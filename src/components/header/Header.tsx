@@ -13,14 +13,14 @@ const Header = () => {
   };
 
   return (
-    <div className="h-16 py-6 flex flex-shrink-0 justify-between items-center px-14 shadow-item bg-black text-white">
+    <div className="h-16 py-6 flex flex-shrink-0 justify-between items-center px-14 shadow-item bg-green-500 text-white">
       <Link href={logged ? "/" : "/login"} className="font-bold text-2xl">
-        alcostsqo
+        aicostsqo
       </Link>
 
       {logged ? (
         <div className="group relative">
-          <button className="flex items-center bg-crimson shadow-item2 text-white py-2 rounded-md px-4 text-base ml-6">
+          <button className="flex items-center bg-green-500 shadow-item2 text-white py-2 rounded-md px-4 text-base ml-6">
             <span
               onClick={() => setVisible(!visible)}
               className="flex items-center"
@@ -54,13 +54,13 @@ const Header = () => {
       ) : (
         <div className="ml-10 flex items-center order-3">
           <Link
-            className={"btn bg-crimson shadow-item text-white mr-5 text-base"}
+            className={"btn bg-black shadow-item text-white mr-5 text-base"}
             href={"/login"}
           >
             Login
           </Link>
           <Link
-            className={"btn bg-crimson shadow-item text-white text-base"}
+            className={"btn bg-black shadow-item text-white text-base"}
             href={"/signup"}
           >
             Sign Up

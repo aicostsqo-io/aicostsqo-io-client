@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <div className="flex flex-row justify-between items-center py-4 px-14 bg-crimson text-white  border-gray-300 text-sm">
+    <div className="flex flex-row justify-between items-center py-4 px-14 bg-black text-white  border-gray-300 text-sm">
       <div className="flex flex-row justify-between gap-3">
         <p>Official links</p>
         <p>Terms and Conditions</p>
@@ -10,7 +10,7 @@ const Footer = () => {
       </div>
       <div>
         <p>
-          © 2022 - 2023 <span className="ml-1 font-bold">alcostsgo</span>
+          © 2022 - 2023 <span className="ml-1 font-bold">aicostsgo</span>
         </p>
       </div>
     </div>
