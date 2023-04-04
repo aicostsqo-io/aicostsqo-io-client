@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 const Header = () => {
   // const { logged, currentUser, logout } = useAuthContext();
-  const logged = false;
+  const logged = true;
   const currentUser = { name: "John Doe", email: "abc@mail.com" };
   const [visible, setVisible] = useState(false);
 
@@ -19,8 +19,19 @@ const Header = () => {
       </Link>
 
       {logged ? (
+        <Link
+          className={
+            "btn bg-black shadow-item text-white text-base ml-auto py-2 px-4"
+          }
+          href={"/site"}
+        >
+          Site
+        </Link>
+      ) : null}
+
+      {logged ? (
         <div className="group relative">
-          <button className="flex items-center bg-green-500 shadow-item2 text-white py-2 rounded-md px-4 text-base ml-6">
+          <button className="flex items-center bg-black shadow-item2 text-white py-2 rounded-md px-4 text-base ml-6">
             <span
               onClick={() => setVisible(!visible)}
               className="flex items-center"
@@ -28,6 +39,7 @@ const Header = () => {
               <div className="hidden sm:block">{currentUser?.name}</div>
             </span>
           </button>
+
           <div
             className={`absolute top-full right-0 w-64 rounded p-1 bg-black flex flex-col z-10  transition-all font-medium ${
               visible ? " visible mt-4" : " invisible mt-2"
