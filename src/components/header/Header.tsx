@@ -1,15 +1,14 @@
+import { useUserContext } from "@/contexts/User";
 import Link from "next/link";
 import React, { useState } from "react";
 
 const Header = () => {
-  // const { logged, currentUser, logout } = useAuthContext();
-  const logged = false;
-  const currentUser = { name: "John Doe", email: "abc@mail.com" };
+  const { logged, currentUser, logout } = useUserContext();
   const [visible, setVisible] = useState(false);
 
   const handleLogout = () => {
     setVisible(false);
-    // logout();
+    logout();
   };
 
   return (
@@ -36,7 +35,7 @@ const Header = () => {
               onClick={() => setVisible(!visible)}
               className="flex items-center"
             >
-              <div className="hidden sm:block">{currentUser?.name}</div>
+              <div className="hidden sm:block">{currentUser?.full_name}</div>
             </span>
           </button>
 

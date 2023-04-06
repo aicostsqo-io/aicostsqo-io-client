@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
-import { UserRegister } from "@/types/models/user";
+import { User, UserRegister } from "@/types/models/user";
 import { loginUser, registerUser } from "@/api/user";
 import { UserLogin } from "@/types/models/user";
 
@@ -14,27 +14,26 @@ type props = {
 export const UserProvider: React.FC<props> = ({ children }) => {
   const [logged, setLogged] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const [currentUser, setCurrentUser] = useState<undefined>();
+  const [currentUser, setCurrentUser] = useState<User | undefined>();
   const router = useRouter();
 
   useEffect(() => {
-    /* if (localStorage.getItem("token")) {
-      setCurrentUser(JSON.parse(localStorage.getItem("userInfo") || "{}"));
+    if (localStorage.getItem("access_token")) {
+      setCurrentUser(JSON.parse(localStorage.getItem("user_info") || "{}"));
       setLogged(true);
     } else {
-      router.push("/login"); */
+      router.push("/login");
+    }
   }, []);
 
   const register = (data: UserRegister) => {
     registerUser(data)
       .then((res) => {
         if (res.data.success) {
-          //- toastify success
-          console.log(res.data.message);
+          console.log(res.data.message); //- toastify success
           router.push("/login");
         } else {
-          //- toastify error
-          console.log(res.data.message);
+          console.log(res.data.message); //- toastify error
         }
       })
       .catch((err) => {
@@ -45,14 +44,43 @@ export const UserProvider: React.FC<props> = ({ children }) => {
   const login = (data: UserLogin) => {
     loginUser(data)
       .then((res) => {
-        console.log(res);
+        if (res.data.success) {
+          console.log(res.data.message); //- toastify success
+          localStorage.setItem("access_token", res.data.tokens.access_token);
+          localStorage.setItem("refresh_token", res.data.tokens.refresh_token);
+          localStorage.setItem(
+            "user_info",
+            JSON.stringify({
+              _id: res.data._id,
+              full_name: res.data.full_name,
+              email: res.data.email,
+            })
+          );
+          setCurrentUser({
+            _id: res.data._id,
+            full_name: res.data.full_name,
+            email: res.data.email,
+          });
+          setLogged(true);
+          router.push("/");
+        } else {
+          console.log(res.data.message); //- toastify error
+          router.push("/login");
+        }
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  const logout = () => {};
+  const logout = () => {
+    setLogged(false);
+    setCurrentUser(undefined);
+    localStorage.removeItem("user_info");
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    router.push("/login");
+  };
 
   const values: any = {
     logged,

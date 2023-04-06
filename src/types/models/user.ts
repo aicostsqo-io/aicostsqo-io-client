@@ -5,7 +5,7 @@ interface Tokens {
 export interface User {
   _id: number;
   full_name: string;
-  tokens: Tokens;
+  email: string;
 }
 
 export interface UserRegister {

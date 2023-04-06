@@ -1,9 +1,10 @@
+import { useUserContext } from "@/contexts/User";
 import { loginSchema } from "@/validations/login";
 import { useFormik } from "formik";
 import Link from "next/link";
 
 const Login = () => {
-  // const { login } = useAuthContext();
+  const { login } = useUserContext();
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
       initialValues: {
@@ -11,8 +12,7 @@ const Login = () => {
         password: "",
       },
       onSubmit: (values) => {
-        console.log(values);
-        //login(values);
+        login(values);
       },
       validationSchema: loginSchema,
     });
@@ -24,7 +24,7 @@ const Login = () => {
           <h1 className="font-extrabold text-3xl mb-5 text-center">Login</h1>
 
           <form onSubmit={handleSubmit}>
-            <div className="w-full flex  flex-col bg-black text-gray-100 px-10 py-10 text-base">
+            <div className="w-full flex  flex-col bg-black px-10 py-10 text-base">
               <div>
                 <input
                   value={values.email}
