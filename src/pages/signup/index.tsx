@@ -1,23 +1,23 @@
+import { useUserContext } from "@/contexts/User";
 import { registerSchema } from "@/validations/register";
 import { useFormik } from "formik";
 
 const Signup = () => {
-  //const { signup } = useAuthContext();
+  const { register } = useUserContext();
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
       initialValues: {
-        name: "",
+        full_name: "",
         email: "",
         password: "",
         passwordConfirm: "",
       },
       onSubmit: (values) => {
-        /* register({
-          name: values.name,
+        register({
+          full_name: values.full_name,
           email: values.email,
           password: values.password,
-        }); */
-        console.log(values);
+        });
       },
       validationSchema: registerSchema,
     });
@@ -29,18 +29,20 @@ const Signup = () => {
           <h1 className="font-extrabold text-3xl mb-5 text-center">Sign Up</h1>
 
           <form onSubmit={handleSubmit}>
-            <div className="w-full flex  flex-col bg-black text-gray-100  px-14 py-14 text-base">
+            <div className="w-full flex  flex-col bg-black px-14 py-14 text-base">
               <input
-                value={values.name}
+                value={values.full_name}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                name="name"
+                name="full_name"
                 type="text"
                 className="text-darkBlue py-2 px-4 w-full"
                 placeholder="Name"
               />
-              {errors.name && touched.name && (
-                <div className="text-red-400 my-2 text-sm">{errors.name}</div>
+              {errors.full_name && touched.full_name && (
+                <div className="text-red-400 my-2 text-sm">
+                  {errors.full_name}
+                </div>
               )}
               <div className="mt-5">
                 <input

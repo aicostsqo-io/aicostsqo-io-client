@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 const Header = () => {
   // const { logged, currentUser, logout } = useAuthContext();
-  const logged = true;
+  const logged = false;
   const currentUser = { name: "John Doe", email: "abc@mail.com" };
   const [visible, setVisible] = useState(false);
 
