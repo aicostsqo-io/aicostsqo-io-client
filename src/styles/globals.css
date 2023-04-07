@@ -5,10 +5,12 @@
 @tailwind utilities;
 
 @layer components {
+  html {
+    @apply text-[14px];
+  }
   body {
     @apply font-poppins;
   }
-
   .btn {
     @apply bg-black text-white py-1 px-4 rounded-md;
   }

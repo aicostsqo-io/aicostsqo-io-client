@@ -3,7 +3,7 @@ interface Tokens {
   refreshToken: string;
 }
 export interface User {
-  _id: number;
+  _id: string;
   full_name: string;
   email: string;
 }
