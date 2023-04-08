@@ -18,6 +18,7 @@ import { useUserContext } from "@/contexts/User";
 const WorldMap = () => {
   const [siteBounds, setSiteBounds] = useState<SiteBound[] | null>(null);
   const [siteBound, setSiteBound] = useState<SiteBound | null>(null);
+  const [polygon, setPolygon] = useState<number[][] | null>(null);
   const { currentUser } = useUserContext();
 
   useEffect(() => {
@@ -41,16 +42,16 @@ const WorldMap = () => {
     if (e.layerType === "polygon") {
       const latlngs: Array<LatLng> = e.layer._latlngs[0];
       latlngs.forEach((element, index) => {
-        console.log(
-          `lat ${index + 1}: ` + element.lat?.toFixed(5),
-          `lng ${index + 1}:` + element.lng?.toFixed(5)
-        );
-        polygon.push(...polygon, [
+        /* console.log(
+          `${index} - lat ${index + 1}: ` + element.lat?.toFixed(5),
+          `- lng ${index + 1}:` + element.lng?.toFixed(5)
+        ); */
+        polygon.push([
           Number(element.lat?.toFixed(5)),
-          Number(element.lat?.toFixed(5)),
+          Number(element.lng?.toFixed(5)),
         ]);
       });
-      console.log(polygon);
+      setPolygon(polygon);
     }
   };
 
@@ -71,8 +72,44 @@ const WorldMap = () => {
     return indexes;
   };
 
+  const mapSiteBoundObject = (polygon: number[][]) => {
+    const siteBound: SiteBound = {
+      siteId: "642fd715840d04775c480fe4",
+      mapReferenceSystem: "WGS-84",
+      vertexes: polygon.map((vertex, index) => {
+        return {
+          vertexNumber: index + 1,
+          coordX: vertex[0],
+          coordY: vertex[1],
+        };
+      }),
+    };
+    return siteBound;
+  };
+
   const handleAddSiteBound = () => {
-    // createSiteBound();
+    createSiteBound(mapSiteBoundObject(polygon!))
+      .then((res) => {
+        if (res.data.success) {
+          console.log(res.data.message); // toastify success
+          getSiteBounds()
+            .then((res) => {
+              if (res.data.success) {
+                setSiteBounds(res.data.siteBounds);
+              } else {
+                console.log(res.data.message);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+        } else {
+          console.log(res.data.message); // toastify error
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
