@@ -11,6 +11,9 @@
   body {
     @apply font-poppins;
   }
+  .nav-item{
+    @apply cursor-pointer px-8 h-full flex items-center text-center rounded-3xl hover:bg-gray-200;
+  }
   .btn {
     @apply bg-black text-white py-1 px-4 rounded-md;
   }

@@ -1,18 +1,45 @@
+import { assets } from "@/assets/imgs";
+import Image from "next/image";
 const Footer = () => {
   return (
-    <div className="flex flex-row justify-between items-center py-4 px-14 bg-black text-white  border-gray-300 text-sm">
-      <div className="flex flex-row justify-between gap-3">
-        <p>Official links</p>
-        <p>Terms and Conditions</p>
-        <p>Advertising Policy</p>
-        <p>Guide for Government Agencies</p>
-        <p>Privacy Statement</p>
-      </div>
-      <div>
-        <p>
-          © 2022 - 2023 <span className="ml-1 font-bold">aicostsgo</span>
-        </p>
-      </div>
+    <div className="flex flex-row justify-between items-center shadow-item2 px-14 bg-white  border-gray-300 text-sm">
+      <ul className="flex flex-row gap-7">
+      <li className="w-[100px] h-[50px]">
+          <Image
+              src={assets.BAY_E}
+              alt=""
+              className="rounded-t-md w-full h-full object-fill"
+            />
+        </li>
+        <li className="w-[80px] h-[50px]">
+          <Image
+              src={assets.FIS}
+              alt=""
+              className="rounded-t-md w-full h-full object-cover"
+            />
+        </li>
+        <li className="w-[50px] h-[50px]">
+          <Image
+              src={assets.GIR}
+              alt=""
+              className="rounded-t-md w-full h-full object-cover"
+            />
+        </li>
+        <li className="w-[50px] h-[50px]">
+          <Image
+              src={assets.Unibo}
+              alt=""
+              className="rounded-t-md w-full h-full object-cover"
+            />
+        </li>
+        <li className="w-[70px] h-[50px]">
+          <Image
+              src={assets.UniversiteDinPetrosani}
+              alt=""
+              className="rounded-t-md w-full h-full object-cover"
+            />
+        </li>
+      </ul>
     </div>
   );
 };
