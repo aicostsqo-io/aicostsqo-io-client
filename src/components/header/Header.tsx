@@ -21,6 +21,7 @@ const Header = () => {
             src={assets.AICOSTSQO_logo}
             alt=""
             className="rounded-t-md w-full h-full object-cover"
+            priority
           />
         </Link>
 

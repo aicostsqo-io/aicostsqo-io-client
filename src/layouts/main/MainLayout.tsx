@@ -7,7 +7,7 @@ interface MainProps {
   children: React.ReactNode;
 }
 
-const Main = ({ children }: MainProps) => {
+const MainLayout = ({ children }: MainProps) => {
   return (
     <div className="h-screen flex flex-col justify-between">
       <Header />
@@ -17,4 +17,4 @@ const Main = ({ children }: MainProps) => {
   );
 };
 
-export default Main;
+export default MainLayout;

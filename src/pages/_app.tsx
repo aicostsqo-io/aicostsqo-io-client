@@ -1,5 +1,5 @@
 import { UserProvider } from "@/contexts/User";
-import Main from "@/layouts/main/Main";
+import MainLayout from "@/layouts/main/MainLayout";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 
@@ -7,9 +7,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <UserProvider>
-        <Main>
+        <MainLayout>
           <Component {...pageProps} />
-        </Main>
+        </MainLayout>
       </UserProvider>
     </>
   );

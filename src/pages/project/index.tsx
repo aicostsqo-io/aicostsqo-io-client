@@ -1,7 +1,12 @@
+import ProjectLayout from "@/layouts/project/ProjectLayout";
 import React from "react";
 
 const Project = () => {
-  return <div>Project</div>;
+  return (
+
+      <ProjectLayout>{null}</ProjectLayout>
+    
+  );
 };
 
 export default Project;

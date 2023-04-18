@@ -1311,6 +1311,11 @@ has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+hash-sum@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/hash-sum/-/hash-sum-2.0.0.tgz#81d01bb5de8ea4a214ad5d6ead1b523460b0b45a"
+  integrity sha512-WdZTbAByD+pHfl/g9QSsBIIwy8IT+EsPiKDs0KNX+zSHhdDLFKdZu0BQHljvO+0QI/BasbMSUa8wYNCZTvhslg==
+
 hoist-non-react-statics@^3.3.0:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz#ece0acaf71d62c2969c2ec59feff42a4b1a85b45"
@@ -2056,6 +2061,13 @@ react-fast-compare@^2.0.1:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-2.0.4.tgz#e84b4d455b0fec113e0402c329352715196f81f9"
   integrity sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==
+
+react-hyper-tree@^0.3.12:
+  version "0.3.12"
+  resolved "https://registry.yarnpkg.com/react-hyper-tree/-/react-hyper-tree-0.3.12.tgz#8bb6a4f737e71f37e69db599ffd973be2c993c40"
+  integrity sha512-g3jtAPoU60P3ZYwO98QQmxaAzeE/BE2p12L7UXTAXytpu4CxnGSPgDFSepLrC1Wsb3iV0gxRB2pdWvksvGrI6A==
+  dependencies:
+    hash-sum "^2.0.0"
 
 react-icons@^4.8.0:
   version "4.8.0"
