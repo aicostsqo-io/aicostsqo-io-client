@@ -3,7 +3,7 @@ import Tree, { useTreeState } from "react-hyper-tree";
 
 const data = {
   id: 1,
-  name: "Parent 1",
+  name: "Fields",
   children: [
     {
       id: 2,
