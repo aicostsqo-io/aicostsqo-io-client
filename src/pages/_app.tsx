@@ -7,9 +7,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <UserProvider>
-        <MainLayout>
-          <Component {...pageProps} />
-        </MainLayout>
+        <Component {...pageProps} />
       </UserProvider>
     </>
   );
