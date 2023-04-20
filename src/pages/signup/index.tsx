@@ -85,7 +85,7 @@ const Signup = () => {
                   </label>
                   <input
                     id="password"
-                    value={values.email}
+                    value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     name="password"

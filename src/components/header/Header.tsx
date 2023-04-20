@@ -97,8 +97,12 @@ const Header = () => {
         <div className="nav-item" onClick={handleLogout}>
           Signout
         </div>
-      ) : (
-        <div className="ml-10 flex items-center order-3">
+      ) : null}
+    </div>
+  );
+};
+
+/* <div className="ml-10 flex items-center order-3">
           <Link
             className={"btn bg-black shadow-item text-white mr-5 text-base"}
             href={"/login"}
@@ -111,10 +115,6 @@ const Header = () => {
           >
             Sign Up
           </Link>
-        </div>
-      )}
-    </div>
-  );
-};
+        </div> */
 
 export default Header;
