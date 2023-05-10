@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import React from "react";
 import Tree, { useTreeState } from "react-hyper-tree";
 
@@ -33,7 +34,15 @@ const TreeComponent = () => {
     defaultOpened: true,
   });
 
+  const router = useRouter();
+
+  const handleStartWizard = () => {
+    console.log("Wizard Başlatıldı")
+    router.push("/project/add-field-wizard")
+  }
+
   return (
+    <>
     <Tree
       {...required}
       {...handlers}
@@ -57,6 +66,8 @@ const TreeComponent = () => {
       verticalLineOffset={4}
       renderNode={undefined}
     />
+    <button className="bg-red-600 text-white" onClick={handleStartWizard}>Wizard Başlat</button>
+    </>
   );
 };
 

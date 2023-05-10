@@ -60,13 +60,13 @@ const Signup = () => {
                 </div>
                 <div className="flex justify-between gap-10 items-center">
                   <label
-                    htmlFor="username"
+                    htmlFor="email"
                     className="text-green-600 w-1/3 text-center"
                   >
                     Email
                   </label>
                   <input
-                    id="username"
+                    id="email"
                     value={values.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
