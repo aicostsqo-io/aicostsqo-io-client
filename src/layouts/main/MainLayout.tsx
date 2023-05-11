@@ -9,7 +9,7 @@ interface MainProps {
 
 const MainLayout = ({ children }: MainProps) => {
   return (
-    <div className="h-screen flex flex-col justify-between">
+    <div className="min-h-screen flex flex-col justify-between">
       <Header />
       <Content>{children}</Content>
       <Footer />

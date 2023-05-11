@@ -8,7 +8,8 @@ import {
 const NewProject = () => {
   return (
     <MainLayout>
-      <div className="modal-container w-1/3  py-6 px-3 flex flex-col justify-between  gap-16">
+      <div className="flex justify-center">
+        <div className="modal-container w-1/3 translate-y-full  py-6 px-3 flex flex-col justify-between  gap-16">
         <div className="modal-container-title">New Project</div>
         <div className="flex justify-between items-center gap-4">
           <div className="bg-gray-100 border-t-2 border-black w-1/2 py-2 px-3 text-center font-medium">
@@ -29,6 +30,7 @@ const NewProject = () => {
             <TrashIcon className="cursor-pointer opacity-40" size={50} />
             <span className="opacity-60">Cancel</span>
           </div>
+        </div>
         </div>
       </div>
     </MainLayout>

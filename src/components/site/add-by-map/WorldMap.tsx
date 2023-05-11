@@ -15,7 +15,7 @@ import { SiteBound } from "@/types/models/site";
 import { createSiteBound, getSiteBounds } from "@/api/site";
 import { useUserContext } from "@/contexts/User";
 
-const WorldMap = () => {
+const WorldMap = ({next} : any) => {
   const [siteBounds, setSiteBounds] = useState<SiteBound[] | null>(null);
   const [siteBound, setSiteBound] = useState<SiteBound | null>(null);
   const [polygon, setPolygon] = useState<number[][] | null>(null);
@@ -88,7 +88,9 @@ const WorldMap = () => {
   };
 
   const handleAddSiteBound = () => {
-    createSiteBound(mapSiteBoundObject(polygon!))
+    console.log(polygon);
+    next()
+    /* createSiteBound(mapSiteBoundObject(polygon!))
       .then((res) => {
         if (res.data.success) {
           console.log(res.data.message); // toastify success
@@ -109,13 +111,11 @@ const WorldMap = () => {
       })
       .catch((err) => {
         console.log(err);
-      });
+      }); */
   };
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center gap-5">
-      <div className="text-2xl font-bold">Add Site by Map</div>
-      <div className="w-2/3 h-2/3">
         <MapContainer
           className="w-full h-full"
           center={position}
@@ -158,15 +158,13 @@ const WorldMap = () => {
             subdomains={["mt1", "mt2", "mt3"]}
           />
         </MapContainer>
-      </div>
-      <div className="text-right w-2/3">
-        <button
+
+      <div
+          className="w-full bg-black text-white text-center cursor-pointer py-2 px-5 text-lg"
           onClick={handleAddSiteBound}
-          className="btn cursor-pointer py-2 px-5 text-xl"
         >
           Add
-        </button>
-      </div>
+        </div>
     </div>
   );
 };

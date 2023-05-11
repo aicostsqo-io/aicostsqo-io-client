@@ -14,8 +14,8 @@ const Header = () => {
   };
 
   return (
-    <div className="flex flex-shrink-0 justify-between items-center px-14 shadow-item2 bg-white text-black">
-      <div className="flex h-full gap-10">
+    <div className="flex flex-shrink-0 justify-between items-center px-14 shadow-item2  text-black">
+      <div className="flex h-full gap-10 ">
         <Link href={logged ? "/" : "/login"} className="w-[100px] h-[50px]">
           <Image
             src={assets.AICOSTSQO_logo}
@@ -26,7 +26,7 @@ const Header = () => {
         </Link>
 
         {logged ? (
-          <ul className="flex h-full">
+          <ul className="flex ">
             <li className="group relative">
               <span
                 onClick={() => setVisible(!visible)}

@@ -7,25 +7,27 @@ import {
 import {
   FaRegClone as CloneIcon
 } from "react-icons/fa";
+import { useRouter } from "next/router";
 
-const AddSite = () => {
+const AddSite = ({setAddSiteOption} : any) => {
+  const router = useRouter();
   return <div className="flex justify-between">
-    <div className="flex flex-col gap-5 items-center cursor-pointer">
-      <AddIcon className="text-5xl"/>
-      <span className="text-xl">Add Site</span>
+    <div className="flex flex-col gap-3 items-center cursor-pointer" onClick={() => setAddSiteOption(0)}>
+      <AddIcon className="text-4xl"/>
+      <span className="text-lg">Add Site</span>
     </div>
-    <div className="flex flex-col gap-5 items-center cursor-pointer">
-      <SearchIcon className="text-5xl"/>
-      <span className="text-xl">Search In</span>
+    <div className="flex flex-col gap-3 items-center cursor-pointer">
+      <SearchIcon className="text-4xl"/>
+      <span className="text-lg">Search In</span>
     </div>
-    <div className="flex flex-col gap-5 items-center cursor-pointer">
-      <CloneIcon className="text-5xl"/>
-      <span className="text-xl">Clone From Previous Site</span>
+    <div className="flex flex-col gap-3 items-center cursor-pointer">
+      <CloneIcon className="text-4xl"/>
+      <span className="text-lg">Clone From Previous Site</span>
     </div>
 
-    <div className="flex flex-col gap-5 items-center cursor-pointer">
-      <TrashIcon className="text-5xl"/>
-      <span className="text-xl">Cancel</span>
+    <div className="flex flex-col gap-3 items-center cursor-pointer" onClick={() => router.push("/project")}>
+      <TrashIcon className="text-4xl"/>
+      <span className="text-lg">Cancel</span>
     </div>
   </div>;
 };

@@ -13,22 +13,22 @@ import {
 
 const AddRP = () => {
   return <div className="flex justify-between">
-    <div className="flex flex-col gap-5 items-center cursor-pointer">
-      <AddIcon className="text-5xl"/>
-      <span className="text-xl">Add Manually (RPs)</span>
+    <div className="flex flex-col gap-3 items-center cursor-pointer">
+      <AddIcon className="text-4xl"/>
+      <span className="text-lg">Add Manually (RPs)</span>
     </div>
-    <div className="flex flex-col gap-5 items-center cursor-pointer">
-      <SearchIcon className="text-5xl"/>
-      <span className="text-xl">Search In</span>
+    <div className="flex flex-col gap-3 items-center cursor-pointer">
+      <SearchIcon className="text-4xl"/>
+      <span className="text-lg">Search In</span>
     </div>
-    <div className="flex flex-col gap-5 items-center cursor-pointer">
-      <CloneIcon className="text-5xl"/>
-      <span className="text-xl">Clone From Previous My RPs</span>
+    <div className="flex flex-col gap-3 items-center cursor-pointer">
+      <CloneIcon className="text-4xl"/>
+      <span className="text-lg">Clone From Previous My RPs</span>
     </div>
 
-    <div className="flex flex-col gap-5 items-center cursor-pointer">
-      <NextIcon className="text-5xl"/>
-      <span className="text-xl">Not Yet</span>
+    <div className="flex flex-col gap-3 items-center cursor-pointer">
+      <NextIcon className="text-4xl"/>
+      <span className="text-lg">Not Yet</span>
     </div>
   </div>;
 };
