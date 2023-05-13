@@ -1,5 +1,4 @@
 import { useRouter } from "next/router";
-import React from "react";
 import Tree, { useTreeState } from "react-hyper-tree";
 
 const data = {
@@ -36,37 +35,45 @@ const TreeComponent = () => {
 
   const router = useRouter();
 
-  const handleStartWizard = () => {
-    console.log("Wizard Başlatıldı")
-    router.push("/project/add-field-wizard")
-  }
-
   return (
     <>
-    <Tree
-      {...required}
-      {...handlers}
-      horizontalLineStyles={{
-        stroke: "#c4c4c4",
-        strokeWidth: 1,
-        strokeDasharray: "1 4",
-      }}
-      verticalLineStyles={{
-        stroke: "#c4c4c4",
-        strokeWidth: 1,
-        strokeDasharray: "1 4",
-      }}
-      draggable={true}
-      gapMode={"padding"}
-      depthGap={40}
-      disableLines={false}
-      disableHorizontalLines={false}
-      disableVerticalLines={false}
-      verticalLineTopOffset={1}
-      verticalLineOffset={4}
-      renderNode={undefined}
-    />
-    <button className="bg-red-600 text-white" onClick={handleStartWizard}>Wizard Başlat</button>
+      <Tree
+        {...required}
+        {...handlers}
+        horizontalLineStyles={{
+          stroke: "#c4c4c4",
+          strokeWidth: 1,
+          strokeDasharray: "1 4",
+        }}
+        verticalLineStyles={{
+          stroke: "#c4c4c4",
+          strokeWidth: 1,
+          strokeDasharray: "1 4",
+        }}
+        draggable={true}
+        gapMode={"padding"}
+        depthGap={40}
+        disableLines={false}
+        disableHorizontalLines={false}
+        disableVerticalLines={false}
+        verticalLineTopOffset={1}
+        verticalLineOffset={4}
+        renderNode={undefined}
+      />
+      <div className="flex flex-col gap-2 mt-5">
+        <button
+          className=" bg-red-400 text-white px-3 cursor-pointer"
+          onClick={() => router.push("/project/add-field-wizard")}
+        >
+          Use Wizard To Add Field
+        </button>
+        <button
+          className="bg-blue-400 text-white px-3 cursor-pointer"
+          onClick={() => router.push("/project/fields")}
+        >
+          Open My Fields
+        </button>
+      </div>
     </>
   );
 };

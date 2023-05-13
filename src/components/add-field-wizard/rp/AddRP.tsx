@@ -11,9 +11,9 @@ import {
   GrCaretNext as NextIcon
 } from "react-icons/gr";
 
-const AddRP = () => {
+const AddRP = ({next, setAddRpOption}:any) => {
   return <div className="flex justify-between">
-    <div className="flex flex-col gap-3 items-center cursor-pointer">
+    <div className="flex flex-col gap-3 items-center cursor-pointer" onClick={() => setAddRpOption(0)}>
       <AddIcon className="text-4xl"/>
       <span className="text-lg">Add Manually (RPs)</span>
     </div>
@@ -26,7 +26,7 @@ const AddRP = () => {
       <span className="text-lg">Clone From Previous My RPs</span>
     </div>
 
-    <div className="flex flex-col gap-3 items-center cursor-pointer">
+    <div className="flex flex-col gap-3 items-center cursor-pointer" onClick={() => next()}>
       <NextIcon className="text-4xl"/>
       <span className="text-lg">Not Yet</span>
     </div>

@@ -13,7 +13,7 @@ interface vertex {
 
 export interface SiteBound {
   _id?: string;
-  siteId: string;
+  siteId?: string;
   mapReferenceSystem: string;
   vertexes: vertex[];
 }
