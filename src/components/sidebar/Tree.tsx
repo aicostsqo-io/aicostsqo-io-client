@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import Tree, { useTreeState } from "react-hyper-tree";
+import SiteList from "./sites/SiteList";
 
 const data = {
   id: 1,
@@ -74,6 +75,8 @@ const TreeComponent = () => {
           Open My Fields
         </button>
       </div>
+
+      {/*  <SiteList /> */}
     </>
   );
 };

@@ -87,6 +87,10 @@ const WorldMap = ({ next, info, setInfo }: any) => {
   };
 
   const handleAddSiteBound = () => {
+    if(siteName === "" || siteName.trim() === "" || siteName === null || siteName === undefined){
+      console.log("Site name cannot be empty"); // toastify error
+      return;
+    }
     const siteBound = mapSiteBoundObject(polygon!);
     setInfo({
       ...info,

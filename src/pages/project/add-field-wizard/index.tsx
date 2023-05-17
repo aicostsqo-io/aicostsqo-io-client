@@ -37,9 +37,12 @@ const initialInfo = {
     positionLat: "",
     heading: "",
   },
-  rp: {
+  rps: [
+    /*
+    {
     // _id: "",
     // siteBoundId: "",
+   
     slopeAngle: "",
     crepeAngle: "",
     volume: "",
@@ -51,16 +54,12 @@ const initialInfo = {
     positionZ: "",
     rotationX: "",
     rotationY: "",
-    rotationZ: "",
-  },
-  disc: {
-    //_id: "",
-    dip: "",
-    dipDirection: "",
-    px: "",
-    py: "",
-    pz: "",
-  },
+    rotationZ: "", 
+    
+  }
+*/
+  ],
+  //discs: []
 };
 
 const AddField = () => {
@@ -93,11 +92,11 @@ const AddField = () => {
   const save = () => {
     createSite(info)
       .then((res) => {
-        console.log(res);
-        // router.push("/project");
+        console.log(res); // toastify success
+        router.push("/project");
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err); // toastify error
       });
   };
   return (
