@@ -1,84 +1,97 @@
-import { useRouter } from "next/router";
-import Tree, { useTreeState } from "react-hyper-tree";
-import SiteList from "./sites/SiteList";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Button from '@mui/material/Button';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import TreeView from '@mui/lab/TreeView';
+import TreeItem from '@mui/lab/TreeItem';
+import { useRouter } from 'next/router';
+import { getSites } from '@/api/site';
+import useFetch from '@/hooks/useFetch';
 
-const data = {
-  id: 1,
-  name: "Fields",
-  children: [
-    {
-      id: 2,
-      name: "Add New Field",
-      children: [
-        {
-          id: 3,
-          name: "Use Wizard",
-        },
-        {
-          id: 4,
-          name: "Manually",
-        },
-      ],
-    },
-    {
-      id: 5,
-      name: "Open My Fields",
-    },
-  ],
-};
 
-const TreeComponent = () => {
-  const { required, handlers } = useTreeState({
-    id: "tree",
-    data: data,
-    defaultOpened: true,
-  });
+//* disc rp'lerin içinde olmalı
+// const DiscTreeItem = ({disc} : any) => {}
+
+const RPTreeItem = ({rps} : any) => {
+  return (
+    <TreeItem nodeId={"10"} label={"Representing Prisms"}>
+      {
+        rps?.map((rp: any, index:number) => (
+          <TreeItem key={index} nodeId={rp?._id} label={`RP 00${index+1}`}>
+            <TreeItem nodeId={"11"} label={"RP"} />
+            <TreeItem nodeId={"12"} label={"Discontinuities (Scanline Measure)"} />
+            {/* {
+              field?.rps?.discs?.length > 0 ? <DiscTreeItem discs={field?.rps?.discs} /> : <TreeItem nodeId={"199"} label={"No Discs"} /> 
+            } */}
+          </TreeItem>
+        ))
+      }
+    </TreeItem>
+  )
+}
+
+const FieldTreeItem = ({field} : any) => {
+  return (
+    <TreeItem nodeId={field?.site?._id} label={field?.site?.name}>
+      <TreeItem nodeId={"10"} label={"Site Topological Map"} />
+      <TreeItem nodeId={"10"} label={"Site Boundaries"} />
+      {
+        field?.rps?.length > 0 ? <RPTreeItem  rps={field?.rps} /> : <TreeItem nodeId={"99"} label={"No RPs"} /> 
+      }
+    </TreeItem>
+  )
+}
+
+export default function Tree() {
+  const [expanded, setExpanded] = React.useState<string[]>([]);
+  const [selected, setSelected] = React.useState<string[]>([]);
+
+  const handleToggle = (event: React.SyntheticEvent, nodeIds: string[]) => {
+    setExpanded(nodeIds);
+  };
+
+  const handleSelect = (event: React.SyntheticEvent, nodeIds: string[]) => {
+    setSelected(nodeIds);
+  };
+
+  const handleExpandClick = () => {
+    setExpanded((oldExpanded) =>
+      oldExpanded.length === 0 ? ['1', '5', '6', '7'] : [],
+    );
+  };
 
   const router = useRouter();
 
+  const {data: fieldData, isLoading : fieldDataLoading, isError: fieldDataError, mutate : fieldDataMutate } =  useFetch("/fields")
+
+  console.log("fieldData : ",fieldData)
   return (
-    <>
-      <Tree
-        {...required}
-        {...handlers}
-        horizontalLineStyles={{
-          stroke: "#c4c4c4",
-          strokeWidth: 1,
-          strokeDasharray: "1 4",
-        }}
-        verticalLineStyles={{
-          stroke: "#c4c4c4",
-          strokeWidth: 1,
-          strokeDasharray: "1 4",
-        }}
-        draggable={true}
-        gapMode={"padding"}
-        depthGap={40}
-        disableLines={false}
-        disableHorizontalLines={false}
-        disableVerticalLines={false}
-        verticalLineTopOffset={1}
-        verticalLineOffset={4}
-        renderNode={undefined}
-      />
-      <div className="flex flex-col gap-2 mt-5">
-        <button
-          className=" bg-red-400 text-white px-3 cursor-pointer"
-          onClick={() => router.push("/project/add-field-wizard")}
-        >
-          Use Wizard To Add Field
-        </button>
-        <button
-          className="bg-blue-400 text-white px-3 cursor-pointer"
-          onClick={() => router.push("/project/fields")}
-        >
-          Open My Fields
-        </button>
-      </div>
-
-      {/*  <SiteList /> */}
-    </>
+    <Box sx={{ height: "100%", flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}>
+      <Box sx={{ mb: 1 }}>
+        <Button onClick={handleExpandClick}>
+          {expanded.length === 0 ? 'Expand all' : 'Collapse all'}
+        </Button>
+      </Box>      
+      <TreeView
+        aria-label="controlled"
+        defaultCollapseIcon={<ExpandMoreIcon />}
+        defaultExpandIcon={<ChevronRightIcon />}
+        expanded={expanded}
+        selected={selected}
+        onNodeToggle={handleToggle}
+        onNodeSelect={handleSelect}
+      >
+        <TreeItem nodeId="1" label="Add New Field">
+          <TreeItem nodeId="2" label="Use Wizard" onClick={() => router.push("/project/add-field-wizard")}/>
+          <TreeItem nodeId="3" label="Manually" />
+        </TreeItem>
+        <TreeItem nodeId="5" label="Open My Fields" onClick={() => router.push("/project/fields")}>
+          {
+            fieldData?.map((field: any, index:number) => <FieldTreeItem key={index} field={field} />)
+          }
+        </TreeItem>
+      </TreeView>
+    </Box>
   );
-};
-
-export default TreeComponent;
+}

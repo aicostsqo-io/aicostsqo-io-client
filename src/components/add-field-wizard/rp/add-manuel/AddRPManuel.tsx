@@ -34,7 +34,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
   };
 
   return (
-    <div className="modal-container h-full p-10 gap-3 flex flex-col justify-between">
+    <div className="modal-container h-min p-10 gap-3 flex flex-col justify-between">
       <div className="modal-container-title">Add RP Manually</div>
       <div className="flex flex-col gap-4">
         <div className={inputContainerClasses}>
@@ -216,7 +216,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
       </div>
 
       <div
-        className="mt-10 w-full bg-black text-white text-center cursor-pointer py-2 px-5 text-lg"
+        className="mt-2 w-full bg-black text-white text-center cursor-pointer py-2 px-5 text-lg"
         onClick={handleAddRps}
       >
         Next

@@ -1,5 +1,5 @@
 import { UserLogin, UserRegister } from "@/types/models/user";
-import axios from "./axiosInstance";
+import {instance as axios} from "./axiosInstance";
 
 export const registerUser = (data: UserRegister) => axios.post("/users", data);
 

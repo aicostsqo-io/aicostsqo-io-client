@@ -1,4 +1,4 @@
-import axios from "./axiosInstance";
+import {instance as axios} from "./axiosInstance";
 
 export const bulkDeleteRps = (data: string[]) =>
   axios.post("/rps/bulk-delete", data);

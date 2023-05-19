@@ -69,7 +69,7 @@ const AddField = () => {
   const [stepText, setStepText] = useState(stepTexts[step]);
 
   const [addSiteOption, setAddSiteOption] = useState(-1);
-  const [addRpOption, setAddRpOption] = useState(-1);
+  const [addRpOption, setAddRpOption] = useState(0);
   const [addDiscOption, setAddDiscOption] = useState(-1);
   const [addOtherOption, setAddOtherOption] = useState(-1);
 
@@ -125,7 +125,7 @@ const AddField = () => {
           </div>
         </div>
 
-        <div className="h-[800px]">
+        <div>
           {step === 0 && addSiteOption === 0 && (
             <WorldMap info={info} setInfo={setInfo} next={next} />
           )}

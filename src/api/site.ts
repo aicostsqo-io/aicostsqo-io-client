@@ -1,5 +1,5 @@
 import { SiteBound } from "@/types/models/site";
-import axios from "./axiosInstance";
+import {instance as axios} from "./axiosInstance";
 
 export const getSiteBounds = () => axios.get(`/siteBounds`);
 

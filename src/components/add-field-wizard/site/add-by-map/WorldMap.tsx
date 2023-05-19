@@ -132,7 +132,7 @@ const WorldMap = ({ next, info, setInfo }: any) => {
   };
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center gap-5">
+    <div className="w-full h-[800px] flex flex-col justify-center items-center gap-5">
       <div className="self-start">
         <input
           type="text"
