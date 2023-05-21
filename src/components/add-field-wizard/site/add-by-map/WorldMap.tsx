@@ -87,6 +87,10 @@ const WorldMap = ({ next, info, setInfo }: any) => {
   };
 
   const handleAddSiteBound = () => {
+    if(siteName === "" || siteName.trim() === "" || siteName === null || siteName === undefined){
+      console.log("Site name cannot be empty"); // toastify error
+      return;
+    }
     const siteBound = mapSiteBoundObject(polygon!);
     setInfo({
       ...info,
@@ -128,7 +132,7 @@ const WorldMap = ({ next, info, setInfo }: any) => {
   };
 
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center gap-5">
+    <div className="w-full h-[800px] flex flex-col justify-center items-center gap-5">
       <div className="self-start">
         <input
           type="text"

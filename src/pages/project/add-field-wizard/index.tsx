@@ -37,9 +37,12 @@ const initialInfo = {
     positionLat: "",
     heading: "",
   },
-  rp: {
+  rps: [
+    /*
+    {
     // _id: "",
     // siteBoundId: "",
+   
     slopeAngle: "",
     crepeAngle: "",
     volume: "",
@@ -51,16 +54,12 @@ const initialInfo = {
     positionZ: "",
     rotationX: "",
     rotationY: "",
-    rotationZ: "",
-  },
-  disc: {
-    //_id: "",
-    dip: "",
-    dipDirection: "",
-    px: "",
-    py: "",
-    pz: "",
-  },
+    rotationZ: "", 
+    
+  }
+*/
+  ],
+  //discs: []
 };
 
 const AddField = () => {
@@ -70,7 +69,7 @@ const AddField = () => {
   const [stepText, setStepText] = useState(stepTexts[step]);
 
   const [addSiteOption, setAddSiteOption] = useState(-1);
-  const [addRpOption, setAddRpOption] = useState(-1);
+  const [addRpOption, setAddRpOption] = useState(0);
   const [addDiscOption, setAddDiscOption] = useState(-1);
   const [addOtherOption, setAddOtherOption] = useState(-1);
 
@@ -93,11 +92,11 @@ const AddField = () => {
   const save = () => {
     createSite(info)
       .then((res) => {
-        console.log(res);
-        // router.push("/project");
+        console.log(res); // toastify success
+        router.push("/project");
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err); // toastify error
       });
   };
   return (
@@ -126,7 +125,7 @@ const AddField = () => {
           </div>
         </div>
 
-        <div className="h-[800px]">
+        <div>
           {step === 0 && addSiteOption === 0 && (
             <WorldMap info={info} setInfo={setInfo} next={next} />
           )}

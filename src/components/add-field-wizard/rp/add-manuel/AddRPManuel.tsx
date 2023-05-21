@@ -1,15 +1,40 @@
+import { useState } from "react";
+
 const inputContainerClasses = "flex justify-between w-1/3";
 const inputClasses = "border border-black w-1/2 py-1 px-2 outline-none";
 const labelClasses = "w-1/2";
 
+const initialState = {
+  slopeAngle: "",
+  crepeAngle: "",
+  volume: "",
+  sizeX: "",
+  sizeY: "",
+  sizeZ: "",
+  positionX: "",
+  positionY: "",
+  positionZ: "",
+  rotationX: "",
+  rotationY: "",
+  rotationZ: "",
+};
+
 const AddRPManuel = ({ next, info, setInfo }: any) => {
-  const handleAddRP = () => {
+  const [rp, setRp] = useState<any>(initialState);
+
+  const handleAddRPToInfo = () => {
+    setInfo({ ...info, rps: [...info.rps, rp] });
+    setRp(initialState);
+    console.log("RP added successfully"); // toastify success
+  };
+
+  const handleAddRps = () => {
     console.log(info);
     next();
   };
 
   return (
-    <div className="modal-container h-full p-10 gap-3 flex flex-col justify-between">
+    <div className="modal-container h-min p-10 gap-3 flex flex-col justify-between">
       <div className="modal-container-title">Add RP Manually</div>
       <div className="flex flex-col gap-4">
         <div className={inputContainerClasses}>
@@ -17,11 +42,11 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
           <input
             className={inputClasses}
             type="text"
-            value={info?.rp?.slopeAngle}
+            value={rp?.slopeAngle}
             onChange={(e) =>
-              setInfo({
-                ...info,
-                rp: { ...info.rp, slopeAngle: e.target.value },
+              setRp({
+                ...rp,
+                slopeAngle: e.target.value,
               })
             }
           />
@@ -33,11 +58,11 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
           <input
             className={inputClasses}
             type="text"
-            value={info?.rp?.crepeAngle}
+            value={rp?.crepeAngle}
             onChange={(e) =>
-              setInfo({
-                ...info,
-                rp: { ...info.rp, crepeAngle: e.target.value },
+              setRp({
+                ...rp,
+                crepeAngle: e.target.value,
               })
             }
           />
@@ -49,10 +74,8 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
           <input
             className={inputClasses}
             type="text"
-            value={info?.rp?.volume}
-            onChange={(e) =>
-              setInfo({ ...info, rp: { ...info.rp, volume: e.target.value } })
-            }
+            value={rp?.volume}
+            onChange={(e) => setRp({ ...rp, volume: e.target.value })}
           />
         </div>
         <div className={inputContainerClasses}>
@@ -62,10 +85,8 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
           <input
             className={inputClasses}
             type="text"
-            value={info?.rp?.sizeX}
-            onChange={(e) =>
-              setInfo({ ...info, rp: { ...info.rp, sizeX: e.target.value } })
-            }
+            value={rp?.sizeX}
+            onChange={(e) => setRp({ ...rp, sizeX: e.target.value })}
           />
         </div>
         <div className={inputContainerClasses}>
@@ -75,10 +96,8 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
           <input
             className={inputClasses}
             type="text"
-            value={info?.rp?.sizeY}
-            onChange={(e) =>
-              setInfo({ ...info, rp: { ...info.rp, sizeY: e.target.value } })
-            }
+            value={rp?.sizeY}
+            onChange={(e) => setRp({ ...rp, sizeY: e.target.value })}
           />
         </div>
         <div className={inputContainerClasses}>
@@ -88,10 +107,8 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
           <input
             className={inputClasses}
             type="text"
-            value={info?.rp?.sizeZ}
-            onChange={(e) =>
-              setInfo({ ...info, rp: { ...info.rp, sizeZ: e.target.value } })
-            }
+            value={rp?.sizeZ}
+            onChange={(e) => setRp({ ...rp, sizeZ: e.target.value })}
           />
         </div>
         <div className={inputContainerClasses}>
@@ -101,11 +118,11 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
           <input
             className={inputClasses}
             type="text"
-            value={info?.rp?.positionX}
+            value={rp?.positionX}
             onChange={(e) =>
-              setInfo({
-                ...info,
-                rp: { ...info.rp, positionX: e.target.value },
+              setRp({
+                ...rp,
+                positionX: e.target.value,
               })
             }
           />
@@ -117,11 +134,11 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
           <input
             className={inputClasses}
             type="text"
-            value={info?.rp?.positionY}
+            value={rp?.positionY}
             onChange={(e) =>
-              setInfo({
-                ...info,
-                rp: { ...info.rp, positionY: e.target.value },
+              setRp({
+                ...rp,
+                positionY: e.target.value,
               })
             }
           />
@@ -133,11 +150,11 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
           <input
             className={inputClasses}
             type="text"
-            value={info?.rp?.positionZ}
+            value={rp?.positionZ}
             onChange={(e) =>
-              setInfo({
-                ...info,
-                rp: { ...info.rp, positionZ: e.target.value },
+              setRp({
+                ...rp,
+                positionZ: e.target.value,
               })
             }
           />
@@ -149,11 +166,11 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
           <input
             className={inputClasses}
             type="text"
-            value={info?.rp?.rotationX}
+            value={rp?.rotationX}
             onChange={(e) =>
-              setInfo({
-                ...info,
-                rp: { ...info.rp, rotationX: e.target.value },
+              setRp({
+                ...rp,
+                rotationX: e.target.value,
               })
             }
           />
@@ -165,11 +182,11 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
           <input
             className={inputClasses}
             type="text"
-            value={info?.rp?.rotationY}
+            value={rp?.rotationY}
             onChange={(e) =>
-              setInfo({
-                ...info,
-                rp: { ...info.rp, rotationY: e.target.value },
+              setRp({
+                ...rp,
+                rotationY: e.target.value,
               })
             }
           />
@@ -181,22 +198,28 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
           <input
             className={inputClasses}
             type="text"
-            value={info?.rp?.rotationZ}
+            value={rp?.rotationZ}
             onChange={(e) =>
-              setInfo({
-                ...info,
-                rp: { ...info.rp, rotationZ: e.target.value },
+              setRp({
+                ...rp,
+                rotationZ: e.target.value,
               })
             }
           />
         </div>
+        <div
+          className="bg-black text-white justify-between w-1/3 py-2 rounded text-center cursor-pointer"
+          onClick={handleAddRPToInfo}
+        >
+          Add
+        </div>
       </div>
 
       <div
-        className="mt-10 w-full bg-black text-white text-center cursor-pointer py-2 px-5 text-lg"
-        onClick={handleAddRP}
+        className="mt-2 w-full bg-black text-white text-center cursor-pointer py-2 px-5 text-lg"
+        onClick={handleAddRps}
       >
-        Add
+        Next
       </div>
     </div>
   );

@@ -33,7 +33,7 @@ export const UserProvider: React.FC<props> = ({ children }) => {
           console.log(res.data.message); //- toastify success
           router.push("/login");
         } else {
-          console.log(res.data.message); //- toastify error
+          console.log(res); //- toastify error
         }
       })
       .catch((err) => {
@@ -64,7 +64,7 @@ export const UserProvider: React.FC<props> = ({ children }) => {
           setLogged(true);
           router.push("/");
         } else {
-          console.log(res.data.message); //- toastify error
+          console.log(res); //- toastify error
           router.push("/login");
         }
       })

@@ -7,7 +7,7 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use((config) => {
-  const token = localStorage.getItem("access-token");
+  const token = localStorage.getItem("access_token");
 
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
@@ -32,4 +32,6 @@ instance.interceptors.response.use(
   }
 );
 
-export default instance;
+const fetcher = (url: string) => instance.get(url).then((res) => res.data);
+
+export { instance, fetcher };
