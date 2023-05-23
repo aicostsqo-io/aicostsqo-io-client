@@ -1,11 +1,11 @@
 import { SiteBound } from "@/types/models/site";
-import {instance as axios} from "./axiosInstance";
+import { instance as axios } from "./axiosInstance";
 
 export const getSiteBounds = () => axios.get(`/siteBounds`);
 
 export const getSites = () => axios.get(`/sites`);
 
-export const createSite = (data: any) => axios.post(`/sites`, data);
+export const createSite = (data: any) => axios.post(`/fields`, data);
 
 export const createSiteBound = (data: SiteBound) =>
   axios.post(`/siteBounds`, data);

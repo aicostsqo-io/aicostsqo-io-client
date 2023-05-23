@@ -1,8 +1,11 @@
+import RPInfo from "@/components/fields/RPInfo";
 import DataTab from "@/components/fields/Table";
 import TopBar from "@/components/fields/TopBar";
 import MainLayout from "@/layouts/main/MainLayout";
 import ProjectLayout from "@/layouts/project/ProjectLayout";
 import { useState } from "react";
+import { assets } from "@/assets/imgs";
+import Image from "next/image";
 
 const Fields = () => {
   const [page, setPage] = useState<number>(0);
@@ -11,7 +14,19 @@ const Fields = () => {
       <ProjectLayout>
         <TopBar page={page} setPage={setPage} />
         {page === 0 && (
-          <div className="flex flex-col gap-10">Visualization</div>
+          <div className="flex flex-row h-full">
+            <div className="w-3/4 flex justify-center items-center">
+              <div className="w-[400px] h-[400px]">
+                <Image
+                  src={assets.rp}
+                  alt=""
+                  className="w-full h-full object-cover"
+                  priority
+                />
+              </div>
+            </div>
+            <RPInfo />
+          </div>
         )}
         {page === 1 && <DataTab />}
       </ProjectLayout>
