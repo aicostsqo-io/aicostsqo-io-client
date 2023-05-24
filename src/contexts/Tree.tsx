@@ -9,10 +9,13 @@ type props = {
 
 export const TreeProvider: React.FC<props> = ({ children }) => {
   const [expanded, setExpanded] = useState<string[]>([]);
+  const [point, setPoint] = useState<string>("");
 
   const values: any = {
     expanded,
     setExpanded,
+    point,
+    setPoint,
   };
 
   return <TreeContext.Provider value={values}>{children}</TreeContext.Provider>;

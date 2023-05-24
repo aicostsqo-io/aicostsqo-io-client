@@ -4,6 +4,7 @@ import axios from "axios";
 import { User, UserRegister } from "@/types/models/user";
 import { loginUser, registerUser } from "@/api/user";
 import { UserLogin } from "@/types/models/user";
+import { toast } from "react-toastify";
 
 export const UserContext = createContext<any>(null);
 
@@ -27,25 +28,23 @@ export const UserProvider: React.FC<props> = ({ children }) => {
   }, []);
 
   const register = (data: UserRegister) => {
+    console.log(data);
     registerUser(data)
-      .then((res) => {
-        if (res.data.success) {
-          console.log(res.data.message); //- toastify success
+      .then((res: any) => {
+        if (res?.status === 201 || res?.status === 200) {
           router.push("/login");
-        } else {
-          console.log(res); //- toastify error
+          toast.success("Registered successfully");
         }
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch((err) => {});
   };
 
   const login = (data: UserLogin) => {
     loginUser(data)
-      .then((res) => {
-        if (res.data.success) {
-          console.log(res.data.message); //- toastify success
+      .then((res: any) => {
+        console.log(res);
+        if (res?.status === 201 || res?.status === 200) {
+          toast.success("Login successfully");
           localStorage.setItem("access_token", res.data.tokens.access_token);
           localStorage.setItem("refresh_token", res.data.tokens.refresh_token);
           localStorage.setItem(
@@ -64,7 +63,7 @@ export const UserProvider: React.FC<props> = ({ children }) => {
           setLogged(true);
           router.push("/");
         } else {
-          console.log(res); //- toastify error
+          toast.error(res); //- toastify error
           router.push("/login");
         }
       })

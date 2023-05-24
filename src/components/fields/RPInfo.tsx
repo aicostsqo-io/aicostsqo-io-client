@@ -58,15 +58,15 @@ const RPInfo = () => {
             <td className="py-2">Rotation Z</td>
             <td className="py-2">274</td>
           </tr>
-          <tr className="bg-white text-black border border-blue-400">
+          <tr className="bg-blue-100 text-black border border-blue-400">
             <td className="py-2">Slope Angle</td>
             <td className="py-2">85</td>
           </tr>
-          <tr className="bg-blue-100 text-black border border-blue-400">
+          <tr className="bg-white text-black border border-blue-400">
             <td className="py-2">Crepe Angle</td>
             <td className="py-2">0</td>
           </tr>
-          <tr className="bg-white text-black border border-blue-400">
+          <tr className="bg-blue-100 text-black border border-blue-400">
             <td className="py-2">Volume</td>
             <td className="py-2">0</td>
           </tr>

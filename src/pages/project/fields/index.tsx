@@ -1,14 +1,17 @@
 import RPInfo from "@/components/fields/RPInfo";
-import DataTab from "@/components/fields/Table";
+import DataTab from "@/components/fields/RPData";
 import TopBar from "@/components/fields/TopBar";
 import MainLayout from "@/layouts/main/MainLayout";
 import ProjectLayout from "@/layouts/project/ProjectLayout";
 import { useState } from "react";
 import { assets } from "@/assets/imgs";
 import Image from "next/image";
+import { useTreeContext } from "@/contexts/Tree";
 
 const Fields = () => {
-  const [page, setPage] = useState<number>(0);
+  const [page, setPage] = useState<number>(-1);
+  const { point } = useTreeContext();
+  console.log(point);
   return (
     <MainLayout>
       <ProjectLayout>

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const apiURL = process.env.NEXT_PUBLIC_BASE_ENDPOINT;
 
@@ -24,7 +25,7 @@ instance.interceptors.response.use(
       //window.location.href = "/login";
     }
     try {
-      //console.log(error?.response?.data?.message);
+      // toast.error("Hata mesajı");
     } catch (e) {
       console.log("Something went wrong.");
     }

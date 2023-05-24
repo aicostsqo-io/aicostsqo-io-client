@@ -5,6 +5,9 @@ import GIR from "./images/GIR.png";
 import Unibo from "./images/Unibo.png";
 import UniversiteDinPetrosani from "./images/UniversiteDinPetrosani.png";
 import rp from "./test/rp.png";
+import topological from "./test/topological.png";
+import map from "./test/map.png";
+import disc from "./test/disc.png";
 
 export const assets = {
   AICOSTSQO_logo,
@@ -14,4 +17,7 @@ export const assets = {
   Unibo,
   UniversiteDinPetrosani,
   rp,
+  topological,
+  map,
+  disc,
 };

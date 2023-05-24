@@ -9,7 +9,7 @@ import {
   IoTrashOutline as TrashIcon,
 } from "react-icons/io5";
 
-const DataTab = () => {
+const RPData = () => {
   const [data, setData] = useState<Rp[]>([]);
   const [selectedRows, setselectedRows] = useState<string[]>([]);
   useEffect(() => {
@@ -128,4 +128,4 @@ const DataTab = () => {
   );
 };
 
-export default DataTab;
+export default RPData;

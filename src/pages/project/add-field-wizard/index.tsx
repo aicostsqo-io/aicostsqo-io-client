@@ -11,6 +11,7 @@ import MainLayout from "@/layouts/main/MainLayout";
 import ProjectLayout from "@/layouts/project/ProjectLayout";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const stepTexts = [
   "Add Site/Field",
@@ -91,8 +92,9 @@ const AddField = () => {
 
   const save = () => {
     createSite(info)
-      .then((res) => {
-        console.log(res); // toastify success
+      .then((res: any) => {
+        console.log(res);
+        // toast.success(res); // toastify success
         router.push("/project");
       })
       .catch((err) => {
