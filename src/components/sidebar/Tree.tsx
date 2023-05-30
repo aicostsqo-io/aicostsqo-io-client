@@ -13,14 +13,14 @@ import { useTreeContext } from "@/contexts/Tree";
 //* disc rp'lerin içinde olmalı
 // const DiscTreeItem = ({disc} : any) => {}
 
-const RPTreeItem = ({ rps, setPoint }: any) => {
+const RPTreeItem = ({ rps, setPoint, index }: any) => {
   return (
-    <TreeItem nodeId={"Representing Prisms"} label={"Representing Prisms"}>
-      {rps?.map((rp: any, index: number) => (
+    <TreeItem nodeId={`${index + 1}`} label={"Representing Prisms"}>
+      {rps?.map((rp: any, index2: number) => (
         <TreeItem
-          key={index}
+          key={index2}
           nodeId={rp?._id}
-          label={`RP 00${index + 1}`}
+          label={`RP 00${index2 + 1}`}
           onClick={() => setPoint("RP")}
         >
           <TreeItem
@@ -42,7 +42,7 @@ const RPTreeItem = ({ rps, setPoint }: any) => {
   );
 };
 
-const FieldTreeItem = ({ field, router, setPoint }: any) => {
+const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
   const handleClickSite = () => {
     setPoint("Site Main");
     router.push(`/project/fields/${field?.site?._id}`);
@@ -64,7 +64,7 @@ const FieldTreeItem = ({ field, router, setPoint }: any) => {
         onClick={() => setPoint("Site Boundaries")}
       />
       {field?.rps?.length > 0 ? (
-        <RPTreeItem setPoint={setPoint} rps={field?.rps} />
+        <RPTreeItem setPoint={setPoint} rps={field?.rps} index={index} />
       ) : (
         <TreeItem nodeId={"No RPs"} label={"No RPs"} />
       )}
@@ -132,6 +132,7 @@ export default function Tree() {
             <FieldTreeItem
               setPoint={setPoint}
               key={index}
+              index={index}
               field={field}
               router={router}
             />
