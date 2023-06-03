@@ -1,6 +1,4 @@
 import MainLayout from "@/layouts/main/MainLayout";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 export default function Home() {
   return (
@@ -12,17 +10,6 @@ export default function Home() {
           <p>You can start by creating a project.</p>
         </div>
       </div>
-      <ToastContainer
-        position="bottom-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-      />
     </MainLayout>
   );
 }

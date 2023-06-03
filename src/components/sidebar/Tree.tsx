@@ -9,27 +9,44 @@ import { useRouter } from "next/router";
 import { getSites } from "@/api/site";
 import useFetch from "@/hooks/useFetch";
 import { useTreeContext } from "@/contexts/Tree";
+import { useSiteContext } from "@/contexts/Site";
 
 //* disc rp'lerin içinde olmalı
 // const DiscTreeItem = ({disc} : any) => {}
 
 const RPTreeItem = ({ rps, setPoint, index }: any) => {
+  const { setSelectedRP, setSelectedRPs } = useSiteContext();
+
+  const handleClickRpTreeItem = (rp: any) => {
+    setPoint("RPItem");
+    setSelectedRP(rp);
+  };
+
+  const handleClickRpTree = (rps: any) => {
+    setPoint("Representing Prisms");
+    setSelectedRPs(rps);
+  };
+
   return (
-    <TreeItem nodeId={`${index + 1}`} label={"Representing Prisms"}>
+    <TreeItem
+      nodeId={`${index + 1}`}
+      label={"Representing Prisms"}
+      onClick={() => handleClickRpTree(rps)}
+    >
       {rps?.map((rp: any, index2: number) => (
         <TreeItem
           key={index2}
           nodeId={rp?._id}
-          label={`RP 00${index2 + 1}`}
-          onClick={() => setPoint("RP")}
+          label={rp?.name}
+          onClick={() => handleClickRpTreeItem(rp)}
         >
           <TreeItem
-            nodeId={"RP"}
+            nodeId={rp?._id + 1}
             label={"RP"}
             onClick={() => setPoint("RPVisualization")}
           />
           <TreeItem
-            nodeId={"Discontinuities"}
+            nodeId={rp?._id + 2}
             label={"Discontinuities"}
             onClick={() => setPoint("Discontinuities")}
           />
@@ -100,7 +117,7 @@ export default function Tree() {
     data: fieldData,
     isLoading: fieldDataLoading,
     isError: fieldDataError,
-    mutate: fieldDataMutate,
+    mutate: fieldDataMutate
   } = useFetch("/fields");
 
   return (

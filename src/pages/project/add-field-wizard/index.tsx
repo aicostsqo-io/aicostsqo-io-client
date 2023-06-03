@@ -18,7 +18,7 @@ const stepTexts = [
   "Add RP (Representative Prism)",
   "Add Disc (Discontinuities)",
   "Other Measurement Techniques (GPR etc.)",
-  "End The Wizard",
+  "End The Wizard"
 ];
 
 const initialInfo = {
@@ -26,7 +26,7 @@ const initialInfo = {
     //_id: "",
     customerId: "",
     name: "",
-    numberOfVertex: "",
+    numberOfVertex: ""
   },
   siteBound: {
     //_id: "",
@@ -36,7 +36,7 @@ const initialInfo = {
     positionE: "",
     positionLong: "",
     positionLat: "",
-    heading: "",
+    heading: ""
   },
   rps: [
     /*
@@ -59,7 +59,7 @@ const initialInfo = {
     
   }
 */
-  ],
+  ]
   //discs: []
 };
 
@@ -93,13 +93,10 @@ const AddField = () => {
   const save = () => {
     createSite(info)
       .then((res: any) => {
-        console.log(res);
-        // toast.success(res); // toastify success
+        toast.success("Site created successfully");
         router.push("/project");
       })
-      .catch((err) => {
-        console.log(err); // toastify error
-      });
+      .catch((err) => {});
   };
   return (
     <MainLayout>
