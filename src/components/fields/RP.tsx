@@ -1,9 +1,13 @@
 import { assets } from "@/assets/imgs";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RPInfo from "./RPInfo";
+import { useTreeContext } from "@/contexts/Tree";
+import { useSiteContext } from "@/contexts/Site";
 
 const RP = () => {
+  const { selectedRP } = useSiteContext();
+
   return (
     <div className="flex flex-row h-full">
       <div className="w-3/4 flex justify-center items-center">
@@ -16,7 +20,7 @@ const RP = () => {
           />
         </div> */}
       </div>
-      <RPInfo />
+      <RPInfo rp={selectedRP} />
     </div>
   );
 };

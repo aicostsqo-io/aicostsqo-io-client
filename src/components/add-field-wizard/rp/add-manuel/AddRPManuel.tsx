@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const inputContainerClasses = "flex justify-between w-1/3";
 const inputClasses = "border border-black w-1/2 py-1 px-2 outline-none";
@@ -16,16 +17,22 @@ const initialState = {
   positionZ: "",
   rotationX: "",
   rotationY: "",
-  rotationZ: "",
+  rotationZ: ""
 };
 
 const AddRPManuel = ({ next, info, setInfo }: any) => {
   const [rp, setRp] = useState<any>(initialState);
 
   const handleAddRPToInfo = () => {
-    setInfo({ ...info, rps: [...info.rps, rp] });
+    setInfo({
+      ...info,
+      rps: [
+        ...info.rps,
+        { ...rp, name: `RP ${String(info?.rps.length + 1).padStart(3, "0")}` }
+      ]
+    });
     setRp(initialState);
-    console.log("RP added successfully"); // toastify success
+    toast.success("RP added successfully"); // toastify success
   };
 
   const handleAddRps = () => {
@@ -46,7 +53,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                slopeAngle: e.target.value,
+                slopeAngle: e.target.value
               })
             }
           />
@@ -62,7 +69,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                crepeAngle: e.target.value,
+                crepeAngle: e.target.value
               })
             }
           />
@@ -122,7 +129,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                positionX: e.target.value,
+                positionX: e.target.value
               })
             }
           />
@@ -138,7 +145,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                positionY: e.target.value,
+                positionY: e.target.value
               })
             }
           />
@@ -154,7 +161,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                positionZ: e.target.value,
+                positionZ: e.target.value
               })
             }
           />
@@ -170,7 +177,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                rotationX: e.target.value,
+                rotationX: e.target.value
               })
             }
           />
@@ -186,7 +193,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                rotationY: e.target.value,
+                rotationY: e.target.value
               })
             }
           />
@@ -202,7 +209,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                rotationZ: e.target.value,
+                rotationZ: e.target.value
               })
             }
           />

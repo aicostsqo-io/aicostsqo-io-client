@@ -2,8 +2,10 @@ import { assets } from "@/assets/imgs";
 import Image from "next/image";
 import React from "react";
 import RPInfo from "./RPInfo";
+import { useSiteContext } from "@/contexts/Site";
 
 const Discontinuities = () => {
+  const { selectedRP } = useSiteContext();
   return (
     <div className="flex flex-row h-full">
       <div className="w-3/4 flex justify-center items-center">
@@ -16,7 +18,7 @@ const Discontinuities = () => {
           />
         </div>
       </div>
-      <RPInfo />
+      <RPInfo rp={selectedRP} />
     </div>
   );
 };

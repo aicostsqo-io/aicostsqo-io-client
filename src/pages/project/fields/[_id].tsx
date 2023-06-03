@@ -10,7 +10,7 @@ import useFetch from "@/hooks/useFetch";
 import MainLayout from "@/layouts/main/MainLayout";
 import ProjectLayout from "@/layouts/project/ProjectLayout";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RPData from "@/components/fields/RPData";
 
 const Field = () => {
@@ -18,16 +18,16 @@ const Field = () => {
   const router = useRouter();
   const { _id } = router.query;
   const { point } = useTreeContext();
-  console.log(point);
 
   const {
     data: siteData,
     isLoading: siteDataLoading,
     isError: siteDataError,
-    mutate: siteDataMutate,
-  } = useFetch(`/fields/${_id}`);
+    mutate: siteDataMutate
+  } = useFetch(_id ? `/fields/${_id}` : null);
 
-  console.log(siteData);
+  console.log("point : ", point);
+  console.log("siteData : ", siteData);
 
   return (
     <MainLayout>
@@ -35,14 +35,20 @@ const Field = () => {
         <TopBar page={page} setPage={setPage} />
         {point === "Site Main" && (
           <div className="h-full flex justify-center items-center text-5xl font-bold">
-            {siteData?.site?.name} Maden Alanı
+            {siteData?.site?.name} Mining Field
           </div>
         )}
         {point === "Site Topological Map" && page === 0 && <Topological />}
         {point === "Site Boundaries" && page === 0 && <Boundaries />}
-        {point === "RP" && page === 0 && <RP />}
+        {point === "Representing Prisms" && page === 0 && (
+          <div className="h-full flex justify-center items-center text-5xl font-bold">
+            {siteData?.site?.name} Mining Field
+          </div>
+        )}
+        {point === "Representing Prisms" && page === 1 && <RPData />}
+        {point.startsWith("RPItem") && page === 0 && <RP />}
+        {point === "RPItem" && page === 1 && <RPData />}
         {point === "RPVisualization" && page === 0 && <RPVisualization />}
-        {point === "RPVisualization" && page === 1 && <RPData />}
         {point === "Discontinuities" && page === 0 && <Discontinuities />}
       </ProjectLayout>
     </MainLayout>

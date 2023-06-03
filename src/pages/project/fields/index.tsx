@@ -11,11 +11,11 @@ import { useTreeContext } from "@/contexts/Tree";
 const Fields = () => {
   const [page, setPage] = useState<number>(-1);
   const { point } = useTreeContext();
-  console.log(point);
+
   return (
     <MainLayout>
       <ProjectLayout>
-        <TopBar page={page} setPage={setPage} />
+        {/* <TopBar page={page} setPage={setPage} />
         {page === 0 && (
           <div className="flex flex-row h-full">
             <div className="w-3/4 flex justify-center items-center">
@@ -31,7 +31,7 @@ const Fields = () => {
             <RPInfo />
           </div>
         )}
-        {page === 1 && <DataTab />}
+        {page === 1 && <DataTab />} */}
       </ProjectLayout>
     </MainLayout>
   );

@@ -1,4 +1,6 @@
 import { bulkDeleteRps, getRps } from "@/api/rp";
+import { useSiteContext } from "@/contexts/Site";
+import { useTreeContext } from "@/contexts/Tree";
 import { Rp } from "@/types/models/rp";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import {
@@ -6,17 +8,28 @@ import {
   IoClose as CloseIcon,
   IoSaveOutline as SaveIcon,
   IoSearchOutline as SearchIcon,
-  IoTrashOutline as TrashIcon,
+  IoTrashOutline as TrashIcon
 } from "react-icons/io5";
 
 const RPData = () => {
   const [data, setData] = useState<Rp[]>([]);
   const [selectedRows, setselectedRows] = useState<string[]>([]);
+  const { selectedRPs, selectedRP } = useSiteContext();
+  const { point } = useTreeContext();
+
   useEffect(() => {
+    if (point === "Representing Prisms") {
+      setData(selectedRPs);
+    } else if (point === "RPItem") {
+      setData([selectedRP]);
+    }
+  }, [selectedRPs, selectedRP]);
+
+  /* useEffect(() => {
     getRps()
       .then((newList) => setData(newList.data.rps))
       .catch((err) => console.log(err));
-  }, []);
+  }, []); */
 
   const handleSelectAll = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) setselectedRows(data.map((p) => p._id));
@@ -38,10 +51,12 @@ const RPData = () => {
     const updatedTableData = data.filter((row) => !row.isSelected);
     setData(updatedTableData);
   };
+
   return (
     <div className="flex flex-col modal-container py-3 min-h-[300px] justify-between">
-      <h1 className="modal-container-title"> Data Sets of the RP 001 </h1>
-      <div className="overflow-auto my-10 mx-5">
+      <h1 className="modal-container-title">Data Sets</h1>
+
+      <div className="overflow-scroll my-10 mx-5">
         <table className="min-w-max w-full table-auto">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
@@ -65,7 +80,7 @@ const RPData = () => {
             </tr>
           </thead>
           <tbody className="text-gray-600 text-sm font-light">
-            {data?.map((p) => (
+            {data?.map((p: any) => (
               <tr key={p._id} className="border-b border-gray-200">
                 <td className="py-3 px-6 text-left">
                   <input

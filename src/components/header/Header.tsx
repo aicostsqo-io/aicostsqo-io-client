@@ -43,7 +43,7 @@ const Header = () => {
                   onClick={() => setVisible(!visible)}
                   href="/new-project"
                   className={
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-green-500 hover:text-white border-b-2"
                   }
                 >
                   New Project
@@ -52,7 +52,7 @@ const Header = () => {
                   onClick={() => setVisible(!visible)}
                   href="/project"
                   className={
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-green-500 hover:text-white border-b-2"
                   }
                 >
                   Open Project
@@ -61,7 +61,7 @@ const Header = () => {
                   onClick={() => setVisible(!visible)}
                   href="/new-project"
                   className={
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-green-500 hover:text-white border-b-2"
                   }
                 >
                   Save Project
@@ -70,19 +70,10 @@ const Header = () => {
                   onClick={() => setVisible(!visible)}
                   href="/new-project"
                   className={
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-green-500 hover:text-white border-b-2"
                   }
                 >
                   Close Project
-                </Link>
-                <Link
-                  onClick={() => setVisible(!visible)}
-                  href="/new-project"
-                  className={
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-gray-200 border-b-2"
-                  }
-                >
-                  Signout
                 </Link>
               </div>
             </li>

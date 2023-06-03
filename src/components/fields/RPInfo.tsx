@@ -1,10 +1,13 @@
+import { useTreeContext } from "@/contexts/Tree";
 import React from "react";
 
-const RPInfo = () => {
+const RPInfo = ({ rp }: any) => {
+  const { point } = useTreeContext();
+  console.log("rp :   ", rp);
   return (
     <div className="w-1/4 h-min">
       <div className="text-center text-blue-500 text-2xl mb-3">
-        Properties for RP 001
+        Properties for {rp?.name}
       </div>
       <table className="w-full text-center border border-blue-400 table-fixed">
         <thead className="bg-blue-400 text-white">
@@ -16,59 +19,59 @@ const RPInfo = () => {
         <tbody>
           <tr className="bg-white text-black border border-blue-400">
             <td className="py-2">RP Name</td>
-            <td className="py-2">RP 001</td>
+            <td className="py-2">{rp?.name}</td>
           </tr>
           <tr className="bg-blue-100 text-black border border-blue-400">
             <td className="py-2">RP Id</td>
-            <td className="py-2">1</td>
+            <td className="py-2">{rp?.name?.substring(2, point.length)}</td>
           </tr>
           <tr className="bg-white text-black border border-blue-400">
             <td className="py-2">Depth X</td>
-            <td className="py-2">30</td>
+            <td className="py-2">{rp?.sizeX}</td>
           </tr>
           <tr className="bg-blue-100 text-black border border-blue-400">
             <td className="py-2">Width Y</td>
-            <td className="py-2">33</td>
+            <td className="py-2">{rp?.sizeY}</td>
           </tr>
           <tr className="bg-white text-black border border-blue-400">
             <td className="py-2">Height Z</td>
-            <td className="py-2">12</td>
+            <td className="py-2">{rp?.sizeZ}</td>
           </tr>
           <tr className="bg-blue-100 text-black border border-blue-400">
             <td className="py-2">Position X</td>
-            <td className="py-2">0</td>
+            <td className="py-2">{rp?.positionX}</td>
           </tr>
           <tr className="bg-white text-black border border-blue-400">
             <td className="py-2">Position Y</td>
-            <td className="py-2">0</td>
+            <td className="py-2">{rp?.positionY}</td>
           </tr>
           <tr className="bg-blue-100 text-black border border-blue-400">
             <td className="py-2">Position Z</td>
-            <td className="py-2">0</td>
+            <td className="py-2">{rp?.positionZ}</td>
           </tr>
           <tr className="bg-white text-black border border-blue-400">
             <td className="py-2">Rotation X</td>
-            <td className="py-2">0</td>
+            <td className="py-2">{rp?.rotationX}</td>
           </tr>
           <tr className="bg-blue-100 text-black border border-blue-400">
             <td className="py-2">Rotation Y</td>
-            <td className="py-2">0</td>
+            <td className="py-2">{rp?.rotationY}</td>
           </tr>
           <tr className="bg-white text-black border border-blue-400">
             <td className="py-2">Rotation Z</td>
-            <td className="py-2">274</td>
+            <td className="py-2">{rp?.rotationZ}</td>
           </tr>
           <tr className="bg-blue-100 text-black border border-blue-400">
             <td className="py-2">Slope Angle</td>
-            <td className="py-2">85</td>
+            <td className="py-2">{rp?.slopeAngle}</td>
           </tr>
           <tr className="bg-white text-black border border-blue-400">
             <td className="py-2">Crepe Angle</td>
-            <td className="py-2">0</td>
+            <td className="py-2">{rp?.crepeAngle}</td>
           </tr>
           <tr className="bg-blue-100 text-black border border-blue-400">
             <td className="py-2">Volume</td>
-            <td className="py-2">0</td>
+            <td className="py-2">{rp?.volume}</td>
           </tr>
         </tbody>
       </table>
