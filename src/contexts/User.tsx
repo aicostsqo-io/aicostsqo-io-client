@@ -6,6 +6,10 @@ import { loginUser, registerUser } from "@/api/user";
 import { UserLogin } from "@/types/models/user";
 import { toast } from "react-toastify";
 
+/* const initialState = localStorage.getItem('token')
+  ? { isLoggedIn: true, ...jwt_decode(localStorage.getItem('token')) }
+  : { isLoggedIn: false }; */
+
 export const UserContext = createContext<any>(null);
 
 type props = {
@@ -22,6 +26,7 @@ export const UserProvider: React.FC<props> = ({ children }) => {
     if (localStorage.getItem("access_token")) {
       setCurrentUser(JSON.parse(localStorage.getItem("user_info") || "{}"));
       setLogged(true);
+      router.push("/");
     } else {
       router.push("/login");
     }
@@ -52,13 +57,13 @@ export const UserProvider: React.FC<props> = ({ children }) => {
             JSON.stringify({
               _id: res.data._id,
               full_name: res.data.full_name,
-              email: res.data.email,
+              email: res.data.email
             })
           );
           setCurrentUser({
             _id: res.data._id,
             full_name: res.data.full_name,
-            email: res.data.email,
+            email: res.data.email
           });
           setLogged(true);
           router.push("/");
@@ -89,7 +94,7 @@ export const UserProvider: React.FC<props> = ({ children }) => {
     register,
     login,
     currentUser,
-    logout,
+    logout
   };
 
   return <UserContext.Provider value={values}>{children}</UserContext.Provider>;

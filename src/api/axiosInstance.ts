@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 const apiURL = process.env.NEXT_PUBLIC_BASE_ENDPOINT;
 
 const instance = axios.create({
-  baseURL: apiURL,
+  baseURL: apiURL
 });
 
 instance.interceptors.request.use((config) => {
@@ -25,9 +25,9 @@ instance.interceptors.response.use(
       //window.location.href = "/login";
     }
     try {
-      // toast.error("Hata mesajı");
+      toast.error(error?.response?.data?.message); //* buraya girmesi lazım
     } catch (e) {
-      console.log("Something went wrong.");
+      toast.error("Bir hata oluştu. Lütfen tekrar deneyin.");
     }
     return error;
   }
