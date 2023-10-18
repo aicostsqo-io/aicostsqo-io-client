@@ -20,12 +20,12 @@ instance.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error?.response?.status === 401) {
-      //console.log("Please login again.");
+      console.log("Please login again.");
       //localStorage.removeItem("token");
       //window.location.href = "/login";
     }
     try {
-      toast.error(error?.response?.data?.message); //* buraya girmesi lazım
+      toast.error(error?.response?.data?.message);
     } catch (e) {
       toast.error("Bir hata oluştu. Lütfen tekrar deneyin.");
     }

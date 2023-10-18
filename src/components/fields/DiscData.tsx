@@ -1,7 +1,6 @@
-import { bulkDeleteRps, getRps } from "@/api/rp";
+import { getDiscsByRpId } from "@/api/disc";
 import { useSiteContext } from "@/contexts/Site";
 import { useTreeContext } from "@/contexts/Tree";
-import { Rp } from "@/types/models/rp";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import {
   IoAddCircleOutline as AddIcon,
@@ -11,19 +10,26 @@ import {
   IoTrashOutline as TrashIcon,
 } from "react-icons/io5";
 
-const RPData = () => {
-  const [data, setData] = useState<Rp[]>([]);
+const DiscData = () => {
+  const [data, setData] = useState<any>([]);
   const [selectedRows, setselectedRows] = useState<string[]>([]);
-  const { selectedRPs, selectedRP } = useSiteContext();
+  const { selectedDiscs, selectedRP } = useSiteContext();
   const { point } = useTreeContext();
 
+  const fetchDiscData = async () => {
+    const res = await getDiscsByRpId(selectedRP?._id);
+    setData(res.data.message);
+    console.log(res);
+  };
+
   useEffect(() => {
-    if (point === "Representing Prisms") {
-      setData(selectedRPs);
-    } else if (point === "RPItem") {
+    fetchDiscData();
+    if (point === "Discontinuities (scanline measure)") {
+      setData(selectedDiscs);
+    } /* else if (point === "RPItem") {
       setData([selectedRP]);
-    }
-  }, [selectedRPs, selectedRP]);
+    } */
+  }, []);
 
   /* useEffect(() => {
     getRps()
@@ -32,15 +38,15 @@ const RPData = () => {
   }, []); */
 
   const handleSelectAll = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.checked) setselectedRows(data.map((p) => p._id));
-    else setselectedRows([]);
+    /*   if (e.target.checked) setselectedRows(data.map((p) => p._id));
+    else setselectedRows([]); */
   };
   const handleSelectRow = (e: ChangeEvent<HTMLInputElement>, id: string) => {
-    if (e.target.checked) setselectedRows([...selectedRows, id]);
-    else setselectedRows(selectedRows.filter((row) => row !== id));
+    /*   if (e.target.checked) setselectedRows([...selectedRows, id]);
+    else setselectedRows(selectedRows.filter((row) => row !== id)); */
   };
   const handleDeleteSelectedRows = (e: MouseEvent<HTMLDivElement>) => {
-    const rowsToDelete = selectedRows;
+    /*   const rowsToDelete = selectedRows;
     bulkDeleteRps(rowsToDelete)
       .then((res) => {
         getRps()
@@ -49,7 +55,7 @@ const RPData = () => {
       })
       .catch((err) => console.log(err));
     const updatedTableData = data.filter((row) => !row.isSelected);
-    setData(updatedTableData);
+    setData(updatedTableData); */
   };
 
   return (
@@ -63,20 +69,17 @@ const RPData = () => {
               <th className="py-3 px-6 text-left">
                 <input type="checkbox" onChange={handleSelectAll} />
               </th>
+              <th className="py-3 px-6 text-left">RP Id</th>
               <th className="py-3 px-6 text-left">Id</th>
-              <th className="py-3 px-6 text-left">Site Bound Id</th>
-              <th className="py-3 px-6 text-left">Size X</th>
-              <th className="py-3 px-6 text-left">Size Y</th>
-              <th className="py-3 px-6 text-left">Size Z</th>
-              <th className="py-3 px-6 text-left">Position X</th>
-              <th className="py-3 px-6 text-left">Position Y</th>
-              <th className="py-3 px-6 text-left">Position Z</th>
-              <th className="py-3 px-6 text-left">Rotation X</th>
-              <th className="py-3 px-6 text-left">Rotation Y</th>
-              <th className="py-3 px-6 text-left">Rotation Z</th>
-              <th className="py-3 px-6 text-left">Slope Angle</th>
-              <th className="py-3 px-6 text-left">Crepe Angle</th>
-              <th className="py-3 px-6 text-left">Volume</th>
+              <th className="py-3 px-6 text-left">Slope</th>
+              <th className="py-3 px-6 text-left">Slope Direction</th>
+              <th className="py-3 px-6 text-left">pX</th>
+              <th className="py-3 px-6 text-left">pY</th>
+              <th className="py-3 px-6 text-left">pZ</th>
+              <th className="py-3 px-6 text-left">nX</th>
+              <th className="py-3 px-6 text-left">nY</th>
+              <th className="py-3 px-6 text-left">nZ</th>
+              <th className="py-3 px-6 text-left">Type</th>
             </tr>
           </thead>
           <tbody className="text-gray-600 text-sm font-light">
@@ -89,20 +92,17 @@ const RPData = () => {
                     onChange={(e) => handleSelectRow(e, p._id)}
                   />
                 </td>
+                <td className="py-3 px-6 text-left">{p.rpId}</td>
                 <td className="py-3 px-6 text-left">{p._id}</td>
-                <td className="py-3 px-6 text-left">{p.siteBoundId}</td>
-                <td className="py-3 px-6 text-left">{p.sizeX}</td>
-                <td className="py-3 px-6 text-left">{p.sizeY}</td>
-                <td className="py-3 px-6 text-left">{p.sizeZ}</td>
-                <td className="py-3 px-6 text-left">{p.positionX}</td>
-                <td className="py-3 px-6 text-left">{p.positionY}</td>
-                <td className="py-3 px-6 text-left">{p.positionZ}</td>
-                <td className="py-3 px-6 text-left">{p.rotationX}</td>
-                <td className="py-3 px-6 text-left">{p.rotationY}</td>
-                <td className="py-3 px-6 text-left">{p.rotationZ}</td>
-                <td className="py-3 px-6 text-left">{p.slopeAngle}</td>
-                <td className="py-3 px-6 text-left">{p.crepeAngle}</td>
-                <td className="py-3 px-6 text-left">{p.volume}</td>
+                <td className="py-3 px-6 text-left">{p.dip}</td>
+                <td className="py-3 px-6 text-left">{p.dipDirect}</td>
+                <td className="py-3 px-6 text-left">{p.pX}</td>
+                <td className="py-3 px-6 text-left">{p.pY}</td>
+                <td className="py-3 px-6 text-left">{p.pZ}</td>
+                <td className="py-3 px-6 text-left">{p.nX}</td>
+                <td className="py-3 px-6 text-left">{p.nY}</td>
+                <td className="py-3 px-6 text-left">{p.nZ}</td>
+                <td className="py-3 px-6 text-left">{p.type}</td>
               </tr>
             ))}
           </tbody>
@@ -143,4 +143,4 @@ const RPData = () => {
   );
 };
 
-export default RPData;
+export default DiscData;

@@ -1,6 +1,7 @@
 import { createSite } from "@/api/site";
 import EndWizard from "@/components/add-field-wizard/EndWizard";
 import AddDisc from "@/components/add-field-wizard/discontinuities/AddDisc";
+import AddDiscManuel from "@/components/add-field-wizard/discontinuities/add-manuel/AddDiscManuel";
 import AddOther from "@/components/add-field-wizard/other/AddOther";
 import AddRP from "@/components/add-field-wizard/rp/AddRP";
 import AddRPManuel from "@/components/add-field-wizard/rp/add-manuel/AddRPManuel";
@@ -59,8 +60,8 @@ const initialInfo = {
     
   }
 */
-  ]
-  //discs: []
+  ],
+  discs: []
 };
 
 const AddField = () => {
@@ -71,8 +72,11 @@ const AddField = () => {
 
   const [addSiteOption, setAddSiteOption] = useState(-1);
   const [addRpOption, setAddRpOption] = useState(0);
-  const [addDiscOption, setAddDiscOption] = useState(-1);
+  const [addDiscOption, setAddDiscOption] = useState(0);
+  const [discType, setDiscType] = useState(-1);
   const [addOtherOption, setAddOtherOption] = useState(-1);
+
+  console.log(discType);
 
   const router = useRouter();
 
@@ -115,7 +119,12 @@ const AddField = () => {
               <AddRP setAddRpOption={setAddRpOption} next={next} />
             )}
             {step === 2 && (
-              <AddDisc setAddDiscOption={setAddRpOption} next={next} />
+              <AddDisc
+                setAddDiscOption={setAddRpOption}
+                discType={discType}
+                setDiscType={setDiscType}
+                next={next}
+              />
             )}
             {step === 3 && (
               <AddOther setAddOtherOption={setAddRpOption} next={next} />
@@ -130,6 +139,9 @@ const AddField = () => {
           )}
           {step === 1 && addRpOption === 0 && (
             <AddRPManuel info={info} setInfo={setInfo} next={next} />
+          )}
+          {step === 2 && addDiscOption === 0 && discType === 0 && (
+            <AddDiscManuel info={info} setInfo={setInfo} next={next} />
           )}
         </div>
       </ProjectLayout>

@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import React, { createContext, useContext, useState } from "react";
 
 export const SiteContext = createContext<any>(null);
@@ -12,7 +11,7 @@ export const SiteProvider: React.FC<props> = ({ children }) => {
   const [sites, setSites] = useState<any>();
   const [selectedRP, setSelectedRP] = useState<any>();
   const [selectedRPs, setSelectedRPs] = useState<any>();
-  const router = useRouter();
+  const [selectedDiscs, setSelectedDiscs] = useState<any>();
 
   const values: any = {
     loading,
@@ -22,7 +21,9 @@ export const SiteProvider: React.FC<props> = ({ children }) => {
     selectedRP,
     setSelectedRP,
     selectedRPs,
-    setSelectedRPs
+    setSelectedRPs,
+    selectedDiscs,
+    setSelectedDiscs,
   };
 
   return <SiteContext.Provider value={values}>{children}</SiteContext.Provider>;
