@@ -27,7 +27,6 @@ const initialInfo = {
     //_id: "",
     customerId: "",
     name: "",
-    numberOfVertex: ""
   },
   siteBound: {
     //_id: "",
