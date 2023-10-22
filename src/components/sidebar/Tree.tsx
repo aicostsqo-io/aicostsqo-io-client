@@ -15,12 +15,17 @@ import { useSiteContext } from "@/contexts/Site";
 // const DiscTreeItem = ({disc} : any) => {}
 
 const RPTreeItem = ({ rps, setPoint, index }: any) => {
-  const { setSelectedRP, setSelectedRPs, setPage, setSelectedDiscs } =
-    useSiteContext();
+  const { setSelectedRP, setSelectedRPs, setPage } = useSiteContext();
+  const { expanded, setExpanded } = useTreeContext();
 
   const handleClickRpTreeItem = (rp: any) => {
     setPoint("RPItem");
     setSelectedRP(rp);
+    const newExpanded = expanded.filter(
+      (item: any) => !item.startsWith("RPNode")
+    );
+    newExpanded.push("RPNode" + rp?._id);
+    setExpanded(newExpanded);
   };
 
   const handleClickRpTree = (rps: any) => {
@@ -38,7 +43,7 @@ const RPTreeItem = ({ rps, setPoint, index }: any) => {
       {rps?.map((rp: any, index2: number) => (
         <TreeItem
           key={index2}
-          nodeId={rp?._id}
+          nodeId={"RPNode" + rp?._id}
           label={rp?.name}
           onClick={() => handleClickRpTreeItem(rp)}
         >
