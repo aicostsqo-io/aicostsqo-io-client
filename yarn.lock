@@ -2162,7 +2162,7 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-marble-disc@^1.0.5:
+marble-disc@^1.1.5:
   version "1.1.5"
   resolved "https://registry.yarnpkg.com/marble-disc/-/marble-disc-1.1.5.tgz#a313881e5b7150d5e7453e8ce7bc613d4670ca8d"
   integrity sha512-3Szi2avaabRDUxNKSOH3oX29+3DrBWftQeNKSqnH8EEcLtYagBgzJ/dhzjCEA6/4ioq4v8KXEqXbGj2xGPrIng==
