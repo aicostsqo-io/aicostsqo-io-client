@@ -2162,10 +2162,10 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-marble-disc@^1.1.5:
-  version "1.1.5"
-  resolved "https://registry.yarnpkg.com/marble-disc/-/marble-disc-1.1.5.tgz#a313881e5b7150d5e7453e8ce7bc613d4670ca8d"
-  integrity sha512-3Szi2avaabRDUxNKSOH3oX29+3DrBWftQeNKSqnH8EEcLtYagBgzJ/dhzjCEA6/4ioq4v8KXEqXbGj2xGPrIng==
+marble-disc@^1.1.6:
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/marble-disc/-/marble-disc-1.1.6.tgz#3d5ff28b5146f76a01b8128f5831b912c66bad14"
+  integrity sha512-J36GvHl/FWZc5p7lHn/UlaATP2OCxGsLZnCONESgJVSJQlEXT6yBhwfFqEkZHNtAVJe6qwNcq1F9zeNa1zBYIA==
   dependencies:
     three "^0.150.1"
 
