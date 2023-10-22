@@ -11,11 +11,8 @@ import useFetch from "@/hooks/useFetch";
 import { useTreeContext } from "@/contexts/Tree";
 import { useSiteContext } from "@/contexts/Site";
 
-//* disc rp'lerin içinde olmalı
-// const DiscTreeItem = ({disc} : any) => {}
-
 const RPTreeItem = ({ rps, setPoint, index }: any) => {
-  const { setSelectedRP, setSelectedRPs, setPage } = useSiteContext();
+  const { setSelectedRP, setSelectedRPs, setSelectedDiscs } = useSiteContext();
   const { expanded, setExpanded } = useTreeContext();
 
   const handleClickRpTreeItem = (rp: any) => {
@@ -30,7 +27,6 @@ const RPTreeItem = ({ rps, setPoint, index }: any) => {
 
   const handleClickRpTree = (rps: any) => {
     setPoint("Representing Prisms");
-    setPage(1);
     setSelectedRPs(rps);
   };
 
@@ -50,7 +46,10 @@ const RPTreeItem = ({ rps, setPoint, index }: any) => {
           <TreeItem
             nodeId={rp?._id + 1}
             label={"RP"}
-            onClick={() => setPoint("RP")}
+            onClick={() => {
+              setPoint("RP");
+              setSelectedDiscs([]);
+            }}
           />
           <TreeItem
             nodeId={rp?._id + 2}

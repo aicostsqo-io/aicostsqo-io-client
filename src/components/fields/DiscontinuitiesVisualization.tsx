@@ -1,7 +1,4 @@
-import { assets } from "@/assets/imgs";
-import Image from "next/image";
 import React, { useEffect, useRef } from "react";
-import RPInfo from "./RPInfo";
 import { useSiteContext } from "@/contexts/Site";
 import * as M from "marble-disc";
 import { getDiscsByRpId } from "@/api/disc";
