@@ -47,15 +47,13 @@ const AddDisc = ({ next, setAddDiscOption, discType, setDiscType }: any) => {
       <div className="flex flex-col gap-5 mt-10 text-lg">
         {discTypes?.map((discType: string, index: number) => (
           <div key={index} className="flex gap-3">
-            <option value={discType}>
-              <input
-                type="radio"
-                value={index}
-                name="type"
-                id={discType}
-                onChange={(e) => setDiscType(parseInt(e.target.value))}
-              />
-            </option>
+            <input
+              type="radio"
+              value={index}
+              name="type"
+              id={discType}
+              onChange={(e) => setDiscType(parseInt(e.target.value))}
+            />
             <label htmlFor={discType}>{discType}</label>
           </div>
         ))}
