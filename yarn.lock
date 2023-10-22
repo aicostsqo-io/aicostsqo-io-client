@@ -2162,6 +2162,13 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+marble-disc@^1.0.5:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/marble-disc/-/marble-disc-1.1.4.tgz#e0ec6acfa92af281072865232f56b9e6466679fb"
+  integrity sha512-ul5WjX4STgMnq+jl+hA1yjj24flwbSxb6V4VQjo2F8q6pJvMU+ancdDZWtwBEU6+tJcFMCkCsP8mm1hzWwj1JQ==
+  dependencies:
+    three "^0.150.1"
+
 merge2@^1.3.0, merge2@^1.4.1:
   version "1.4.1"
   resolved "https://registry.yarnpkg.com/merge2/-/merge2-1.4.1.tgz#4368892f885e907455a6fd7dc55c0c9d404990ae"
@@ -3120,6 +3127,11 @@ thenify-all@^1.0.0:
   integrity sha512-RVZSIV5IG10Hk3enotrhvz0T9em6cyHBLkH/YAZuKqd8hRkKhSfCGIcP2KUY0EPxndzANBmNllzWPwak+bheSw==
   dependencies:
     any-promise "^1.0.0"
+
+three@^0.150.1:
+  version "0.150.1"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.150.1.tgz#870d324a4d2daf1c7d55be97f3f73d83783e28be"
+  integrity sha512-5C1MqKUWaHYo13BX0Q64qcdwImgnnjSOFgBscOzAo8MYCzEtqfQqorEKMcajnA3FHy1yVlIe9AmaMQ0OQracNA==
 
 tiny-case@^1.0.3:
   version "1.0.3"

@@ -15,7 +15,8 @@ import { useSiteContext } from "@/contexts/Site";
 // const DiscTreeItem = ({disc} : any) => {}
 
 const RPTreeItem = ({ rps, setPoint, index }: any) => {
-  const { setSelectedRP, setSelectedRPs, setPage } = useSiteContext();
+  const { setSelectedRP, setSelectedRPs, setPage, setSelectedDiscs } =
+    useSiteContext();
 
   const handleClickRpTreeItem = (rp: any) => {
     setPoint("RPItem");
@@ -49,7 +50,10 @@ const RPTreeItem = ({ rps, setPoint, index }: any) => {
           <TreeItem
             nodeId={rp?._id + 2}
             label={"Discontinuities (scanline measure)"}
-            onClick={() => setPoint("Discontinuities (scanline measure)")}
+            onClick={() => {
+              setPoint("Discontinuities (scanline measure)");
+              // setSelectedDiscs([]);
+            }}
           />
           {/* {
               field?.rps?.discs?.length > 0 ? <DiscTreeItem discs={field?.rps?.discs} /> : <TreeItem nodeId={"199"} label={"No Discs"} /> 
@@ -105,12 +109,6 @@ export default function Tree() {
     setSelected(nodeIds);
   };
 
-  const handleExpandClick = () => {
-    setExpanded((oldExpanded: any) =>
-      oldExpanded.length === 0 ? ["1", "5", "6", "7"] : []
-    );
-  };
-
   React.useEffect(() => {
     console.log("sidebar renderlandı"); //? NEDEN HER SEFERİNDE RENDER'LIYOR
   }, []);
@@ -126,11 +124,6 @@ export default function Tree() {
 
   return (
     <Box sx={{ height: "100%", flexGrow: 1, maxWidth: 400, overflowY: "auto" }}>
-      <Box sx={{ mb: 1 }}>
-        <Button onClick={handleExpandClick}>
-          {expanded.length === 0 ? "Expand all" : "Collapse all"}
-        </Button>
-      </Box>
       <TreeView
         aria-label="controlled"
         defaultCollapseIcon={<ExpandMoreIcon />}

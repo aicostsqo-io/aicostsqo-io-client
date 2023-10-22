@@ -14,7 +14,7 @@ import AddDiscontinuity from "../common/Modals/AddDiscontinuity";
 const DiscontinuitiesData = () => {
   const [data, setData] = useState<any>([]);
   const [selectedRows, setselectedRows] = useState<string[]>([]);
-  const { selectedDiscs, selectedRP } = useSiteContext();
+  const { setSelectedDiscs, selectedRP } = useSiteContext();
   const { point } = useTreeContext();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -22,7 +22,7 @@ const DiscontinuitiesData = () => {
   const fetchDiscData = async () => {
     const res = await getDiscsByRpId(selectedRP?._id);
     setData(res.data.discs);
-    console.log(res);
+    setSelectedDiscs(res.data.discs)
   };
 
   useEffect(() => {
