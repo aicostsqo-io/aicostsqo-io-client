@@ -9,6 +9,7 @@ import {
   IoSearchOutline as SearchIcon,
   IoTrashOutline as TrashIcon,
 } from "react-icons/io5";
+import AddDiscontinuity from "../common/Modals/AddDiscontinuity";
 
 const DiscontinuitiesData = () => {
   const [data, setData] = useState<any>([]);
@@ -16,19 +17,16 @@ const DiscontinuitiesData = () => {
   const { selectedDiscs, selectedRP } = useSiteContext();
   const { point } = useTreeContext();
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const fetchDiscData = async () => {
     const res = await getDiscsByRpId(selectedRP?._id);
-    setData(res.data.message);
+    setData(res.data.discs);
     console.log(res);
   };
 
   useEffect(() => {
     fetchDiscData();
-    if (point === "Discontinuities (scanline measure)") {
-      setData(selectedDiscs);
-    } /* else if (point === "RPItem") {
-      setData([selectedRP]);
-    } */
   }, []);
 
   /* useEffect(() => {
@@ -114,6 +112,7 @@ const DiscontinuitiesData = () => {
             className="flex flex-col gap-3 items-center cursor-pointer"
             data-modal-target="authentication-modal"
             data-modal-toggle="authentication-modal"
+            onClick={() => setIsModalOpen(true)}
           >
             <AddIcon className="text-4xl" />
             <span className="text-lg">Add New Line</span>
@@ -139,6 +138,12 @@ const DiscontinuitiesData = () => {
           </div>
         </div>
       </div>
+      {isModalOpen ? (
+        <AddDiscontinuity
+          onClose={() => setIsModalOpen(false)}
+          refetch={() => fetchDiscData()}
+        />
+      ) : null}
     </div>
   );
 };

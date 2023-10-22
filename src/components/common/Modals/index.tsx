@@ -1,7 +1,7 @@
 import { useUIContext } from "../../../contexts/UI";
 import { MODALS } from "../../../constants/modals";
 import AddRP from "./AddRP";
-import AddDiscontinuitiy from "./AddDiscontinuitiy";
+import AddDiscontinuitiy from "./AddDiscontinuity";
 import { useCallback } from "react";
 
 export const MODAL_COMPONENTS = {
