@@ -2163,9 +2163,9 @@ lru-cache@^6.0.0:
     yallist "^4.0.0"
 
 marble-disc@^1.0.5:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/marble-disc/-/marble-disc-1.1.4.tgz#e0ec6acfa92af281072865232f56b9e6466679fb"
-  integrity sha512-ul5WjX4STgMnq+jl+hA1yjj24flwbSxb6V4VQjo2F8q6pJvMU+ancdDZWtwBEU6+tJcFMCkCsP8mm1hzWwj1JQ==
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/marble-disc/-/marble-disc-1.1.5.tgz#a313881e5b7150d5e7453e8ce7bc613d4670ca8d"
+  integrity sha512-3Szi2avaabRDUxNKSOH3oX29+3DrBWftQeNKSqnH8EEcLtYagBgzJ/dhzjCEA6/4ioq4v8KXEqXbGj2xGPrIng==
   dependencies:
     three "^0.150.1"
 
