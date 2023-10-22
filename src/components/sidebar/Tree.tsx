@@ -47,8 +47,8 @@ const RPTreeItem = ({ rps, setPoint, index }: any) => {
           />
           <TreeItem
             nodeId={rp?._id + 2}
-            label={"Discontinuities"}
-            onClick={() => setPoint("Discontinuities")}
+            label={"Discontinuities (scanline measure)"}
+            onClick={() => setPoint("Discontinuities (scanline measure)")}
           />
           {/* {
               field?.rps?.discs?.length > 0 ? <DiscTreeItem discs={field?.rps?.discs} /> : <TreeItem nodeId={"199"} label={"No Discs"} /> 
@@ -117,7 +117,7 @@ export default function Tree() {
     data: fieldData,
     isLoading: fieldDataLoading,
     isError: fieldDataError,
-    mutate: fieldDataMutate
+    mutate: fieldDataMutate,
   } = useFetch("/fields");
 
   return (
@@ -142,7 +142,7 @@ export default function Tree() {
             label="Use Wizard"
             onClick={() => router.push("/project/add-field-wizard")}
           />
-          <TreeItem nodeId="3" label="Manually" />
+          <TreeItem nodeId="manually" label="Manually" />
         </TreeItem>
         <TreeItem nodeId="Open My Fields" label="Open My Fields">
           {fieldData?.map((field: any, index: number) => (

@@ -12,6 +12,7 @@ import ProjectLayout from "@/layouts/project/ProjectLayout";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import RPData from "@/components/fields/RPData";
+import DiscData from "@/components/fields/DiscData";
 
 const Field = () => {
   const [page, setPage] = useState<number>(0);
@@ -23,7 +24,7 @@ const Field = () => {
     data: siteData,
     isLoading: siteDataLoading,
     isError: siteDataError,
-    mutate: siteDataMutate
+    mutate: siteDataMutate,
   } = useFetch(_id ? `/fields/${_id}` : null);
 
   console.log("point : ", point);
@@ -50,6 +51,9 @@ const Field = () => {
         {point === "RPItem" && page === 1 && <RPData />}
         {point === "RPVisualization" && page === 0 && <RPVisualization />}
         {point === "Discontinuities" && page === 0 && <Discontinuities />}
+        {point === "Discontinuities (scanline measure)" && page === 1 && (
+          <DiscData />
+        )}
       </ProjectLayout>
     </MainLayout>
   );

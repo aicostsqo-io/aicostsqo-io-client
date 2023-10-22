@@ -98,7 +98,6 @@ const WorldMap = ({ next, info, setInfo }: any) => {
         ...info.site,
         customerId: currentUser?._id,
         name: siteName,
-        numberOfVertex: siteBound.vertexes.length,
       },
       siteBound: {
         ...info.siteBound,

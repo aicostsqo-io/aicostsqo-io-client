@@ -1,7 +1,6 @@
 export interface Site {
   _id: string;
   name: string;
-  numberOfVertex: number;
 }
 
 interface vertex {

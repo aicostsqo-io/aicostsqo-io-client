@@ -1,7 +1,9 @@
 import { createSite } from "@/api/site";
 import EndWizard from "@/components/add-field-wizard/EndWizard";
 import AddDisc from "@/components/add-field-wizard/discontinuities/AddDisc";
+import AddDiscManuel from "@/components/add-field-wizard/discontinuities/add-manuel/AddDiscManuel";
 import AddOther from "@/components/add-field-wizard/other/AddOther";
+import AddOtherManually from "@/components/add-field-wizard/other/add-manually/AddOtherManually";
 import AddRP from "@/components/add-field-wizard/rp/AddRP";
 import AddRPManuel from "@/components/add-field-wizard/rp/add-manuel/AddRPManuel";
 import AddSite from "@/components/add-field-wizard/site/AddSite";
@@ -18,7 +20,7 @@ const stepTexts = [
   "Add RP (Representative Prism)",
   "Add Disc (Discontinuities)",
   "Other Measurement Techniques (GPR etc.)",
-  "End The Wizard"
+  "End The Wizard",
 ];
 
 const initialInfo = {
@@ -26,7 +28,6 @@ const initialInfo = {
     //_id: "",
     customerId: "",
     name: "",
-    numberOfVertex: ""
   },
   siteBound: {
     //_id: "",
@@ -36,7 +37,7 @@ const initialInfo = {
     positionE: "",
     positionLong: "",
     positionLat: "",
-    heading: ""
+    heading: "",
   },
   rps: [
     /*
@@ -59,8 +60,9 @@ const initialInfo = {
     
   }
 */
-  ]
-  //discs: []
+  ],
+  discs: [],
+  gprs: [],
 };
 
 const AddField = () => {
@@ -71,8 +73,12 @@ const AddField = () => {
 
   const [addSiteOption, setAddSiteOption] = useState(-1);
   const [addRpOption, setAddRpOption] = useState(0);
-  const [addDiscOption, setAddDiscOption] = useState(-1);
-  const [addOtherOption, setAddOtherOption] = useState(-1);
+  const [addDiscOption, setAddDiscOption] = useState(0);
+  const [discType, setDiscType] = useState(-1);
+  const [gprType, setGprType] = useState(-1);
+  const [addOtherOption, setAddOtherOption] = useState(0);
+
+  console.log(discType);
 
   const router = useRouter();
 
@@ -115,10 +121,20 @@ const AddField = () => {
               <AddRP setAddRpOption={setAddRpOption} next={next} />
             )}
             {step === 2 && (
-              <AddDisc setAddDiscOption={setAddRpOption} next={next} />
+              <AddDisc
+                setAddDiscOption={setAddDiscOption}
+                discType={discType}
+                setDiscType={setDiscType}
+                next={next}
+              />
             )}
             {step === 3 && (
-              <AddOther setAddOtherOption={setAddRpOption} next={next} />
+              <AddOther
+                setAddOtherOption={setAddOtherOption}
+                next={next}
+                gprType={gprType}
+                setGprType={setGprType}
+              />
             )}
             {step === 4 && <EndWizard save={save} end={end} />}
           </div>
@@ -130,6 +146,12 @@ const AddField = () => {
           )}
           {step === 1 && addRpOption === 0 && (
             <AddRPManuel info={info} setInfo={setInfo} next={next} />
+          )}
+          {step === 2 && addDiscOption === 0 && discType === 0 && (
+            <AddDiscManuel info={info} setInfo={setInfo} next={next} />
+          )}
+          {step === 3 && addOtherOption === 0 && gprType === 0 && (
+            <AddOtherManually info={info} setInfo={setInfo} next={next} />
           )}
         </div>
       </ProjectLayout>

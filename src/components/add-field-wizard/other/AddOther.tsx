@@ -14,7 +14,7 @@ import Options from "../Options";
 
 const options = ["GPR","Electrical Resistivity", "Point Clouds", "Etc."]
 
-const AddOther = ({next, setAddOtherOption}:any) => {
+const AddOther = ({next, setAddOtherOption, setGprType, gprType}:any) => {
   return (
     <div className="flex-col justify-between">
       <div className="flex justify-between">
@@ -36,7 +36,7 @@ const AddOther = ({next, setAddOtherOption}:any) => {
       <span className="text-lg">Not Yet</span>
     </div>
   </div>
-  <Options options={options}/>
+  <Options options={options} setGprType={setGprType} gprType={gprType}/>
     </div>
   );
 };

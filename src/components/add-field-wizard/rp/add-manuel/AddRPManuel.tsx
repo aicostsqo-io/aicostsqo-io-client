@@ -17,7 +17,8 @@ const initialState = {
   positionZ: "",
   rotationX: "",
   rotationY: "",
-  rotationZ: ""
+  rotationZ: "",
+  discs: []
 };
 
 const AddRPManuel = ({ next, info, setInfo }: any) => {
