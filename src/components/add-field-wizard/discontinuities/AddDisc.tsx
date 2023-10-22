@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {
   IoAddCircleOutline as AddIcon,
   IoTrashOutline as TrashIcon,
-  IoSearchOutline as SearchIcon
+  IoSearchOutline as SearchIcon,
 } from "react-icons/io5";
 import { FaRegClone as CloneIcon } from "react-icons/fa";
 import { GrCaretNext as NextIcon } from "react-icons/gr";
@@ -12,7 +12,7 @@ const discTypes = [
   "Scan-line",
   "Discontinuity Sets",
   "Drilling / Borehole",
-  "Disc planes made from point cloud"
+  "Disc planes made from point cloud",
 ];
 
 const AddDisc = ({ next, setAddDiscOption, discType, setDiscType }: any) => {
