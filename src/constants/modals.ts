@@ -1,0 +1,5 @@
+export const MODALS = {
+  ADD_RP: "ADD_RP",
+  EDIT_RP: "EDIT_RP",
+  ADD_DISCONTINUITIES: "ADD_DISCONTINUITIY",
+};

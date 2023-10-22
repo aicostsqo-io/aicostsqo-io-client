@@ -1,5 +1,7 @@
+import Modals from "@/components/common/Modals";
 import { SiteProvider } from "@/contexts/Site";
 import { TreeProvider } from "@/contexts/Tree";
+import { UIProvider } from "@/contexts/UI";
 import { UserProvider } from "@/contexts/User";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
@@ -12,7 +14,10 @@ export default function App({ Component, pageProps }: AppProps) {
       <UserProvider>
         <SiteProvider>
           <TreeProvider>
-            <Component {...pageProps} />
+            <UIProvider>
+              <Component {...pageProps} />
+              <Modals />
+            </UIProvider>
           </TreeProvider>
         </SiteProvider>
       </UserProvider>
