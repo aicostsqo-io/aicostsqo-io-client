@@ -17,14 +17,14 @@ const RPInfo = ({ rp }: any) => {
           </tr>
         </thead>
         <tbody>
-          <tr className="bg-white text-black border border-blue-400">
+          <tr className="bg-blue-100 text-black border border-blue-400">
             <td className="py-2">RP Name</td>
             <td className="py-2">{rp?.name}</td>
           </tr>
-          <tr className="bg-blue-100 text-black border border-blue-400">
+          {/* <tr className="bg-blue-100 text-black border border-blue-400">
             <td className="py-2">RP Id</td>
             <td className="py-2">{rp?.name?.substring(2, point.length)}</td>
-          </tr>
+          </tr> */}
           <tr className="bg-white text-black border border-blue-400">
             <td className="py-2">Depth X</td>
             <td className="py-2">{rp?.sizeX}</td>

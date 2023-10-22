@@ -1,5 +1,5 @@
 import Boundaries from "@/components/fields/Boundaries";
-import Discontinuities from "@/components/fields/Discontinuities";
+import DiscontinuitiesVisualization from "@/components/fields/DiscontinuitiesVisualization";
 import RP from "@/components/fields/RP";
 import RPVisualization from "@/components/fields/RPVisualization";
 import DataTab from "@/components/fields/RPData";
@@ -12,13 +12,14 @@ import ProjectLayout from "@/layouts/project/ProjectLayout";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import RPData from "@/components/fields/RPData";
-import DiscData from "@/components/fields/DiscData";
+import DiscontinuitiesData from "@/components/fields/DiscontinuitiesData";
+import { useSiteContext } from "@/contexts/Site";
 
 const Field = () => {
-  const [page, setPage] = useState<number>(0);
   const router = useRouter();
   const { _id } = router.query;
   const { point } = useTreeContext();
+  const { selectedRP, page, setPage } = useSiteContext();
 
   const {
     data: siteData,
@@ -29,6 +30,7 @@ const Field = () => {
 
   console.log("point : ", point);
   console.log("siteData : ", siteData);
+  console.log("selectedRP : ", selectedRP);
 
   return (
     <MainLayout>
@@ -46,13 +48,21 @@ const Field = () => {
             {siteData?.site?.name} Mining Field
           </div>
         )}
-        {point === "Representing Prisms" && page === 1 && <RPData />}
-        {point.startsWith("RPItem") && page === 0 && <RP />}
-        {point === "RPItem" && page === 1 && <RPData />}
-        {point === "RPVisualization" && page === 0 && <RPVisualization />}
-        {point === "Discontinuities" && page === 0 && <Discontinuities />}
+        {point === "Representing Prisms" && page === 1 && <RPData editable />}
+        {/* {point.startsWith("RPItem") && page === 0 && <RP />}
+         */}
+        {point === "RPItem" && (
+          <div className="h-full flex justify-center items-center text-5xl font-bold">
+            {selectedRP?.name}
+          </div>
+        )}
+        {point === "RP" && page === 0 && <RPVisualization />}
+        {point === "RP" && page === 1 && <RPData />}
+        {point === "Discontinuities (scanline measure)" && page === 0 && (
+          <DiscontinuitiesVisualization />
+        )}
         {point === "Discontinuities (scanline measure)" && page === 1 && (
-          <DiscData />
+          <DiscontinuitiesData />
         )}
       </ProjectLayout>
     </MainLayout>

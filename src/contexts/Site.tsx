@@ -12,6 +12,7 @@ export const SiteProvider: React.FC<props> = ({ children }) => {
   const [selectedRP, setSelectedRP] = useState<any>();
   const [selectedRPs, setSelectedRPs] = useState<any>();
   const [selectedDiscs, setSelectedDiscs] = useState<any>();
+  const [page, setPage] = useState<number>(0);
 
   const values: any = {
     loading,
@@ -24,6 +25,8 @@ export const SiteProvider: React.FC<props> = ({ children }) => {
     setSelectedRPs,
     selectedDiscs,
     setSelectedDiscs,
+    setPage,
+    page,
   };
 
   return <SiteContext.Provider value={values}>{children}</SiteContext.Provider>;

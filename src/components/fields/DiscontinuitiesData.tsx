@@ -10,7 +10,7 @@ import {
   IoTrashOutline as TrashIcon,
 } from "react-icons/io5";
 
-const DiscData = () => {
+const DiscontinuitiesData = () => {
   const [data, setData] = useState<any>([]);
   const [selectedRows, setselectedRows] = useState<string[]>([]);
   const { selectedDiscs, selectedRP } = useSiteContext();
@@ -143,4 +143,4 @@ const DiscData = () => {
   );
 };
 
-export default DiscData;
+export default DiscontinuitiesData;

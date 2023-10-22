@@ -11,16 +11,18 @@ import {
   IoTrashOutline as TrashIcon,
 } from "react-icons/io5";
 
-const RPData = () => {
+const RPData = ({ editable = false }: { editable?: boolean }) => {
   const [data, setData] = useState<Rp[]>([]);
   const [selectedRows, setselectedRows] = useState<string[]>([]);
   const { selectedRPs, selectedRP } = useSiteContext();
   const { point } = useTreeContext();
 
+  console.log("selectedRPs : ", selectedRP);
+
   useEffect(() => {
     if (point === "Representing Prisms") {
       setData(selectedRPs);
-    } else if (point === "RPItem") {
+    } else if (point === "RP") {
       setData([selectedRP]);
     }
   }, [selectedRPs, selectedRP]);
@@ -53,7 +55,7 @@ const RPData = () => {
   };
 
   return (
-    <div className="flex flex-col modal-container py-3 min-h-[300px] justify-between">
+    <div className="flex flex-col modal-container py-3  justify-between">
       <h1 className="modal-container-title">Data Sets</h1>
 
       <div className="overflow-scroll my-10 mx-5">
@@ -108,37 +110,39 @@ const RPData = () => {
           </tbody>
         </table>
       </div>
-      <div className="w-3/4 mx-auto">
-        <div className="flex justify-between">
-          <div
-            className="flex flex-col gap-3 items-center cursor-pointer"
-            data-modal-target="authentication-modal"
-            data-modal-toggle="authentication-modal"
-          >
-            <AddIcon className="text-4xl" />
-            <span className="text-lg">Add New Line</span>
-          </div>
-          <div className="flex flex-col gap-3 items-center cursor-pointer">
-            <SearchIcon className="text-4xl" />
-            <span className="text-lg">Search In</span>
-          </div>
-          <div
-            className="flex flex-col gap-3 items-center cursor-pointer"
-            onClick={handleDeleteSelectedRows}
-          >
-            <TrashIcon className="text-4xl" />
-            <span className="text-lg">Delete Selected Rows</span>
-          </div>
-          <div className="flex flex-col gap-3 items-center cursor-pointer">
-            <SaveIcon className="text-4xl" />
-            <span className="text-lg">Save</span>
-          </div>
-          <div className="flex flex-col gap-3 items-center cursor-pointer">
-            <CloseIcon className="text-4xl" />
-            <span className="text-lg">Cancel</span>
+      {editable ? (
+        <div className="w-3/4 mx-auto">
+          <div className="flex justify-between">
+            <div
+              className="flex flex-col gap-3 items-center cursor-pointer"
+              data-modal-target="authentication-modal"
+              data-modal-toggle="authentication-modal"
+            >
+              <AddIcon className="text-3xl" />
+              <span className="text-base">Add New Line</span>
+            </div>
+            <div className="flex flex-col gap-3 items-center cursor-pointer">
+              <SearchIcon className="text-3xl" />
+              <span className="text-base">Search In</span>
+            </div>
+            <div
+              className="flex flex-col gap-3 items-center cursor-pointer"
+              onClick={handleDeleteSelectedRows}
+            >
+              <TrashIcon className="text-3xl" />
+              <span className="text-base">Delete Selected Rows</span>
+            </div>
+            <div className="flex flex-col gap-3 items-center cursor-pointer">
+              <SaveIcon className="text-3xl" />
+              <span className="text-base">Save</span>
+            </div>
+            <div className="flex flex-col gap-3 items-center cursor-pointer">
+              <CloseIcon className="text-3xl" />
+              <span className="text-base">Cancel</span>
+            </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </div>
   );
 };

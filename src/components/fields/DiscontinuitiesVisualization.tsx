@@ -4,12 +4,11 @@ import React from "react";
 import RPInfo from "./RPInfo";
 import { useSiteContext } from "@/contexts/Site";
 
-const Discontinuities = () => {
-  const { selectedRP } = useSiteContext();
+const DiscontinuitiesVisualization = () => {
   return (
     <div className="flex flex-row h-full">
-      <div className="w-3/4 flex justify-center items-center">
-        <div className="w-[400px] h-[400px]">
+      <div className="w-full flex justify-center items-center">
+        <div className="w-[400px] h-auto ">
           <Image
             src={assets.disc}
             alt=""
@@ -18,9 +17,8 @@ const Discontinuities = () => {
           />
         </div>
       </div>
-      <RPInfo rp={selectedRP} />
     </div>
   );
 };
 
-export default Discontinuities;
+export default DiscontinuitiesVisualization;

@@ -15,7 +15,7 @@ import { useSiteContext } from "@/contexts/Site";
 // const DiscTreeItem = ({disc} : any) => {}
 
 const RPTreeItem = ({ rps, setPoint, index }: any) => {
-  const { setSelectedRP, setSelectedRPs } = useSiteContext();
+  const { setSelectedRP, setSelectedRPs, setPage } = useSiteContext();
 
   const handleClickRpTreeItem = (rp: any) => {
     setPoint("RPItem");
@@ -24,6 +24,7 @@ const RPTreeItem = ({ rps, setPoint, index }: any) => {
 
   const handleClickRpTree = (rps: any) => {
     setPoint("Representing Prisms");
+    setPage(1);
     setSelectedRPs(rps);
   };
 
@@ -43,7 +44,7 @@ const RPTreeItem = ({ rps, setPoint, index }: any) => {
           <TreeItem
             nodeId={rp?._id + 1}
             label={"RP"}
-            onClick={() => setPoint("RPVisualization")}
+            onClick={() => setPoint("RP")}
           />
           <TreeItem
             nodeId={rp?._id + 2}
