@@ -61,8 +61,11 @@ const RPTreeItem = ({ rps, setPoint, index }: any) => {
 };
 
 const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
+  const { setSelectedSite } = useSiteContext();
   const handleClickSite = () => {
     setPoint("Site Main");
+
+    setSelectedSite(field);
     router.push(`/project/fields/${field?.site?._id}`);
   };
   return (

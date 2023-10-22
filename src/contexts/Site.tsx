@@ -9,6 +9,7 @@ type props = {
 export const SiteProvider: React.FC<props> = ({ children }) => {
   const [loading, setLoading] = useState<boolean>(false);
   const [sites, setSites] = useState<any>();
+  const [selectedSite, setSelectedSite] = useState<any>();
   const [selectedRP, setSelectedRP] = useState<any>();
   const [selectedRPs, setSelectedRPs] = useState<any>();
   const [selectedDiscs, setSelectedDiscs] = useState<any>();
@@ -19,6 +20,8 @@ export const SiteProvider: React.FC<props> = ({ children }) => {
     setLoading,
     sites,
     setSites,
+    selectedSite,
+    setSelectedSite,
     selectedRP,
     setSelectedRP,
     selectedRPs,

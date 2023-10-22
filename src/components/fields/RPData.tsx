@@ -1,6 +1,7 @@
 import { bulkDeleteRps, getRps } from "@/api/rp";
 import { useSiteContext } from "@/contexts/Site";
 import { useTreeContext } from "@/contexts/Tree";
+import { useUIContext } from "@/contexts/UI";
 import { Rp } from "@/types/models/rp";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import {
@@ -10,14 +11,16 @@ import {
   IoSearchOutline as SearchIcon,
   IoTrashOutline as TrashIcon,
 } from "react-icons/io5";
+import AddRP from "../common/Modals/AddRP";
 
 const RPData = ({ editable = false }: { editable?: boolean }) => {
   const [data, setData] = useState<Rp[]>([]);
   const [selectedRows, setselectedRows] = useState<string[]>([]);
-  const { selectedRPs, selectedRP } = useSiteContext();
+  const { selectedRPs, selectedRP, selectedSite } = useSiteContext();
   const { point } = useTreeContext();
+  // const { setActiveModal } = useUIContext();
 
-  console.log("selectedRPs : ", selectedRP);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     if (point === "Representing Prisms") {
@@ -92,7 +95,7 @@ const RPData = ({ editable = false }: { editable?: boolean }) => {
                   />
                 </td>
                 <td className="py-3 px-6 text-left">{p._id}</td>
-                <td className="py-3 px-6 text-left">{p.siteBoundId}</td>
+                <td className="py-3 px-6 text-left">{p.siteBound}</td>
                 <td className="py-3 px-6 text-left">{p.sizeX}</td>
                 <td className="py-3 px-6 text-left">{p.sizeY}</td>
                 <td className="py-3 px-6 text-left">{p.sizeZ}</td>
@@ -117,6 +120,7 @@ const RPData = ({ editable = false }: { editable?: boolean }) => {
               className="flex flex-col gap-3 items-center cursor-pointer"
               data-modal-target="authentication-modal"
               data-modal-toggle="authentication-modal"
+              onClick={() => setIsModalOpen(true)}
             >
               <AddIcon className="text-3xl" />
               <span className="text-base">Add New Line</span>
@@ -143,6 +147,7 @@ const RPData = ({ editable = false }: { editable?: boolean }) => {
           </div>
         </div>
       ) : null}
+      {isModalOpen ? <AddRP onClose={() => setIsModalOpen(false)} /> : null}
     </div>
   );
 };
