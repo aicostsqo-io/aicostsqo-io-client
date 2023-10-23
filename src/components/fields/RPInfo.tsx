@@ -3,7 +3,7 @@ import React from "react";
 
 const RPInfo = ({ rp }: any) => {
   const { point } = useTreeContext();
-  console.log("rp :   ", rp);
+  // console.log("rp :   ", rp);
   return (
     <div className="w-1/4 h-min">
       <div className="text-center text-blue-500 text-2xl mb-3">

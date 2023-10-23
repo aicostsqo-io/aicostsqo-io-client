@@ -114,7 +114,7 @@ export default function Tree() {
   };
 
   React.useEffect(() => {
-    console.log("sidebar renderlandı"); //? NEDEN HER SEFERİNDE RENDER'LIYOR
+    // console.log("sidebar renderlandı"); // TODO: NEDEN HER SEFERİNDE RENDER'LIYOR
   }, []);
 
   const router = useRouter();

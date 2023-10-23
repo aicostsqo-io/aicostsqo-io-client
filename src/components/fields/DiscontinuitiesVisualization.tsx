@@ -27,6 +27,13 @@ const DiscontinuitiesVisualization = () => {
     fetchDiscData();
   }, []);
 
+  useEffect(() => {
+    return () => {
+      marbleRef.current = null;
+      console.warn("çıkıldı ve temizlendi");
+    };
+  }, []);
+
   if (selectedDiscs?.length === 0) return <div>No Disc</div>;
 
   return (

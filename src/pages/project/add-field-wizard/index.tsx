@@ -78,7 +78,7 @@ const AddField = () => {
   const [gprType, setGprType] = useState(-1);
   const [addOtherOption, setAddOtherOption] = useState(0);
 
-  console.log(discType);
+  // console.log(discType);
 
   const router = useRouter();
 

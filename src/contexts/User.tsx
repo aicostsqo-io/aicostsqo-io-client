@@ -33,7 +33,7 @@ export const UserProvider: React.FC<props> = ({ children }) => {
   }, []);
 
   const register = (data: UserRegister) => {
-    console.log(data);
+    // console.log(data);
     registerUser(data)
       .then((res: any) => {
         if (res?.status === 201 || res?.status === 200) {
@@ -47,7 +47,7 @@ export const UserProvider: React.FC<props> = ({ children }) => {
   const login = (data: UserLogin) => {
     loginUser(data)
       .then((res: any) => {
-        console.log(res);
+        // console.log(res);
         if (res?.status === 201 || res?.status === 200) {
           toast.success("Login successfully");
           localStorage.setItem("access_token", res.data.tokens.access_token);

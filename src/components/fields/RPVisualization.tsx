@@ -15,6 +15,13 @@ const RPVisualization = () => {
     );
   }, [selectedRP]);
 
+  useEffect(() => {
+    return () => {
+      marbleRef.current = null;
+      console.warn("çıkıldı ve temizlendi");
+    };
+  }, []);
+
   return (
     <div className="flex flex-row h-full gap-5">
       <div className="w-3/4 flex justify-center items-center">

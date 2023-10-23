@@ -28,9 +28,9 @@ const Field = () => {
     mutate: siteDataMutate,
   } = useFetch(_id ? `/fields/${_id}` : null);
 
-  console.log("point : ", point);
-  console.log("siteData : ", siteData);
-  console.log("selectedRP : ", selectedRP);
+  // console.log("point : ", point);
+  // console.log("siteData : ", siteData);
+  // console.log("selectedRP : ", selectedRP);
 
   return (
     <MainLayout>

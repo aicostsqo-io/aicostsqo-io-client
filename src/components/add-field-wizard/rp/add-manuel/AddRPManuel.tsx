@@ -37,7 +37,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
   };
 
   const handleAddRps = () => {
-    console.log(info);
+    // console.log(info);
     next();
   };
 

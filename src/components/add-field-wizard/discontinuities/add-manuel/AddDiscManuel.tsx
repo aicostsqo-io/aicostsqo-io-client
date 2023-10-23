@@ -21,7 +21,7 @@ const initialState = {
 const AddDiscManuel = ({ next, info, setInfo }: any) => {
   const [disc, setDisc] = useState<any>(initialState);
 
-  console.log(info);
+  // console.log(info);
 
   const handleAddDiscToInfo = () => {
     const rp = info?.rps?.find((rp: any) => rp.name === disc?.RPName);
@@ -35,7 +35,7 @@ const AddDiscManuel = ({ next, info, setInfo }: any) => {
   };
 
   const handleAddDiscs = () => {
-    console.log(info);
+    // console.log(info);
     next();
   };
 
