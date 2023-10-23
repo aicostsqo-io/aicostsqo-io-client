@@ -1,4 +1,4 @@
-import { getDiscsByRpId } from "@/api/disc";
+import { bulkDeleteRpDiscs, getDiscsByRpId } from "@/api/disc";
 import { useSiteContext } from "@/contexts/Site";
 import { useTreeContext } from "@/contexts/Tree";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
@@ -22,7 +22,7 @@ const DiscontinuitiesData = () => {
   const fetchDiscData = async () => {
     const res = await getDiscsByRpId(selectedRP?._id);
     setData(res.data.discs);
-    setSelectedDiscs(res.data.discs)
+    setSelectedDiscs(res.data.discs);
   };
 
   useEffect(() => {
@@ -36,24 +36,22 @@ const DiscontinuitiesData = () => {
   }, []); */
 
   const handleSelectAll = (e: ChangeEvent<HTMLInputElement>) => {
-    /*   if (e.target.checked) setselectedRows(data.map((p) => p._id));
-    else setselectedRows([]); */
+    if (e.target.checked) setselectedRows(data.map((p: any) => p._id));
+    else setselectedRows([]);
   };
   const handleSelectRow = (e: ChangeEvent<HTMLInputElement>, id: string) => {
-    /*   if (e.target.checked) setselectedRows([...selectedRows, id]);
-    else setselectedRows(selectedRows.filter((row) => row !== id)); */
+    if (e.target.checked) setselectedRows([...selectedRows, id]);
+    else setselectedRows(selectedRows.filter((row) => row !== id));
   };
   const handleDeleteSelectedRows = (e: MouseEvent<HTMLDivElement>) => {
-    /*   const rowsToDelete = selectedRows;
-    bulkDeleteRps(rowsToDelete)
-      .then((res) => {
-        getRps()
-          .then((newList) => setData(newList.data.rps))
-          .catch((err) => console.log(err));
+    const rowsToDelete = selectedRows;
+    bulkDeleteRpDiscs(rowsToDelete)
+      .then(async () => {
+        await fetchDiscData();
       })
-      .catch((err) => console.log(err));
-    const updatedTableData = data.filter((row) => !row.isSelected);
-    setData(updatedTableData); */
+      .catch((err: any) => console.log(err));
+    const updatedTableData = data.filter((row: any) => !row.isSelected);
+    setData(updatedTableData);
   };
 
   return (
