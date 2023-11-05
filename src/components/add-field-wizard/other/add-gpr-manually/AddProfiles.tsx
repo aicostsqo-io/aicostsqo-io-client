@@ -7,7 +7,7 @@ import {
 
 const initialState = {
   rectangleLineNumber: "",
-  profileType: "Longitudinal",
+  profileType: "",
   longitudinalProfileNumber: "",
   traversalProfileNumber: "",
   distance: "",
@@ -23,7 +23,8 @@ const initialState = {
   filename: "",
 };
 const profileTypes = [{ name: "Longitudinal" }, { name: "Traversal" }];
-export const AddProfiles = ({ setInfo, setStep }: any) => {
+
+export const AddProfiles = ({ setGpr, setStep, gpr }: any) => {
   const [modelData, setModelData] = useState(initialState);
   const [profiles, setProfiles] = useState<any>([]);
 
@@ -32,13 +33,15 @@ export const AddProfiles = ({ setInfo, setStep }: any) => {
   };
 
   const handleSave = () => {
-    setProfiles([...profiles, modelData]);
+    profiles.push(modelData);
+    setProfiles(profiles);
   };
 
   const handleSaveAndProceed = () => {
     handleSave();
+    const newGpr = { ...gpr, profiles };
+    setGpr(newGpr);
     setStep(2);
-    // TODO: setInfo gprProfiles bilgisi set edilecek.
   };
 
   const handleSaveAndAddNew = () => {

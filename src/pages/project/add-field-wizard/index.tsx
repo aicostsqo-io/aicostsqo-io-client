@@ -66,9 +66,7 @@ const initialInfo = {
 */
   ],
   discs: [],
-  gpr: {},
-  gprProfiles: [],
-  gprDiscs: [],
+  gprs: [],
 };
 
 const AddField = () => {
@@ -157,7 +155,11 @@ const AddField = () => {
             <AddDiscManuel info={info} setInfo={setInfo} next={next} />
           )}
           {step === 3 && addOtherOption === 0 && (
-            <OtherComponent otherType={otherType} setInfo={setInfo} />
+            <OtherComponent
+              otherType={otherType}
+              setInfo={setInfo}
+              setStep={setStep}
+            />
           )}
         </div>
       </ProjectLayout>
@@ -165,7 +167,7 @@ const AddField = () => {
   );
 };
 
-const OtherComponent = ({ otherType, setInfo }: any) => {
+const OtherComponent = ({ otherType, setInfo, setStep }: any) => {
   const componentMapping: any = {
     0: AddGPRManually,
     1: AddSeismicManually,
@@ -174,7 +176,7 @@ const OtherComponent = ({ otherType, setInfo }: any) => {
     4: AddResistiviteManually,
   };
   const Component = componentMapping[otherType];
-  return <Component setInfo={setInfo} />;
+  return <Component setInfo={setInfo} setMainStep={setStep} />;
 };
 
 export default AddField;
