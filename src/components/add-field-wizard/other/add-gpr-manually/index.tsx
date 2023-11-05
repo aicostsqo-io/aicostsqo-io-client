@@ -1,11 +1,10 @@
 import StepWatcher from "@/components/stepwatcher/StepWatcher";
 import React, { useEffect, useState } from "react";
-import { AddProfiles } from "./AddProfiles";
-import { AddCracks } from "./AddCracks";
+import SetGPRData from "./SetGPRData";
 
-const stepTexts = ["Add Profiles", "Add Cracks"];
+const stepTexts = ["GPR Info", "Add Profiles", "Add Cracks"];
 
-export default function AddOtherManually({ info, setInfo, next }: any) {
+export default function AddGPRManually({ setInfo, info }: any) {
   const [step, setStep] = useState(0);
   const [stepText, setStepText] = useState(stepTexts[step]);
   useEffect(() => {
@@ -21,8 +20,15 @@ export default function AddOtherManually({ info, setInfo, next }: any) {
         setStep={setStep}
       />
       <div className="w-3/4 mx-auto">
-        {step === 0 && <AddProfiles setInfo={setInfo} />}
-        {step === 1 && <AddCracks setInfo={setInfo} />}
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            console.log(info);
+          }}
+        >
+          Console Log
+        </button>
+        {step === 0 && <SetGPRData setInfo={setInfo} setStep={setStep} />}
       </div>
     </div>
   );
