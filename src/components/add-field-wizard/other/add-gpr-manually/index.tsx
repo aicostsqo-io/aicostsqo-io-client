@@ -1,5 +1,7 @@
 import StepWatcher from "@/components/stepwatcher/StepWatcher";
 import React, { useEffect, useState } from "react";
+import { AddProfiles } from "./AddProfiles";
+import { AddCracks } from "./AddCracks";
 import SetGPRData from "./SetGPRData";
 
 const stepTexts = ["GPR Info", "Add Profiles", "Add Cracks"];
@@ -29,6 +31,8 @@ export default function AddGPRManually({ setInfo, info }: any) {
           Console Log
         </button>
         {step === 0 && <SetGPRData setInfo={setInfo} setStep={setStep} />}
+        {step === 1 && <AddProfiles setInfo={setInfo} setStep={setStep} />}
+        {step === 2 && <AddCracks setInfo={setInfo} setStep={setStep} />}
       </div>
     </div>
   );
