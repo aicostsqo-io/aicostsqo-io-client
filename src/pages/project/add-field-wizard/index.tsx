@@ -3,7 +3,11 @@ import EndWizard from "@/components/add-field-wizard/EndWizard";
 import AddDisc from "@/components/add-field-wizard/discontinuities/AddDisc";
 import AddDiscManuel from "@/components/add-field-wizard/discontinuities/add-manuel/AddDiscManuel";
 import AddOther from "@/components/add-field-wizard/other/AddOther";
-import AddOtherManually from "@/components/add-field-wizard/other/add-manually/AddOtherManually";
+import AddGPRManually from "@/components/add-field-wizard/other/add-gpr-manually";
+import AddMagnetometricManually from "@/components/add-field-wizard/other/add-magnetometric-manually";
+import AddResistiviteManually from "@/components/add-field-wizard/other/add-resistivite-manually";
+import AddSeismicManually from "@/components/add-field-wizard/other/add-seismic-manually";
+import AddTeleviewerManually from "@/components/add-field-wizard/other/add-televiewer-manually";
 import AddRP from "@/components/add-field-wizard/rp/AddRP";
 import AddRPManuel from "@/components/add-field-wizard/rp/add-manuel/AddRPManuel";
 import AddSite from "@/components/add-field-wizard/site/AddSite";
@@ -62,7 +66,9 @@ const initialInfo = {
 */
   ],
   discs: [],
-  gprs: [],
+  gpr: {},
+  gprProfiles: [],
+  gprDiscs: [],
 };
 
 const AddField = () => {
@@ -75,7 +81,7 @@ const AddField = () => {
   const [addRpOption, setAddRpOption] = useState(0);
   const [addDiscOption, setAddDiscOption] = useState(0);
   const [discType, setDiscType] = useState(-1);
-  const [gprType, setGprType] = useState(-1);
+  const [otherType, setOtherType] = useState(0);
   const [addOtherOption, setAddOtherOption] = useState(0);
 
   // console.log(discType);
@@ -132,8 +138,8 @@ const AddField = () => {
               <AddOther
                 setAddOtherOption={setAddOtherOption}
                 next={next}
-                gprType={gprType}
-                setGprType={setGprType}
+                setOtherType={setOtherType}
+                otherType={otherType}
               />
             )}
             {step === 4 && <EndWizard save={save} end={end} />}
@@ -150,13 +156,25 @@ const AddField = () => {
           {step === 2 && addDiscOption === 0 && discType === 0 && (
             <AddDiscManuel info={info} setInfo={setInfo} next={next} />
           )}
-          {step === 3 && addOtherOption === 0 && gprType === 0 && (
-            <AddOtherManually info={info} setInfo={setInfo} next={next} />
+          {step === 3 && addOtherOption === 0 && (
+            <OtherComponent otherType={otherType} setInfo={setInfo} />
           )}
         </div>
       </ProjectLayout>
     </MainLayout>
   );
+};
+
+const OtherComponent = ({ otherType, setInfo }: any) => {
+  const componentMapping: any = {
+    0: AddGPRManually,
+    1: AddSeismicManually,
+    2: AddMagnetometricManually,
+    3: AddTeleviewerManually,
+    4: AddResistiviteManually,
+  };
+  const Component = componentMapping[otherType];
+  return <Component setInfo={setInfo} />;
 };
 
 export default AddField;

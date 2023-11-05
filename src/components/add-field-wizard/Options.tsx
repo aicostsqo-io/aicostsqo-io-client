@@ -1,6 +1,6 @@
 import React from "react";
 
-const Options = ({ options, setGprType, gprType }: any) => {
+const Options = ({ options, setOtherType, otherType }: any) => {
   return (
     <div className="flex flex-col gap-5 mt-10 text-lg">
       {options?.map((option: string, index: number) => (
@@ -8,10 +8,11 @@ const Options = ({ options, setGprType, gprType }: any) => {
           <input
             type="radio"
             value={option}
+            checked={otherType === index}
             name="type"
             id={option}
             onChange={(e) =>
-              setGprType(parseInt(options.indexOf(e.target.value)))
+              setOtherType(parseInt(options.indexOf(e.target.value)))
             }
           />
           <label htmlFor={option}>{option}</label>
