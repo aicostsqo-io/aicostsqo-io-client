@@ -6,7 +6,7 @@ import SetGPRData from "./SetGPRData";
 
 const stepTexts = ["GPR Info", "Add Profiles", "Add Cracks"];
 
-export default function AddGPRManually({ setInfo, info }: any) {
+export default function AddGPRManually({ setInfo }: any) {
   const [step, setStep] = useState(0);
   const [stepText, setStepText] = useState(stepTexts[step]);
   useEffect(() => {
@@ -22,14 +22,6 @@ export default function AddGPRManually({ setInfo, info }: any) {
         setStep={setStep}
       />
       <div className="w-3/4 mx-auto">
-        <button
-          className="btn btn-primary"
-          onClick={() => {
-            console.log(info);
-          }}
-        >
-          Console Log
-        </button>
         {step === 0 && <SetGPRData setInfo={setInfo} setStep={setStep} />}
         {step === 1 && <AddProfiles setInfo={setInfo} setStep={setStep} />}
         {step === 2 && <AddCracks setInfo={setInfo} setStep={setStep} />}
