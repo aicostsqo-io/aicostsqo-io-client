@@ -15,7 +15,7 @@ function StepWatcher({ step, stepCount, texts, setStep }: any) {
               step >= index
                 ? "bg-slate-800"
                 : "bg-white border-2 border-gray-500"
-            } h-6 w-6 rounded-full cursor-pointer`}
+            } h-6 w-6 rounded-full cursor-pointer`} // TODO pointer kaldırılacak
             onClick={() => setStep(index)}
           />
 

@@ -55,6 +55,7 @@ const initialState = {
   },
   explanation: "",
 };
+
 const shapeTypes = [
   {
     name: "Circular",
@@ -91,18 +92,29 @@ const referenceSystems = [
   },
 ];
 
-export default function SetGPRData({ setInfo, setStep }: any) {
+export default function SetGPRData({ onProceed, setStep }: any) {
   const [gpr, setGpr] = useState<any>(initialState);
+
   const handleChange = (field: any, event: any) => {
-    setGpr({ ...gpr, [field]: event.target.value });
+    const updatedGpr = { ...gpr };
+    const fieldPath = field.split(".");
+    let currentLevel = updatedGpr;
+    for (let i = 0; i < fieldPath.length - 1; i++) {
+      currentLevel = currentLevel[fieldPath[i]];
+    }
+    currentLevel[fieldPath[fieldPath.length - 1]] = event.target.value;
+    setGpr(updatedGpr);
   };
+
   const handleSaveAndProceed = () => {
+    onProceed(gpr);
     setStep(1);
-    //TODO: setInfo kullanılarak gpr bilgisi set edilecek.
   };
+
   const handleCancel = () => {
     setGpr(initialState);
   };
+
   return (
     <>
       <div className="flex flex-row gap-20">

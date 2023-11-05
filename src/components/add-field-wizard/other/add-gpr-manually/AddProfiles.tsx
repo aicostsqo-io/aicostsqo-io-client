@@ -102,6 +102,8 @@ export const AddProfiles = ({ setInfo, setStep }: any) => {
             min={0}
             onChange={(e: any) => handleChange("startingVertexX", e)}
           />
+        </div>
+        <div className="flex flex-col gap-4">
           <FormNumberField
             label="Starting Vertex Y"
             value={modelData.startingVertexY}
