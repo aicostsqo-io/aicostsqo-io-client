@@ -4,56 +4,59 @@ import {
   FormSelectField,
   FormTextField,
 } from "../core-form-elements";
+import { Gpr } from "@/types/models/gpr";
 
-const initialState = {
-  rectangleNumber: "",
+const initialState: Gpr = {
+  rectangleNumber: 0,
   shape: "",
-  longitudinalProfileNumber: "",
-  traversalProfileNumber: "",
-  distance: "",
-  spacing: "",
+  longitudinalProfileNumber: 0,
+  traversalProfileNumber: 0,
+  distance: 0,
+  spacing: 0,
   dimension: "",
-  positionX: "",
-  positionY: "",
-  positionZ: "",
+  positionX: 0,
+  positionY: 0,
+  positionZ: 0,
   antenna: "",
   longitudinalProfilesDirectory: "",
-  longitudinalProfilesMaxDepth: "",
-  longitudinalProfilesMaxDistance: "",
+  longitudinalProfilesMaxDepth: 0,
+  longitudinalProfilesMaxDistance: 0,
   traversalProfilesDirectory: "",
-  traversalProfilesMaxDepth: "",
-  traversalProfilesMaxDistance: "",
-  mapReferenceSystemForStartOfLongitudinalProfiles: "",
-  mapReferenceSystemForStartOfTransversalProfiles: "",
+  traversalProfilesMaxDepth: 0,
+  traversalProfilesMaxDistance: 0,
+  mapReferenceSystemForStartOfLongitudinalProfiles: 0,
+  mapReferenceSystemForStartOfTransversalProfiles: 0,
   vertex1: {
-    startOfLongitudinalProfilesX: "",
-    startOfLongitudinalProfilesY: "",
-    startOfLongitudinalProfilesZ: "",
-    endOfLongitudinalProfilesX: "",
-    endOfLongitudinalProfilesY: "",
-    endOfLongitudinalProfilesZ: "",
-    startOfTraversalProfilesX: "",
-    startOfTraversalProfilesY: "",
-    startOfTraversalProfilesZ: "",
-    endOfTraversalProfilesX: "",
-    endOfTraversalProfilesY: "",
-    endOfTraversalProfilesZ: "",
+    startOfLongitudinalProfilesX: 0,
+    startOfLongitudinalProfilesY: 0,
+    startOfLongitudinalProfilesZ: 0,
+    endOfLongitudinalProfilesX: 0,
+    endOfLongitudinalProfilesY: 0,
+    endOfLongitudinalProfilesZ: 0,
+    startOfTraversalProfilesX: 0,
+    startOfTraversalProfilesY: 0,
+    startOfTraversalProfilesZ: 0,
+    endOfTraversalProfilesX: 0,
+    endOfTraversalProfilesY: 0,
+    endOfTraversalProfilesZ: 0,
   },
   vertex2: {
-    startOfLongitudinalProfilesX: "",
-    startOfLongitudinalProfilesY: "",
-    startOfLongitudinalProfilesZ: "",
-    endOfLongitudinalProfilesX: "",
-    endOfLongitudinalProfilesY: "",
-    endOfLongitudinalProfilesZ: "",
-    startOfTraversalProfilesX: "",
-    startOfTraversalProfilesY: "",
-    startOfTraversalProfilesZ: "",
-    endOfTraversalProfilesX: "",
-    endOfTraversalProfilesY: "",
-    endOfTraversalProfilesZ: "",
+    startOfLongitudinalProfilesX: 0,
+    startOfLongitudinalProfilesY: 0,
+    startOfLongitudinalProfilesZ: 0,
+    endOfLongitudinalProfilesX: 0,
+    endOfLongitudinalProfilesY: 0,
+    endOfLongitudinalProfilesZ: 0,
+    startOfTraversalProfilesX: 0,
+    startOfTraversalProfilesY: 0,
+    startOfTraversalProfilesZ: 0,
+    endOfTraversalProfilesX: 0,
+    endOfTraversalProfilesY: 0,
+    endOfTraversalProfilesZ: 0,
   },
   explanation: "",
+  discs: [],
+  profiles: [],
 };
 
 const shapeTypes = [
@@ -92,13 +95,18 @@ const referenceSystems = [
   },
 ];
 
-export default function SetGPRData({ onProceed, setStep }: any) {
-  const [gpr, setGpr] = useState<any>(initialState);
+type SetGPRDataProps = {
+  onProceed: (gpr: any) => void;
+  setStep: (step: number) => void;
+};
+
+export default function SetGPRData({ onProceed, setStep }: SetGPRDataProps) {
+  const [gpr, setGpr] = useState<Gpr>(initialState);
 
   const handleChange = (field: any, event: any) => {
     const updatedGpr = { ...gpr };
     const fieldPath = field.split(".");
-    let currentLevel = updatedGpr;
+    let currentLevel: any = updatedGpr;
     for (let i = 0; i < fieldPath.length - 1; i++) {
       currentLevel = currentLevel[fieldPath[i]];
     }

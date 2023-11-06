@@ -3,26 +3,36 @@ import React, { useEffect, useState } from "react";
 import { AddProfiles } from "./AddProfiles";
 import { AddCracks } from "./AddCracks";
 import SetGPRData from "./SetGPRData";
+import { Gpr } from "@/types/models/gpr";
 
 const stepTexts = ["GPR Info", "Add Profiles", "Add Cracks"];
 
 export default function AddGPRManually({ setInfo, setMainStep }: any) {
   const [step, setStep] = useState(0);
   const [stepText, setStepText] = useState(stepTexts[step]);
-  const [gpr, setGpr] = useState<any>();
+  const [gpr, setGpr] = useState<Gpr>({} as Gpr);
 
   useEffect(() => {
     setStepText(stepTexts[step]);
   }, [step]);
 
-  const handleComplete = (newGpr: boolean) => {
-    console.log("gpr: ", gpr);
+  const handleComplete = (newGpr: Gpr, addNewGpr: boolean) => {
+    setGpr(newGpr);
     setInfo((prev: any) => ({
       ...prev,
-      gprs: [...prev.gprs, gpr],
+      gprs: [...prev.gprs, newGpr],
     }));
+    if (addNewGpr) setStep(0);
+    else setMainStep(4);
+  };
 
-    if (!newGpr) setMainStep(4);
+  const handleProfileProceed = (e: Gpr) => {
+    setGpr(e);
+    setStep(2);
+  };
+
+  const handleGPRDataProceed = (e: Gpr) => {
+    setGpr(e);
   };
 
   return (
@@ -30,30 +40,18 @@ export default function AddGPRManually({ setInfo, setMainStep }: any) {
       <h1 className="modal-container-title"> {stepText} </h1>
       <StepWatcher
         step={step}
-        stepCount={5}
+        stepCount={stepTexts.length}
         texts={stepTexts}
         setStep={setStep}
       />
       <div className="w-3/4 mx-auto">
         {step === 0 && (
-          <SetGPRData
-            setStep={setStep}
-            onProceed={(e: any) => {
-              setGpr(e);
-            }}
-          />
+          <SetGPRData setStep={setStep} onProceed={handleGPRDataProceed} />
         )}
         {step === 1 && (
-          <AddProfiles setStep={setStep} gpr={gpr} setGpr={setGpr} />
+          <AddProfiles gpr={gpr} onProceed={handleProfileProceed} />
         )}
-        {step === 2 && (
-          <AddCracks
-            setStep={setStep}
-            gpr={gpr}
-            setGpr={setGpr}
-            onCompleted={handleComplete}
-          />
-        )}
+        {step === 2 && <AddCracks gpr={gpr} onCompleted={handleComplete} />}
       </div>
     </div>
   );

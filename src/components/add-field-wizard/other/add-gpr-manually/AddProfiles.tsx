@@ -4,29 +4,36 @@ import {
   FormSelectField,
   FormTextField,
 } from "../core-form-elements";
+import { Gpr } from "@/types/models/gpr";
+import { GprProfile } from "@/types/models/gprProfile";
 
-const initialState = {
-  rectangleLineNumber: "",
+const initialState: GprProfile = {
+  rectangleLineNumber: 0,
   profileType: "",
-  longitudinalProfileNumber: "",
-  traversalProfileNumber: "",
-  distance: "",
-  spacing: "",
-  numberOfProfile: "",
-  startingVertexX: "",
-  startingVertexY: "",
-  startingVertexZ: "",
-  endVertexX: "",
-  endVertexY: "",
-  endVertexZ: "",
-  frequency: "",
-  filename: "",
+  longitudinalProfileNumber: 0,
+  traversalProfileNumber: 0,
+  distance: 0,
+  spacing: 0,
+  numberOfProfile: 0,
+  startingVertexX: 0,
+  startingVertexY: 0,
+  startingVertexZ: 0,
+  endVertexX: 0,
+  endVertexY: 0,
+  endVertexZ: 0,
+  frequency: 0,
+  filname: "",
 };
 const profileTypes = [{ name: "Longitudinal" }, { name: "Traversal" }];
 
-export const AddProfiles = ({ setGpr, setStep, gpr }: any) => {
-  const [modelData, setModelData] = useState(initialState);
-  const [profiles, setProfiles] = useState<any>([]);
+type AddProfilesProps = {
+  gpr: Gpr;
+  onProceed: (newGpr: Gpr) => void;
+};
+
+export const AddProfiles = ({ gpr, onProceed }: AddProfilesProps) => {
+  const [modelData, setModelData] = useState<GprProfile>(initialState);
+  const [profiles, setProfiles] = useState<GprProfile[]>([]);
 
   const handleChange = (field: any, event: any) => {
     setModelData({ ...modelData, [field]: event.target.value });
@@ -40,8 +47,7 @@ export const AddProfiles = ({ setGpr, setStep, gpr }: any) => {
   const handleSaveAndProceed = () => {
     handleSave();
     const newGpr = { ...gpr, profiles };
-    setGpr(newGpr);
-    setStep(2);
+    onProceed(newGpr);
   };
 
   const handleSaveAndAddNew = () => {
@@ -144,9 +150,9 @@ export const AddProfiles = ({ setGpr, setStep, gpr }: any) => {
             onChange={(e: any) => handleChange("frequency", e)}
           />
           <FormTextField
-            label="Filename"
-            value={modelData.filename}
-            onChange={(e: any) => handleChange("filename", e)}
+            label="Filname"
+            value={modelData.filname}
+            onChange={(e: any) => handleChange("filname", e)}
           />
         </div>
       </div>

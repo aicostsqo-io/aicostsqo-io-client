@@ -1,29 +1,65 @@
 import React, { useState } from "react";
 import { FormNumberField, FormSelectField } from "../core-form-elements";
+import { GprDisc } from "@/types/models/gprDisc";
+import { Gpr } from "@/types/models/gpr";
 
-const initialState = {
-  rectangleLineNumber: "",
+const initialState: GprDisc = {
+  rectangleLineNumber: 0,
   profileType: "",
-  crackProfileNumber: "",
+  crackProfileNumber: 0,
   typeOfCrack: "",
   typeOfDisc: "",
-  dip: "",
-  dipDirection: "",
-  mapReferenceSystem: "",
-  startingVertexX: "",
-  startingVertexY: "",
-  startingVertexZ: "",
-  endVertexX: "",
-  endVertexY: "",
-  endVertexZ: "",
-  nX: "",
-  nY: "",
-  nZ: "",
+  dip: 0,
+  dipDirection: 0,
+  mapReferenceSystem: 0,
+  startingVertexX: 0,
+  startingVertexY: 0,
+  startingVertexZ: 0,
+  endVertexX: 0,
+  endVertexY: 0,
+  endVertexZ: 0,
+  nX: 0,
+  nY: 0,
+  nZ: 0,
 };
 
-export const AddCracks = ({ setGpr, gpr, onCompleted, setStep }: any) => {
-  const [crackData, setCrackData] = useState(initialState);
-  const [discs, setDiscs] = useState<any>([]);
+const profileTypes = [
+  {
+    name: "Longitudinal",
+  },
+  { name: "Traversal" },
+];
+
+const crackTypes = [
+  {
+    name: "Main Crack",
+  },
+  { name: "Crack Zone" },
+];
+
+const discTypes = [
+  {
+    name: "Circular",
+  },
+  {
+    name: "Quadratic",
+  },
+  {
+    name: "Triangular",
+  },
+  {
+    name: "Other",
+  },
+];
+
+type AddCracksProps = {
+  gpr: Gpr;
+  onCompleted: (gpr: Gpr, newGpr: boolean) => void;
+};
+
+export const AddCracks = ({ gpr, onCompleted }: AddCracksProps) => {
+  const [crackData, setCrackData] = useState<GprDisc>(initialState);
+  const [discs, setDiscs] = useState<GprDisc[]>([]);
 
   const handleChange = (field: any, event: any) => {
     setCrackData({ ...crackData, [field]: event.target.value });
@@ -41,53 +77,19 @@ export const AddCracks = ({ setGpr, gpr, onCompleted, setStep }: any) => {
 
   const handleProceedAndAddNewGPR = () => {
     handleSave();
-    setGpr({ ...gpr, discs: [...gpr.discs, ...discs] }); //!TODO: çalışmıyor
-    onCompleted(true);
-    setStep(0);
+    const newGpr = { ...gpr, discs };
+    onCompleted(newGpr, true);
   };
 
   const handleComplete = () => {
-    setGpr((prev: any) => {
-      return {
-        ...prev,
-        discs: [...prev.discs, ...discs],
-      };
-    });
-    onCompleted(false);
+    handleSave();
+    const newGpr = { ...gpr, discs };
+    onCompleted(newGpr, false);
   };
 
   const handleCancel = () => {
     setCrackData(initialState);
   };
-
-  const profileTypes = [
-    {
-      name: "Longitudinal",
-    },
-    { name: "Traversal" },
-  ];
-
-  const crackTypes = [
-    {
-      name: "Main Crack",
-    },
-    { name: "Crack Zone" },
-  ];
-
-  const discTypes = [
-    {
-      name: "Circular",
-    },
-    {
-      name: "Quadratic",
-    },
-    {
-      name: "Triangular",
-    },
-    {
-      name: "Other",
-    },
-  ];
 
   return (
     <>
