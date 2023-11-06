@@ -33,6 +33,7 @@ export default function AddGPRManually({ setInfo, setMainStep }: any) {
 
   const handleGPRDataProceed = (e: Gpr) => {
     setGpr(e);
+    setStep(1);
   };
 
   return (
@@ -45,9 +46,7 @@ export default function AddGPRManually({ setInfo, setMainStep }: any) {
         setStep={setStep}
       />
       <div className="w-3/4 mx-auto">
-        {step === 0 && (
-          <SetGPRData setStep={setStep} onProceed={handleGPRDataProceed} />
-        )}
+        {step === 0 && <SetGPRData onProceed={handleGPRDataProceed} />}
         {step === 1 && (
           <AddProfiles gpr={gpr} onProceed={handleProfileProceed} />
         )}

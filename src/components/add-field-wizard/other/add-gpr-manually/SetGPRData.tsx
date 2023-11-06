@@ -97,10 +97,9 @@ const referenceSystems = [
 
 type SetGPRDataProps = {
   onProceed: (gpr: any) => void;
-  setStep: (step: number) => void;
 };
 
-export default function SetGPRData({ onProceed, setStep }: SetGPRDataProps) {
+export default function SetGPRData({ onProceed }: SetGPRDataProps) {
   const [gpr, setGpr] = useState<Gpr>(initialState);
 
   const handleChange = (field: any, event: any) => {
@@ -116,7 +115,6 @@ export default function SetGPRData({ onProceed, setStep }: SetGPRDataProps) {
 
   const handleSaveAndProceed = () => {
     onProceed(gpr);
-    setStep(1);
   };
 
   const handleCancel = () => {
