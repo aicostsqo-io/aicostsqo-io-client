@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import RPData from "@/components/fields/RPData";
 import DiscontinuitiesData from "@/components/fields/DiscontinuitiesData";
 import { useSiteContext } from "@/contexts/Site";
+import DiscontinuitiesGPRVisualization from "@/components/fields";
 
 const Field = () => {
   const router = useRouter();
@@ -63,6 +64,9 @@ const Field = () => {
         )}
         {point === "Discontinuities (scanline measure)" && page === 1 && (
           <DiscontinuitiesData />
+        )}
+        {point === "Discontinuities (GPR)" && page === 0 && (
+          <DiscontinuitiesGPRVisualization />
         )}
       </ProjectLayout>
     </MainLayout>

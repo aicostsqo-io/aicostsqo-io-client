@@ -59,6 +59,14 @@ const RPTreeItem = ({ rps, setPoint, index }: any) => {
               // setSelectedDiscs([]);
             }}
           />
+          <TreeItem
+            nodeId={rp?._id + 3}
+            label={"Discontinuities (GPR)"}
+            onClick={() => {
+              setPoint("Discontinuities (GPR)");
+              setSelectedDiscs([]);
+            }}
+          />
           {/* {
               field?.rps?.discs?.length > 0 ? <DiscTreeItem discs={field?.rps?.discs} /> : <TreeItem nodeId={"199"} label={"No Discs"} /> 
             } */}
