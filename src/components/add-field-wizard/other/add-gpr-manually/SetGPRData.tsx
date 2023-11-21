@@ -69,6 +69,9 @@ const shapeTypes = [
   {
     name: "Quadratic",
   },
+  {
+    name: "Line",
+  },
 ];
 
 const dimensions = [

@@ -50,6 +50,9 @@ const discTypes = [
   {
     name: "Other",
   },
+  {
+    name: "Line",
+  },
 ];
 
 type AddCracksProps = {
