@@ -59,14 +59,6 @@ const RPTreeItem = ({ rps, setPoint, index }: any) => {
               // setSelectedDiscs([]);
             }}
           />
-          <TreeItem
-            nodeId={rp?._id + 3}
-            label={"Discontinuities (GPR)"}
-            onClick={() => {
-              setPoint("Discontinuities (GPR)");
-              setSelectedDiscs([]);
-            }}
-          />
           {/* {
               field?.rps?.discs?.length > 0 ? <DiscTreeItem discs={field?.rps?.discs} /> : <TreeItem nodeId={"199"} label={"No Discs"} /> 
             } */}
@@ -99,6 +91,13 @@ const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
         nodeId={"Site Boundaries"}
         label={"Site Boundaries"}
         onClick={() => setPoint("Site Boundaries")}
+      />
+      <TreeItem
+        nodeId={"GPRs"}
+        label={"Discontinuities (GPR)"}
+        onClick={() => {
+          setPoint("Discontinuities (GPR)");
+        }}
       />
       {field?.rps?.length > 0 ? (
         <RPTreeItem setPoint={setPoint} rps={field?.rps} index={index} />

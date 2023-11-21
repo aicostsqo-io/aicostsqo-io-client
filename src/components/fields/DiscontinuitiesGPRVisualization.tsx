@@ -1,7 +1,10 @@
+import { getRpsBySiteId } from "@/api/gpr";
+import { useSiteContext } from "@/contexts/Site";
 import * as L from "leaflet";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import "leaflet-draw/dist/leaflet.draw.css";
 import "leaflet/dist/leaflet.css";
+import { useEffect, useState } from "react";
 import { MapContainer, Polyline, TileLayer } from "react-leaflet";
 
 const position: L.LatLngExpression = [52.524663, -0.111807];
@@ -14,6 +17,19 @@ const polylinePositions: L.LatLngExpression[] = [
   [52.51902, -0.121164],
 ];
 function DiscontinuitiesGPRVisualization() {
+  const [gprs, setGprs] = useState<any[]>();
+  const { selectedSite } = useSiteContext();
+  useEffect(() => {
+    getRpsBySiteId(selectedSite.site._id)
+      .then((res) => {
+        setGprs(res.data);
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [selectedSite]);
+
   return (
     <MapContainer
       className="w-full h-full"
