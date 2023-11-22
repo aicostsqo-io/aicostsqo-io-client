@@ -165,13 +165,6 @@ const AddField = () => {
               setStep={setStep}
             />
           )}
-          <button
-            onClick={() => {
-              console.log("info: ", info);
-            }}
-          >
-            info
-          </button>
         </div>
       </ProjectLayout>
     </MainLayout>
