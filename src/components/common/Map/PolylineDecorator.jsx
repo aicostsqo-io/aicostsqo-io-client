@@ -1,18 +1,9 @@
-import L, { PathOptions } from "leaflet";
+import L from "leaflet";
 import { useEffect } from "react";
 import { useMap } from "react-leaflet";
 import "leaflet-polylinedecorator/dist/leaflet.polylineDecorator";
-import { FormattedProfile } from "@/types/models/formattedProfile";
 
-type PolylineDecoratorProps = {
-  positions: FormattedProfile;
-  pathStyle: PathOptions;
-};
-
-export function PolylineDecorator({
-  positions,
-  pathStyle,
-}: PolylineDecoratorProps) {
+export function PolylineDecorator({ positions, pathStyle }) {
   const map = useMap();
   const arrow = [
     {

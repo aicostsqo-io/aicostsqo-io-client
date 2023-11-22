@@ -6,7 +6,7 @@ import "leaflet-draw/dist/leaflet.draw.css";
 import "leaflet/dist/leaflet.css";
 import { Fragment, useEffect, useState } from "react";
 import { MapContainer, TileLayer } from "react-leaflet";
-import { PolylineDecorator } from "../common/Map/PolylineDecorator";
+import { PolylineDecorator } from "../../common/Map/PolylineDecorator";
 import { FormattedProfile, MapProfile } from "@/types/models/formattedProfile";
 
 function DiscontinuitiesGPRVisualization() {
@@ -22,7 +22,6 @@ function DiscontinuitiesGPRVisualization() {
         );
         setPosition(ress.longitudes[0].startCoords);
         setGprProfiles(ress);
-        console.log(ress);
       })
       .catch((err) => {
         console.log(err);
