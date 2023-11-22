@@ -54,6 +54,13 @@ const AddGPRProfileModal = ({
 
   const handleAddGPRProfile = async () => {
     //TODO: validation
+    for (let value of Object.values(gprProfile)) {
+      if (!value) {
+        toast.error("Please fill all fields");
+        return;
+      }
+    }
+
     try {
       await createGPRProfile({
         ...gprProfile,

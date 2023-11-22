@@ -25,13 +25,22 @@ const DiscontinuitiesGPRVisualizationData = () => {
 
   const fetchGPRData = async () => {
     const res = await getGprDataBySiteId(selectedSite?.site?._id);
-    // console.log("res : ", res.data.result);
-    setData(res.data.result);
+    setData(res?.data?.result);
   };
 
   useEffect(() => {
     fetchGPRData();
   }, []);
+
+  useEffect(() => {
+    if (selectedGPR) {
+      const filteredProfiles = data?.gprProfiles?.filter(
+        (p: any) => p.rectangleLineNumber === selectedGPR.rectangleNumber
+      );
+      console.log("filteredProfiles : ", filteredProfiles);
+      setFilteredProfiles(filteredProfiles);
+    }
+  }, [data]);
 
   const handleSelectAll = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) setselectedRows(data.map((p: any) => p._id));

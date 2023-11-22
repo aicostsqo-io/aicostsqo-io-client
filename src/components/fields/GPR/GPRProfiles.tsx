@@ -31,9 +31,8 @@ const GPRProfiles = ({
     useState<boolean>(false);
 
   useEffect(() => {
-    //     console.log("profiles : ", profiles);
     setData(profiles);
-  }, []);
+  }, [profiles]);
 
   const handleSelectAll = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) setselectedRows(data.map((p: any) => p._id));
@@ -167,7 +166,7 @@ const GPRProfiles = ({
             <AddGPRProfileModal
               rectangleLineNumber={rectangleLineNumber}
               onClose={() => setIsAddGPRAddProfileModalOpen(false)}
-              refetch={refetch}
+              refetch={() => refetch()}
             />
           ) : null}
         </div>
