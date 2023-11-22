@@ -70,15 +70,20 @@ const RPTreeItem = ({ rps, setPoint, index }: any) => {
 
 const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
   const { setSelectedSite } = useSiteContext();
+  const { expanded, setExpanded } = useTreeContext();
   const handleClickSite = () => {
     setPoint("Site Main");
-
+    const newExpanded = expanded.filter(
+      (item: any) => !item.startsWith("Site")
+    );
+    newExpanded.push("Site" + field?.site?._id);
+    setExpanded(newExpanded);
     setSelectedSite(field);
     router.push(`/project/fields/${field?.site?._id}`);
   };
   return (
     <TreeItem
-      nodeId={field?.site?._id}
+      nodeId={"Site" + field?.site?._id}
       label={field?.site?.name}
       onClick={() => handleClickSite()}
     >

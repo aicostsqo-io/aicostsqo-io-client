@@ -14,7 +14,8 @@ import { useEffect, useState } from "react";
 import RPData from "@/components/fields/RPData";
 import DiscontinuitiesData from "@/components/fields/DiscontinuitiesData";
 import { useSiteContext } from "@/contexts/Site";
-import DiscontinuitiesGPRVisualization from "@/components/fields";
+import DiscontinuitiesGPRVisualization from "@/components/fields/GPR";
+import DiscontinuitiesGPRVisualizationData from "@/components/fields/GPR/DiscontinuitiesGPRVisualizationData";
 
 const Field = () => {
   const router = useRouter();
@@ -67,6 +68,9 @@ const Field = () => {
         )}
         {point === "Discontinuities (GPR)" && page === 0 && (
           <DiscontinuitiesGPRVisualization />
+        )}
+        {point === "Discontinuities (GPR)" && page === 1 && (
+          <DiscontinuitiesGPRVisualizationData />
         )}
       </ProjectLayout>
     </MainLayout>
