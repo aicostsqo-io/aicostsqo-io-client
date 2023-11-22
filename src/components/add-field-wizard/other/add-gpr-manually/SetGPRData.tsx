@@ -14,12 +14,12 @@ import { toast } from "react-toastify";
 
 const initialState: Gpr = {
   rectangleNumber: 0,
-  shape: "",
+  shape: "Quadratic",
   longitudinalProfileNumber: 0,
   traversalProfileNumber: 0,
   distance: 0,
   spacing: 0,
-  dimension: "",
+  dimension: "3D",
   positionX: 0,
   positionY: 0,
   positionZ: 0,
@@ -30,8 +30,8 @@ const initialState: Gpr = {
   traversalProfilesDirectory: "",
   traversalProfilesMaxDepth: 0,
   traversalProfilesMaxDistance: 0,
-  mapReferenceSystemForStartOfLongitudinalProfiles: "",
-  mapReferenceSystemForStartOfTransversalProfiles: "",
+  mapReferenceSystemForStartOfLongitudinalProfiles: "GPS",
+  mapReferenceSystemForStartOfTransversalProfiles: "GPS",
   vertex1: {
     startOfLongitudinalProfilesX: 0,
     startOfLongitudinalProfilesY: 0,

@@ -59,9 +59,10 @@ export default function SetSeismicData({ onProceed }: SetSeismicDataProps) {
             onChange={(e: any) => handleChange("measurementId", e)}
           />
 
-          <FormTextField
+          <FormSelectField
             label="Shape"
             value={seismic.shape}
+            data={[{ name: "Mesh" }, { name: "Line" }]}
             onChange={(e: any) => handleChange("shape", e)}
           />
 
