@@ -67,6 +67,10 @@ const initialInfo = {
   ],
   discs: [],
   gprs: [],
+  magnetometrics: [],
+  seismics: [],
+  televiewers: [],
+  resistivities: [],
 };
 
 const AddField = () => {
@@ -102,7 +106,7 @@ const AddField = () => {
 
   const save = () => {
     createSite(info)
-      .then((res: any) => {
+      .then(() => {
         toast.success("Site created successfully");
         router.push("/project");
       })
@@ -161,6 +165,13 @@ const AddField = () => {
               setStep={setStep}
             />
           )}
+          <button
+            onClick={() => {
+              console.log("info: ", info);
+            }}
+          >
+            info
+          </button>
         </div>
       </ProjectLayout>
     </MainLayout>
