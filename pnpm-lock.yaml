@@ -50,6 +50,9 @@ dependencies:
   leaflet-draw:
     specifier: ^1.0.4
     version: 1.0.4
+  leaflet-polylinedecorator:
+    specifier: ^1.6.0
+    version: 1.6.0
   marble-disc:
     specifier: ^1.1.10
     version: 1.1.10
@@ -91,6 +94,9 @@ devDependencies:
   '@types/leaflet':
     specifier: ^1.9.3
     version: 1.9.3
+  '@types/leaflet-polylinedecorator':
+    specifier: ^1.6.4
+    version: 1.6.4
   autoprefixer:
     specifier: ^10.4.14
     version: 10.4.14(postcss@8.4.21)
@@ -752,6 +758,12 @@ packages:
   /@types/json5@0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: false
+
+  /@types/leaflet-polylinedecorator@1.6.4:
+    resolution: {integrity: sha512-meH/jC58Drt/9aqLhuzMCUQjHgMTud+UuQBK5gT6E8M6OfM/rftz/VgvdxOCCAQC9isrp4pqahDgEswesb5X3A==}
+    dependencies:
+      '@types/leaflet': 1.9.3
+    dev: true
 
   /@types/leaflet@1.9.3:
     resolution: {integrity: sha512-Caa1lYOgKVqDkDZVWkto2Z5JtVo09spEaUt2S69LiugbBpoqQu92HYFMGUbYezZbnBkyOxMNPXHSgRrRY5UyIA==}
@@ -2419,6 +2431,16 @@ packages:
 
   /leaflet-draw@1.0.4:
     resolution: {integrity: sha512-rsQ6saQO5ST5Aj6XRFylr5zvarWgzWnrg46zQ1MEOEIHsppdC/8hnN8qMoFvACsPvTioAuysya/TVtog15tyAQ==}
+    dev: false
+
+  /leaflet-polylinedecorator@1.6.0:
+    resolution: {integrity: sha512-kn3krmZRetgvN0wjhgYL8kvyLS0tUogAl0vtHuXQnwlYNjbl7aLQpkoFUo8UB8gVZoB0dhI4Tb55VdTJAcYzzQ==}
+    dependencies:
+      leaflet-rotatedmarker: 0.2.0
+    dev: false
+
+  /leaflet-rotatedmarker@0.2.0:
+    resolution: {integrity: sha512-yc97gxLXwbZa+Gk9VCcqI0CkvIBC9oNTTjFsHqq4EQvANrvaboib4UdeQLyTnEqDpaXHCqzwwVIDHtvz2mUiDg==}
     dev: false
 
   /leaflet@1.9.3:

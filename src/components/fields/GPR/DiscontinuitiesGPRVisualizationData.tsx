@@ -4,13 +4,23 @@ import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 ("react");
 import { HiCursorClick } from "react-icons/hi";
 import GPRProfiles from "./GPRProfiles";
+import AddGPRModal from "./AddGPRModal";
+import {
+  IoAddCircleOutline as AddIcon,
+  IoClose as CloseIcon,
+  IoSaveOutline as SaveIcon,
+  IoSearchOutline as SearchIcon,
+  IoTrashOutline as TrashIcon,
+} from "react-icons/io5";
 
 const DiscontinuitiesGPRVisualizationData = () => {
   const [data, setData] = useState<any>([]);
+  const [selectedGPR, setSelectedGPR] = useState<any>(null);
   const [filteredProfiles, setFilteredProfiles] = useState<any>([]);
   const { selectedSite } = useSiteContext();
   const [isGPRProfilesModalOpen, setIsGPRProfilesModalOpen] =
     useState<boolean>(false);
+  const [isAddGPRModalOpen, setIsAddGPRModalOpen] = useState<boolean>(false);
   const [selectedRows, setselectedRows] = useState<string[]>([]);
 
   const fetchGPRData = async () => {
@@ -43,10 +53,11 @@ const DiscontinuitiesGPRVisualizationData = () => {
     setData(updatedTableData); */
   };
 
-  const handleClickRectangleNumber = (rectangleNumber: number) => {
+  const handleClickRectangleNumber = (gpr: any) => {
     const filteredProfiles = data?.gprProfiles?.filter(
-      (p: any) => p.rectangleLineNumber === rectangleNumber
+      (p: any) => p.rectangleLineNumber === gpr.rectangleNumber
     );
+    setSelectedGPR(gpr);
     setFilteredProfiles(filteredProfiles);
     setIsGPRProfilesModalOpen(true);
   };
@@ -99,9 +110,7 @@ const DiscontinuitiesGPRVisualizationData = () => {
                 <td className="py-3 px-6 text-left">{gpr._id}</td>
                 <td
                   className="py-3 px-6 text-left font-bold text-blue-500 flex items-center"
-                  onClick={() =>
-                    handleClickRectangleNumber(gpr.rectangleNumber)
-                  }
+                  onClick={() => handleClickRectangleNumber(gpr)}
                 >
                   <span className="">{gpr.rectangleNumber}</span>
                   <HiCursorClick className="ml-1 text-lg " />
@@ -132,20 +141,13 @@ const DiscontinuitiesGPRVisualizationData = () => {
         </table>
       </div>
 
-      {isGPRProfilesModalOpen ? (
-        <GPRProfiles
-          onClose={() => setIsGPRProfilesModalOpen(false)}
-          profiles={filteredProfiles}
-        />
-      ) : null}
-
-      {/* <div className="w-3/4 mx-auto">
+      <div className="w-3/4 mx-auto">
         <div className="flex justify-between">
           <div
             className="flex flex-col gap-3 items-center cursor-pointer"
             data-modal-target="authentication-modal"
             data-modal-toggle="authentication-modal"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => setIsAddGPRModalOpen(true)}
           >
             <AddIcon className="text-4xl" />
             <span className="text-lg">Add New Line</span>
@@ -171,12 +173,22 @@ const DiscontinuitiesGPRVisualizationData = () => {
           </div>
         </div>
       </div>
-      {isModalOpen ? (
-        <AddDiscontinuity
-          onClose={() => setIsModalOpen(false)}
-          refetch={() => fetchDiscData()}
+
+      {isGPRProfilesModalOpen ? (
+        <GPRProfiles
+          onClose={() => setIsGPRProfilesModalOpen(false)}
+          profiles={filteredProfiles}
+          rectangleLineNumber={selectedGPR?.rectangleNumber}
+          refetch={() => fetchGPRData()}
         />
-      ) : null} */}
+      ) : null}
+
+      {isAddGPRModalOpen ? (
+        <AddGPRModal
+          onClose={() => setIsAddGPRModalOpen(false)}
+          refetch={() => fetchGPRData()}
+        />
+      ) : null}
     </div>
   );
 };

@@ -14,7 +14,7 @@ function DiscontinuitiesGPRVisualization() {
   const [position, setPosition] = useState<L.LatLngExpression>();
   const { selectedSite } = useSiteContext();
   useEffect(() => {
-    getRpsBySiteId(selectedSite.site._id)
+    getRpsBySiteId(selectedSite?.site?._id)
       .then((res) => {
         const ress: MapProfile = formatProfiles(
           res.data.result.gprProfiles,

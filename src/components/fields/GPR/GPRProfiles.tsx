@@ -3,15 +3,32 @@ import { useSiteContext } from "@/contexts/Site";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 ("react");
+import {
+  IoAddCircleOutline as AddIcon,
+  IoClose as CloseIcon,
+  IoSaveOutline as SaveIcon,
+  IoSearchOutline as SearchIcon,
+  IoTrashOutline as TrashIcon,
+} from "react-icons/io5";
+import AddGPRProfileModal from "./AddGPRProfileModal";
 
 interface GPRProfilesProps {
+  rectangleLineNumber: number;
+  refetch: () => void;
   profiles: any[];
   onClose: () => void;
 }
 
-const GPRProfiles = ({ profiles, onClose }: GPRProfilesProps) => {
+const GPRProfiles = ({
+  profiles,
+  onClose,
+  rectangleLineNumber,
+  refetch,
+}: GPRProfilesProps) => {
   const [data, setData] = useState<any>([]);
   const [selectedRows, setselectedRows] = useState<string[]>([]);
+  const [isAddGPRAddProfileModalOpen, setIsAddGPRAddProfileModalOpen] =
+    useState<boolean>(false);
 
   useEffect(() => {
     //     console.log("profiles : ", profiles);
@@ -39,17 +56,16 @@ const GPRProfiles = ({ profiles, onClose }: GPRProfilesProps) => {
   };
 
   return (
-    <div className="bg-black bg-opacity-70 fixed inset-0 w-full flex justify-center items-center overflow-scroll z-[100 ] tracking-wider">
-      <div className="bg-white text-black radius-lg w-4/5 flex flex-col gap-10 max-h-[800px]">
+    <div className="bg-black bg-opacity-70 fixed inset-0 w-full flex justify-center items-center overflow-scroll z-[100] tracking-wider">
+      <div className="bg-white text-black radius-lg w-4/5 flex flex-col gap-7 min-h-[300px] max-h-screen">
         <div className="modal-header py-3 px-7 flex justify-between border-b border-slate-600 border-opacity-50">
           <span className="modal-header-title font-bold">GPR Profiles</span>
           <button type="button" onClick={() => onClose()}>
             <AiOutlineClose className="text-2xl" />
           </button>
         </div>
-        <div className="flex flex-col modal-container min-h-[300px] max-h-[600px] justify-between w-full">
+        <div className="flex flex-col modal-container min-h-[200px] justify-between w-full pb-5">
           <h1 className="modal-container-title">Data Sets</h1>
-
           <div className="overflow-scroll my-5 mx-5">
             <table className="min-w-max w-full table-auto">
               <thead>
@@ -115,44 +131,45 @@ const GPRProfiles = ({ profiles, onClose }: GPRProfilesProps) => {
             </table>
           </div>
 
-          {/* <div className="w-3/4 mx-auto">
-        <div className="flex justify-between">
-          <div
-            className="flex flex-col gap-3 items-center cursor-pointer"
-            data-modal-target="authentication-modal"
-            data-modal-toggle="authentication-modal"
-            onClick={() => setIsModalOpen(true)}
-          >
-            <AddIcon className="text-4xl" />
-            <span className="text-lg">Add New Line</span>
+          <div className="w-3/4 mx-auto">
+            <div className="flex justify-between">
+              <div
+                className="flex flex-col gap-3 items-center cursor-pointer"
+                data-modal-target="authentication-modal"
+                data-modal-toggle="authentication-modal"
+                onClick={() => setIsAddGPRAddProfileModalOpen(true)}
+              >
+                <AddIcon className="text-4xl" />
+                <span className="text-lg">Add New Line</span>
+              </div>
+              <div className="flex flex-col gap-3 items-center cursor-pointer">
+                <SearchIcon className="text-4xl" />
+                <span className="text-lg">Search In</span>
+              </div>
+              <div
+                className="flex flex-col gap-3 items-center cursor-pointer"
+                onClick={handleDeleteSelectedRows}
+              >
+                <TrashIcon className="text-4xl" />
+                <span className="text-lg">Delete Selected Rows</span>
+              </div>
+              <div className="flex flex-col gap-3 items-center cursor-pointer">
+                <SaveIcon className="text-4xl" />
+                <span className="text-lg">Save</span>
+              </div>
+              <div className="flex flex-col gap-3 items-center cursor-pointer">
+                <CloseIcon className="text-4xl" />
+                <span className="text-lg">Cancel</span>
+              </div>
+            </div>
           </div>
-          <div className="flex flex-col gap-3 items-center cursor-pointer">
-            <SearchIcon className="text-4xl" />
-            <span className="text-lg">Search In</span>
-          </div>
-          <div
-            className="flex flex-col gap-3 items-center cursor-pointer"
-            onClick={handleDeleteSelectedRows}
-          >
-            <TrashIcon className="text-4xl" />
-            <span className="text-lg">Delete Selected Rows</span>
-          </div>
-          <div className="flex flex-col gap-3 items-center cursor-pointer">
-            <SaveIcon className="text-4xl" />
-            <span className="text-lg">Save</span>
-          </div>
-          <div className="flex flex-col gap-3 items-center cursor-pointer">
-            <CloseIcon className="text-4xl" />
-            <span className="text-lg">Cancel</span>
-          </div>
-        </div>
-      </div>
-      {isModalOpen ? (
-        <AddDiscontinuity
-          onClose={() => setIsModalOpen(false)}
-          refetch={() => fetchDiscData()}
-        />
-      ) : null} */}
+          {isAddGPRAddProfileModalOpen ? (
+            <AddGPRProfileModal
+              rectangleLineNumber={rectangleLineNumber}
+              onClose={() => setIsAddGPRAddProfileModalOpen(false)}
+              refetch={refetch}
+            />
+          ) : null}
         </div>
       </div>
     </div>

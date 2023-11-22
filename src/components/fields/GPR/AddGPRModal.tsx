@@ -1,15 +1,24 @@
+import { createGPR } from "@/api/gpr";
+import { useSiteContext } from "@/contexts/Site";
 import React, { useState } from "react";
-import {
-  FormNumberField,
-  FormSelectField,
-  FormTextField,
-} from "../core-form-elements";
+import { AiOutlineClose } from "react-icons/ai";
+import { toast } from "react-toastify";
 import { Gpr } from "@/types/models/gpr";
 import {
   dimensions,
   referenceSystems,
   shapeTypes,
 } from "@/utils/constants/gpr";
+import {
+  FormNumberField,
+  FormSelectField,
+  FormTextField,
+} from "@/components/add-field-wizard/other/core-form-elements";
+
+interface Props {
+  onClose: () => void;
+  refetch: () => void;
+}
 
 const initialState: Gpr = {
   rectangleNumber: 0,
@@ -64,12 +73,25 @@ const initialState: Gpr = {
   profiles: [],
 };
 
-type SetGPRDataProps = {
-  onProceed: (gpr: any) => void;
-};
+const AddGPRModal = ({ onClose, refetch }: Props) => {
+  const [gpr, setGpr] = useState<any>(initialState);
+  const { selectedSite } = useSiteContext();
 
-export default function SetGPRData({ onProceed }: SetGPRDataProps) {
-  const [gpr, setGpr] = useState<Gpr>(initialState);
+  const handleAddGPR = async () => {
+    //TODO: validation
+    try {
+      await createGPR({
+        ...gpr,
+        siteId: selectedSite?.site?._id,
+      });
+
+      refetch();
+      toast.success("GPR added successfully");
+      onClose();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleChange = (field: any, event: any) => {
     const updatedGpr = { ...gpr };
@@ -82,18 +104,16 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
     setGpr(updatedGpr);
   };
 
-  const handleSaveAndProceed = () => {
-    onProceed(gpr);
-  };
-
-  const handleCancel = () => {
-    setGpr(initialState);
-  };
-
   return (
-    <>
-      <div className="flex flex-row gap-20">
-        <div className="flex flex-col gap-4">
+    <div className="bg-black bg-opacity-70 fixed inset-0 w-full flex justify-center items-center overflow-scroll z-[100] tracking-wider">
+      <div className="bg-white text-black radius-lg w-2/3 flex flex-col min-h-[300px] max-h-screen">
+        <div className="modal-header py-3 px-7 flex justify-between border-b border-slate-600 border-opacity-50">
+          <span className="modal-header-title font-bold">Add GPR</span>
+          <button type="button" onClick={() => onClose()}>
+            <AiOutlineClose className="text-2xl" />
+          </button>
+        </div>
+        <div className="modal-body px-7 pt-5 pb-5 flex flex-col gap-2  overflow-auto flex-1">
           <FormNumberField
             label="Rectangle Number"
             value={gpr.rectangleNumber}
@@ -244,8 +264,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
               handleChange("vertex1.startOfLongitudinalProfilesZ", e)
             }
           />
-        </div>
-        <div className="flex flex-col gap-4">
           <FormNumberField
             label="Vertex 1 End Of Longitudinal Profiles X"
             value={gpr.vertex1.endOfLongitudinalProfilesX}
@@ -419,22 +437,18 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
             value={gpr.explanation}
             onChange={(e: any) => handleChange("explanation", e)}
           />
+          <div className="flex flex-col gap-4">
+            <div
+              className="bg-black text-white justify-between w-full mt-3 py-2 rounded text-center cursor-pointer"
+              onClick={handleAddGPR}
+            >
+              Add
+            </div>
+          </div>
         </div>
       </div>
-      <div className="flex flex-row gap-6 pt-4">
-        <div
-          className="bg-black text-white justify-between w-1/3 py-2 rounded text-center cursor-pointer"
-          onClick={handleSaveAndProceed}
-        >
-          Save & Proceed
-        </div>
-        <div
-          className="bg-black text-white justify-between w-1/3 py-2 rounded text-center cursor-pointer"
-          onClick={handleCancel}
-        >
-          Cancel
-        </div>
-      </div>
-    </>
+    </div>
   );
-}
+};
+
+export default AddGPRModal;

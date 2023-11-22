@@ -1,12 +1,27 @@
-import { useState } from "react";
+import { createGPR, createGPRProfile } from "@/api/gpr";
+import { useSiteContext } from "@/contexts/Site";
+import React, { use, useEffect, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { toast } from "react-toastify";
+import { Gpr } from "@/types/models/gpr";
+import {
+  dimensions,
+  referenceSystems,
+  shapeTypes,
+} from "@/utils/constants/gpr";
 import {
   FormNumberField,
   FormSelectField,
   FormTextField,
-} from "../core-form-elements";
-import { Gpr } from "@/types/models/gpr";
+} from "@/components/add-field-wizard/other/core-form-elements";
 import { GprProfile } from "@/types/models/gprProfile";
 import { profileTypes } from "@/utils/constants/gpr";
+
+interface Props {
+  rectangleLineNumber: number;
+  onClose: () => void;
+  refetch: () => void;
+}
 
 const initialState: GprProfile = {
   rectangleLineNumber: 0,
@@ -25,163 +40,150 @@ const initialState: GprProfile = {
   frequency: 0,
   filname: "",
 };
+const AddGPRProfileModal = ({
+  rectangleLineNumber,
+  onClose,
+  refetch,
+}: Props) => {
+  const [gprProfile, setGprProfile] = useState<any>(initialState);
+  const { selectedSite } = useSiteContext();
 
-type AddProfilesProps = {
-  gpr: Gpr;
-  onProceed: (newGpr: Gpr) => void;
-};
+  useEffect(() => {
+    setGprProfile({ ...gprProfile, rectangleLineNumber });
+  }, []);
 
-export const AddProfiles = ({ gpr, onProceed }: AddProfilesProps) => {
-  const [modelData, setModelData] = useState<GprProfile>(initialState);
-  const [profiles, setProfiles] = useState<GprProfile[]>([]);
+  const handleAddGPRProfile = async () => {
+    //TODO: validation
+    try {
+      await createGPRProfile({
+        ...gprProfile,
+        siteId: selectedSite?.site?._id,
+      });
+
+      refetch();
+      toast.success("GPR added successfully");
+      onClose();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleChange = (field: any, event: any) => {
-    setModelData({ ...modelData, [field]: event.target.value });
-  };
-
-  const handleSave = () => {
-    profiles.push(modelData);
-    setProfiles(profiles);
-  };
-
-  const handleSaveAndProceed = () => {
-    handleSave();
-    const newGpr = { ...gpr, profiles };
-    onProceed(newGpr);
-  };
-
-  const handleSaveAndAddNew = () => {
-    handleSave();
-    setModelData(initialState);
-  };
-
-  const handleCancel = () => {
-    setModelData(initialState);
+    setGprProfile({ ...gprProfile, [field]: event.target.value });
   };
 
   return (
-    <>
-      <div className="flex flex-row gap-20">
-        <div className="flex flex-col gap-4">
+    <div className="bg-black bg-opacity-70 fixed inset-0 w-full flex justify-center items-center overflow-scroll z-[100] tracking-wider">
+      <div className="bg-white text-black radius-lg w-2/3 flex flex-col h-[800px] max-h-screen">
+        <div className="modal-header py-3 px-7 flex justify-between border-b border-slate-600 border-opacity-50">
+          <span className="modal-header-title font-bold">Add GPR</span>
+          <button type="button" onClick={() => onClose()}>
+            <AiOutlineClose className="text-2xl" />
+          </button>
+        </div>
+        <div className="modal-body px-7 py-5 flex flex-col gap-2  overflow-auto flex-1">
           <FormNumberField
             label="Rectangle Line Number"
-            value={modelData.rectangleLineNumber}
+            value={gprProfile.rectangleLineNumber}
             min={0}
             onChange={(e: any) => handleChange("rectangleLineNumber", e)}
           />
           <FormSelectField
             label="Profile Type"
-            value={modelData.profileType}
+            value={gprProfile.profileType}
             onChange={(e: any) => handleChange("profileType", e)}
             data={profileTypes}
           />
           <FormNumberField
             label="Longitudinal Profile Number"
-            value={modelData.longitudinalProfileNumber}
+            value={gprProfile.longitudinalProfileNumber}
             min={0}
             onChange={(e: any) => handleChange("longitudinalProfileNumber", e)}
           />
           <FormNumberField
             label="Traversal Profile Number"
-            value={modelData.traversalProfileNumber}
+            value={gprProfile.traversalProfileNumber}
             min={0}
             onChange={(e: any) => handleChange("traversalProfileNumber", e)}
           />
           <FormNumberField
             label="Distance"
-            value={modelData.distance}
+            value={gprProfile.distance}
             min={0}
             onChange={(e: any) => handleChange("distance", e)}
           />
           <FormNumberField
             label="Spacing"
-            value={modelData.spacing}
+            value={gprProfile.spacing}
             min={0}
             onChange={(e: any) => handleChange("spacing", e)}
           />
           <FormNumberField
             label="Number of Profile"
-            value={modelData.numberOfProfile}
+            value={gprProfile.numberOfProfile}
             min={0}
             onChange={(e: any) => handleChange("numberOfProfile", e)}
           />
           <FormNumberField
             label="Starting Vertex X"
-            value={modelData.startingVertexX}
+            value={gprProfile.startingVertexX}
             min={0}
             onChange={(e: any) => handleChange("startingVertexX", e)}
           />
-        </div>
-        <div className="flex flex-col gap-4">
           <FormNumberField
             label="Starting Vertex Y"
-            value={modelData.startingVertexY}
+            value={gprProfile.startingVertexY}
             min={0}
             onChange={(e: any) => handleChange("startingVertexY", e)}
           />
           <FormNumberField
             label="Starting Vertex Z"
-            value={modelData.startingVertexZ}
+            value={gprProfile.startingVertexZ}
             min={0}
             onChange={(e: any) => handleChange("startingVertexZ", e)}
           />
           <FormNumberField
             label="End Vertex X"
-            value={modelData.endVertexX}
+            value={gprProfile.endVertexX}
             min={0}
             onChange={(e: any) => handleChange("endVertexX", e)}
           />
           <FormNumberField
             label="End Vertex Y"
-            value={modelData.endVertexY}
+            value={gprProfile.endVertexY}
             min={0}
             onChange={(e: any) => handleChange("endVertexY", e)}
           />
           <FormNumberField
             label="End Vertex Z"
-            value={modelData.endVertexZ}
+            value={gprProfile.endVertexZ}
             min={0}
             onChange={(e: any) => handleChange("endVertexZ", e)}
           />
           <FormNumberField
             label="Frequency"
-            value={modelData.frequency}
+            value={gprProfile.frequency}
             min={0}
             onChange={(e: any) => handleChange("frequency", e)}
           />
           <FormTextField
             label="Filname"
-            value={modelData.filname}
+            value={gprProfile.filname}
             onChange={(e: any) => handleChange("filname", e)}
           />
+
+          <div className="flex flex-col gap-4 mt-auto">
+            <div
+              className="bg-black text-white justify-between w-full mt-3 py-2 rounded text-center cursor-pointer"
+              onClick={handleAddGPRProfile}
+            >
+              Add
+            </div>
+          </div>
         </div>
       </div>
-      <div className="flex flex-row gap-6 pt-4">
-        <div
-          className="bg-black text-white justify-between w-1/3 py-2 rounded text-center cursor-pointer"
-          onClick={handleSave}
-        >
-          Save
-        </div>
-        <div
-          className="bg-black text-white justify-between w-1/3 py-2 rounded text-center cursor-pointer"
-          onClick={handleSaveAndAddNew}
-        >
-          Save & Add New
-        </div>
-        <div
-          className="bg-black text-white justify-between w-1/3 py-2 rounded text-center cursor-pointer"
-          onClick={handleSaveAndProceed}
-        >
-          Save & Proceed
-        </div>
-        <div
-          className="bg-black text-white justify-between w-1/3 py-2 rounded text-center cursor-pointer"
-          onClick={handleCancel}
-        >
-          Cancel
-        </div>
-      </div>
-    </>
+    </div>
   );
 };
+
+export default AddGPRProfileModal;
