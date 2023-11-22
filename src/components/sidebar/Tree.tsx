@@ -73,10 +73,11 @@ const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
   const { expanded, setExpanded } = useTreeContext();
   const handleClickSite = () => {
     setPoint("Site Main");
+    const isExpanded = expanded.includes("Site" + field?.site?._id);
     const newExpanded = expanded.filter(
       (item: any) => !item.startsWith("Site")
     );
-    newExpanded.push("Site" + field?.site?._id);
+    if (!isExpanded) newExpanded.push("Site" + field?.site?._id);
     setExpanded(newExpanded);
     setSelectedSite(field);
     router.push(`/project/fields/${field?.site?._id}`);

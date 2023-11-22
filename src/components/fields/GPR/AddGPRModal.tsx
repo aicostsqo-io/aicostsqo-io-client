@@ -79,6 +79,12 @@ const AddGPRModal = ({ onClose, refetch }: Props) => {
 
   const handleAddGPR = async () => {
     //TODO: validation
+    for (let value of Object.values(gpr)) {
+      if (!value) {
+        toast.error("Please fill all fields");
+        return;
+      }
+    }
     try {
       await createGPR({
         ...gpr,
