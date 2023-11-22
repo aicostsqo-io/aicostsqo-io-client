@@ -1,6 +1,6 @@
-export interface GprDisc {
+export interface MagnetometricDisc {
   rectangleLineNumber: Number;
-  profileType: String;
+  profileType: "" | "Longitudinal" | "Traversal";
   crackProfileNumber: Number;
   typeOfCrack: String;
   typeOfDisc: String;

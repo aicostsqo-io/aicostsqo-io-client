@@ -19,8 +19,8 @@ export interface Gpr {
   traversalProfilesDirectory: String;
   traversalProfilesMaxDepth: Number;
   traversalProfilesMaxDistance: Number;
-  mapReferenceSystemForStartOfLongitudinalProfiles: Number;
-  mapReferenceSystemForStartOfTransversalProfiles: Number;
+  mapReferenceSystemForStartOfLongitudinalProfiles: string;
+  mapReferenceSystemForStartOfTransversalProfiles: string;
   vertex1: {
     startOfLongitudinalProfilesX: Number;
     startOfLongitudinalProfilesY: Number;
