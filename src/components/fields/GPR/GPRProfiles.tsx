@@ -1,4 +1,4 @@
-import { getGprDataBySiteId } from "@/api/gpr";
+import { bulkDeleteGPRProfile, getGprDataBySiteId } from "@/api/gpr";
 import { useSiteContext } from "@/contexts/Site";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
@@ -45,13 +45,11 @@ const GPRProfiles = ({
   const handleDeleteSelectedRows = (e: MouseEvent<HTMLDivElement>) => {
     const rowsToDelete = selectedRows;
     console.log("rowsToDelete : ", rowsToDelete);
-    /* bulkDeleteRpDiscs(rowsToDelete)
+    bulkDeleteGPRProfile(rowsToDelete)
       .then(async () => {
-        await fetchGPRData();
+        refetch();
       })
       .catch((err: any) => console.log(err));
-    const updatedTableData = data.filter((row: any) => !row.isSelected);
-    setData(updatedTableData); */
   };
 
   return (

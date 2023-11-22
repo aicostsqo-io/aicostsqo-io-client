@@ -1,4 +1,4 @@
-import { getGprDataBySiteId } from "@/api/gpr";
+import { bulkDeleteGPR, getGprDataBySiteId } from "@/api/gpr";
 import { useSiteContext } from "@/contexts/Site";
 import { ChangeEvent, MouseEvent, useEffect, useState } from "react";
 ("react");
@@ -25,6 +25,7 @@ const DiscontinuitiesGPRVisualizationData = () => {
 
   const fetchGPRData = async () => {
     const res = await getGprDataBySiteId(selectedSite?.site?._id);
+    // console.log(res?.data?.result);
     setData(res?.data?.result);
   };
 
@@ -53,12 +54,12 @@ const DiscontinuitiesGPRVisualizationData = () => {
   const handleDeleteSelectedRows = (e: MouseEvent<HTMLDivElement>) => {
     const rowsToDelete = selectedRows;
     console.log("rowsToDelete : ", rowsToDelete);
-    /* bulkDeleteRpDiscs(rowsToDelete)
+    bulkDeleteGPR(rowsToDelete)
       .then(async () => {
         await fetchGPRData();
       })
       .catch((err: any) => console.log(err));
-    const updatedTableData = data.filter((row: any) => !row.isSelected);
+    /* const updatedTableData = data.filter((row: any) => !row.isSelected);
     setData(updatedTableData); */
   };
 
