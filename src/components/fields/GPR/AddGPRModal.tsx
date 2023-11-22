@@ -38,8 +38,8 @@ const initialState: Gpr = {
   traversalProfilesDirectory: "",
   traversalProfilesMaxDepth: 0,
   traversalProfilesMaxDistance: 0,
-  mapReferenceSystemForStartOfLongitudinalProfiles: 0,
-  mapReferenceSystemForStartOfTransversalProfiles: 0,
+  mapReferenceSystemForStartOfLongitudinalProfiles: "GPS",
+  mapReferenceSystemForStartOfTransversalProfiles: "GPS",
   vertex1: {
     startOfLongitudinalProfilesX: 0,
     startOfLongitudinalProfilesY: 0,

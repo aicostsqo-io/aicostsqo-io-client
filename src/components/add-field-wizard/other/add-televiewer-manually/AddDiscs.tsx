@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  FormNumberField,
-  FormSelectField,
-  FormTextField,
-} from "../core-form-elements";
+import { FormNumberField, FormTextField } from "../core-form-elements";
 import { TeleviewerDisc } from "@/types/models/televiewerDisc";
 import { Televiewer } from "@/types/models/televiewer";
 import { toast } from "react-toastify";
