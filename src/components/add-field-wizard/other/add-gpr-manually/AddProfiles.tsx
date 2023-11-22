@@ -7,6 +7,7 @@ import {
 import { Gpr } from "@/types/models/gpr";
 import { GprProfile } from "@/types/models/gprProfile";
 import { profileTypes } from "@/utils/constants/gpr";
+import { toast } from "react-toastify";
 
 const initialState: GprProfile = {
   rectangleLineNumber: 0,
@@ -42,21 +43,25 @@ export const AddProfiles = ({ gpr, onProceed }: AddProfilesProps) => {
   const handleSave = () => {
     profiles.push(modelData);
     setProfiles(profiles);
+    toast.success("Profile added!");
   };
 
   const handleSaveAndProceed = () => {
     handleSave();
     const newGpr = { ...gpr, profiles };
     onProceed(newGpr);
+    toast.success("Proceeding to next step!");
   };
 
   const handleSaveAndAddNew = () => {
     handleSave();
     setModelData(initialState);
+    toast.success("Form cleared!");
   };
 
   const handleCancel = () => {
     setModelData(initialState);
+    toast.success("Contents cleared!");
   };
 
   return (
@@ -66,7 +71,6 @@ export const AddProfiles = ({ gpr, onProceed }: AddProfilesProps) => {
           <FormNumberField
             label="Rectangle Line Number"
             value={modelData.rectangleLineNumber}
-            min={0}
             onChange={(e: any) => handleChange("rectangleLineNumber", e)}
           />
           <FormSelectField
@@ -78,37 +82,31 @@ export const AddProfiles = ({ gpr, onProceed }: AddProfilesProps) => {
           <FormNumberField
             label="Longitudinal Profile Number"
             value={modelData.longitudinalProfileNumber}
-            min={0}
             onChange={(e: any) => handleChange("longitudinalProfileNumber", e)}
           />
           <FormNumberField
             label="Traversal Profile Number"
             value={modelData.traversalProfileNumber}
-            min={0}
             onChange={(e: any) => handleChange("traversalProfileNumber", e)}
           />
           <FormNumberField
             label="Distance"
             value={modelData.distance}
-            min={0}
             onChange={(e: any) => handleChange("distance", e)}
           />
           <FormNumberField
             label="Spacing"
             value={modelData.spacing}
-            min={0}
             onChange={(e: any) => handleChange("spacing", e)}
           />
           <FormNumberField
             label="Number of Profile"
             value={modelData.numberOfProfile}
-            min={0}
             onChange={(e: any) => handleChange("numberOfProfile", e)}
           />
           <FormNumberField
             label="Starting Vertex X"
             value={modelData.startingVertexX}
-            min={0}
             onChange={(e: any) => handleChange("startingVertexX", e)}
           />
         </div>
@@ -116,37 +114,31 @@ export const AddProfiles = ({ gpr, onProceed }: AddProfilesProps) => {
           <FormNumberField
             label="Starting Vertex Y"
             value={modelData.startingVertexY}
-            min={0}
             onChange={(e: any) => handleChange("startingVertexY", e)}
           />
           <FormNumberField
             label="Starting Vertex Z"
             value={modelData.startingVertexZ}
-            min={0}
             onChange={(e: any) => handleChange("startingVertexZ", e)}
           />
           <FormNumberField
             label="End Vertex X"
             value={modelData.endVertexX}
-            min={0}
             onChange={(e: any) => handleChange("endVertexX", e)}
           />
           <FormNumberField
             label="End Vertex Y"
             value={modelData.endVertexY}
-            min={0}
             onChange={(e: any) => handleChange("endVertexY", e)}
           />
           <FormNumberField
             label="End Vertex Z"
             value={modelData.endVertexZ}
-            min={0}
             onChange={(e: any) => handleChange("endVertexZ", e)}
           />
           <FormNumberField
             label="Frequency"
             value={modelData.frequency}
-            min={0}
             onChange={(e: any) => handleChange("frequency", e)}
           />
           <FormTextField

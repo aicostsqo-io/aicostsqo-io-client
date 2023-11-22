@@ -1,7 +1,7 @@
 import StepWatcher from "@/components/stepwatcher/StepWatcher";
 import React, { useEffect, useState } from "react";
 import { AddProfiles } from "./AddProfiles";
-import { AddCracks } from "./AddCracks";
+import { AddDiscs } from "./AddDiscs";
 import SetGPRData from "./SetGPRData";
 import { Gpr } from "@/types/models/gpr";
 
@@ -50,7 +50,7 @@ export default function AddGPRManually({ setInfo, setMainStep }: any) {
         {step === 1 && (
           <AddProfiles gpr={gpr} onProceed={handleProfileProceed} />
         )}
-        {step === 2 && <AddCracks gpr={gpr} onCompleted={handleComplete} />}
+        {step === 2 && <AddDiscs gpr={gpr} onCompleted={handleComplete} />}
       </div>
     </div>
   );

@@ -2,6 +2,13 @@ import React, { useState } from "react";
 import { FormNumberField, FormSelectField } from "../core-form-elements";
 import { GprDisc } from "@/types/models/gprDisc";
 import { Gpr } from "@/types/models/gpr";
+import {
+  crackTypes,
+  profileTypes,
+  referenceSystems,
+  discTypes,
+} from "@/utils/constants/gpr";
+import { toast } from "react-toastify";
 
 const initialState: GprDisc = {
   rectangleLineNumber: 0,
@@ -11,7 +18,7 @@ const initialState: GprDisc = {
   typeOfDisc: "",
   dip: 0,
   dipDirection: 0,
-  mapReferenceSystem: 0,
+  mapReferenceSystem: "",
   startingVertexX: 0,
   startingVertexY: 0,
   startingVertexZ: 0,
@@ -23,75 +30,48 @@ const initialState: GprDisc = {
   nZ: 0,
 };
 
-const profileTypes = [
-  {
-    name: "Longitudinal",
-  },
-  { name: "Traversal" },
-];
-
-const crackTypes = [
-  {
-    name: "Main Crack",
-  },
-  { name: "Crack Zone" },
-];
-
-const discTypes = [
-  {
-    name: "Circular",
-  },
-  {
-    name: "Quadratic",
-  },
-  {
-    name: "Triangular",
-  },
-  {
-    name: "Other",
-  },
-  {
-    name: "Line",
-  },
-];
-
-type AddCracksProps = {
+type AddDiscsProps = {
   gpr: Gpr;
   onCompleted: (gpr: Gpr, newGpr: boolean) => void;
 };
 
-export const AddCracks = ({ gpr, onCompleted }: AddCracksProps) => {
-  const [crackData, setCrackData] = useState<GprDisc>(initialState);
+export const AddDiscs = ({ gpr, onCompleted }: AddDiscsProps) => {
+  const [discData, setDiscData] = useState<GprDisc>(initialState);
   const [discs, setDiscs] = useState<GprDisc[]>([]);
 
   const handleChange = (field: any, event: any) => {
-    setCrackData({ ...crackData, [field]: event.target.value });
+    setDiscData({ ...discData, [field]: event.target.value });
   };
 
   const handleSave = () => {
-    discs.push(crackData);
+    discs.push(discData);
     setDiscs(discs);
+    toast.success("Disc added!");
   };
 
   const handleSaveAndAddNew = () => {
     handleSave();
-    setCrackData(initialState);
+    setDiscData(initialState);
+    toast.success("Form cleared!");
   };
 
   const handleProceedAndAddNewGPR = () => {
     handleSave();
     const newGpr = { ...gpr, discs };
     onCompleted(newGpr, true);
+    toast.success("Redirected to add new GPR!");
   };
 
   const handleComplete = () => {
     handleSave();
     const newGpr = { ...gpr, discs };
     onCompleted(newGpr, false);
+    toast.success("Step completed!");
   };
 
   const handleCancel = () => {
-    setCrackData(initialState);
+    setDiscData(initialState);
+    toast.success("Contents cleared!");
   };
 
   return (
@@ -100,106 +80,93 @@ export const AddCracks = ({ gpr, onCompleted }: AddCracksProps) => {
         <div className="flex flex-col gap-4">
           <FormNumberField
             label="Rectangle Line Number"
-            value={crackData.rectangleLineNumber}
-            min={0}
+            value={discData.rectangleLineNumber}
             onChange={(e: any) => handleChange("rectangleLineNumber", e)}
           />
           <FormSelectField
             label="Profile Type"
-            value={crackData.profileType}
+            value={discData.profileType}
             onChange={(e: any) => handleChange("profileType", e)}
             data={profileTypes}
           />
           <FormNumberField
             label="Crack Profile Number"
-            value={crackData.crackProfileNumber}
-            min={0}
+            value={discData.crackProfileNumber}
             onChange={(e: any) => handleChange("crackProfileNumber", e)}
           />
           <FormSelectField
             label="Type of Crack"
-            value={crackData.typeOfCrack}
+            value={discData.typeOfCrack}
             onChange={(e: any) => handleChange("typeOfCrack", e)}
             data={crackTypes}
           />
           <FormSelectField
             label="Type of Disc"
-            value={crackData.typeOfDisc}
+            value={discData.typeOfDisc}
             onChange={(e: any) => handleChange("typeOfDisc", e)}
             data={discTypes}
           />
           <FormNumberField
             label="Dip"
-            value={crackData.dip}
-            min={0}
+            value={discData.dip}
             onChange={(e: any) => handleChange("dip", e)}
           />
           <FormNumberField
             label="Dip Direction"
-            value={crackData.dipDirection}
-            min={0}
+            value={discData.dipDirection}
             onChange={(e: any) => handleChange("dipDirection", e)}
           />
-          <FormNumberField
+          <FormSelectField
             label="Map Reference System"
-            value={crackData.mapReferenceSystem}
-            min={0}
+            value={discData.mapReferenceSystem}
+            data={referenceSystems}
             onChange={(e: any) => handleChange("mapReferenceSystem", e)}
           />
         </div>
         <div className="flex flex-col gap-4">
           <FormNumberField
             label="Starting Vertex X"
-            value={crackData.startingVertexX}
-            min={0}
+            value={discData.startingVertexX}
             onChange={(e: any) => handleChange("startingVertexX", e)}
           />
           <FormNumberField
             label="Starting Vertex Y"
-            value={crackData.startingVertexY}
-            min={0}
+            value={discData.startingVertexY}
             onChange={(e: any) => handleChange("startingVertexY", e)}
           />
           <FormNumberField
             label="Starting Vertex Z"
-            value={crackData.startingVertexZ}
-            min={0}
+            value={discData.startingVertexZ}
             onChange={(e: any) => handleChange("startingVertexZ", e)}
           />
           <FormNumberField
             label="End Vertex X"
-            value={crackData.endVertexX}
-            min={0}
+            value={discData.endVertexX}
             onChange={(e: any) => handleChange("endVertexX", e)}
           />
           <FormNumberField
             label="End Vertex Y"
-            value={crackData.endVertexY}
-            min={0}
+            value={discData.endVertexY}
             onChange={(e: any) => handleChange("endVertexY", e)}
           />
           <FormNumberField
             label="End Vertex Z"
-            value={crackData.endVertexZ}
-            min={0}
+            value={discData.endVertexZ}
             onChange={(e: any) => handleChange("endVertexZ", e)}
           />
           <FormNumberField
             label="nX"
-            value={crackData.nX}
-            min={0}
+            value={discData.nX}
             onChange={(e: any) => handleChange("nX", e)}
           />
           <FormNumberField
             label="nY"
-            value={crackData.nY}
-            min={0}
+            value={discData.nY}
             onChange={(e: any) => handleChange("nY", e)}
           />
           <FormNumberField
             label="nZ"
-            value={crackData.nZ}
-            min={0}
+            value={discData.nZ}
             onChange={(e: any) => handleChange("nZ", e)}
           />
         </div>

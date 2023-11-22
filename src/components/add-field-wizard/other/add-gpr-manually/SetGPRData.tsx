@@ -10,6 +10,7 @@ import {
   referenceSystems,
   shapeTypes,
 } from "@/utils/constants/gpr";
+import { toast } from "react-toastify";
 
 const initialState: Gpr = {
   rectangleNumber: 0,
@@ -29,8 +30,8 @@ const initialState: Gpr = {
   traversalProfilesDirectory: "",
   traversalProfilesMaxDepth: 0,
   traversalProfilesMaxDistance: 0,
-  mapReferenceSystemForStartOfLongitudinalProfiles: 0,
-  mapReferenceSystemForStartOfTransversalProfiles: 0,
+  mapReferenceSystemForStartOfLongitudinalProfiles: "",
+  mapReferenceSystemForStartOfTransversalProfiles: "",
   vertex1: {
     startOfLongitudinalProfilesX: 0,
     startOfLongitudinalProfilesY: 0,
@@ -83,11 +84,13 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
   };
 
   const handleSaveAndProceed = () => {
+    toast.success("Proceeding to add discs");
     onProceed(gpr);
   };
 
   const handleCancel = () => {
     setGpr(initialState);
+    toast.success("Contents cleared!");
   };
 
   return (
@@ -97,7 +100,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Rectangle Number"
             value={gpr.rectangleNumber}
-            min={0}
             onChange={(e: any) => handleChange("rectangleNumber", e)}
           />
           <FormSelectField
@@ -109,25 +111,21 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Longitudinal Profile Number"
             value={gpr.longitudinalProfileNumber}
-            min={0}
             onChange={(e: any) => handleChange("longitudinalProfileNumber", e)}
           />
           <FormNumberField
             label="Traversal Profile Number"
             value={gpr.traversalProfileNumber}
-            min={0}
             onChange={(e: any) => handleChange("traversalProfileNumber", e)}
           />
           <FormNumberField
             label="Distance"
             value={gpr.distance}
-            min={0}
             onChange={(e: any) => handleChange("distance", e)}
           />
           <FormNumberField
             label="Spacing"
             value={gpr.spacing}
-            min={0}
             onChange={(e: any) => handleChange("spacing", e)}
           />
           <FormSelectField
@@ -139,19 +137,16 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="PositionX"
             value={gpr.positionX}
-            min={0}
             onChange={(e: any) => handleChange("positionX", e)}
           />
           <FormNumberField
             label="PositionY"
             value={gpr.positionY}
-            min={0}
             onChange={(e: any) => handleChange("positionY", e)}
           />
           <FormNumberField
             label="PositionZ"
             value={gpr.positionZ}
-            min={0}
             onChange={(e: any) => handleChange("positionZ", e)}
           />
           <FormTextField
@@ -169,7 +164,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Longitudinal Profiles Max Depth"
             value={gpr.longitudinalProfilesMaxDepth}
-            min={0}
             onChange={(e: any) =>
               handleChange("longitudinalProfilesMaxDepth", e)
             }
@@ -177,7 +171,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Longitudinal Profiles Max Distance"
             value={gpr.longitudinalProfilesMaxDistance}
-            min={0}
             onChange={(e: any) =>
               handleChange("longitudinalProfilesMaxDistance", e)
             }
@@ -190,13 +183,11 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Traversal Profiles Max Depth"
             value={gpr.traversalProfilesMaxDepth}
-            min={0}
             onChange={(e: any) => handleChange("traversalProfilesMaxDepth", e)}
           />
           <FormNumberField
             label="Traversal Profiles Max Distance"
             value={gpr.traversalProfilesMaxDistance}
-            min={0}
             onChange={(e: any) =>
               handleChange("traversalProfilesMaxDistance", e)
             }
@@ -223,7 +214,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 1 Start Of Longitudinal Profiles X"
             value={gpr.vertex1.startOfLongitudinalProfilesX}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex1.startOfLongitudinalProfilesX", e)
             }
@@ -231,7 +221,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 1 Start Of Longitudinal Profiles Y"
             value={gpr.vertex1.startOfLongitudinalProfilesY}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex1.startOfLongitudinalProfilesY", e)
             }
@@ -239,7 +228,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 1 Start Of Longitudinal Profiles Z"
             value={gpr.vertex1.startOfLongitudinalProfilesZ}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex1.startOfLongitudinalProfilesZ", e)
             }
@@ -249,7 +237,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 1 End Of Longitudinal Profiles X"
             value={gpr.vertex1.endOfLongitudinalProfilesX}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex1.endOfLongitudinalProfilesX", e)
             }
@@ -257,7 +244,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 1 End Of Longitudinal Profiles Y"
             value={gpr.vertex1.endOfLongitudinalProfilesY}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex1.endOfLongitudinalProfilesY", e)
             }
@@ -265,7 +251,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 1 End Of Longitudinal Profiles Z"
             value={gpr.vertex1.endOfLongitudinalProfilesZ}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex1.endOfLongitudinalProfilesZ", e)
             }
@@ -273,7 +258,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 1 Start Of Traversal Profiles X"
             value={gpr.vertex1.startOfTraversalProfilesX}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex1.startOfTraversalProfilesX", e)
             }
@@ -281,7 +265,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 1 Start Of Traversal Profiles Y"
             value={gpr.vertex1.startOfTraversalProfilesY}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex1.startOfTraversalProfilesY", e)
             }
@@ -289,7 +272,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 1 Start Of Traversal Profiles Z"
             value={gpr.vertex1.startOfTraversalProfilesZ}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex1.startOfTraversalProfilesZ", e)
             }
@@ -297,7 +279,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 1 End Of Traversal Profiles X"
             value={gpr.vertex1.endOfTraversalProfilesX}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex1.endOfTraversalProfilesX", e)
             }
@@ -305,7 +286,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 1 End Of Traversal Profiles Y"
             value={gpr.vertex1.endOfTraversalProfilesY}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex1.endOfTraversalProfilesY", e)
             }
@@ -313,7 +293,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 1 End Of Traversal Profiles Z"
             value={gpr.vertex1.endOfTraversalProfilesZ}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex1.endOfTraversalProfilesZ", e)
             }
@@ -321,7 +300,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 2 Start Of Longitudinal Profiles X"
             value={gpr.vertex2.startOfLongitudinalProfilesX}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex2.startOfLongitudinalProfilesX", e)
             }
@@ -329,7 +307,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 2 Start Of Longitudinal Profiles Y"
             value={gpr.vertex2.startOfLongitudinalProfilesY}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex2.startOfLongitudinalProfilesY", e)
             }
@@ -337,7 +314,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 2 Start Of Longitudinal Profiles Z"
             value={gpr.vertex2.startOfLongitudinalProfilesZ}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex2.startOfLongitudinalProfilesZ", e)
             }
@@ -345,7 +321,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 2 End Of Longitudinal Profiles X"
             value={gpr.vertex2.endOfLongitudinalProfilesX}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex2.endOfLongitudinalProfilesX", e)
             }
@@ -353,7 +328,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 2 End Of Longitudinal Profiles Y"
             value={gpr.vertex2.endOfLongitudinalProfilesY}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex2.endOfLongitudinalProfilesY", e)
             }
@@ -361,7 +335,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 2 End Of Longitudinal Profiles Z"
             value={gpr.vertex2.endOfLongitudinalProfilesZ}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex2.endOfLongitudinalProfilesZ", e)
             }
@@ -369,7 +342,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 2 Start Of Traversal Profiles X"
             value={gpr.vertex2.startOfTraversalProfilesX}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex2.startOfTraversalProfilesX", e)
             }
@@ -377,7 +349,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 2 Start Of Traversal Profiles Y"
             value={gpr.vertex2.startOfTraversalProfilesY}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex2.startOfTraversalProfilesY", e)
             }
@@ -385,7 +356,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 2 Start Of Traversal Profiles Z"
             value={gpr.vertex2.startOfTraversalProfilesZ}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex2.startOfTraversalProfilesZ", e)
             }
@@ -393,7 +363,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 2 End Of Traversal Profiles X"
             value={gpr.vertex2.endOfTraversalProfilesX}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex2.endOfTraversalProfilesX", e)
             }
@@ -401,7 +370,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 2 End Of Traversal Profiles Y"
             value={gpr.vertex2.endOfTraversalProfilesY}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex2.endOfTraversalProfilesY", e)
             }
@@ -409,7 +377,6 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
           <FormNumberField
             label="Vertex 2 End Of Traversal Profiles Z"
             value={gpr.vertex2.endOfTraversalProfilesZ}
-            min={0}
             onChange={(e: any) =>
               handleChange("vertex2.endOfTraversalProfilesZ", e)
             }
