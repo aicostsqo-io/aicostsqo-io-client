@@ -1,8 +1,6 @@
 import Boundaries from "@/components/fields/Boundaries";
 import DiscontinuitiesVisualization from "@/components/fields/DiscontinuitiesVisualization";
-import RP from "@/components/fields/RP";
 import RPVisualization from "@/components/fields/RPVisualization";
-import DataTab from "@/components/fields/RPData";
 import TopBar from "@/components/fields/TopBar";
 import Topological from "@/components/fields/Topological";
 import { useTreeContext } from "@/contexts/Tree";
@@ -10,12 +8,15 @@ import useFetch from "@/hooks/useFetch";
 import MainLayout from "@/layouts/main/MainLayout";
 import ProjectLayout from "@/layouts/project/ProjectLayout";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 import RPData from "@/components/fields/RPData";
 import DiscontinuitiesData from "@/components/fields/DiscontinuitiesData";
 import { useSiteContext } from "@/contexts/Site";
 import DiscontinuitiesGPRVisualization from "@/components/fields/GPR";
-import DiscontinuitiesGPRVisualizationData from "@/components/fields/GPR/DiscontinuitiesGPRVisualizationData";
+import DiscontinuitiesGPRData from "@/components/fields/GPR/DiscontinuitiesGPRData";
+import DiscontinuitiesTeleviewerData from "@/components/fields/Televiewer/DiscontinuitiesTeleviewerData";
+import DiscontinuitiesSeismicData from "@/components/fields/Seismic/DiscontinuitiesSeismicData";
+import DiscontinuitiesMagnetometricData from "@/components/fields/Magnetometric/DiscontinuitiesMagnetometricData";
+import DiscontinuitiesResistivityData from "@/components/fields/Resistivity/DiscontinuitiesResistivityData";
 
 const Field = () => {
   const router = useRouter();
@@ -70,7 +71,35 @@ const Field = () => {
           <DiscontinuitiesGPRVisualization />
         )}
         {point === "Discontinuities (GPR)" && page === 1 && (
-          <DiscontinuitiesGPRVisualizationData />
+          <DiscontinuitiesGPRData />
+        )}
+
+        {point === "Discontinuities (Magnetometric)" && page === 0 && (
+          <DiscontinuitiesGPRVisualization />
+        )}
+        {point === "Discontinuities (Magnetometric)" && page === 1 && (
+          <DiscontinuitiesMagnetometricData />
+        )}
+
+        {point === "Discontinuities (Resistivity)" && page === 0 && (
+          <DiscontinuitiesGPRVisualization />
+        )}
+        {point === "Discontinuities (Resistivity)" && page === 1 && (
+          <DiscontinuitiesResistivityData />
+        )}
+
+        {point === "Discontinuities (Seismic)" && page === 0 && (
+          <DiscontinuitiesGPRVisualization />
+        )}
+        {point === "Discontinuities (Seismic)" && page === 1 && (
+          <DiscontinuitiesSeismicData />
+        )}
+
+        {point === "Discontinuities (Televiewer)" && page === 0 && (
+          <DiscontinuitiesGPRVisualization />
+        )}
+        {point === "Discontinuities (Televiewer)" && page === 1 && (
+          <DiscontinuitiesTeleviewerData />
         )}
       </ProjectLayout>
     </MainLayout>

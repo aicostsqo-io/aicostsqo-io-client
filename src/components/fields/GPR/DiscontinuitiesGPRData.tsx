@@ -13,7 +13,7 @@ import {
   IoTrashOutline as TrashIcon,
 } from "react-icons/io5";
 
-const DiscontinuitiesGPRVisualizationData = () => {
+const DiscontinuitiesGPRData = () => {
   const [data, setData] = useState<any>([]);
   const [selectedGPR, setSelectedGPR] = useState<any>(null);
   const [filteredProfiles, setFilteredProfiles] = useState<any>([]);
@@ -203,4 +203,4 @@ const DiscontinuitiesGPRVisualizationData = () => {
   );
 };
 
-export default DiscontinuitiesGPRVisualizationData;
+export default DiscontinuitiesGPRData;

@@ -98,11 +98,40 @@ const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
         label={"Site Boundaries"}
         onClick={() => setPoint("Site Boundaries")}
       />
+
       <TreeItem
         nodeId={"GPRs"}
         label={"Discontinuities (GPR)"}
         onClick={() => {
           setPoint("Discontinuities (GPR)");
+        }}
+      />
+      <TreeItem
+        nodeId={"Magnetometrics"}
+        label={"Discontinuities (Magnetometric)"}
+        onClick={() => {
+          setPoint("Discontinuities (Magnetometric)");
+        }}
+      />
+      <TreeItem
+        nodeId={"Resistivities"}
+        label={"Discontinuities (Resistivity)"}
+        onClick={() => {
+          setPoint("Discontinuities (Resistivity)");
+        }}
+      />
+      <TreeItem
+        nodeId={"Seismics"}
+        label={"Discontinuities (Seismic)"}
+        onClick={() => {
+          setPoint("Discontinuities (Seismic)");
+        }}
+      />
+      <TreeItem
+        nodeId={"Televiewers"}
+        label={"Discontinuities (Televiewer)"}
+        onClick={() => {
+          setPoint("Discontinuities (Televiewer)");
         }}
       />
       {field?.rps?.length > 0 ? (
