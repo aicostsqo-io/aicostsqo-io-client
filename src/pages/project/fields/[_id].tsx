@@ -74,30 +74,30 @@ const Field = () => {
           <DiscontinuitiesGPRData />
         )}
 
-        {point === "Discontinuities (Magnetometric)" && page === 0 && (
-          <DiscontinuitiesGPRVisualization />
-        )}
+        {point === "Discontinuities (Magnetometric)" &&
+          page === 0 &&
+          "Not yet implemented magnetometric visualization"}
         {point === "Discontinuities (Magnetometric)" && page === 1 && (
           <DiscontinuitiesMagnetometricData />
         )}
 
-        {point === "Discontinuities (Resistivity)" && page === 0 && (
-          <DiscontinuitiesGPRVisualization />
-        )}
+        {point === "Discontinuities (Resistivity)" &&
+          page === 0 &&
+          "Not yet implemented resistivity visualization"}
         {point === "Discontinuities (Resistivity)" && page === 1 && (
           <DiscontinuitiesResistivityData />
         )}
 
-        {point === "Discontinuities (Seismic)" && page === 0 && (
-          <DiscontinuitiesGPRVisualization />
-        )}
+        {point === "Discontinuities (Seismic)" &&
+          page === 0 &&
+          "Not yet implemented seismic visualization"}
         {point === "Discontinuities (Seismic)" && page === 1 && (
           <DiscontinuitiesSeismicData />
         )}
 
-        {point === "Discontinuities (Televiewer)" && page === 0 && (
-          <DiscontinuitiesGPRVisualization />
-        )}
+        {point === "Discontinuities (Televiewer)" &&
+          page === 0 &&
+          "Not yet implemented televiewer visualization"}
         {point === "Discontinuities (Televiewer)" && page === 1 && (
           <DiscontinuitiesTeleviewerData />
         )}

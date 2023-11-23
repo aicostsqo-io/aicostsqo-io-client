@@ -12,8 +12,10 @@ import { FormattedProfile, MapProfile } from "@/types/models/formattedProfile";
 function DiscontinuitiesGPRVisualization() {
   const [gprProfiles, setGprProfiles] = useState<MapProfile>();
   const [position, setPosition] = useState<L.LatLngExpression>();
+  const [loading, setLoading] = useState<boolean>(false);
   const { selectedSite } = useSiteContext();
   useEffect(() => {
+    setLoading(true);
     getRpsBySiteId(selectedSite?.site?._id)
       .then((res) => {
         const ress: MapProfile = formatProfiles(
@@ -25,6 +27,9 @@ function DiscontinuitiesGPRVisualization() {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [selectedSite]);
 
@@ -90,7 +95,12 @@ function DiscontinuitiesGPRVisualization() {
 
   return (
     <>
-      {position && (
+      {loading && (
+        <div className="h-full flex justify-center items-center text-5xl font-bold">
+          Loading...
+        </div>
+      )}
+      {!!position ? (
         <MapContainer
           className="w-full h-full"
           center={position}
@@ -132,6 +142,8 @@ function DiscontinuitiesGPRVisualization() {
             }
           )}
         </MapContainer>
+      ) : (
+        <div>No GPR profiles found</div>
       )}
     </>
   );
