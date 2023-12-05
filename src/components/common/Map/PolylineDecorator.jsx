@@ -48,6 +48,20 @@ export function PolylineDecorator({ positions, pathStyle }) {
           color: pathStyle.color,
         });
       })
+      .on("click", (e) => {
+        // TODO: uncomment below code when image is ready
+        // if (!positions.filname) return;
+        // const imageUrl = `${process.env.NEXT_PUBLIC_BASE_ENDPOINT}/uploads/${positions.filname}`;
+        map.openPopup(
+          `<b>Profile ${positions.numberOfProfile}</b><br><img src="https://ai-costsqo.gorkemarik.com/api/uploads/gpr-profiles/d00806372c384a808df609e3e1216e99.jpg">`,
+          e.latlng,
+          {
+            minWidth: 800,
+            maxWidth: 1000,
+            maxHeight: 1000,
+          }
+        );
+      })
       .addTo(map);
   }, [map]);
 

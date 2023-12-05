@@ -1,6 +1,7 @@
 import L from "leaflet";
 
 export interface FormattedProfile {
+  filname: string | null;
   numberOfProfile: Number | null;
   startCoords: L.LatLngExpression;
   endCoords: L.LatLngExpression;
