@@ -36,7 +36,7 @@ type AddDiscsProps = {
 };
 
 export const AddDiscs = ({ gpr, onCompleted }: AddDiscsProps) => {
-  const [discData, setDiscData] = useState<GprDisc>(initialState);
+  const [discData, setDiscData] = useState<any>(initialState);
   const [discs, setDiscs] = useState<GprDisc[]>([]);
 
   const handleChange = (field: any, event: any) => {
@@ -44,26 +44,38 @@ export const AddDiscs = ({ gpr, onCompleted }: AddDiscsProps) => {
   };
 
   const handleSave = () => {
+    // check if disc fields are empty
+    const discFields = Object.keys(discData);
+    for (const field of discFields) {
+      if (discData[field] === "") {
+        toast.error("Please fill all the fields");
+        return false;
+      }
+    }
+
     discs.push(discData);
     setDiscs(discs);
     toast.success("Disc added!");
+    return true;
   };
 
   const handleSaveAndAddNew = () => {
-    handleSave();
+    const status = handleSave();
+    if (!status) return;
     setDiscData(initialState);
     toast.success("Form cleared!");
   };
 
   const handleProceedAndAddNewGPR = () => {
-    handleSave();
+    const status = handleSave();
+    if (!status) return;
     const newGpr = { ...gpr, discs };
     onCompleted(newGpr, true);
     toast.success("Redirected to add new GPR!");
   };
 
+  //! just the finish adding discs, not new disc
   const handleComplete = () => {
-    handleSave();
     const newGpr = { ...gpr, discs };
     onCompleted(newGpr, false);
     toast.success("Step completed!");

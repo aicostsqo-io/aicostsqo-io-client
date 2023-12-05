@@ -18,22 +18,32 @@ const initialState = {
   rotationX: "",
   rotationY: "",
   rotationZ: "",
-  discs: []
+  discs: [],
 };
 
 const AddRPManuel = ({ next, info, setInfo }: any) => {
   const [rp, setRp] = useState<any>(initialState);
 
   const handleAddRPToInfo = () => {
+    // check if rp fields are empty
+    const rpFields = Object.keys(rp);
+    for (const field of rpFields) {
+      if (Array.isArray(rp[field])) continue;
+      if (rp[field] === "") {
+        toast.error("Please fill all the fields");
+        return;
+      }
+    }
+
     setInfo({
       ...info,
       rps: [
         ...info.rps,
-        { ...rp, name: `RP ${String(info?.rps.length + 1).padStart(3, "0")}` }
-      ]
+        { ...rp, name: `RP ${String(info?.rps.length + 1).padStart(3, "0")}` },
+      ],
     });
     setRp(initialState);
-    toast.success("RP added successfully"); // toastify success
+    toast.success("RP added successfully");
   };
 
   const handleAddRps = () => {
@@ -54,7 +64,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                slopeAngle: e.target.value
+                slopeAngle: e.target.value,
               })
             }
           />
@@ -70,7 +80,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                crepeAngle: e.target.value
+                crepeAngle: e.target.value,
               })
             }
           />
@@ -130,7 +140,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                positionX: e.target.value
+                positionX: e.target.value,
               })
             }
           />
@@ -146,7 +156,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                positionY: e.target.value
+                positionY: e.target.value,
               })
             }
           />
@@ -162,7 +172,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                positionZ: e.target.value
+                positionZ: e.target.value,
               })
             }
           />
@@ -178,7 +188,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                rotationX: e.target.value
+                rotationX: e.target.value,
               })
             }
           />
@@ -194,7 +204,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                rotationY: e.target.value
+                rotationY: e.target.value,
               })
             }
           />
@@ -210,7 +220,7 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setRp({
                 ...rp,
-                rotationZ: e.target.value
+                rotationZ: e.target.value,
               })
             }
           />

@@ -15,7 +15,7 @@ const initialState = {
   nX: "",
   nY: "",
   nZ: "",
-  type: "Deterministic"
+  type: "Deterministic",
 };
 
 const AddDiscManuel = ({ next, info, setInfo }: any) => {
@@ -24,6 +24,15 @@ const AddDiscManuel = ({ next, info, setInfo }: any) => {
   // console.log(info);
 
   const handleAddDiscToInfo = () => {
+    // check if disc fields are empty
+    const discFields = Object.keys(disc);
+    for (const field of discFields) {
+      if (disc[field] === "") {
+        toast.error("Please fill all the fields");
+        return;
+      }
+    }
+
     const rp = info?.rps?.find((rp: any) => rp.name === disc?.RPName);
     if (!rp) {
       toast.error("RP not found");
@@ -51,7 +60,7 @@ const AddDiscManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setDisc({
                 ...disc,
-                RPName: e.target.value
+                RPName: e.target.value,
               })
             }
           >
@@ -72,7 +81,7 @@ const AddDiscManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setDisc({
                 ...disc,
-                dip: e.target.value
+                dip: e.target.value,
               })
             }
           />
@@ -88,7 +97,7 @@ const AddDiscManuel = ({ next, info, setInfo }: any) => {
             onChange={(e) =>
               setDisc({
                 ...disc,
-                dipDirect: e.target.value
+                dipDirect: e.target.value,
               })
             }
           />

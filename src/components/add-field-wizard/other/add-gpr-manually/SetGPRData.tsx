@@ -70,7 +70,7 @@ type SetGPRDataProps = {
 };
 
 export default function SetGPRData({ onProceed }: SetGPRDataProps) {
-  const [gpr, setGpr] = useState<Gpr>(initialState);
+  const [gpr, setGpr] = useState<any>(initialState);
 
   const handleChange = (field: any, event: any) => {
     const updatedGpr = { ...gpr };
@@ -84,8 +84,19 @@ export default function SetGPRData({ onProceed }: SetGPRDataProps) {
   };
 
   const handleSaveAndProceed = () => {
+    // check if gpr fields are empty
+    const gprFields = Object.keys(gpr);
+    for (const field of gprFields) {
+      if (Array.isArray(gpr[field])) continue;
+      if (gpr[field] === "") {
+        toast.error("Please fill all the fields");
+        return;
+      }
+    }
+
     toast.success("Proceeding to add discs");
     onProceed(gpr);
+    setGpr(initialState);
   };
 
   const handleCancel = () => {

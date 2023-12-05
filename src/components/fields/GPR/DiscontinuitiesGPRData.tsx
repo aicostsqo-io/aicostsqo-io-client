@@ -25,7 +25,7 @@ const DiscontinuitiesGPRData = () => {
 
   const fetchGPRData = async () => {
     const res = await getGprDataBySiteId(selectedSite?.site?._id);
-    // console.log(res?.data?.result);
+    console.log("GPRData", res?.data?.result);
     setData(res?.data?.result);
   };
 

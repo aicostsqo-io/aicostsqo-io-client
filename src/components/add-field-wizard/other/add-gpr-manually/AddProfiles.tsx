@@ -33,7 +33,7 @@ type AddProfilesProps = {
 };
 
 export const AddProfiles = ({ gpr, onProceed }: AddProfilesProps) => {
-  const [modelData, setModelData] = useState<GprProfile>(initialState);
+  const [modelData, setModelData] = useState<any>(initialState);
   const [profiles, setProfiles] = useState<GprProfile[]>([]);
 
   const handleChange = (field: any, event: any) => {
@@ -41,27 +41,45 @@ export const AddProfiles = ({ gpr, onProceed }: AddProfilesProps) => {
   };
 
   const handleSave = () => {
+    // check if profile fields are empty
+    const profileFields = Object.keys(modelData);
+    for (const field of profileFields) {
+      if (modelData[field] === "") {
+        toast.error("Please fill all the fields");
+        return false;
+      }
+    }
+
     profiles.push(modelData);
     setProfiles(profiles);
     toast.success("Profile added!");
+
+    return true;
   };
 
   const handleSaveAndProceed = () => {
-    handleSave();
+    const status = handleSave();
+    if (!status) return;
     const newGpr = { ...gpr, profiles };
     onProceed(newGpr);
     toast.success("Proceeding to next step!");
   };
 
   const handleSaveAndAddNew = () => {
-    handleSave();
+    const status = handleSave();
+    if (!status) return;
     setModelData(initialState);
     toast.success("Form cleared!");
   };
 
-  const handleCancel = () => {
+  const handleClear = () => {
     setModelData(initialState);
     toast.success("Contents cleared!");
+  };
+
+  const handleNext = () => {
+    onProceed(gpr);
+    toast.success("Proceeding to next step!");
   };
 
   return (
@@ -169,9 +187,15 @@ export const AddProfiles = ({ gpr, onProceed }: AddProfilesProps) => {
         </div>
         <div
           className="bg-black text-white justify-between w-1/3 py-2 rounded text-center cursor-pointer"
-          onClick={handleCancel}
+          onClick={handleClear}
         >
-          Cancel
+          Clear
+        </div>
+        <div
+          className="bg-black text-white justify-between w-1/3 py-2 rounded text-center cursor-pointer"
+          onClick={handleNext}
+        >
+          Next
         </div>
       </div>
     </>

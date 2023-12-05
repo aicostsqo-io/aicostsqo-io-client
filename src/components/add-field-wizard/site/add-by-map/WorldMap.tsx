@@ -13,6 +13,7 @@ import {
   TileLayer,
 } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
+import { toast } from "react-toastify";
 
 const WorldMap = ({ next, info, setInfo }: any) => {
   const [siteBounds, setSiteBounds] = useState<SiteBound[] | null>(null);
@@ -87,10 +88,21 @@ const WorldMap = ({ next, info, setInfo }: any) => {
   };
 
   const handleAddSiteBound = () => {
-    if(siteName === "" || siteName.trim() === "" || siteName === null || siteName === undefined){
-      console.log("Site name cannot be empty"); // toastify error
+    if (
+      siteName === "" ||
+      siteName.trim() === "" ||
+      siteName === null ||
+      siteName === undefined
+    ) {
+      toast.error("Site name cannot be empty");
       return;
     }
+
+    if (!polygon) {
+      toast.error("Please draw the site bound of the field");
+      return;
+    }
+
     const siteBound = mapSiteBoundObject(polygon!);
     setInfo({
       ...info,
