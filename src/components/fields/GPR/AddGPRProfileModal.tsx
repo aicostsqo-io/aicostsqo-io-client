@@ -10,12 +10,16 @@ import {
   shapeTypes,
 } from "@/utils/constants/gpr";
 import {
+  FormImageField,
   FormNumberField,
   FormSelectField,
   FormTextField,
 } from "@/components/add-field-wizard/other/core-form-elements";
 import { GprProfile } from "@/types/models/gprProfile";
 import { profileTypes } from "@/utils/constants/gpr";
+import { uploadFile } from "@/api/upload";
+
+const UPLOADS_ENDPOINT = process.env.NEXT_PUBLIC_UPLOADS_ENDPOINT;
 
 interface Props {
   rectangleLineNumber: number;
@@ -54,7 +58,8 @@ const AddGPRProfileModal = ({
 
   const handleAddGPRProfile = async () => {
     //TODO: validation
-    for (let value of Object.values(gprProfile)) {
+    for (let [key, value] of Object.entries(gprProfile)) {
+      if (key === "filname") continue;
       if (!value) {
         toast.error("Please fill all fields");
         return;
@@ -77,6 +82,21 @@ const AddGPRProfileModal = ({
 
   const handleChange = (field: any, event: any) => {
     setGprProfile({ ...gprProfile, [field]: event.target.value });
+  };
+
+  const handleUploadImage = async (event: any) => {
+    const file = event.target.files[0];
+    const folder = "gprProfiles";
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("folder", folder);
+
+    try {
+      const { data } = await uploadFile(formData);
+      setGprProfile({ ...gprProfile, filname: data.filePath });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -173,11 +193,23 @@ const AddGPRProfileModal = ({
             min={0}
             onChange={(e: any) => handleChange("frequency", e)}
           />
-          <FormTextField
-            label="Filname"
-            value={gprProfile.filname}
-            onChange={(e: any) => handleChange("filname", e)}
-          />
+          {gprProfile.filname ? (
+            <div className={"flex items-center"}>
+              <label className={"w-1/2 me-2"}>{"Filname"}</label>
+              <div className="w-[300px] h-[200px]">
+                <img
+                  src={`${UPLOADS_ENDPOINT}/${gprProfile.filname}`}
+                  className="w-full h-full object-cover"
+                  alt=""
+                />
+              </div>
+            </div>
+          ) : (
+            <FormImageField
+              label="Filname"
+              onChange={(e: any) => handleUploadImage(e)}
+            />
+          )}
 
           <div className="flex flex-col gap-4 mt-auto">
             <div

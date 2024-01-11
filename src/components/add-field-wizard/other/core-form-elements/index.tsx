@@ -46,3 +46,17 @@ export const FormTextField = ({ label, value, onChange }: any) => {
     </div>
   );
 };
+
+export const FormImageField = ({ label, onChange }: any) => {
+  return (
+    <div className={inputContainerClasses}>
+      <label className={labelClasses}>{label}</label>
+      <input
+        className={inputClasses}
+        type="file"
+        accept="image/*"
+        onChange={onChange}
+      />
+    </div>
+  );
+};
