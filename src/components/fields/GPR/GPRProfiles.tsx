@@ -11,6 +11,7 @@ import {
   IoTrashOutline as TrashIcon,
 } from "react-icons/io5";
 import AddGPRProfileModal from "./AddGPRProfileModal";
+import ImageModal from "@/components/common/imageModal";
 
 interface GPRProfilesProps {
   rectangleLineNumber: number;
@@ -29,6 +30,7 @@ const GPRProfiles = ({
   const [selectedRows, setselectedRows] = useState<string[]>([]);
   const [isAddGPRAddProfileModalOpen, setIsAddGPRAddProfileModalOpen] =
     useState<boolean>(false);
+  const [showImage, setShowImage] = useState<string | null>(null);
 
   useEffect(() => {
     setData(profiles);
@@ -81,6 +83,7 @@ const GPRProfiles = ({
                   <th className="py-3 px-6 text-left">End Vertex X</th>
                   <th className="py-3 px-6 text-left">End Vertex Y</th>
                   <th className="py-3 px-6 text-left">End Vertex Z</th>
+                  <th className="py-3 px-6 text-left">Filname</th>
                 </tr>
               </thead>
               <tbody className="text-gray-600 text-sm font-light">
@@ -121,6 +124,14 @@ const GPRProfiles = ({
                     </td>
                     <td className="py-3 px-6 text-left">
                       {profile.endVertexZ}
+                    </td>
+                    <td className="py-3 px-6 text-left">
+                      <button
+                        onClick={() => setShowImage(profile.filname)}
+                        className="py-1 px-2  font-medium border border-blue-500 text-blue-500 bg-white hover:bg-blue-500 hover:text-white"
+                      >
+                        Show Image
+                      </button>
                     </td>
                   </tr>
                 ))}
@@ -165,6 +176,13 @@ const GPRProfiles = ({
               rectangleLineNumber={rectangleLineNumber}
               onClose={() => setIsAddGPRAddProfileModalOpen(false)}
               refetch={() => refetch()}
+            />
+          ) : null}
+          {showImage ? (
+            <ImageModal
+              imageCategory="GPR Profile Image"
+              imagePath={showImage}
+              onClose={() => setShowImage(null)}
             />
           ) : null}
         </div>
