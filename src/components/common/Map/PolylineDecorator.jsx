@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useMap } from "react-leaflet";
 import "leaflet-polylinedecorator/dist/leaflet.polylineDecorator";
 
+const UPLOADS_ENDPOINT = process.env.NEXT_PUBLIC_UPLOADS_ENDPOINT;
 export function PolylineDecorator({ positions, pathStyle }) {
   const map = useMap();
   const arrow = [
@@ -53,7 +54,7 @@ export function PolylineDecorator({ positions, pathStyle }) {
         // if (!positions.filname) return;
         // const imageUrl = `${process.env.NEXT_PUBLIC_BASE_ENDPOINT}/uploads/${positions.filname}`;
         map.openPopup(
-          `<b>Profile ${positions.numberOfProfile}</b><br><img src="https://ai-costsqo.gorkemarik.com/api/uploads/gpr-profiles/d00806372c384a808df609e3e1216e99.jpg">`,
+          `<b>Profile ${positions.numberOfProfile}</b><br><img src=${UPLOADS_ENDPOINT}/${positions.filname}>`,
           e.latlng,
           {
             minWidth: 800,

@@ -78,7 +78,7 @@ function DiscontinuitiesGPRVisualization() {
       res.push({
         color: gpr.shape == "Line" ? "orange" : color,
         numberOfProfile: profile.numberOfProfile,
-        filname: profile.filename,
+        filname: profile.filname,
         startCoords: [profile.startingVertexX, profile.startingVertexY],
         endCoords: [profile.endVertexX, profile.endVertexY],
       });
