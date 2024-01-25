@@ -66,7 +66,7 @@ const initialState: Gpr = {
 };
 
 type SetGPRDataProps = {
-  onProceed: (gpr: any) => void;
+  onProceed: (gpr: Gpr) => void;
 };
 
 export default function SetGPRData({ onProceed }: SetGPRDataProps) {
