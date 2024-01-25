@@ -50,16 +50,17 @@ export function PolylineDecorator({ positions, pathStyle }) {
         });
       })
       .on("click", (e) => {
-        // TODO: uncomment below code when image is ready
-        // if (!positions.filname) return;
-        // const imageUrl = `${process.env.NEXT_PUBLIC_BASE_ENDPOINT}/uploads/${positions.filname}`;
+        if (!positions.filname) return;
+        const imageUrl = `${UPLOADS_ENDPOINT}/${positions.filname}`;
+        console.log(imageUrl);
         map.openPopup(
-          `<b>Profile ${positions.numberOfProfile}</b><br><img src=${UPLOADS_ENDPOINT}/${positions.filname}>`,
+          `<b>Profile ${positions.numberOfProfile}</b><br><img src=${imageUrl}>`,
           e.latlng,
           {
             minWidth: 800,
             maxWidth: 1000,
             maxHeight: 1000,
+            keepInView: true,
           }
         );
       })
