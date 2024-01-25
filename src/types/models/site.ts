@@ -3,7 +3,7 @@ export interface Site {
   name: string;
 }
 
-interface vertex {
+export interface Vertex {
   vertexNumber: number;
   coordX: number;
   coordY: number;
@@ -14,5 +14,5 @@ export interface SiteBound {
   _id?: string;
   siteId?: string;
   mapReferenceSystem: string;
-  vertexes: vertex[];
+  vertexes: Vertex[];
 }
