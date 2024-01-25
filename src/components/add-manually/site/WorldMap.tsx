@@ -136,12 +136,15 @@ const WorldMap = ({ method }: any) => {
         <FeatureGroup>
           <EditControl
             position="topright"
+            edit={{
+              edit: false,
+            }}
             draw={{
               rectangle: false,
               circle: false,
               polyline: false,
               marker: false,
-              circlemarker: true,
+              circlemarker: false,
               polygon: {
                 shapeOptions: {
                   color: "#ff0000",
@@ -150,7 +153,6 @@ const WorldMap = ({ method }: any) => {
             }}
             onCreated={polygonCreated}
           />
-          <Circle center={[51.51, -0.06]} radius={200} />
         </FeatureGroup>
 
         {siteBounds &&
