@@ -185,7 +185,11 @@ export default function Tree() {
             label="Use Wizard"
             onClick={() => router.push("/project/add-field-wizard")}
           />
-          <TreeItem nodeId="manually" label="Manually" />
+          <TreeItem
+            nodeId="manually"
+            label="Manually"
+            onClick={() => router.push("/project/add-manually")}
+          />
         </TreeItem>
         <TreeItem nodeId="Open My Fields" label="Open My Fields">
           {fieldData?.map((field: any, index: number) => (
