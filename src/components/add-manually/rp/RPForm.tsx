@@ -1,4 +1,6 @@
-import React from "react";
+import { getRpsBySiteBoundId } from "@/api/rp";
+import { getSiteBounds } from "@/api/site";
+import React, { useEffect, useState } from "react";
 
 const inputContainerClasses = "flex justify-between w-1/3";
 const inputClasses = "border border-black w-1/2 py-1 px-2 outline-none";
@@ -11,22 +13,41 @@ interface IRPFormProps {
 }
 
 const RPForm = ({ rp, setRp, handleAddRp }: IRPFormProps) => {
+  const [siteBounds, setSiteBounds] = useState<any>([]);
+  const [rps, setRps] = useState<any>([]);
+  useEffect(() => {
+    getSiteBounds().then((res) => {
+      setSiteBounds(res.data.siteBounds);
+    });
+
+    if (rp.siteBound) {
+      getRpsBySiteBoundId(rp.siteBound).then((res) => {
+        setRps(res.data.rps);
+      });
+    }
+  }, [rp.siteBound]);
   return (
     <div className="flex flex-col gap-4">
       <div className={inputContainerClasses}>
-        <label className={labelClasses}>SiteBound ID</label>
+        <label className={labelClasses}>Site Bound</label>
         <select
           className={inputClasses}
-          value={rp?.siteBoundId}
+          value={rp?.siteBound}
           onChange={(e) =>
             setRp({
               ...rp,
-              siteBoundId: e.target.value,
+              siteBound: e.target.value,
             })
           }
         >
-          <option value="1">1</option>
-          <option value="2">2</option>
+          <option value="" disabled>
+            Select Site Bound
+          </option>
+          {siteBounds.map((siteBound: any) => (
+            <option key={siteBound._id} value={siteBound._id}>
+              {siteBound.site.name}
+            </option>
+          ))}
         </select>
       </div>
       <div className={inputContainerClasses}>
@@ -201,9 +222,9 @@ const RPForm = ({ rp, setRp, handleAddRp }: IRPFormProps) => {
       </div>
       <div
         className="bg-black text-white justify-between w-1/3 py-2 rounded text-center cursor-pointer"
-        onClick={handleAddRp}
+        onClick={() => handleAddRp(rps.length)}
       >
-        Add
+        Add RP to Array
       </div>
     </div>
   );

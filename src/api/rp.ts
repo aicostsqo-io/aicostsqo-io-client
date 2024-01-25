@@ -9,3 +9,5 @@ export const createRp = (data: any) => axios.post("/rps", data);
 
 export const getRpsBySiteBoundId = (siteBoundId: string) =>
   axios.get(`/rps/${siteBoundId}`);
+
+export const createRpsByManual = (data: any) => axios.post("/rps/manual", data);
