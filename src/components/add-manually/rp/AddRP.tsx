@@ -35,9 +35,14 @@ const AddRP = ({ method }: any) => {
       }
     }
 
+    const randomThreeDigitNumber = Math.floor(100 + Math.random() * 900);
+
     setRps([
       ...rps,
-      { ...rp, name: `RP ${String(rpLength + 1).padStart(3, "0")}` },
+      {
+        ...rp,
+        name: `RP ${randomThreeDigitNumber}`,
+      },
     ]);
     setRp(initialState);
     toast.success("RP added successfully");
@@ -45,8 +50,12 @@ const AddRP = ({ method }: any) => {
 
   const handleAddRps = async () => {
     try {
-      await createRpsByManual(rps);
-      toast.success("RPs added successfully");
+      const res = await createRpsByManual(rps);
+      if (res.status === 200) {
+        setRps([]);
+        setRp(initialState);
+        toast.success("RPs added successfully");
+      }
     } catch (err) {
       console.log(err);
     }

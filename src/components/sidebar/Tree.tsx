@@ -10,6 +10,7 @@ import { getSites } from "@/api/site";
 import useFetch from "@/hooks/useFetch";
 import { useTreeContext } from "@/contexts/Tree";
 import { useSiteContext } from "@/contexts/Site";
+import { toast } from "react-toastify";
 
 const RPTreeItem = ({ rps, setPoint, index }: any) => {
   const { setSelectedRP, setSelectedRPs, setSelectedDiscs } = useSiteContext();
@@ -191,6 +192,14 @@ export default function Tree() {
             onClick={() => router.push("/project/add-manually")}
           />
         </TreeItem>
+        <TreeItem
+          nodeId="Refresh Fields"
+          label="Refresh Fields"
+          onClick={() => {
+            fieldDataMutate();
+            toast.success("Fields refresh successfully");
+          }}
+        />
         <TreeItem nodeId="Open My Fields" label="Open My Fields">
           {fieldData?.map((field: any, index: number) => (
             <FieldTreeItem

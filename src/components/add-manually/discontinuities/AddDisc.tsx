@@ -40,8 +40,12 @@ const AddDisc = ({ method }: any) => {
 
   const handleAddDiscs = async () => {
     try {
-      await createDiscsByManual(discs);
-      toast.success("Discontinuities added successfully");
+      const res = await createDiscsByManual(discs);
+      if (res.status === 200) {
+        setDiscs([]);
+        setDisc(initialState);
+        toast.success("Discontinuities added successfully");
+      }
     } catch (err) {
       console.log(err);
     }
