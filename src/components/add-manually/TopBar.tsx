@@ -12,41 +12,49 @@ function TopBar({ page, setPage, method, setMethod }: any) {
           className={`${page === 0 ? barItemActive : barItemInActive}`}
           onClick={() => setPage(0)}
         >
-          RP
+          Site
         </div>
         <div
           className={`${page === 1 ? barItemActive : barItemInActive}`}
           onClick={() => setPage(1)}
         >
-          Discontinuities
+          RP
         </div>
         <div
           className={`${page === 2 ? barItemActive : barItemInActive}`}
           onClick={() => setPage(2)}
         >
-          Other Measurement Techniques (GPR etc.)
+          Discontinuities
+        </div>
+        <div
+          className={`${page === 3 ? barItemActive : barItemInActive}`}
+          onClick={() => setPage(3)}
+        >
+          Measurement Techniques
         </div>
       </div>
-      <div className="">
-        <div className="flex justify-between gap-2">
-          <div
-            className={`${
-              method === "manual" ? barItemActive : barItemInActive
-            }`}
-            onClick={() => setMethod("manual")}
-          >
-            Manual
-          </div>
-          <div
-            className={`${
-              method === "excel" ? barItemActive : barItemInActive
-            }`}
-            onClick={() => setMethod("excel")}
-          >
-            Excel
+      {page !== 0 ? (
+        <div className="">
+          <div className="flex justify-between gap-2">
+            <div
+              className={`${
+                method === "manual" ? barItemActive : barItemInActive
+              }`}
+              onClick={() => setMethod("manual")}
+            >
+              Manual
+            </div>
+            <div
+              className={`${
+                method === "excel" ? barItemActive : barItemInActive
+              }`}
+              onClick={() => setMethod("excel")}
+            >
+              Excel
+            </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </div>
   );
 }
