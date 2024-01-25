@@ -22,7 +22,9 @@ function DiscontinuitiesGPRVisualization() {
           res.data.result.gprProfiles,
           res.data.result.gprs
         );
-        setPosition(ress.longitudes[0].startCoords);
+        setPosition(
+          ress.longitudes[0]?.startCoords || ress.transversals[0]?.startCoords
+        );
         setGprProfiles(ress);
       })
       .catch((err) => {
