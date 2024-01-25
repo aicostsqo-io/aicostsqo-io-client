@@ -3,7 +3,14 @@ const barItem =
 const barItemInActive = `${barItem} bg-gray-100 hover:bg-gray-200 `;
 const barItemActive = `${barItem} shadow-xl bg-white hover:bg-white `;
 
-function TopBar({ page, setPage, method, setMethod }: any) {
+function TopBar({
+  page,
+  setPage,
+  method,
+  setMethod,
+  gprStep,
+  setGprStep,
+}: any) {
   return (
     <div className="flex flex-col modal-container py-6 px-6">
       <h1 className="modal-container-title">Add Data</h1>
@@ -33,28 +40,57 @@ function TopBar({ page, setPage, method, setMethod }: any) {
           Measurement Techniques
         </div>
       </div>
-      {page !== 0 ? (
-        <div className="">
+      {page === 3 ? (
+        <div className="mb-2">
           <div className="flex justify-between gap-2">
             <div
               className={`${
-                method === "manual" ? barItemActive : barItemInActive
+                gprStep === "info" ? barItemActive : barItemInActive
               }`}
-              onClick={() => setMethod("manual")}
+              onClick={() => setGprStep("info")}
             >
-              Manual
+              Info
             </div>
             <div
               className={`${
-                method === "excel" ? barItemActive : barItemInActive
+                gprStep === "profile" ? barItemActive : barItemInActive
               }`}
-              onClick={() => setMethod("excel")}
+              onClick={() => setGprStep("profile")}
             >
-              Excel
+              Profile
+            </div>
+            <div
+              className={`${
+                gprStep === "crack" ? barItemActive : barItemInActive
+              }`}
+              onClick={() => setGprStep("crack")}
+            >
+              Crack
             </div>
           </div>
         </div>
       ) : null}
+
+      <div className="">
+        <div className="flex justify-between gap-2">
+          <div
+            className={`${
+              method === "manual" ? barItemActive : barItemInActive
+            }`}
+            onClick={() => setMethod("manual")}
+          >
+            Manual
+          </div>
+          <div
+            className={`${
+              method === "excel" ? barItemActive : barItemInActive
+            }`}
+            onClick={() => setMethod("excel")}
+          >
+            Excel
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

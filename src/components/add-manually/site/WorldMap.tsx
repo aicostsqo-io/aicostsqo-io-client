@@ -15,8 +15,9 @@ import {
 } from "react-leaflet";
 import { EditControl } from "react-leaflet-draw";
 import { toast } from "react-toastify";
+import SiteExcel from "./SiteExcel";
 
-const WorldMap = () => {
+const WorldMap = ({ method }: any) => {
   const [siteBounds, setSiteBounds] = useState<SiteBound[] | null>(null);
   const [polygon, setPolygon] = useState<number[][] | null>(null);
   const { currentUser } = useUserContext();
@@ -106,6 +107,10 @@ const WorldMap = () => {
       console.log(err);
     }
   };
+
+  if (method === "excel") {
+    return <SiteExcel />;
+  }
 
   return (
     <div className="w-full h-[800px] flex flex-col justify-center items-center gap-5">

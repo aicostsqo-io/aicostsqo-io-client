@@ -1,3 +1,4 @@
+import { getRpsBySiteBoundId } from "@/api/rp";
 import { getSiteBounds } from "@/api/site";
 import React, { useEffect, useState } from "react";
 
@@ -13,11 +14,18 @@ interface IRPFormProps {
 
 const RPForm = ({ rp, setRp, handleAddRp }: IRPFormProps) => {
   const [siteBounds, setSiteBounds] = useState<any>([]);
+  const [rps, setRps] = useState<any>([]);
   useEffect(() => {
     getSiteBounds().then((res) => {
       setSiteBounds(res.data.siteBounds);
     });
-  }, []);
+
+    if (rp.siteBound) {
+      getRpsBySiteBoundId(rp.siteBound).then((res) => {
+        setRps(res.data.rps);
+      });
+    }
+  }, [rp.siteBound]);
   return (
     <div className="flex flex-col gap-4">
       <div className={inputContainerClasses}>
@@ -214,7 +222,7 @@ const RPForm = ({ rp, setRp, handleAddRp }: IRPFormProps) => {
       </div>
       <div
         className="bg-black text-white justify-between w-1/3 py-2 rounded text-center cursor-pointer"
-        onClick={handleAddRp}
+        onClick={() => handleAddRp(rps.length)}
       >
         Add RP to Array
       </div>

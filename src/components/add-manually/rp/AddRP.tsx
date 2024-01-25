@@ -24,9 +24,7 @@ const AddRP = ({ method }: any) => {
   const [rp, setRp] = useState<any>(initialState);
   const [rps, setRps] = useState<any>([]);
 
-  const handleAddRp = () => {
-    // check if rp fields are empty
-    console.log("rp", rp);
+  const handleAddRp = (rpLength: number) => {
     const rpFields = Object.keys(rp);
     for (const field of rpFields) {
       if (Array.isArray(rp[field])) continue;
@@ -37,7 +35,10 @@ const AddRP = ({ method }: any) => {
       }
     }
 
-    setRps([...rps, rp]);
+    setRps([
+      ...rps,
+      { ...rp, name: `RP ${String(rpLength + 1).padStart(3, "0")}` },
+    ]);
     setRp(initialState);
     toast.success("RP added successfully");
   };
