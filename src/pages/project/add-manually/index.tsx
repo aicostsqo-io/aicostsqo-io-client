@@ -13,7 +13,7 @@ import { AddDiscs } from "@/components/add-manually/other/add-gpr-manually/AddDi
 const AddManually = () => {
   const [page, setPage] = useState(0);
   const [method, setMethod] = useState("manual");
-  const [gprStep, setGprStep] = useState("");
+  const [gprStep, setGprStep] = useState("info");
   return (
     <MainLayout>
       <ProjectLayout>
