@@ -99,10 +99,14 @@ const WorldMap = ({ method }: any) => {
           vertexes: siteBound.vertexes,
         },
       };
-      await createSiteByManual(siteInfo);
-      toast.success("Site added successfully");
-      setPolygon(null);
-      setSiteName("");
+      const res = await createSiteByManual(siteInfo);
+      if (res.status === 200) {
+        toast.success("Site added successfully");
+        setPolygon(null);
+        setSiteName("");
+      } else {
+        toast.error("Something went wrong");
+      }
     } catch (err) {
       console.log(err);
     }
