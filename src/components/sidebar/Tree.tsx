@@ -1,28 +1,32 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import TreeView from "@mui/lab/TreeView";
 import TreeItem from "@mui/lab/TreeItem";
 import { useRouter } from "next/router";
+import { getSites } from "@/api/site";
 import useFetch from "@/hooks/useFetch";
 import { useTreeContext } from "@/contexts/Tree";
 import { useSiteContext } from "@/contexts/Site";
 import { toast } from "react-toastify";
 
-const RPTreeItem = ({ rps, setPoint, index }) => {
+const RPTreeItem = ({ rps, setPoint, index }: any) => {
   const { setSelectedRP, setSelectedRPs, setSelectedDiscs } = useSiteContext();
   const { expanded, setExpanded } = useTreeContext();
 
-  const handleClickRpTreeItem = (rp) => {
+  const handleClickRpTreeItem = (rp: any) => {
     setPoint("RPItem");
     setSelectedRP(rp);
-    const newExpanded = expanded.filter((item) => !item.startsWith("RPNode"));
+    const newExpanded = expanded.filter(
+      (item: any) => !item.startsWith("RPNode")
+    );
     newExpanded.push("RPNode" + rp?._id);
     setExpanded(newExpanded);
   };
 
-  const handleClickRpTree = (rps) => {
+  const handleClickRpTree = (rps: any) => {
     setPoint("Representing Prisms");
     setSelectedRPs(rps);
   };
@@ -33,7 +37,7 @@ const RPTreeItem = ({ rps, setPoint, index }) => {
       label={"Representing Prisms"}
       onClick={() => handleClickRpTree(rps)}
     >
-      {rps?.map((rp, index2) => (
+      {rps?.map((rp: any, index2: number) => (
         <TreeItem
           key={index2}
           nodeId={"RPNode" + rp?._id}
@@ -65,13 +69,15 @@ const RPTreeItem = ({ rps, setPoint, index }) => {
   );
 };
 
-const FieldTreeItem = ({ field, router, setPoint, index }) => {
+const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
   const { setSelectedSite } = useSiteContext();
   const { expanded, setExpanded } = useTreeContext();
   const handleClickSite = () => {
     setPoint("Site Main");
     const isExpanded = expanded.includes("Site" + field?.site?._id);
-    const newExpanded = expanded.filter((item) => !item.startsWith("Site"));
+    const newExpanded = expanded.filter(
+      (item: any) => !item.startsWith("Site")
+    );
     if (!isExpanded) newExpanded.push("Site" + field?.site?._id);
     setExpanded(newExpanded);
     setSelectedSite(field);
@@ -140,13 +146,13 @@ const FieldTreeItem = ({ field, router, setPoint, index }) => {
 
 export default function Tree() {
   const { expanded, setExpanded, setPoint } = useTreeContext();
-  const [selected, setSelected] = React.useState([]);
+  const [selected, setSelected] = React.useState<string[]>([]);
 
-  const handleToggle = (event, nodeIds) => {
+  const handleToggle = (event: React.SyntheticEvent, nodeIds: string[]) => {
     setExpanded(nodeIds);
   };
 
-  const handleSelect = (event, nodeIds) => {
+  const handleSelect = (event: React.SyntheticEvent, nodeIds: string[]) => {
     setSelected(nodeIds);
   };
 
@@ -195,7 +201,7 @@ export default function Tree() {
           }}
         />
         <TreeItem nodeId="Open My Fields" label="Open My Fields">
-          {fieldData?.map((field, index) => (
+          {fieldData?.map((field: any, index: number) => (
             <FieldTreeItem
               setPoint={setPoint}
               key={index}

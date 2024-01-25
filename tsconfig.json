@@ -19,6 +19,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/common/Map/PolylineDecorator.jsx", "src/components/sidebar/Tree.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/components/common/Map/PolylineDecorator.jsx"],
   "exclude": ["node_modules"]
 }
