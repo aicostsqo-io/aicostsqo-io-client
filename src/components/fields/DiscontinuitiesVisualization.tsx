@@ -8,9 +8,6 @@ import { useSiteContext } from "@/contexts/Site";
 import { getDiscsByRpId } from "@/api/disc";
 import axios from "axios";
 
-const apiUrl =
-  "https://e9d41ab0-814d-4a89-a904-f232c5bf0ffc-00-10dj332pi2cbu.spock.replit.dev";
-
 type Urls = {
   obj: string;
   mtl: string;
@@ -21,10 +18,17 @@ type SceneProps = {
 };
 
 function Scene({ urls }: SceneProps) {
-  const mtl = useLoader(MTLLoader, `${apiUrl}${urls.mtl}`);
-  const obj = useLoader(OBJLoader, `${apiUrl}${urls.obj}`, (loader) => {
-    loader.setMaterials(mtl);
-  });
+  const mtl = useLoader(
+    MTLLoader,
+    `${process.env.NEXT_PUBLIC_MARBLE_API_ENDPOINT}${urls.mtl}`
+  );
+  const obj = useLoader(
+    OBJLoader,
+    `${process.env.NEXT_PUBLIC_MARBLE_API_ENDPOINT}${urls.obj}`,
+    (loader) => {
+      loader.setMaterials(mtl);
+    }
+  );
 
   return <primitive object={obj} />;
 }
@@ -53,22 +57,25 @@ const DiscontinuitiesVisualization = () => {
   };
 
   const fetchObj = async (discs: any) => {
-    const res = await axios.post(`${apiUrl}/disc`, {
-      filename: selectedRP._id,
-      positionX: selectedRP.sizeX,
-      positionY: selectedRP.sizeY,
-      positionZ: selectedRP.sizeZ,
-      sizeX: selectedRP.sizeX,
-      sizeY: selectedRP.sizeY,
-      sizeZ: selectedRP.sizeZ,
-      data: discs.map((d: any) => ({
-        dip: d.dip,
-        dipDirection: d.dipDirect,
-        positionX: d.pX,
-        positionY: d.pY,
-        positionZ: d.pZ,
-      })),
-    });
+    const res = await axios.post(
+      `${process.env.NEXT_PUBLIC_MARBLE_API_ENDPOINT}/disc`,
+      {
+        filename: selectedRP._id,
+        positionX: selectedRP.sizeX,
+        positionY: selectedRP.sizeY,
+        positionZ: selectedRP.sizeZ,
+        sizeX: selectedRP.sizeX,
+        sizeY: selectedRP.sizeY,
+        sizeZ: selectedRP.sizeZ,
+        data: discs.map((d: any) => ({
+          dip: d.dip,
+          dipDirection: d.dipDirect,
+          positionX: d.pX,
+          positionY: d.pY,
+          positionZ: d.pZ,
+        })),
+      }
+    );
     setUrls({ obj: res.data.obj, mtl: res.data.mtl });
   };
 
