@@ -45,7 +45,7 @@ const RPForm = ({ rp, setRp, handleAddRp }: IRPFormProps) => {
           </option>
           {siteBounds.map((siteBound: any) => (
             <option key={siteBound._id} value={siteBound._id}>
-              {siteBound.site.name}
+              {siteBound?.site?.name}
             </option>
           ))}
         </select>

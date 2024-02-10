@@ -44,7 +44,7 @@ const DiscForm = ({ disc, setDisc, handleAddDisc }: IDiscFormProps) => {
             <option value={""}>Select Site Bound</option>
             {siteBounds?.map((siteBound: any, index: number) => (
               <option key={index} value={siteBound._id}>
-                {siteBound.site.name}
+                {siteBound?.site?.name}
               </option>
             ))}
           </select>
