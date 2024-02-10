@@ -35,12 +35,10 @@ const AddRPManuel = ({ next, info, setInfo }: any) => {
       }
     }
 
+    //* adding rp with mapped name
     setInfo({
       ...info,
-      rps: [
-        ...info.rps,
-        { ...rp, name: `RP ${String(info?.rps.length + 1).padStart(3, "0")}` },
-      ],
+      rps: [...info.rps, { ...rp, name: `RP ${info?.rps.length + 1}` }],
     });
     setRp(initialState);
     toast.success("RP added successfully");
