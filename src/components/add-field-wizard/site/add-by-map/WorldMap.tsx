@@ -57,6 +57,47 @@ const WorldMap = ({ next, info, setInfo }: any) => {
     }
   };
 
+  // Lat = Y Long = X           y, x
+  const findTop = (array: number[][]) => {
+    let top = array[0][0];
+    for (let i = 0; i < array.length; i++) {
+      if (array[i][0] > top) {
+        top = array[i][0];
+      }
+    }
+    return top;
+  };
+
+  const findBottom = (array: number[][]) => {
+    let bottom = array[0][0];
+    for (let i = 0; i < array.length; i++) {
+      if (array[i][0] < bottom) {
+        bottom = array[i][0];
+      }
+    }
+    return bottom;
+  };
+
+  const findRight = (array: number[][]) => {
+    let right = array[0][1];
+    for (let i = 0; i < array.length; i++) {
+      if (array[i][1] > right) {
+        right = array[i][1];
+      }
+    }
+    return right;
+  };
+
+  const findLeft = (array: number[][]) => {
+    let left = array[0][1];
+    for (let i = 0; i < array.length; i++) {
+      if (array[i][1] < left) {
+        left = array[i][1];
+      }
+    }
+    return left;
+  };
+
   const polygonDeleted = (e: any) => {
     setPolygon(null);
   };
@@ -104,7 +145,7 @@ const WorldMap = ({ next, info, setInfo }: any) => {
     }
 
     if (siteHeight < 0) {
-      toast.error("Site height (z) cannot be empty");
+      toast.error("Site depth (z) cannot be empty");
       return;
     }
 
@@ -126,6 +167,12 @@ const WorldMap = ({ next, info, setInfo }: any) => {
         ...info.siteBound,
         mapReferenceSystem: siteBound.mapReferenceSystem,
         vertexes: siteBound.vertexes,
+        limits: {
+          top: findTop(polygon),
+          bottom: findBottom(polygon),
+          right: findRight(polygon),
+          left: findLeft(polygon),
+        },
       },
     });
     next();
@@ -167,13 +214,13 @@ const WorldMap = ({ next, info, setInfo }: any) => {
           />
         </div>
         <div className="m-2">
-          <label className="text-lg">Site Height (m): </label>
+          <label className="text-lg">Site Depth (m): </label>
           <input
             type="number"
             min={0}
             className="border border-black py-2 px-4 rounded-xl"
             value={siteHeight}
-            placeholder="Site Height (m)"
+            placeholder="Site Depth (m)"
             onChange={(e) => setSiteHeight(Number(e.target.value))}
           />
         </div>
