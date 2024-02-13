@@ -21,6 +21,7 @@ const WorldMap = ({ next, info, setInfo }: any) => {
   const [polygon, setPolygon] = useState<number[][] | null>(null);
   const { currentUser } = useUserContext();
   const [siteName, setSiteName] = useState<string>("");
+  const [siteHeight, setSiteHeight] = useState<number>(100);
 
   /*   useEffect(() => {
     getSiteBounds()
@@ -54,6 +55,10 @@ const WorldMap = ({ next, info, setInfo }: any) => {
       });
       setPolygon(polygon);
     }
+  };
+
+  const polygonDeleted = (e: any) => {
+    setPolygon(null);
   };
 
   /* const polygon: any = [
@@ -98,6 +103,11 @@ const WorldMap = ({ next, info, setInfo }: any) => {
       return;
     }
 
+    if (siteHeight < 0) {
+      toast.error("Site height (z) cannot be empty");
+      return;
+    }
+
     if (!polygon) {
       toast.error("Please draw the site bound of the field");
       return;
@@ -110,6 +120,7 @@ const WorldMap = ({ next, info, setInfo }: any) => {
         ...info.site,
         customerId: currentUser?._id,
         name: siteName,
+        height: siteHeight,
       },
       siteBound: {
         ...info.siteBound,
@@ -144,14 +155,28 @@ const WorldMap = ({ next, info, setInfo }: any) => {
 
   return (
     <div className="w-full h-[800px] flex flex-col justify-center items-center gap-5">
-      <div className="self-start">
-        <input
-          type="text"
-          className="border border-black py-2 px-4"
-          value={siteName}
-          placeholder="Site Name"
-          onChange={(e) => setSiteName(e.target.value)}
-        />
+      <div className="w-full flex justify-between mx-12">
+        <div className="m-2">
+          <label className="text-lg">Site Name: </label>
+          <input
+            type="text"
+            className="border border-black py-2 px-4 rounded-xl"
+            value={siteName}
+            placeholder="Site Name"
+            onChange={(e) => setSiteName(e.target.value)}
+          />
+        </div>
+        <div className="m-2">
+          <label className="text-lg">Site Height (m): </label>
+          <input
+            type="number"
+            min={0}
+            className="border border-black py-2 px-4 rounded-xl"
+            value={siteHeight}
+            placeholder="Site Height (m)"
+            onChange={(e) => setSiteHeight(Number(e.target.value))}
+          />
+        </div>
       </div>
       <MapContainer
         className="w-full h-full"
@@ -171,13 +196,10 @@ const WorldMap = ({ next, info, setInfo }: any) => {
               polyline: false,
               marker: false,
               circlemarker: false,
-              polygon: {
-                shapeOptions: {
-                  color: "#ff0000",
-                },
-              },
+              polygon: true,
             }}
             onCreated={polygonCreated}
+            onDeleted={polygonDeleted}
           />
         </FeatureGroup>
 
