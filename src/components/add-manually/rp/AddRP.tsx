@@ -34,16 +34,7 @@ const AddRP = ({ method }: any) => {
         return;
       }
     }
-
-    const randomThreeDigitNumber = Math.floor(100 + Math.random() * 900);
-
-    setRps([
-      ...rps,
-      {
-        ...rp,
-        name: `RP ${randomThreeDigitNumber}`,
-      },
-    ]);
+    setRps([...rps, rp]);
     setRp(initialState);
     toast.success("RP added successfully");
   };
