@@ -17,6 +17,8 @@ import DiscontinuitiesTeleviewerData from "@/components/fields/Televiewer/Discon
 import DiscontinuitiesSeismicData from "@/components/fields/Seismic/DiscontinuitiesSeismicData";
 import DiscontinuitiesMagnetometricData from "@/components/fields/Magnetometric/DiscontinuitiesMagnetometricData";
 import DiscontinuitiesResistivityData from "@/components/fields/Resistivity/DiscontinuitiesResistivityData";
+import AllRPsVisualization from "@/components/fields/AllRPsVisualization";
+import VirtualExtendedRPsVisualization from "@/components/fields/VirtualExtendedRPsVisualization";
 
 const Field = () => {
   const router = useRouter();
@@ -43,9 +45,7 @@ const Field = () => {
         {point === "Site Topological Map" && page === 0 && <Topological />}
         {point === "Site Boundaries" && page === 0 && <Boundaries />}
         {point === "Representing Prisms" && page === 0 && (
-          <div className="h-full flex justify-center items-center text-5xl font-bold">
-            {siteData?.site?.name} Mining Field
-          </div>
+          <AllRPsVisualization />
         )}
         {point === "Representing Prisms" && page === 1 && <RPData editable />}
         {/* {point.startsWith("RPItem") && page === 0 && <RP />}
@@ -62,6 +62,9 @@ const Field = () => {
         )}
         {point === "Discontinuities (scanline measure)" && page === 1 && (
           <DiscontinuitiesData />
+        )}
+        {point === "Extended" && page === 0 && (
+          <VirtualExtendedRPsVisualization />
         )}
         {point === "Discontinuities (GPR)" && page === 0 && (
           <DiscontinuitiesGPRVisualization />
