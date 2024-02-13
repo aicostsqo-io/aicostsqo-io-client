@@ -61,9 +61,9 @@ const DiscontinuitiesVisualization = () => {
       `${process.env.NEXT_PUBLIC_MARBLE_API_ENDPOINT}/disc`,
       {
         filename: selectedRP._id,
-        positionX: selectedRP.sizeX,
-        positionY: selectedRP.sizeY,
-        positionZ: selectedRP.sizeZ,
+        positionX: selectedRP.positionX,
+        positionY: selectedRP.positionY,
+        positionZ: selectedRP.positionZ,
         sizeX: selectedRP.sizeX,
         sizeY: selectedRP.sizeY,
         sizeZ: selectedRP.sizeZ,
