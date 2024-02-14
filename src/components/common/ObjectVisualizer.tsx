@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
-import { PerspectiveCamera } from "three";
+import { PerspectiveCamera, DoubleSide } from "three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
 
@@ -17,7 +17,10 @@ export type SceneProps = {
 function Scene({ urls }: SceneProps) {
   const mtl = useLoader(
     MTLLoader,
-    `${process.env.NEXT_PUBLIC_MARBLE_API_ENDPOINT}${urls.mtl}`
+    `${process.env.NEXT_PUBLIC_MARBLE_API_ENDPOINT}${urls.mtl}`,
+    (loader) => {
+      loader.setMaterialOptions({ side: DoubleSide });
+    }
   );
   const obj = useLoader(
     OBJLoader,

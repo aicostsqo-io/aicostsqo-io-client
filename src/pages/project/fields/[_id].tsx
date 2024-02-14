@@ -19,6 +19,7 @@ import DiscontinuitiesMagnetometricData from "@/components/fields/Magnetometric/
 import DiscontinuitiesResistivityData from "@/components/fields/Resistivity/DiscontinuitiesResistivityData";
 import AllRPsVisualization from "@/components/fields/AllRPsVisualization";
 import VirtualExtendedRPsVisualization from "@/components/fields/VirtualExtendedRPsVisualization";
+import PolyhedronVisualization from "@/components/fields/PolyhedronVisualization";
 
 const Field = () => {
   const router = useRouter();
@@ -63,6 +64,7 @@ const Field = () => {
         {point === "Discontinuities (scanline measure)" && page === 1 && (
           <DiscontinuitiesData />
         )}
+        {point === "Polyhedron" && page === 0 && <PolyhedronVisualization />}
         {point === "Extended" && page === 0 && (
           <VirtualExtendedRPsVisualization />
         )}

@@ -62,6 +62,13 @@ const RPTreeItem = ({ rps, setPoint, index }: any) => {
           />
           <TreeItem
             nodeId={rp?._id + 3}
+            label={"Polyhedron"}
+            onClick={() => {
+              setPoint("Polyhedron");
+            }}
+          />
+          <TreeItem
+            nodeId={rp?._id + 4}
             label={"Extended"}
             onClick={() => {
               setPoint("Extended");
