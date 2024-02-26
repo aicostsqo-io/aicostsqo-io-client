@@ -20,6 +20,7 @@ import DiscontinuitiesResistivityData from "@/components/fields/Resistivity/Disc
 import AllRPsVisualization from "@/components/fields/AllRPsVisualization";
 import VirtualExtendedRPsVisualization from "@/components/fields/VirtualExtendedRPsVisualization";
 import PolyhedronVisualization from "@/components/fields/PolyhedronVisualization";
+import RPDistributionCurves from "@/components/fields/RPDistributionCurves";
 
 const Field = () => {
   const router = useRouter();
@@ -51,11 +52,12 @@ const Field = () => {
         {point === "Representing Prisms" && page === 1 && <RPData editable />}
         {/* {point.startsWith("RPItem") && page === 0 && <RP />}
          */}
-        {point === "RPItem" && (
+        {point === "RPItem" && (page === 0 || page === 1 || page === 3) && (
           <div className="h-full flex justify-center items-center text-5xl font-bold">
             {selectedRP?.name}
           </div>
         )}
+        {point === "RPItem" && page === 2 && <RPDistributionCurves />}
         {point === "RP" && page === 0 && <RPVisualization />}
         {point === "RP" && page === 1 && <RPData />}
         {point === "Discontinuities (scanline measure)" && page === 0 && (
