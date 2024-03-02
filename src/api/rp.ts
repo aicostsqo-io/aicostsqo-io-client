@@ -11,3 +11,6 @@ export const getRpsBySiteBoundId = (siteBoundId: string) =>
   axios.get(`/rps/${siteBoundId}`);
 
 export const createRpsByManual = (data: any) => axios.post("/rps/manual", data);
+
+export const getRpDistributionCurves = (data: any) =>
+  axios.post(`/rps/distribution-curves`, data);
