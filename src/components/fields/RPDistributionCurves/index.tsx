@@ -1,8 +1,9 @@
 import { useSiteContext } from "@/contexts/Site";
 import React, { useEffect, useState } from "react";
 import LineChart from "../../common/Charts/Line";
-import TopBar from "./Topbar";
 import { getRpDistributionCurves } from "@/api/rp";
+import TopBar from "./TopBar";
+import BarChart from "@/components/common/Charts/Bar";
 
 /* const data = {
   result: {
@@ -155,10 +156,17 @@ function RPDistributionCurves() {
                 );
               }
               if (distributionValue && distributionKey === "histogram") {
+                console.log(
+                  "getChartData(distributionKey)",
+                  getChartData(distributionKey)
+                );
                 return (
-                  <div>
-                    <h1>Histogram</h1>
-                  </div>
+                  <BarChart
+                    key={distributionKey}
+                    data={getChartData(distributionKey)}
+                    text={distributionKey}
+                    volumeTypes={volumeTypes}
+                  />
                 );
               }
             }

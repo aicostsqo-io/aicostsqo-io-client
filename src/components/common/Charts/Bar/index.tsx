@@ -1,28 +1,25 @@
-import React, { use, useEffect, useMemo, useState } from "react";
-
+import React, { useEffect, useMemo, useState } from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend,
 } from "chart.js";
-import { Line } from "react-chartjs-2";
+import { Bar } from "react-chartjs-2";
 
 ChartJS.register(
   CategoryScale,
   LinearScale,
-  PointElement,
-  LineElement,
+  BarElement,
   Title,
   Tooltip,
   Legend
 );
 
-interface LineChartProps {
+interface BarChartProps {
   text: string;
   data: any;
   volumeTypes: any;
@@ -48,8 +45,7 @@ function getColor(key: string) {
   }
 }
 
-const LineChart = ({ text, data, volumeTypes }: LineChartProps) => {
-  console.log("data", data);
+const BarChart = ({ text, data, volumeTypes }: BarChartProps) => {
   const [datasets, setDatasets] = useState<any[]>([]);
   const [labels, setLabels] = useState<any[]>([]);
   useEffect(() => {
@@ -72,9 +68,8 @@ const LineChart = ({ text, data, volumeTypes }: LineChartProps) => {
     setLabels(labelsArray);
   }, [volumeTypes]);
 
-  const options = useMemo(() => {
-    return {
-      type: "line",
+  const options = useMemo(
+    () => ({
       responsive: true,
       plugins: {
         legend: {
@@ -85,24 +80,14 @@ const LineChart = ({ text, data, volumeTypes }: LineChartProps) => {
           text,
         },
       },
-      indexAxis: "y" as const,
-      scales: {
-        x: {
-          type: "linear" as const,
-          position: "bottom" as const,
-        },
-        y: {
-          type: "linear" as const,
-          position: "left" as const,
-        },
-      },
-    };
-  }, [text]);
+    }),
+    [text]
+  );
 
   if (!datasets.length || !labels.length) return null;
 
   return (
-    <Line
+    <Bar
       options={options}
       data={{
         labels,
@@ -112,4 +97,4 @@ const LineChart = ({ text, data, volumeTypes }: LineChartProps) => {
   );
 };
 
-export default LineChart;
+export default BarChart;
