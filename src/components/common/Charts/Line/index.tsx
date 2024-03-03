@@ -49,14 +49,13 @@ function getColor(key: string) {
 }
 
 const LineChart = ({ text, data, volumeTypes }: LineChartProps) => {
-  console.log("data", data);
   const [datasets, setDatasets] = useState<any[]>([]);
   const [labels, setLabels] = useState<any[]>([]);
   useEffect(() => {
     const datasetsArray: any = [];
     let labelsArray: any = [];
-    Object.entries(volumeTypes).forEach(([key, value]) => {
-      if (value) {
+    Object.entries(volumeTypes).forEach(([key, object]: any) => {
+      if (object.value) {
         labelsArray = data[key]?.map((item: any) => item.y);
         const colorObject: any = getColor(key);
         datasetsArray.push({

@@ -21,37 +21,46 @@ const TobBar = ({
     <>
       <div className="flex gap-5">
         {Object.entries(distributions).map(
-          ([distributionKey, distributionValue]) => (
+          ([distributionKey, distributionObject]: any) => (
             <div
               key={distributionKey}
               className={`${
-                distributionValue ? barItemActive : barItemInActive
+                distributionObject.value ? barItemActive : barItemInActive
               }`}
               onClick={() => {
-                setDistributions({
-                  ...distributions,
-                  [distributionKey]: !distributionValue,
-                });
+                setDistributions((prevDistributions: any) => ({
+                  ...prevDistributions,
+                  [distributionKey]: {
+                    ...prevDistributions[distributionKey],
+                    value: !distributionObject.value,
+                  },
+                }));
               }}
             >
-              {distributionKey}
+              {distributionObject.label}
             </div>
           )
         )}
       </div>
+
       <div className="flex gap-5">
-        {Object.entries(volumeTypes).map(([volumeKey, volumeValue]) => (
+        {Object.entries(volumeTypes).map(([volumeKey, volumeObject]: any) => (
           <div
             key={volumeKey}
-            className={`${volumeValue ? barItemActive : barItemInActive}`}
+            className={`${
+              volumeObject.value ? barItemActive : barItemInActive
+            }`}
             onClick={() => {
-              setVolumeTypes({
-                ...volumeTypes,
-                [volumeKey]: !volumeValue,
-              });
+              setVolumeTypes((prevVolumeTypes: any) => ({
+                ...prevVolumeTypes,
+                [volumeKey]: {
+                  ...prevVolumeTypes[volumeKey],
+                  value: !volumeObject.value,
+                },
+              }));
             }}
           >
-            {volumeKey}
+            {volumeObject.label}
           </div>
         ))}
       </div>

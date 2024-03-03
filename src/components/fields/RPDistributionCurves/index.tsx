@@ -34,46 +34,40 @@ import BarChart from "@/components/common/Charts/Bar";
   },
 }; */
 
-const distributionsList = [
-  {
-    value: "pdf",
+const distributionsListInitialState = {
+  pdf: {
+    key: "pdf",
     label: "PDF",
+    value: false,
   },
-  {
-    value: "cdf",
+  cdf: {
+    key: "cdf",
     label: "CDF",
+    value: false,
   },
-  {
-    value: "histogram",
+  histogram: {
+    key: "histogram",
     label: "Histogram",
+    value: false,
   },
-];
-
-const volumeTypesList = [
-  {
-    value: "volumeTheoric",
-    label: "Volume Theoric",
-  },
-  {
-    value: "volumeQuarry",
-    label: "Volume Quarry",
-  },
-  {
-    value: "totalVolumeOfMaxQuarry",
-    label: "Total Volume Of Max Quarry",
-  },
-];
-
-const distributionsInitialState = {
-  pdf: false,
-  cdf: false,
-  histogram: false,
 };
 
-const volumeTypesInitialState = {
-  volumeTheoric: false,
-  volumeQuarry: false,
-  totalVolumeOfMaxQs: false,
+const volumeTypesListInitialState = {
+  volumeTheoric: {
+    key: "volumeTheoric",
+    label: "Volume Theoric",
+    value: false,
+  },
+  volumeQuarry: {
+    key: "volumeQuarry",
+    label: "Volume Quarry",
+    value: false,
+  },
+  totalVolumeOfMaxQs: {
+    key: "totalVolumeOfMaxQs",
+    label: "Total Volume Of MaxQs",
+    value: false,
+  },
 };
 
 const requestBody = {
@@ -86,15 +80,16 @@ function RPDistributionCurves() {
   const { selectedRP } = useSiteContext();
   const [data, setData] = useState<null | any>(null);
   const [chartData, setChartData] = useState<null | any>(null);
-  const [volumeTypes, setVolumeTypes] = useState(volumeTypesInitialState);
-  const [distributions, setDistributions] = useState(distributionsInitialState);
+  const [volumeTypes, setVolumeTypes] = useState(volumeTypesListInitialState);
+  const [distributions, setDistributions] = useState(
+    distributionsListInitialState
+  );
 
   useEffect(() => {
     getRpDistributionCurves({
       ...requestBody,
       rpIdList: [selectedRP._id],
     }).then((res: any) => {
-      console.log(res);
       const { rpId, ...rest } = res.data.result[0];
       setData(rest);
     });
@@ -144,27 +139,23 @@ function RPDistributionCurves() {
       <div className="grid grid-cols-1 mt-12">
         {data &&
           Object.entries(distributions).map(
-            ([distributionKey, distributionValue]) => {
-              if (distributionValue && distributionKey !== "histogram") {
+            ([distributionKey, distributionObject]) => {
+              if (distributionObject.value && distributionKey !== "histogram") {
                 return (
                   <LineChart
                     key={distributionKey}
                     data={getChartData(distributionKey)}
-                    text={distributionKey}
+                    text={distributionObject.label}
                     volumeTypes={volumeTypes}
                   />
                 );
               }
-              if (distributionValue && distributionKey === "histogram") {
-                console.log(
-                  "getChartData(distributionKey)",
-                  getChartData(distributionKey)
-                );
+              if (distributionObject.value && distributionKey === "histogram") {
                 return (
                   <BarChart
                     key={distributionKey}
                     data={getChartData(distributionKey)}
-                    text={distributionKey}
+                    text={distributionObject.label}
                     volumeTypes={volumeTypes}
                   />
                 );
