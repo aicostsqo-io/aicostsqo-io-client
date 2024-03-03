@@ -74,6 +74,13 @@ const RPTreeItem = ({ rps, setPoint, index }: any) => {
               setPoint("Extended");
             }}
           />
+          <TreeItem
+            nodeId={rp?._id + 5}
+            label={"DFN"}
+            onClick={() => {
+              setPoint("DFN");
+            }}
+          />
           {/* {
               field?.rps?.discs?.length > 0 ? <DiscTreeItem discs={field?.rps?.discs} /> : <TreeItem nodeId={"199"} label={"No Discs"} /> 
             } */}
