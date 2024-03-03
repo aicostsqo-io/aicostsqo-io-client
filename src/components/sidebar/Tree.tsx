@@ -61,7 +61,7 @@ const RPTreeItem = ({ rps, setPoint, site, index }: any) => {
               // setSelectedDiscs([]);
             }}
           />
-          {calculatePolyhedrons ? (
+          {calculatePolyhedrons || true ? (
             <TreeItem
               nodeId={rp?._id + 3}
               label={"Polyhedron"}
@@ -70,7 +70,7 @@ const RPTreeItem = ({ rps, setPoint, site, index }: any) => {
               }}
             />
           ) : null}
-          {generateVirtual1DExtendedRPs ? (
+          {generateVirtual1DExtendedRPs || true ? (
             <TreeItem
               nodeId={rp?._id + 4}
               label={"Extended"}
