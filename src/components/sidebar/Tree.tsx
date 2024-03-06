@@ -69,13 +69,20 @@ const RPTreeItem = ({ rps, setPoint, index }: any) => {
           />
           <TreeItem
             nodeId={rp?._id + 4}
-            label={"Extended"}
+            label={"Extended (1D)"}
             onClick={() => {
-              setPoint("Extended");
+              setPoint("Extended (1D)");
             }}
           />
           <TreeItem
             nodeId={rp?._id + 5}
+            label={"Extended (3D)"}
+            onClick={() => {
+              setPoint("Extended (3D)");
+            }}
+          />
+          <TreeItem
+            nodeId={rp?._id + 6}
             label={"DFN"}
             onClick={() => {
               setPoint("DFN");

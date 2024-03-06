@@ -5,7 +5,7 @@ import { getDiscsByRpId } from "@/api/disc";
 import ObjectVisualizer, { Urls } from "../common/ObjectVisualizer";
 import Loading from "../common/Loading";
 
-const VirtualExtendedRPsVisualization = () => {
+const VirtualExtended1DRPsVisualization = () => {
   const [urls, setUrls] = useState<Urls | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const { selectedRP } = useSiteContext();
@@ -14,7 +14,7 @@ const VirtualExtendedRPsVisualization = () => {
     const fetchObj = async (discs: any) => {
       setLoading(true);
       const res = await axios.post(
-        `${process.env.NEXT_PUBLIC_MARBLE_API_ENDPOINT}/extend`,
+        `${process.env.NEXT_PUBLIC_MARBLE_API_ENDPOINT}/extend1d`,
         {
           filename: selectedRP._id,
           positionX: selectedRP.positionX,
@@ -51,4 +51,4 @@ const VirtualExtendedRPsVisualization = () => {
   );
 };
 
-export default VirtualExtendedRPsVisualization;
+export default VirtualExtended1DRPsVisualization;
