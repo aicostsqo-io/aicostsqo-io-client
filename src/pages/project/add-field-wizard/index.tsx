@@ -32,6 +32,10 @@ const initialInfo = {
     //_id: "",
     customerId: "",
     name: "",
+    generateVirtual1DExtendedRPs: false,
+    calculateMaximumCuboids: false,
+    calculatePolyhedrons: false,
+    generateDiscontinuityPlanes: false,
   },
   siteBound: {
     //_id: "",
@@ -85,8 +89,6 @@ const AddField = () => {
   const [discType, setDiscType] = useState(-1);
   const [otherType, setOtherType] = useState(0);
   const [addOtherOption, setAddOtherOption] = useState(0);
-
-  // console.log(discType);
 
   const router = useRouter();
 
@@ -144,7 +146,9 @@ const AddField = () => {
                 otherType={otherType}
               />
             )}
-            {step === 4 && <EndWizard save={save} end={end} />}
+            {step === 4 && (
+              <EndWizard save={save} end={end} info={info} setInfo={setInfo} />
+            )}
           </div>
         </div>
 

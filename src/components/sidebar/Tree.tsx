@@ -12,9 +12,10 @@ import { useTreeContext } from "@/contexts/Tree";
 import { useSiteContext } from "@/contexts/Site";
 import { toast } from "react-toastify";
 
-const RPTreeItem = ({ rps, setPoint, index }: any) => {
+const RPTreeItem = ({ rps, setPoint, site, index }: any) => {
   const { setSelectedRP, setSelectedRPs, setSelectedDiscs } = useSiteContext();
   const { expanded, setExpanded } = useTreeContext();
+  const { calculatePolyhedrons, generateVirtual1DExtendedRPs } = site;
 
   const handleClickRpTreeItem = (rp: any) => {
     setPoint("RPItem");
@@ -60,27 +61,33 @@ const RPTreeItem = ({ rps, setPoint, index }: any) => {
               // setSelectedDiscs([]);
             }}
           />
-          <TreeItem
-            nodeId={rp?._id + 3}
-            label={"Polyhedron"}
-            onClick={() => {
-              setPoint("Polyhedron");
-            }}
-          />
-          <TreeItem
-            nodeId={rp?._id + 4}
-            label={"Extended (1D)"}
-            onClick={() => {
-              setPoint("Extended (1D)");
-            }}
-          />
-          <TreeItem
-            nodeId={rp?._id + 5}
-            label={"Extended (3D)"}
-            onClick={() => {
-              setPoint("Extended (3D)");
-            }}
-          />
+          {calculatePolyhedrons || true ? (
+            <TreeItem
+              nodeId={rp?._id + 3}
+              label={"Polyhedron"}
+              onClick={() => {
+                setPoint("Polyhedron");
+              }}
+            />
+          ) : null}
+          {generateVirtual1DExtendedRPs || true ? (
+            <TreeItem
+              nodeId={rp?._id + 4}
+              label={"Extended (1D)"}
+              onClick={() => {
+                setPoint("Extended (1D)");
+              }}
+            />
+          ) : null}
+          {generateVirtual1DExtendedRPs || true ? (
+            <TreeItem
+              nodeId={rp?._id + 5}
+              label={"Extended (3D)"}
+              onClick={() => {
+                setPoint("Extended (3D)");
+              }}
+            />
+          ) : null}
           <TreeItem
             nodeId={rp?._id + 6}
             label={"DFN"}
@@ -111,6 +118,7 @@ const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
     setSelectedSite(field);
     router.push(`/project/fields/${field?.site?._id}`);
   };
+
   return (
     <TreeItem
       nodeId={"Site" + field?.site?._id}
@@ -164,7 +172,12 @@ const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
         }}
       />
       {field?.rps?.length > 0 ? (
-        <RPTreeItem setPoint={setPoint} rps={field?.rps} index={index} />
+        <RPTreeItem
+          setPoint={setPoint}
+          site={field?.site}
+          rps={field?.rps}
+          index={index}
+        />
       ) : (
         <TreeItem nodeId={"No RPs"} label={"No RPs"} />
       )}

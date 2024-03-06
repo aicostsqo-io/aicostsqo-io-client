@@ -1,4 +1,4 @@
-import { bulkDeleteRps, getRps } from "@/api/rp";
+import { bulkDeleteRps, getRpsBySiteBoundId } from "@/api/rp";
 import { useSiteContext } from "@/contexts/Site";
 import { useTreeContext } from "@/contexts/Tree";
 import { useUIContext } from "@/contexts/UI";
@@ -30,12 +30,6 @@ const RPData = ({ editable = false }: { editable?: boolean }) => {
     }
   }, [selectedRPs, selectedRP]);
 
-  /* useEffect(() => {
-    getRps()
-      .then((newList) => setData(newList.data.rps))
-      .catch((err) => console.log(err));
-  }, []); */
-
   const handleSelectAll = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) setselectedRows(data.map((p) => p._id));
     else setselectedRows([]);
@@ -48,7 +42,7 @@ const RPData = ({ editable = false }: { editable?: boolean }) => {
     const rowsToDelete = selectedRows;
     bulkDeleteRps(rowsToDelete)
       .then((res) => {
-        getRps()
+        getRpsBySiteBoundId(selectedSite?.siteBound?._id)
           .then((newList) => setData(newList.data.rps))
           .catch((err) => console.log(err));
       })
@@ -69,6 +63,7 @@ const RPData = ({ editable = false }: { editable?: boolean }) => {
                 <input type="checkbox" onChange={handleSelectAll} />
               </th>
               <th className="py-3 px-6 text-left">Id</th>
+              <th className="py-3 px-6 text-left">Name</th>
               <th className="py-3 px-6 text-left">Site Bound Id</th>
               <th className="py-3 px-6 text-left">Size X</th>
               <th className="py-3 px-6 text-left">Size Y</th>
@@ -95,6 +90,7 @@ const RPData = ({ editable = false }: { editable?: boolean }) => {
                   />
                 </td>
                 <td className="py-3 px-6 text-left">{p._id}</td>
+                <td className="py-3 px-6 text-left">{p.name}</td>
                 <td className="py-3 px-6 text-left">{p.siteBound}</td>
                 <td className="py-3 px-6 text-left">{p.sizeX}</td>
                 <td className="py-3 px-6 text-left">{p.sizeY}</td>

@@ -79,13 +79,13 @@ const requestBody = {
 function RPDistributionCurves() {
   const { selectedRP } = useSiteContext();
   const [data, setData] = useState<null | any>(null);
-  const [chartData, setChartData] = useState<null | any>(null);
   const [volumeTypes, setVolumeTypes] = useState(volumeTypesListInitialState);
   const [distributions, setDistributions] = useState(
     distributionsListInitialState
   );
 
   useEffect(() => {
+    setData(null);
     getRpDistributionCurves({
       ...requestBody,
       rpIdList: [selectedRP._id],
@@ -136,7 +136,7 @@ function RPDistributionCurves() {
         setVolumeTypes={setVolumeTypes}
         setDistributions={setDistributions}
       />
-      <div className="grid grid-cols-1 mt-12">
+      <div className="grid grid-cols-1 mt-12 gap-y-10">
         {data &&
           Object.entries(distributions).map(
             ([distributionKey, distributionObject]) => {

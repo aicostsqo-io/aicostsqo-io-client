@@ -80,6 +80,16 @@ const BarChart = ({ text, data, volumeTypes }: BarChartProps) => {
           text,
         },
       },
+      // scales: {
+      //   x: {
+      //     type: "linear" as const,
+      //     position: "bottom" as const,
+      //   },
+      //   y: {
+      //     type: "linear" as const,
+      //     position: "left" as const,
+      //   },
+      // },
     }),
     [text]
   );

@@ -38,7 +38,6 @@ const AddRP = ({ onClose }: Props) => {
       await createRp({
         ...rp,
         siteBound: selectedSite?.siteBound?._id,
-        name: `RP ${String(selectedSite?.rps.length + 1).padStart(3, "0")}`,
       });
 
       const rpsGetResponse = await getRpsBySiteBoundId(
