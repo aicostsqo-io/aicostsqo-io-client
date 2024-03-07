@@ -10,13 +10,27 @@ interface TobBarProps {
   volumeTypes: any;
   setDistributions: any;
   setVolumeTypes: any;
+  showAnalysis: any;
+  setShowAnalysis: any;
 }
 const TobBar = ({
   distributions,
   setDistributions,
   volumeTypes,
   setVolumeTypes,
+  showAnalysis,
+  setShowAnalysis,
 }: TobBarProps) => {
+  const changeVolumeType = (volumeKey: string) => {
+    // just toggle sended volume type, make false the others
+    setVolumeTypes((prevVolumeTypes: any) => {
+      const newVolumeTypes = { ...prevVolumeTypes };
+      Object.keys(newVolumeTypes).forEach((key) => {
+        newVolumeTypes[key].value = key === volumeKey;
+      });
+      return newVolumeTypes;
+    });
+  };
   return (
     <>
       <div className="flex gap-5">
@@ -50,19 +64,19 @@ const TobBar = ({
             className={`${
               volumeObject.value ? barItemActive : barItemInActive
             }`}
-            onClick={() => {
-              setVolumeTypes((prevVolumeTypes: any) => ({
-                ...prevVolumeTypes,
-                [volumeKey]: {
-                  ...prevVolumeTypes[volumeKey],
-                  value: !volumeObject.value,
-                },
-              }));
-            }}
+            onClick={() => changeVolumeType(volumeKey)}
           >
             {volumeObject.label}
           </div>
         ))}
+      </div>
+      <div className="">
+        <div
+          className={`${showAnalysis ? barItemActive : barItemInActive}`}
+          onClick={() => setShowAnalysis(!showAnalysis)}
+        >
+          Show Analysis
+        </div>
       </div>
     </>
   );

@@ -26,6 +26,7 @@ interface LineChartProps {
   text: string;
   data: any;
   volumeTypes: any;
+  showAnalysis: any;
 }
 
 function getColor(key: string) {
@@ -45,10 +46,21 @@ function getColor(key: string) {
         borderColor: "rgb(75, 192, 192)",
         backgroundColor: "rgba(75, 192, 192, 0.5)",
       };
+    case "dashedLine":
+      return {
+        borderColor: "rgb(80, 0, 80)",
+        backgroundColor: "rgba(80, 0, 80, 0.5)",
+      };
   }
 }
 
-const LineChart = ({ text, data, volumeTypes }: LineChartProps) => {
+const LineChart = ({
+  text,
+  data,
+  volumeTypes,
+  showAnalysis,
+}: LineChartProps) => {
+  console.log("data", data);
   const [datasets, setDatasets] = useState<any[]>([]);
   const [labels, setLabels] = useState<any[]>([]);
   useEffect(() => {
@@ -56,20 +68,34 @@ const LineChart = ({ text, data, volumeTypes }: LineChartProps) => {
     let labelsArray: any = [];
     Object.entries(volumeTypes).forEach(([key, object]: any) => {
       if (object.value) {
-        labelsArray = data[key]?.map((item: any) => item.y);
+        labelsArray = data[key]?.map((item: any) => item.x);
         const colorObject: any = getColor(key);
         datasetsArray.push({
           label: key,
-          data: data[key]?.map((item: any) => item.x),
+          data: data[key]?.map((item: any) => item.y),
           fill: false,
+          tension: 0.3,
           backgroundColor: colorObject.backgroundColor,
           borderColor: colorObject.borderColor,
         });
+
+        if (text === "PDF" && showAnalysis && key === "volumeTheoric") {
+          const colorObject: any = getColor("dashedLine");
+          datasetsArray.push({
+            label: "analysis",
+            data: data?.volumeTheoricExpected?.map((item: any) => item.y),
+            fill: false,
+            tension: 0.3,
+            pointStyle: false,
+            backgroundColor: colorObject.backgroundColor,
+            borderColor: colorObject.borderColor,
+          });
+        }
       }
     });
     setDatasets(datasetsArray);
     setLabels(labelsArray);
-  }, [volumeTypes]);
+  }, [volumeTypes, showAnalysis]);
 
   const options = useMemo(() => {
     return {
@@ -84,17 +110,19 @@ const LineChart = ({ text, data, volumeTypes }: LineChartProps) => {
           text,
         },
       },
-      indexAxis: "y" as const,
-      scales: {
-        x: {
-          type: "linear" as const,
-          position: "bottom" as const,
-        },
-        y: {
-          type: "linear" as const,
-          position: "left" as const,
-        },
-      },
+      // ...(showAnalysis && {
+      //   indexAxis: "y" as const,
+      //   scales: {
+      //     x: {
+      //       type: "linear" as const,
+      //       position: "bottom" as const,
+      //     },
+      //     y: {
+      //       type: "linear" as const,
+      //       position: "left" as const,
+      //     },
+      //   },
+      // }),
     };
   }, [text]);
 

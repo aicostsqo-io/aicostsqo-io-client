@@ -5,35 +5,6 @@ import { getRpDistributionCurves } from "@/api/rp";
 import TopBar from "./TopBar";
 import BarChart from "@/components/common/Charts/Bar";
 
-/* const data = {
-  result: {
-    volumeTheoric: {
-      pdf: [
-        {
-          У: 212,
-          x: 149.69418638,
-        },
-        {
-          У: 293,
-          x: 342,
-        },
-        {
-          У: 374,
-          x: 534.30581362,
-        },
-        {
-          У: 455,
-          x: 726,
-        },
-        {
-          У: 536,
-          x: 917.69418638,
-        },
-      ],
-    },
-  },
-}; */
-
 const distributionsListInitialState = {
   pdf: {
     key: "pdf",
@@ -83,6 +54,7 @@ function RPDistributionCurves() {
   const [distributions, setDistributions] = useState(
     distributionsListInitialState
   );
+  const [showAnalysis, setShowAnalysis] = useState(false);
 
   useEffect(() => {
     setData(null);
@@ -92,6 +64,7 @@ function RPDistributionCurves() {
     }).then((res: any) => {
       const { rpId, ...rest } = res.data.result[0];
       setData(rest);
+      console.log("res", rest);
     });
   }, [selectedRP]);
 
@@ -110,9 +83,12 @@ function RPDistributionCurves() {
         break;
       case "pdf":
         chartData = {
-          totalVolumeOfMaxQs: data?.totalVolumeOfMaxQs?.pdf,
-          volumeQuarry: data?.volumeQuarry?.pdf,
-          volumeTheoric: data?.volumeTheoric?.pdf,
+          totalVolumeOfMaxQs: data?.totalVolumeOfMaxQs?.pdf?.observed,
+          totalVolumeOfMaxQsExpected: data?.totalVolumeOfMaxQs?.pdf?.expected,
+          volumeQuarry: data?.volumeQuarry?.pdf?.observed,
+          volumeQuarryExpected: data?.volumeQuarry?.pdf?.expected,
+          volumeTheoric: data?.volumeTheoric?.pdf?.observed,
+          volumeTheoricExpected: data?.volumeTheoric?.pdf?.expected,
         };
         break;
       case "histogram":
@@ -128,6 +104,7 @@ function RPDistributionCurves() {
 
     return chartData;
   }
+
   return (
     <div className="flex flex-col gap-5">
       <TopBar
@@ -135,6 +112,8 @@ function RPDistributionCurves() {
         distributions={distributions}
         setVolumeTypes={setVolumeTypes}
         setDistributions={setDistributions}
+        showAnalysis={showAnalysis}
+        setShowAnalysis={setShowAnalysis}
       />
       <div className="grid grid-cols-1 mt-12 gap-y-10">
         {data &&
@@ -147,6 +126,7 @@ function RPDistributionCurves() {
                     data={getChartData(distributionKey)}
                     text={distributionObject.label}
                     volumeTypes={volumeTypes}
+                    showAnalysis={showAnalysis}
                   />
                 );
               }
