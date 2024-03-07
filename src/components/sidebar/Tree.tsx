@@ -73,14 +73,23 @@ const RPTreeItem = ({ rps, setPoint, site, index }: any) => {
           {generateVirtual1DExtendedRPs || true ? (
             <TreeItem
               nodeId={rp?._id + 4}
-              label={"Extended"}
+              label={"Extended (1D)"}
               onClick={() => {
-                setPoint("Extended");
+                setPoint("Extended (1D)");
+              }}
+            />
+          ) : null}
+          {generateVirtual1DExtendedRPs || true ? (
+            <TreeItem
+              nodeId={rp?._id + 5}
+              label={"Extended (3D)"}
+              onClick={() => {
+                setPoint("Extended (3D)");
               }}
             />
           ) : null}
           <TreeItem
-            nodeId={rp?._id + 5}
+            nodeId={rp?._id + 6}
             label={"DFN"}
             onClick={() => {
               setPoint("DFN");

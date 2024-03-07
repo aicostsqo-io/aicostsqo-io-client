@@ -18,10 +18,11 @@ import DiscontinuitiesSeismicData from "@/components/fields/Seismic/Discontinuit
 import DiscontinuitiesMagnetometricData from "@/components/fields/Magnetometric/DiscontinuitiesMagnetometricData";
 import DiscontinuitiesResistivityData from "@/components/fields/Resistivity/DiscontinuitiesResistivityData";
 import AllRPsVisualization from "@/components/fields/AllRPsVisualization";
-import VirtualExtendedRPsVisualization from "@/components/fields/VirtualExtendedRPsVisualization";
+import VirtualExtended3DRPsVisualization from "@/components/fields/VirtualExtended3DRPsVisualization";
 import PolyhedronVisualization from "@/components/fields/PolyhedronVisualization";
 import RPDistributionCurves from "@/components/fields/RPDistributionCurves";
 import DFNVisualization from "@/components/fields/DFNVisualization";
+import VirtualExtended1DRPsVisualization from "@/components/fields/VirtualExtended1DRPsVisualization";
 
 const Field = () => {
   const router = useRouter();
@@ -68,8 +69,11 @@ const Field = () => {
           <DiscontinuitiesData />
         )}
         {point === "Polyhedron" && page === 0 && <PolyhedronVisualization />}
-        {point === "Extended" && page === 0 && (
-          <VirtualExtendedRPsVisualization />
+        {point === "Extended (1D)" && page === 0 && (
+          <VirtualExtended1DRPsVisualization />
+        )}
+        {point === "Extended (3D)" && page === 0 && (
+          <VirtualExtended3DRPsVisualization />
         )}
         {point === "DFN" && page === 0 && <DFNVisualization />}
         {point === "Discontinuities (GPR)" && page === 0 && (
