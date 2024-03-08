@@ -61,6 +61,7 @@ const LineChart = ({
   showAnalysis,
 }: LineChartProps) => {
   console.log("data", data);
+  console.log("volumeTypes", volumeTypes);
   const [datasets, setDatasets] = useState<any[]>([]);
   const [labels, setLabels] = useState<any[]>([]);
   useEffect(() => {
@@ -79,11 +80,12 @@ const LineChart = ({
           borderColor: colorObject.borderColor,
         });
 
-        if (text === "PDF" && showAnalysis && key === "volumeTheoric") {
+        if (text === "PDF" && showAnalysis) {
+          console.log("esst", data[object?.analysisKey]);
           const colorObject: any = getColor("dashedLine");
           datasetsArray.push({
             label: "analysis",
-            data: data?.volumeTheoricExpected?.map((item: any) => item.y),
+            data: data[object?.analysisKey]?.map((item: any) => item.y),
             fill: false,
             tension: 0.3,
             pointStyle: false,

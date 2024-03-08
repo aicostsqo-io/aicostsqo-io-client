@@ -31,6 +31,30 @@ const TobBar = ({
       return newVolumeTypes;
     });
   };
+
+  // toggle show analysis, if the selected distribution is PDF
+  const toggleShowAnalysis = () => {
+    if (distributions.pdf.value) {
+      setShowAnalysis(true);
+    } else {
+      setShowAnalysis(false);
+    }
+  };
+
+  // toggle distributons, set false showanalysies If you click on something other than a pdf
+  const toggleDistributions = (distributionKey: string) => {
+    setDistributions((prevDistributions: any) => {
+      const newDistributions = { ...prevDistributions };
+      Object.keys(newDistributions).forEach((key) => {
+        newDistributions[key].value = key === distributionKey;
+      });
+      return newDistributions;
+    });
+    if (distributionKey !== "pdf") {
+      setShowAnalysis(false);
+    }
+  };
+
   return (
     <>
       <div className="flex gap-5">
@@ -41,15 +65,7 @@ const TobBar = ({
               className={`${
                 distributionObject.value ? barItemActive : barItemInActive
               }`}
-              onClick={() => {
-                setDistributions((prevDistributions: any) => ({
-                  ...prevDistributions,
-                  [distributionKey]: {
-                    ...prevDistributions[distributionKey],
-                    value: !distributionObject.value,
-                  },
-                }));
-              }}
+              onClick={() => toggleDistributions(distributionKey)}
             >
               {distributionObject.label}
             </div>
@@ -73,7 +89,7 @@ const TobBar = ({
       <div className="">
         <div
           className={`${showAnalysis ? barItemActive : barItemInActive}`}
-          onClick={() => setShowAnalysis(!showAnalysis)}
+          onClick={() => toggleShowAnalysis()}
         >
           Show Analysis
         </div>

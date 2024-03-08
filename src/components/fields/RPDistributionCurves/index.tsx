@@ -9,7 +9,7 @@ const distributionsListInitialState = {
   pdf: {
     key: "pdf",
     label: "PDF",
-    value: false,
+    value: true,
   },
   cdf: {
     key: "cdf",
@@ -27,16 +27,19 @@ const volumeTypesListInitialState = {
   volumeTheoric: {
     key: "volumeTheoric",
     label: "Volume Theoric",
-    value: false,
+    analysisKey: "volumeTheoricExpected",
+    value: true,
   },
   volumeQuarry: {
     key: "volumeQuarry",
     label: "Volume Quarry",
+    analysisKey: "volumeQuarryExpected",
     value: false,
   },
   totalVolumeOfMaxQs: {
     key: "totalVolumeOfMaxQs",
     label: "Total Volume Of MaxQs",
+    analysisKey: "totalVolumeOfMaxQsExpected",
     value: false,
   },
 };

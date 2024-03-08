@@ -53,11 +53,11 @@ const BarChart = ({ text, data, volumeTypes }: BarChartProps) => {
     let labelsArray: any = [];
     Object.entries(volumeTypes).forEach(([key, object]: any) => {
       if (object.value) {
-        labelsArray = data[key]?.map((item: any) => item.y);
+        labelsArray = data[key]?.map((item: any) => item.x);
         const colorObject: any = getColor(key);
         datasetsArray.push({
           label: key,
-          data: data[key]?.map((item: any) => item.x),
+          data: data[key]?.map((item: any) => item.y),
           fill: false,
           backgroundColor: colorObject.backgroundColor,
           borderColor: colorObject.borderColor,
