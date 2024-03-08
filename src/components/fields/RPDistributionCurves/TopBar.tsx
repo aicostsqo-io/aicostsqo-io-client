@@ -35,7 +35,7 @@ const TobBar = ({
   // toggle show analysis, if the selected distribution is PDF
   const toggleShowAnalysis = () => {
     if (distributions.pdf.value) {
-      setShowAnalysis(true);
+      setShowAnalysis(!showAnalysis);
     } else {
       setShowAnalysis(false);
     }
