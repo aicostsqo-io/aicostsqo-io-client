@@ -12,6 +12,7 @@ export type Urls = {
 
 export type SceneProps = {
   urls: Urls;
+  ambientLight?: boolean;
 };
 
 function Scene({ urls }: SceneProps) {
@@ -33,7 +34,7 @@ function Scene({ urls }: SceneProps) {
   return <primitive object={obj} />;
 }
 
-const ObjectVisualizer = ({ urls }: SceneProps) => {
+const ObjectVisualizer = ({ urls, ambientLight = true }: SceneProps) => {
   const camera = new PerspectiveCamera(
     45,
     window.innerWidth / window.innerHeight,
@@ -45,8 +46,16 @@ const ObjectVisualizer = ({ urls }: SceneProps) => {
   return (
     urls && (
       <Canvas camera={camera}>
-        <fog color="hotpink" near={1} far={10} />
-        <ambientLight intensity={0.8} />
+        <fog color="#3f7b9d" near={15} far={14} />
+        {ambientLight ? (
+          <ambientLight intensity={0.8} />
+        ) : (
+          <>
+            <directionalLight position={[-100, 300, -300]} intensity={1.2} />
+            <directionalLight position={[100, 300, 300]} intensity={1.2} />
+          </>
+        )}
+
         <Suspense fallback={null}>
           <Scene urls={urls} />
         </Suspense>

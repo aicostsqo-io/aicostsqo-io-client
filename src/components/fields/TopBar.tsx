@@ -22,7 +22,7 @@ function TopBar({ page, setPage }: any) {
         className={`${page === 1 ? barItemActive : barItemInActive}`}
         onClick={() => setPage(1)}
       >
-        Datas
+        Data
       </div>
       <div
         className={`${page === 2 ? barItemActive : barItemInActive}`}

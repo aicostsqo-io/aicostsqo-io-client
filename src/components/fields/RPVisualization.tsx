@@ -35,7 +35,7 @@ const RPVisualization = () => {
 
   return (
     <div className="flex flex-row h-full gap-5">
-      {urls && <ObjectVisualizer urls={urls} />}
+      {urls && <ObjectVisualizer urls={urls} ambientLight={false} />}
     </div>
   );
 };
