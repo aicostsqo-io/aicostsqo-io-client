@@ -36,10 +36,10 @@ const DFNVisualization = () => {
   const [dfnLoading, setDfnLoading] = useState<boolean>(false);
   const [dfnCalculation, setDfnCalculation] = useState<DfnCalculationModel>({
     distributionSize: "log",
-    fisherConstant: 0,
-    maxFractureCount: 0,
-    meanFractureSize: 0,
-    sigmaFractureSize: 0,
+    fisherConstant: 23,
+    maxFractureCount: 7,
+    meanFractureSize: 0.725,
+    sigmaFractureSize: 0.52,
   } as DfnCalculationModel);
   const { selectedRP } = useSiteContext();
 
@@ -147,7 +147,7 @@ const DFNVisualization = () => {
           />
         </div>
         <div className="m-2">
-          <label className="text-lg">Fisher Constant: </label>
+          <label className="text-lg">Fisher Constant (Kappa): </label>
           <input
             type="number"
             min={0}

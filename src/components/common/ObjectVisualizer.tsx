@@ -45,8 +45,8 @@ const ObjectVisualizer = ({ urls }: SceneProps) => {
   return (
     urls && (
       <Canvas camera={camera}>
-        <directionalLight position={[-100, 300, -300]} intensity={1.2} />
-        <directionalLight position={[100, 300, 300]} intensity={1.2} />
+        <fog color="hotpink" near={1} far={10} />
+        <ambientLight intensity={0.8} />
         <Suspense fallback={null}>
           <Scene urls={urls} />
         </Suspense>
