@@ -57,4 +57,4 @@ const ObjectVisualizer = ({ urls }: SceneProps) => {
   );
 };
 
-export default ObjectVisualizer;
+export default React.memo(ObjectVisualizer);

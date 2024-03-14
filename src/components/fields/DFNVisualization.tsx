@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { useSiteContext } from "@/contexts/Site";
 import axios from "axios";
 import { getDiscsByRpId } from "@/api/disc";
@@ -83,7 +83,8 @@ const DFNVisualization = () => {
         })),
       }
     );
-    setDfnUrls({ obj: res.data.obj, mtl: res.data.mtl });
+    const newDfnUrls = { obj: res.data.obj, mtl: res.data.mtl };
+    setDfnUrls(newDfnUrls);
     setDfnLoading(false);
   };
 
@@ -124,17 +125,28 @@ const DFNVisualization = () => {
       toast.error("Please fill all the fields");
       return;
     }
+
+    if (
+      !(
+        dfnCalculation?.fisherConstant <= 0 ||
+        dfnCalculation?.fisherConstant >= 2
+      )
+    ) {
+      toast.error("fisher_constant value mustn't be between 0 and 2");
+      return;
+    }
+
     await fetchDfnData();
   };
 
   return (
-    <>
+    <Fragment>
       <div className="flex flex-row">
         <div className="m-2">
           <label className="text-lg">Max Fracture Count: </label>
           <input
             type="number"
-            min={0}
+            min={2}
             value={dfnCalculation?.maxFractureCount}
             onChange={(e) =>
               setDfnCalculation((prev) => ({
@@ -150,7 +162,6 @@ const DFNVisualization = () => {
           <label className="text-lg">Fisher Constant (Kappa): </label>
           <input
             type="number"
-            min={0}
             value={dfnCalculation?.fisherConstant}
             onChange={(e) =>
               setDfnCalculation((prev) => ({
@@ -186,7 +197,6 @@ const DFNVisualization = () => {
           <label className="text-lg">Mean Fracture Size: </label>
           <input
             type="number"
-            min={0}
             value={dfnCalculation?.meanFractureSize}
             onChange={(e) =>
               setDfnCalculation((prev) => ({
@@ -202,7 +212,6 @@ const DFNVisualization = () => {
           <label className="text-lg">Sigma Fracture Size: </label>
           <input
             type="number"
-            min={0}
             value={dfnCalculation?.sigmaFractureSize}
             onChange={(e) =>
               setDfnCalculation((prev) => ({
@@ -239,7 +248,7 @@ const DFNVisualization = () => {
           )}
         </div>
       </div>
-    </>
+    </Fragment>
   );
 };
 
