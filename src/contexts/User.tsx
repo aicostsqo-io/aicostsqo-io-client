@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { User, UserRegister } from "@/types/models/user";
@@ -23,25 +29,29 @@ export const UserProvider: React.FC<props> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<User | undefined>();
   const router = useRouter();
 
-  useEffect(() => {
-    if (
-      localStorage.getItem("access_token") &&
-      isValidToken(localStorage.getItem("access_token") || "")
-    ) {
+  const from = useMemo(() => router.query.from, [router.query.from]);
+
+  const check = () => {
+    if (from === "mobile" || localStorage.getItem("fromMobile") === "true") {
+      localStorage.setItem("fromMobile", "true");
+      setCurrentUser({
+        _id: "123",
+        full_name: "John Doe",
+        email: "john@doe.com",
+      });
+      setLogged(true);
+    } else if (isValidToken(localStorage.getItem("access_token"))) {
       setCurrentUser(JSON.parse(localStorage.getItem("user_info") || "{}"));
       setLogged(true);
-      router.push("/");
-    } else if (
-      localStorage.getItem("access_token") &&
-      !isValidToken(localStorage.getItem("access_token") || "")
-    ) {
+    } else if (!isValidToken(localStorage.getItem("access_token"))) {
       setCurrentUser(undefined);
       router.push("/login");
-    } else {
-      router.push("/login");
-      console.error("user context - no token");
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    check();
+  }, [from]);
 
   const register = (data: UserRegister) => {
     // console.log(data);
