@@ -4,9 +4,11 @@ import { loginSchema } from "@/validations/login";
 import { useFormik } from "formik";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Login = () => {
   const { login } = useUserContext();
+  const router = useRouter();
   const { handleSubmit, handleChange, handleBlur, values, errors, touched } =
     useFormik({
       initialValues: {
@@ -97,7 +99,10 @@ const Login = () => {
             Do not you have an account? Sign Up!
           </Link>
 
-          <ul className="flex flex-row justify-between gap-7 mt-10">
+          <ul
+            className="flex flex-row justify-between gap-7 mt-10"
+            onClick={() => router.push("/project")}
+          >
             <li className="h-[80px]">
               <Image
                 src={assets.BAY_E}
