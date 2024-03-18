@@ -1,15 +1,14 @@
 import { useSiteContext } from "@/contexts/Site";
 import React, { useEffect, useState } from "react";
-import LineChart from "../../common/Charts/Line";
 import { getRpDistributionCurves } from "@/api/rp";
 import TopBar from "./TopBar";
-import BarChart from "@/components/common/Charts/Bar";
+import CustomChart from "@/components/common/Charts/CustomChart";
 
 const distributionsListInitialState = {
   pdf: {
     key: "pdf",
     label: "PDF",
-    value: true,
+    value: false,
   },
   cdf: {
     key: "cdf",
@@ -28,18 +27,21 @@ const volumeTypesListInitialState = {
     key: "volumeTheoric",
     label: "Volume Theoric",
     analysisKey: "volumeTheoricExpected",
-    value: true,
+    analysisLabel: "Volume Theoric Expected",
+    value: false,
   },
   volumeQuarry: {
     key: "volumeQuarry",
     label: "Volume Quarry",
     analysisKey: "volumeQuarryExpected",
+    analysisLabel: "Volume Quarry Expected",
     value: false,
   },
   totalVolumeOfMaxQs: {
     key: "totalVolumeOfMaxQs",
     label: "Total Volume Of MaxQs",
     analysisKey: "totalVolumeOfMaxQsExpected",
+    analysisLabel: "Total Volume Of MaxQs Expected",
     value: false,
   },
 };
@@ -122,24 +124,15 @@ function RPDistributionCurves() {
         {data &&
           Object.entries(distributions).map(
             ([distributionKey, distributionObject]) => {
-              if (distributionObject.value && distributionKey !== "histogram") {
+              if (distributionObject.value) {
                 return (
-                  <LineChart
+                  <CustomChart
                     key={distributionKey}
                     data={getChartData(distributionKey)}
                     text={distributionObject.label}
                     volumeTypes={volumeTypes}
                     showAnalysis={showAnalysis}
-                  />
-                );
-              }
-              if (distributionObject.value && distributionKey === "histogram") {
-                return (
-                  <BarChart
-                    key={distributionKey}
-                    data={getChartData(distributionKey)}
-                    text={distributionObject.label}
-                    volumeTypes={volumeTypes}
+                    type={distributionKey === "histogram" ? "bar" : "scatter"}
                   />
                 );
               }

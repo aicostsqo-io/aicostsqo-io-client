@@ -59,7 +59,7 @@ const Field = () => {
             {selectedRP?.name}
           </div>
         )}
-        {point === "RPItem" && page === 2 && <RPDistributionCurves />}
+
         {point === "RP" && page === 0 && <RPVisualization />}
         {point === "RP" && page === 1 && <RPData />}
         {point === "Discontinuities (scanline measure)" && page === 0 && (
@@ -110,6 +110,9 @@ const Field = () => {
         {point === "Discontinuities (Televiewer)" && page === 1 && (
           <DiscontinuitiesTeleviewerData />
         )}
+
+        {/* Block Size Distribution Curves */}
+        {point === "RPItem" && page === 2 && <RPDistributionCurves />}
       </ProjectLayout>
     </MainLayout>
   );

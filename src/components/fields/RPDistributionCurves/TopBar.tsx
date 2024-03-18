@@ -21,15 +21,22 @@ const TobBar = ({
   showAnalysis,
   setShowAnalysis,
 }: TobBarProps) => {
-  const changeVolumeType = (volumeKey: string) => {
+  const toggleVolumeTypes = (volumeKey: string) => {
     // just toggle sended volume type, make false the others
-    setVolumeTypes((prevVolumeTypes: any) => {
-      const newVolumeTypes = { ...prevVolumeTypes };
-      Object.keys(newVolumeTypes).forEach((key) => {
-        newVolumeTypes[key].value = key === volumeKey;
-      });
-      return newVolumeTypes;
-    });
+    // setVolumeTypes((prevVolumeTypes: any) => {
+    //   const newVolumeTypes = { ...prevVolumeTypes };
+    //   Object.keys(newVolumeTypes).forEach((key) => {
+    //     newVolumeTypes[key].value = key === volumeKey;
+    //   });
+    //   return newVolumeTypes;
+    // });
+    setVolumeTypes((prevVolumeTypes: any) => ({
+      ...prevVolumeTypes,
+      [volumeKey]: {
+        ...prevVolumeTypes[volumeKey],
+        value: !prevVolumeTypes[volumeKey].value,
+      },
+    }));
   };
 
   // toggle show analysis, if the selected distribution is PDF
@@ -43,13 +50,21 @@ const TobBar = ({
 
   // toggle distributons, set false showanalysies If you click on something other than a pdf
   const toggleDistributions = (distributionKey: string) => {
-    setDistributions((prevDistributions: any) => {
-      const newDistributions = { ...prevDistributions };
-      Object.keys(newDistributions).forEach((key) => {
-        newDistributions[key].value = key === distributionKey;
-      });
-      return newDistributions;
-    });
+    // setDistributions((prevDistributions: any) => {
+    //   const newDistributions = { ...prevDistributions };
+    //   Object.keys(newDistributions).forEach((key) => {
+    //     newDistributions[key].value = key === distributionKey;
+    //   });
+    //   return newDistributions;
+    // });
+    setDistributions((prevDistributions: any) => ({
+      ...prevDistributions,
+      [distributionKey]: {
+        ...prevDistributions[distributionKey],
+        value: !prevDistributions[distributionKey].value,
+      },
+    }));
+
     if (distributionKey !== "pdf") {
       setShowAnalysis(false);
     }
@@ -80,7 +95,7 @@ const TobBar = ({
             className={`${
               volumeObject.value ? barItemActive : barItemInActive
             }`}
-            onClick={() => changeVolumeType(volumeKey)}
+            onClick={() => toggleVolumeTypes(volumeKey)}
           >
             {volumeObject.label}
           </div>
