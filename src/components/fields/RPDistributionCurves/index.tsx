@@ -2,7 +2,12 @@ import { useSiteContext } from "@/contexts/Site";
 import React, { useEffect, useState } from "react";
 import { getRpDistributionCurves } from "@/api/rp";
 import TopBar from "./TopBar";
-import CustomChart from "@/components/common/Charts/CustomChart";
+
+import dynamic from "next/dynamic";
+
+const CustomChart = dynamic(() => import("../../common/Charts/CustomChart"), {
+  ssr: false,
+});
 
 const distributionsListInitialState = {
   pdf: {
@@ -69,7 +74,6 @@ function RPDistributionCurves() {
     }).then((res: any) => {
       const { rpId, ...rest } = res.data.result[0];
       setData(rest);
-      console.log("res", rest);
     });
   }, [selectedRP]);
 
@@ -120,7 +124,7 @@ function RPDistributionCurves() {
         showAnalysis={showAnalysis}
         setShowAnalysis={setShowAnalysis}
       />
-      <div className="grid grid-cols-1 mt-12 gap-y-10">
+      <div className="grid grid-cols-1 gap-y-7">
         {data &&
           Object.entries(distributions).map(
             ([distributionKey, distributionObject]) => {

@@ -82,8 +82,6 @@ const CustomChart = ({
     setDatasets(datasetsArray);
   }, [volumeTypes, showAnalysis]);
 
-  console.log("datasets", datasets);
-
   return <Plot data={datasets} layout={{ title: text }} />;
 };
 
