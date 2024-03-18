@@ -128,7 +128,7 @@ function RPDistributionCurves() {
         {data &&
           Object.entries(distributions).map(
             ([distributionKey, distributionObject]) => {
-              if (distributionObject.value) {
+              if (distributionObject.value && distributionKey !== "histogram") {
                 return (
                   <CustomChart
                     key={distributionKey}
@@ -136,8 +136,27 @@ function RPDistributionCurves() {
                     text={distributionObject.label}
                     volumeTypes={volumeTypes}
                     showAnalysis={showAnalysis}
-                    type={distributionKey === "histogram" ? "bar" : "scatter"}
+                    type={"scatter"}
                   />
+                );
+              }
+              if (distributionObject.value && distributionKey === "histogram") {
+                return Object.entries(volumeTypes).map(
+                  ([volumeKey, volumeObject]) => {
+                    if (volumeObject.value) {
+                      return (
+                        <CustomChart
+                          key={volumeKey}
+                          selectedVolume={volumeKey}
+                          data={getChartData(distributionKey)}
+                          text={"Histogram - " + volumeObject.label}
+                          volumeTypes={volumeTypes}
+                          showAnalysis={showAnalysis}
+                          type={"bar"}
+                        />
+                      );
+                    }
+                  }
                 );
               }
             }

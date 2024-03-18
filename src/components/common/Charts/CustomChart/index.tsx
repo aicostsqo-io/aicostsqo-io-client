@@ -7,6 +7,7 @@ interface LineChartProps {
   volumeTypes: any;
   showAnalysis: any;
   type: string;
+  selectedVolume?: string;
 }
 
 function getColor(key: string) {
@@ -51,13 +52,25 @@ const CustomChart = ({
   volumeTypes,
   showAnalysis,
   type,
+  selectedVolume = "",
 }: LineChartProps) => {
   const [datasets, setDatasets] = useState<any[]>([]);
 
   useEffect(() => {
     const datasetsArray: any = [];
     Object.entries(volumeTypes).forEach(([key, object]: any) => {
-      if (object.value) {
+      if (selectedVolume) {
+        if (key === selectedVolume) {
+          datasetsArray.push({
+            x: data[key]?.map((item: any) => item.x),
+            y: data[key]?.map((item: any) => item.y),
+            type: type,
+            mode: "lines+markers",
+            marker: { color: getColor(key)?.borderColor },
+            name: object.label,
+          });
+        }
+      } else if (object.value) {
         datasetsArray.push({
           x: data[key]?.map((item: any) => item.x),
           y: data[key]?.map((item: any) => item.y),
