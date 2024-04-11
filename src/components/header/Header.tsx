@@ -40,10 +40,10 @@ const Header = () => {
                 } `}
               >
                 <Link
-                  onClick={() => setVisible(!visible)}
-                  href="/new-project"
+                  // onClick={() => setVisible(!visible)}
+                  href="#"
                   className={
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-green-500 hover:text-white border-b-2"
+                    "text-base inline-flex py-2 px-2 items-center rounded border-b-2 cursor-default text-slate-400"
                   }
                 >
                   New Project
@@ -58,28 +58,34 @@ const Header = () => {
                   Open Project
                 </Link>
                 <Link
-                  onClick={() => setVisible(!visible)}
-                  href="/new-project"
+                  // onClick={() => setVisible(!visible)}
+                  href="#"
                   className={
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-green-500 hover:text-white border-b-2"
+                    "text-base inline-flex py-2 px-2 items-center rounded border-b-2 cursor-default text-slate-400"
                   }
                 >
                   Save Project
                 </Link>
                 <Link
-                  onClick={() => setVisible(!visible)}
-                  href="/new-project"
+                  // onClick={() => setVisible(!visible)}
+                  href="#"
                   className={
-                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-green-500 hover:text-white border-b-2"
+                    "text-base inline-flex py-2 px-2 items-center rounded border-b-2 cursor-default text-slate-400"
                   }
                 >
                   Close Project
                 </Link>
               </div>
             </li>
-            <li className="nav-item">Edit</li>
-            <li className="nav-item">View</li>
-            <li className="nav-item">Help</li>
+            <li className="nav-item text-slate-300 hover:text-slate-300 hover:bg-gray-100 cursor-default">
+              Edit
+            </li>
+            <li className="nav-item text-slate-300 hover:text-slate-300 hover:bg-gray-100 cursor-default">
+              View
+            </li>
+            <li className="nav-item text-slate-300 hover:text-slate-300 hover:bg-gray-100 cursor-default">
+              Help
+            </li>
           </ul>
         ) : null}
       </div>

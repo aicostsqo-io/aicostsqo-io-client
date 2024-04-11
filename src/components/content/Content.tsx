@@ -3,11 +3,7 @@ interface ContentProps {
 }
 
 const Content = ({ children }: ContentProps) => {
-  return (
-    <div className="flex-1">
-      {children ? children : null}
-    </div>
-  );
+  return <div className="flex-1 flex">{children ? children : null}</div>;
 };
 
 export default Content;
