@@ -68,6 +68,9 @@ const Field = () => {
         {point === "Discontinuities (scanline measure)" && page === 1 && (
           <DiscontinuitiesData />
         )}
+
+        {point === "Field Survey" && <h1>In Progress!</h1>}
+
         {point === "Polyhedron" && page === 0 && <PolyhedronVisualization />}
         {point === "Extended (1D)" && page === 0 && (
           <VirtualExtended1DRPsVisualization />

@@ -2,7 +2,7 @@ import Sidebar from "@/components/sidebar/Sidebar";
 import React from "react";
 
 interface ProjectLayoutProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 const MemoizedSidebar = React.memo(Sidebar);

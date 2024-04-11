@@ -1,5 +1,5 @@
 import React from "react";
-import Tree from "./Tree";
+import Tree from "./tree";
 
 const Sidebar = () => {
   return (
