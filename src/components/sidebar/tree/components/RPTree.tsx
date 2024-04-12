@@ -17,8 +17,8 @@ const RPTree = ({ rps, setPoint, site, index }: any) => {
       label={"Representing Prisms"}
       onClick={() => handleClickRpTree(rps)}
     >
-      {rps?.map((rp: any, index2: number) => (
-        <RPTreeItem key={index2} rp={rp} site={site} setPoint={setPoint} />
+      {rps?.map((rp: any, key: number) => (
+        <RPTreeItem key={key} rp={rp} site={site} setPoint={setPoint} />
       ))}
     </TreeItem>
   );
