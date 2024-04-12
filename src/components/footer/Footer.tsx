@@ -2,7 +2,7 @@ import { assets } from "@/assets/imgs";
 import Image from "next/image";
 const Footer = () => {
   return (
-    <div className="flex flex-row justify-between items-center shadow-item2 px-14 bg-white  border-gray-300 text-sm">
+    <div className="flex flex-row justify-between items-center shadow-item2 px-14 bg-white  border-gray-300 text-sm py-2">
       <ul className="flex flex-row gap-7">
         <li className="w-[100px] h-[50px]">
           <Image

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
 import { assets } from "../../assets/imgs";
+import { IoLogOut } from "react-icons/io5";
 
 const Header = () => {
   const { logged, currentUser, logout } = useUserContext();
@@ -15,7 +16,7 @@ const Header = () => {
 
   return (
     <div className="flex flex-shrink-0 justify-between items-center px-14 shadow-item2  text-black">
-      <div className="flex h-full gap-10 ">
+      <div className="flex h-full gap-10 py-2">
         <Link href={logged ? "/" : "/login"} className="w-[100px] h-[50px]">
           <Image
             src={assets.AICOSTSQO_logo}
@@ -27,10 +28,10 @@ const Header = () => {
 
         {logged ? (
           <ul className="flex ">
-            <li className="group relative">
+            <li className="group relative ">
               <span
                 onClick={() => setVisible(!visible)}
-                className="flex items-center nav-item"
+                className="flex items-center justify-center nav-item h-full"
               >
                 <div>File</div>
               </span>
@@ -92,7 +93,7 @@ const Header = () => {
 
       {logged ? (
         <div className="nav-item" onClick={handleLogout}>
-          Signout
+          <IoLogOut className="text-4xl" />
         </div>
       ) : null}
     </div>
