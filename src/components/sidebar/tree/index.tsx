@@ -9,6 +9,8 @@ import useFetch from "@/hooks/useFetch";
 import { useTreeContext } from "@/contexts/Tree";
 import { toast } from "react-toastify";
 import FieldTreeItem from "./components/FieldTreeItem";
+import ManuallyTree from "./components/ManuallyTree";
+import { hasExactKey, hincalRouter } from "@/utils";
 
 export default function Tree() {
   const { expanded, setExpanded, setPoint } = useTreeContext();
@@ -52,11 +54,17 @@ export default function Tree() {
             label="Use Wizard"
             onClick={() => router.push("/project/add-field-wizard")}
           />
-          <TreeItem
-            nodeId="manually"
-            label="Manually"
-            onClick={() => router.push("/project/add-manually")}
-          />
+          {hasExactKey(router.query, "useNewTree") ? (
+            <ManuallyTree setPoint={setPoint} />
+          ) : (
+            <TreeItem
+              nodeId="manually"
+              label="Manually"
+              onClick={() =>
+                hincalRouter(router, router.query, "/project/add-manually")
+              }
+            />
+          )}
         </TreeItem>
         <TreeItem
           nodeId="Refresh Fields"

@@ -3,7 +3,7 @@ import { useTreeContext } from "@/contexts/Tree";
 import { TreeItem } from "@mui/lab";
 import RPTree from "./RPTree";
 import SurveyTree from "./SurveyTree";
-import { hasExactKey } from "@/utils";
+import { hasExactKey, hincalRouter } from "@/utils";
 
 const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
   const { setSelectedSite } = useSiteContext();
@@ -18,23 +18,7 @@ const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
     setExpanded(newExpanded);
     setSelectedSite(field);
 
-    const currentQueryParams = router.query;
-    const filteredQueryParams = Object.keys(currentQueryParams).reduce(
-      (acc: any, key: any) => {
-        if (key !== "_id") {
-          acc[key] = currentQueryParams[key];
-        }
-        return acc;
-      },
-      {}
-    );
-    const queryString = new URLSearchParams(filteredQueryParams).toString();
-
-    if (queryString) {
-      router.push(`/project/fields/${field?.site?._id}?${queryString}`);
-    } else {
-      router.push(`/project/fields/${field?.site?._id}`);
-    }
+    hincalRouter(router, router.query, `/project/fields/${field?.site?._id}`);
   };
 
   return (
