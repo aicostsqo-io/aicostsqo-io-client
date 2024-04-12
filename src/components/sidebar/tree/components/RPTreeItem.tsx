@@ -1,11 +1,14 @@
 import { useSiteContext } from "@/contexts/Site";
 import { useTreeContext } from "@/contexts/Tree";
+import { hasExactKey } from "@/utils";
 import { TreeItem } from "@mui/lab";
+import { useRouter } from "next/router";
 
 const RPTreeItem = ({ rp, site, setPoint }: any) => {
   const { setSelectedRP, setSelectedDiscs } = useSiteContext();
   const { expanded, setExpanded } = useTreeContext();
   const { calculatePolyhedrons, generateVirtual1DExtendedRPs } = site;
+  const router = useRouter();
   const handleClickRpTreeItem = (rp: any) => {
     setPoint("RPItem");
     setSelectedRP(rp);
@@ -21,6 +24,9 @@ const RPTreeItem = ({ rp, site, setPoint }: any) => {
       label={rp?.name}
       onClick={() => handleClickRpTreeItem(rp)}
     >
+      {hasExactKey(router.query, "useNewTree") ? (
+        <TreeItem nodeId={"test"} label={"test"} />
+      ) : null}
       <TreeItem
         nodeId={rp?._id + 1}
         label={"RP"}
