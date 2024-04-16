@@ -79,27 +79,24 @@ const FIELDS_MAP: FieldsMap = {
   "RP-0": FIELD_COMPONENTS[FIELDS.RP_VISUALIZATION],
   "RP-1": FIELD_COMPONENTS[FIELDS.RP_DATA],
   //   ---------- Discontinuities (scanline measure) ----------
-  "Discontinuities (scanline measure)-0":
-    FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_VISUALIZATION],
-  "Discontinuities (scanline measure)-1":
-    FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_DATA],
+  "Scanline-0": FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_VISUALIZATION],
+  "Scanline-1": FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_DATA],
   //   ---------- Discontinuities (GPR) ----------
-  "Discontinuities (GPR)-0":
+  "Field Survey - Ground Penetrating Radar (GPR)-0":
     FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_GPR_VISUALIZATION],
-  "Discontinuities (GPR)-1": FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_GPR_DATA],
+  "Field Survey - Ground Penetrating Radar (GPR)-1":
+    FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_GPR_DATA],
   //   ---------- Discontinuities (Magnetometric) ----------
-  "Discontinuities (Magnetometric)-0":
-    FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
-  "Discontinuities (Magnetometric)-1":
+  "Field Survey - Magnetometry-0": FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
+  "Field Survey - Magnetometry-1":
     FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_MAGNETOMETRIC_DATA],
   //   ---------- Discontinuities (Resistivity) ----------
-  "Discontinuities (Resistivity)-0":
-    FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
-  "Discontinuities (Resistivity)-1":
+  "Field Survey - Resistivity-0": FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
+  "Field Survey - Resistivity-1":
     FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_RESISTIVITY_DATA],
   //   ---------- Discontinuities (Seismic) ----------
-  "Discontinuities (Seismic)-0": FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
-  "Discontinuities (Seismic)-1":
+  "Field Survey - Seismic-0": FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
+  "Field Survey - Seismic-1":
     FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_SEISMIC_DATA],
   //   ---------- Discontinuities (Televiewer) ----------
   "Discontinuities (Televiewer)-0":
@@ -107,10 +104,10 @@ const FIELDS_MAP: FieldsMap = {
   "Discontinuities (Televiewer)-1":
     FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_TELEVIEWER_DATA],
   //   ---------- Virtual Extended ----------
-  "Polyhedron-0": FIELD_COMPONENTS[FIELDS.POLYHEDRON_VISUALIZATION],
-  "Extended (1D)-0":
+  "Polyhedrons-0": FIELD_COMPONENTS[FIELDS.POLYHEDRON_VISUALIZATION],
+  "1D Extended (Virtual Representative Prisms)-0":
     FIELD_COMPONENTS[FIELDS.VIRTUAL_EXTENDED_1D_RPS_VISUALIZATION],
-  "Extended (3D)-0":
+  "3D Extended (Virtual Representative Prisms)-0":
     FIELD_COMPONENTS[FIELDS.VIRTUAL_EXTENDED_3D_RPS_VISUALIZATION],
   "DFN-0": FIELD_COMPONENTS[FIELDS.DFN_VISUALIZATION],
 };

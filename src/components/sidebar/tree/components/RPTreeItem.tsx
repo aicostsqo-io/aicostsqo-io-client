@@ -153,23 +153,30 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
               />
               <TreeItem
                 nodeId={rp?._id + 15}
+                label={"3D Extended (Virtual Representative Prisms)"}
+                onClick={() => {
+                  setPoint("3D Extended (Virtual Representative Prisms)");
+                }}
+              />
+              <TreeItem
+                nodeId={rp?._id + 16}
                 label={"DFN"}
                 onClick={() => {
                   setPoint("DFN");
                 }}
               >
                 <TreeItem
-                  nodeId={rp?._id + 13}
-                  label={"Show"}
+                  nodeId={rp?._id + 17}
+                  label={"Show DFN"}
                   onClick={() => {
-                    setPoint("Show");
+                    setPoint("Show DFN");
                   }}
                 />
                 <TreeItem
-                  nodeId={rp?._id + 13}
-                  label={"ReCalculate"}
+                  nodeId={rp?._id + 18}
+                  label={"ReCalculate DFN"}
                   onClick={() => {
-                    setPoint("ReCalculate");
+                    setPoint("ReCalculate DFN");
                   }}
                 />
               </TreeItem>
