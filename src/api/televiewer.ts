@@ -7,3 +7,6 @@ export const createTeleviewer = (data: any) => axios.post(`/televiewers`, data);
 
 export const bulkDeleteTeleviewer = (televiewers: string[]) =>
   axios.post(`/televiewers/bulk-delete`, televiewers);
+
+export const getExportedDrillings = (siteId: string) =>
+  axios.get(`/televiewers/export/by-site/${siteId}`);

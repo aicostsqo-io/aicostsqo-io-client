@@ -8,3 +8,6 @@ export const createMagnetometric = (data: any) =>
 
 export const bulkDeleteMagnetometric = (magnetometrics: string[]) =>
   axios.post(`/magnetometrics/bulk-delete`, magnetometrics);
+
+export const getExportedMagnetometrics = (siteId: string) =>
+  axios.get(`/magnetometrics/export/by-site/${siteId}`);

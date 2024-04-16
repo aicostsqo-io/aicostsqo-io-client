@@ -11,3 +11,6 @@ export const bulkDeleteSeismic = (seismics: string[]) =>
   axios.post(`/seismics/bulk-delete`, seismics);
 export const bulkDeleteSeismicProfile = (seismicProfiles: string[]) =>
   axios.post(`/seismics/profiles/bulk-delete`, seismicProfiles);
+
+export const getExportedSeismics = (siteId: string) =>
+  axios.get(`/seismics/export/by-site/${siteId}`);

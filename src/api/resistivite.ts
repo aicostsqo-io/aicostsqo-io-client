@@ -12,3 +12,6 @@ export const bulkDeleteResistivity = (resistivities: string[]) =>
   axios.post(`/resistivities/bulk-delete`, resistivities);
 export const bulkDeleteResistivityProfile = (resistivityProfiles: string[]) =>
   axios.post(`/resistivities/profiles/bulk-delete`, resistivityProfiles);
+
+export const getExportedResistivities = (siteId: string) =>
+  axios.get(`/resistivities/export/by-site/${siteId}`);
