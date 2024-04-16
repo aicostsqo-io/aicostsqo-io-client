@@ -10,7 +10,7 @@ import { useTreeContext } from "@/contexts/Tree";
 import { toast } from "react-toastify";
 import FieldTreeItem from "./components/FieldTreeItem";
 import ManuallyTree from "./components/ManuallyTree";
-import { hasExactKey, hincalRouter } from "@/utils";
+import { hasFeatureTag, hincalRouter } from "@/utils";
 
 export default function Tree() {
   const { expanded, setExpanded, setPoint } = useTreeContext();
@@ -25,7 +25,7 @@ export default function Tree() {
   };
 
   React.useEffect(() => {
-    // console.log("sidebar renderlandı"); // TODO: NEDEN HER SEFERİNDE RENDER'LIYOR
+    // console.log("sidebar rendered"); // TODO: why are you rendering all the time bitch?
   }, []);
 
   const router = useRouter();
@@ -38,7 +38,14 @@ export default function Tree() {
   } = useFetch("/fields");
 
   return (
-    <Box sx={{ height: "100%", flexGrow: 1, maxWidth: 400, overflowY: "auto" }}>
+    <Box
+      sx={{
+        height: "100%",
+        flexGrow: 1,
+        maxWidth: 400,
+        overflowY: "auto",
+      }}
+    >
       <TreeView
         aria-label="controlled"
         defaultCollapseIcon={<ExpandMoreIcon />}
@@ -54,7 +61,7 @@ export default function Tree() {
             label="Use Wizard"
             onClick={() => router.push("/project/add-field-wizard")}
           />
-          {hasExactKey(router.query, "useNewTree") ? (
+          {hasFeatureTag(router.query, "useNewTree") ? (
             <ManuallyTree setPoint={setPoint} />
           ) : (
             <TreeItem

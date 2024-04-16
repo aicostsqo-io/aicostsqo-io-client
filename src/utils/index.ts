@@ -1,4 +1,4 @@
-export const hasExactKey = (query: object, key: string) => {
+export const hasFeatureTag = (query: object, key: string) => {
   return Object.hasOwn(query, key);
 };
 

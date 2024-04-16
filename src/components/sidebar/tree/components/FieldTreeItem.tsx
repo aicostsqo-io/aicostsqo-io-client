@@ -3,7 +3,7 @@ import { useTreeContext } from "@/contexts/Tree";
 import { TreeItem } from "@mui/lab";
 import RPTree from "./RPTree";
 import SurveyTree from "./SurveyTree";
-import { hasExactKey, hincalRouter } from "@/utils";
+import { hasFeatureTag, hincalRouter } from "@/utils";
 
 const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
   const { setSelectedSite } = useSiteContext();
@@ -37,7 +37,7 @@ const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
         label={"Site Boundaries (3D Model Virtualization)"}
         onClick={() => setPoint("Site Boundaries")}
       />
-      {hasExactKey(router.query, "useNewTree") ? (
+      {hasFeatureTag(router.query, "useNewTree") ? (
         <SurveyTree setPoint={setPoint} site={field?.site} />
       ) : (
         <>

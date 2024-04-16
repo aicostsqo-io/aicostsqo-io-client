@@ -25,7 +25,7 @@ import DFNVisualization from "@/components/fields/DFNVisualization";
 import VirtualExtended1DRPsVisualization from "@/components/fields/VirtualExtended1DRPsVisualization";
 import { FIELDS } from "@/constants/fields";
 import RPDataEditable from "@/components/fields/RPDataEditable";
-import { hasExactKey } from "@/utils";
+import { hasFeatureTag } from "@/utils";
 
 const NotYetImplemented = () => {
   return (
@@ -131,7 +131,7 @@ const Field = () => {
   const key = `${point}-${page}`;
   const Component = FIELDS_MAP[key];
 
-  if (Component && hasExactKey(router.query, "useNewFields")) {
+  if (Component && hasFeatureTag(router.query, "useNewFields")) {
     return (
       <MainLayout>
         <ProjectLayout>
@@ -140,7 +140,7 @@ const Field = () => {
         </ProjectLayout>
       </MainLayout>
     );
-  } else if (hasExactKey(router.query, "useNewFields")) {
+  } else if (hasFeatureTag(router.query, "useNewFields")) {
     return (
       <MainLayout>
         <ProjectLayout>
