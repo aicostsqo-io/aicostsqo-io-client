@@ -64,6 +64,7 @@ interface FieldsMap {
   [key: string]: React.ComponentType<any> | string;
 }
 
+// TODO: relabel and comments (ex: Field Surver/Drilling/Televiewer)
 const FIELDS_MAP: FieldsMap = {
   "Site Topological Map-0": FIELD_COMPONENTS[FIELDS.TOPOLOGICAL],
   "Site Boundaries-0": FIELD_COMPONENTS[FIELDS.BOUNDARIES],
@@ -99,9 +100,8 @@ const FIELDS_MAP: FieldsMap = {
   "Field Survey - Seismic-1":
     FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_SEISMIC_DATA],
   //   ---------- Discontinuities (Televiewer) ----------
-  "Discontinuities (Televiewer)-0":
-    FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
-  "Discontinuities (Televiewer)-1":
+  "Field Survey - Televiewer-0": FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
+  "Field Survey - Televiewer-1":
     FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_TELEVIEWER_DATA],
   //   ---------- Virtual Extended ----------
   "Polyhedrons-0": FIELD_COMPONENTS[FIELDS.POLYHEDRON_VISUALIZATION],

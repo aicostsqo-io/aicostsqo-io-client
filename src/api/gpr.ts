@@ -14,3 +14,6 @@ export const bulkDeleteGPR = (gprs: string[]) =>
   axios.post(`/gprs/bulk-delete`, gprs);
 export const bulkDeleteGPRProfile = (gprProfiles: string[]) =>
   axios.post(`/gprs/profiles/bulk-delete`, gprProfiles);
+
+export const getExportedGPR = (siteId: string) =>
+  axios.get(`/gprs/export/by-site/${siteId}`);
