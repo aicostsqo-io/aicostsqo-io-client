@@ -67,16 +67,19 @@ const SurveyTree = ({ setPoint, site }: any) => {
           nodeId={"Field Survey - Televiewer"}
           label={"Televiewer"}
           onClick={() => setPoint("Field Survey - Televiewer")}
+          onContextMenu={(e) => e.stopPropagation()}
         />
         <TreeItem
           nodeId={"Field Survey - Core drilling"}
           label={"Core drilling"}
           onClick={() => setPoint("Field Survey - Core drilling")}
+          onContextMenu={(e) => e.stopPropagation()}
         />
         <TreeItem
           nodeId={"Field Survey - Borehole"}
           label={"Borehole"}
           onClick={() => setPoint("Field Survey - Borehole")}
+          onContextMenu={(e) => e.stopPropagation()}
         />
       </TreeItem>
       <TreeItem
@@ -99,11 +102,13 @@ const SurveyTree = ({ setPoint, site }: any) => {
           nodeId={"Field Survey - Profiles"}
           label={"Profiles"}
           onClick={() => setPoint("Field Survey - Profiles")}
+          onContextMenu={(e) => e.stopPropagation()}
         />
         <TreeItem
           nodeId={"Field Survey - Main Crack And Crack Zones"}
           label={"Main Crack And Crack Zones"}
           onClick={() => setPoint("Field Survey - Main Crack And Crack Zones")}
+          onContextMenu={(e) => e.stopPropagation()}
         />
       </TreeItem>
       <TreeItem

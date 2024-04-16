@@ -57,6 +57,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 setPoint("RP");
                 setSelectedDiscs([]);
               }}
+              onContextMenu={(e) => e.stopPropagation()}
             />
             <TreeItem
               nodeId={rp?._id + 2}
@@ -65,6 +66,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 setPoint("Discontinuities (All)");
                 // setSelectedDiscs([]);
               }}
+              onContextMenu={(e) => e.stopPropagation()}
             >
               <TreeItem
                 nodeId={rp?._id + 3}
@@ -72,6 +74,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("Scanline");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
               <TreeItem
                 nodeId={rp?._id + 4}
@@ -79,6 +82,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("Joint Sets");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
               <TreeItem
                 nodeId={rp?._id + 5}
@@ -86,6 +90,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("Discontinuities (Drilling)");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               >
                 <TreeItem
                   nodeId={rp?._id + 6}
@@ -93,6 +98,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                   onClick={() => {
                     setPoint("Televiewer");
                   }}
+                  onContextMenu={(e) => e.stopPropagation()}
                 />
                 <TreeItem
                   nodeId={rp?._id + 7}
@@ -100,6 +106,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                   onClick={() => {
                     setPoint("Core drilling");
                   }}
+                  onContextMenu={(e) => e.stopPropagation()}
                 />
                 <TreeItem
                   nodeId={rp?._id + 8}
@@ -107,6 +114,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                   onClick={() => {
                     setPoint("Borehole");
                   }}
+                  onContextMenu={(e) => e.stopPropagation()}
                 />
               </TreeItem>
               <TreeItem
@@ -115,6 +123,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("Lidar");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
               <TreeItem
                 nodeId={rp?._id + 10}
@@ -122,6 +131,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("Ground Penetrating Radar (GPR)");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
               <TreeItem
                 nodeId={rp?._id + 11}
@@ -129,6 +139,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("Magnetometric");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
               <TreeItem
                 nodeId={rp?._id + 12}
@@ -136,6 +147,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("Resistivity");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
               <TreeItem
                 nodeId={rp?._id + 13}
@@ -143,6 +155,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("Seismic");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
               <TreeItem
                 nodeId={rp?._id + 14}
@@ -150,6 +163,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("1D Extended (Virtual Representative Prisms)");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
               <TreeItem
                 nodeId={rp?._id + 15}
@@ -157,6 +171,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("3D Extended (Virtual Representative Prisms)");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
               <TreeItem
                 nodeId={rp?._id + 16}
@@ -164,6 +179,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("DFN");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               >
                 <TreeItem
                   nodeId={rp?._id + 17}
@@ -171,6 +187,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                   onClick={() => {
                     setPoint("Show DFN");
                   }}
+                  onContextMenu={(e) => e.stopPropagation()}
                 />
                 <TreeItem
                   nodeId={rp?._id + 18}
@@ -178,6 +195,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                   onClick={() => {
                     setPoint("ReCalculate DFN");
                   }}
+                  onContextMenu={(e) => e.stopPropagation()}
                 />
               </TreeItem>
             </TreeItem>
@@ -187,6 +205,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
               onClick={() => {
                 setPoint("Show RP & Discontinuities (Selected / All)");
               }}
+              onContextMenu={(e) => e.stopPropagation()}
             />
             <TreeItem
               nodeId={
@@ -201,6 +220,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                   "Discontinuity intersections (optional for visualizations)"
                 );
               }}
+              onContextMenu={(e) => e.stopPropagation()}
             >
               <TreeItem
                 nodeId={"Show intersections" + rp?._id}
@@ -208,6 +228,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("Show intersections");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
               <TreeItem
                 nodeId={"ReCalculate intersections" + rp?._id}
@@ -215,6 +236,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("ReCalculate intersections");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
             </TreeItem>
             <TreeItem
@@ -223,6 +245,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
               onClick={() => {
                 setPoint("Polyhedrons");
               }}
+              onContextMenu={(e) => e.stopPropagation()}
             >
               <TreeItem
                 nodeId={"Show polyhedrons" + rp?._id}
@@ -230,6 +253,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("Show polyhedrons");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
               <TreeItem
                 nodeId={"ReCalculate polyhedrons" + rp?._id}
@@ -237,6 +261,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("ReCalculate polyhedrons");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
             </TreeItem>
             <TreeItem
@@ -245,6 +270,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
               onClick={() => {
                 setPoint("Max Quboids");
               }}
+              onContextMenu={(e) => e.stopPropagation()}
             >
               <TreeItem
                 nodeId={"Show Max Quboids" + rp?._id}
@@ -252,6 +278,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("Show Max Quboids");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
               <TreeItem
                 nodeId={"ReCalculate Max Quboids" + rp?._id}
@@ -259,6 +286,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("ReCalculate Max Quboids");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               >
                 <TreeItem
                   nodeId={"Mathematical Approach" + rp?._id}
@@ -266,6 +294,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                   onClick={() => {
                     setPoint("Mathematical Approach");
                   }}
+                  onContextMenu={(e) => e.stopPropagation()}
                 />
                 <TreeItem
                   nodeId={"Heuristic Algorithms" + rp?._id}
@@ -273,6 +302,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                   onClick={() => {
                     setPoint("Heuristic Algorithms");
                   }}
+                  onContextMenu={(e) => e.stopPropagation()}
                 />
               </TreeItem>
             </TreeItem>
@@ -282,6 +312,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
               onClick={() => {
                 setPoint("Wedges");
               }}
+              onContextMenu={(e) => e.stopPropagation()}
             >
               <TreeItem
                 nodeId={"Show Wedges" + rp?._id}
@@ -289,6 +320,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("Show Wedges");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
               <TreeItem
                 nodeId={"ReCalculate Wedges" + rp?._id}
@@ -296,6 +328,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 onClick={() => {
                   setPoint("ReCalculate Wedges");
                 }}
+                onContextMenu={(e) => e.stopPropagation()}
               />
             </TreeItem>
           </>
