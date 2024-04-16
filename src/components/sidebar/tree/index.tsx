@@ -89,6 +89,7 @@ export default function Tree() {
               index={index}
               field={field}
               router={router}
+              onRefresh={fieldDataMutate}
             />
           ))}
         </TreeItem>

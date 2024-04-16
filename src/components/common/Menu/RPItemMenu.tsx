@@ -6,21 +6,51 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 // import Typography from "@mui/material/Typography";
-import ContentCut from "@mui/icons-material/ContentCut";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 import ContentCopy from "@mui/icons-material/ContentCopy";
-import ContentPaste from "@mui/icons-material/ContentPaste";
+import RemoveIcon from "@mui/icons-material/Remove";
+import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
+import DoDisturbAltIcon from "@mui/icons-material/DoDisturbAlt";
+import AddIcon from "@mui/icons-material/Add";
 // import Cloud from "@mui/icons-material/Cloud";
 import { useClickAway } from "@uidotdev/usehooks";
+import { bulkDeleteRps } from "@/api/rp";
+import { toast } from "react-toastify";
 
-interface MenuProps {
+interface RPItemMenuProps {
   x: number;
   y: number;
   onClose: () => void;
+  rpId: string;
+  onRefresh?: () => void;
 }
-export default function Menu({ x, y, onClose }: MenuProps) {
+export default function RPItemMenu({
+  x,
+  y,
+  onClose,
+  rpId,
+  onRefresh,
+}: RPItemMenuProps) {
   const contextMenuRef = useClickAway<HTMLDivElement>(() => {
     onClose();
   });
+
+  const handleAddNewRP = () => {
+    console.log("id", rpId);
+    console.log("Add New RP");
+    onClose();
+  };
+
+  const handleDeleteRP = async () => {
+    try {
+      await bulkDeleteRps([rpId]);
+      toast.success("RP deleted successfully");
+      onRefresh && onRefresh();
+    } catch (err) {
+      toast.error("Failed to delete RP");
+    }
+    onClose();
+  };
 
   return (
     <div
@@ -35,9 +65,9 @@ export default function Menu({ x, y, onClose }: MenuProps) {
         }}
       >
         <MenuList>
-          <MenuItem onClick={onClose}>
+          <MenuItem onClick={handleAddNewRP}>
             <ListItemIcon>
-              <ContentCut fontSize="small" />
+              <AddIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Add New</ListItemText>
           </MenuItem>
@@ -47,27 +77,27 @@ export default function Menu({ x, y, onClose }: MenuProps) {
             </ListItemIcon>
             <ListItemText>Copy</ListItemText>
           </MenuItem>
-          <MenuItem onClick={onClose}>
+          <MenuItem onClick={handleDeleteRP}>
             <ListItemIcon>
-              <ContentPaste fontSize="small" />
+              <RemoveIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Delete</ListItemText>
           </MenuItem>
           <MenuItem onClick={onClose}>
             <ListItemIcon>
-              <ContentPaste fontSize="small" />
+              <UnfoldMoreIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Expand</ListItemText>
           </MenuItem>
           <MenuItem onClick={onClose}>
             <ListItemIcon>
-              <ContentPaste fontSize="small" />
+              <UnfoldLessIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Collapse</ListItemText>
           </MenuItem>
           <MenuItem onClick={onClose}>
             <ListItemIcon>
-              <ContentPaste fontSize="small" />
+              <DoDisturbAltIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Cancel</ListItemText>
           </MenuItem>

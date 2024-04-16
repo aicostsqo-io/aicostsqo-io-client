@@ -1,4 +1,4 @@
-import Menu from "@/components/common/Menu";
+import RPItemMenu from "@/components/common/Menu/RPItemMenu";
 import { useSiteContext } from "@/contexts/Site";
 import { useTreeContext } from "@/contexts/Tree";
 import { hasFeatureTag } from "@/utils";
@@ -11,7 +11,7 @@ const initialContextMenu = {
   x: 0,
   y: 0,
 };
-const RPTreeItem = ({ rp, site, setPoint }: any) => {
+const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
   const router = useRouter();
   const { setSelectedRP, setSelectedDiscs } = useSiteContext();
   const { expanded, setExpanded } = useTreeContext();
@@ -21,6 +21,7 @@ const RPTreeItem = ({ rp, site, setPoint }: any) => {
 
   const handleContextMenu = (e: React.MouseEvent<Element, MouseEvent>) => {
     e.preventDefault();
+    e.stopPropagation();
 
     const { pageX, pageY } = e;
     setContextMenu({ show: true, x: pageX, y: pageY });
@@ -350,7 +351,13 @@ const RPTreeItem = ({ rp, site, setPoint }: any) => {
         )}
       </TreeItem>
       {contextMenu.show ? (
-        <Menu x={contextMenu.x} y={contextMenu.y} onClose={closeContextMenu} />
+        <RPItemMenu
+          x={contextMenu.x}
+          y={contextMenu.y}
+          onClose={closeContextMenu}
+          rpId={rp?._id}
+          onRefresh={onRefresh}
+        />
       ) : null}
     </>
   );

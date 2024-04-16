@@ -70,14 +70,14 @@ const FIELDS_MAP: FieldsMap = {
   //   ---------- Representing Prisms ----------
   "Representing Prisms-0": FIELD_COMPONENTS[FIELDS.ALL_RPS_VISUALIZATION],
   "Representing Prisms-1": FIELD_COMPONENTS[FIELDS.RP_DATA_EDITABLE],
-  //   ---------- RP ----------
-  "RP-0": FIELD_COMPONENTS[FIELDS.RP_VISUALIZATION],
-  "RP-1": FIELD_COMPONENTS[FIELDS.RP_DATA],
   //   ---------- RPItem ----------
   "RPItem-0": FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
   "RPItem-1": FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
   "RPItem-2": FIELD_COMPONENTS[FIELDS.RP_DISTRIBUTION_CURVES],
   "RPItem-3": FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
+  //   ---------- RP ----------
+  "RP-0": FIELD_COMPONENTS[FIELDS.RP_VISUALIZATION],
+  "RP-1": FIELD_COMPONENTS[FIELDS.RP_DATA],
   //   ---------- Discontinuities (scanline measure) ----------
   "Discontinuities (scanline measure)-0":
     FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_VISUALIZATION],

@@ -5,9 +5,12 @@ import RPTree from "./RPTree";
 import SurveyTree from "./SurveyTree";
 import { hasFeatureTag, hincalRouter } from "@/utils";
 
-const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
+const FieldTreeItem = ({ field, router, setPoint, index, onRefresh }: any) => {
   const { setSelectedSite } = useSiteContext();
   const { expanded, setExpanded } = useTreeContext();
+  const {
+    siteBound: { _id },
+  } = field;
   const handleClickSite = () => {
     setPoint("Site Main");
     const isExpanded = expanded.includes("Site" + field?.site?._id);
@@ -38,7 +41,11 @@ const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
         onClick={() => setPoint("Site Boundaries")}
       />
       {hasFeatureTag(router.query, "useNewTree") ? (
-        <SurveyTree setPoint={setPoint} site={field?.site} />
+        <SurveyTree
+          setPoint={setPoint}
+          site={field?.site}
+          onRefresh={onRefresh}
+        />
       ) : (
         <>
           <TreeItem
@@ -81,10 +88,12 @@ const FieldTreeItem = ({ field, router, setPoint, index }: any) => {
 
       {field?.rps?.length > 0 ? (
         <RPTree
+          siteBoundId={_id}
           setPoint={setPoint}
           site={field?.site}
           rps={field?.rps}
           index={index}
+          onRefresh={onRefresh}
         />
       ) : (
         <TreeItem nodeId={"No RPs"} label={"No RPs"} />
