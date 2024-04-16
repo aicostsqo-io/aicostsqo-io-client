@@ -5,6 +5,7 @@ import { getDiscsByRpId } from "@/api/disc";
 import ObjectVisualizer, { Urls } from "../common/ObjectVisualizer";
 import Loading from "../common/Loading";
 import { toast } from "react-toastify";
+import { create } from "@/api/dfn";
 
 const distributionSizeTypes = [
   {
@@ -29,7 +30,7 @@ interface DfnCalculationModel {
   sigmaFractureSize: number;
 }
 
-const DFNVisualization = () => {
+const ReCalculateDFN = () => {
   const [dfnUrls, setDfnUrls] = useState<Urls | null>(null);
   const [discUrls, setDiscUrls] = useState<Urls | null>(null);
   const [discLoading, setDiscLoading] = useState<boolean>(false);
@@ -44,21 +45,43 @@ const DFNVisualization = () => {
   const { selectedRP } = useSiteContext();
 
   useEffect(() => {
+    const fetchDiscData = async () => {
+      const res = await getDiscsByRpId(selectedRP?._id);
+      await fetchDiscObj(res.data.discs);
+    };
+    const fetchDiscObj = async (discs: any) => {
+      setDiscLoading(true);
+      const res = await axios.post(
+        `${process.env.NEXT_PUBLIC_MARBLE_API_ENDPOINT}/disc`,
+        {
+          filename: selectedRP._id,
+          positionX: selectedRP.positionX,
+          positionY: selectedRP.positionY,
+          positionZ: selectedRP.positionZ,
+          sizeX: selectedRP.sizeX,
+          sizeY: selectedRP.sizeY,
+          sizeZ: selectedRP.sizeZ,
+          data: discs.map((d: any) => ({
+            dip: d.dip,
+            dipDirection: d.dipDirect,
+            positionX: d.pX,
+            positionY: d.pY,
+            positionZ: d.pZ,
+          })),
+        }
+      );
+      setDiscUrls({ obj: res.data.obj, mtl: res.data.mtl });
+      setDiscLoading(false);
+    };
     fetchDiscData();
   }, [selectedRP]);
 
-  const fetchDiscData = async () => {
-    const res = await getDiscsByRpId(selectedRP?._id);
-    await fetchDiscObj(res.data.discs);
-  };
-
   const fetchDfnData = async () => {
     const res = await getDiscsByRpId(selectedRP?._id);
-    await fetchDfnObj(res.data.discs);
+    return await fetchDfnObj(res.data.discs);
   };
 
   const fetchDfnObj = async (discs: any) => {
-    setDfnLoading(true);
     const res = await axios.post(
       `${process.env.NEXT_PUBLIC_MARBLE_API_ENDPOINT}/dfn`,
       {
@@ -83,34 +106,7 @@ const DFNVisualization = () => {
         })),
       }
     );
-    const newDfnUrls = { obj: res.data.obj, mtl: res.data.mtl };
-    setDfnUrls(newDfnUrls);
-    setDfnLoading(false);
-  };
-
-  const fetchDiscObj = async (discs: any) => {
-    setDiscLoading(true);
-    const res = await axios.post(
-      `${process.env.NEXT_PUBLIC_MARBLE_API_ENDPOINT}/disc`,
-      {
-        filename: selectedRP._id,
-        positionX: selectedRP.positionX,
-        positionY: selectedRP.positionY,
-        positionZ: selectedRP.positionZ,
-        sizeX: selectedRP.sizeX,
-        sizeY: selectedRP.sizeY,
-        sizeZ: selectedRP.sizeZ,
-        data: discs.map((d: any) => ({
-          dip: d.dip,
-          dipDirection: d.dipDirect,
-          positionX: d.pX,
-          positionY: d.pY,
-          positionZ: d.pZ,
-        })),
-      }
-    );
-    setDiscUrls({ obj: res.data.obj, mtl: res.data.mtl });
-    setDiscLoading(false);
+    return { obj: res.data.obj, mtl: res.data.mtl };
   };
 
   const handleCalculateDfn = async () => {
@@ -136,7 +132,25 @@ const DFNVisualization = () => {
       return;
     }
 
-    await fetchDfnData();
+    setDfnLoading(true);
+    const newDfnUrls: Urls = await fetchDfnData();
+    const dfnToAdd = {
+      rpId: selectedRP._id,
+      fractureIntensity: dfnCalculation?.maxFractureCount,
+      fisherK: dfnCalculation?.fisherConstant,
+      persistence: dfnCalculation?.distributionSize,
+      mean: dfnCalculation?.meanFractureSize,
+      std: dfnCalculation?.sigmaFractureSize,
+      objFileName: newDfnUrls.obj,
+      mtlFileName: newDfnUrls.mtl,
+    };
+    const createDfnResult = await create(dfnToAdd);
+    if (createDfnResult.status !== 200) {
+      toast.error("Failed to create DFN");
+      return;
+    }
+    setDfnUrls(newDfnUrls);
+    setDfnLoading(false);
   };
 
   return (
@@ -252,4 +266,4 @@ const DFNVisualization = () => {
   );
 };
 
-export default DFNVisualization;
+export default ReCalculateDFN;

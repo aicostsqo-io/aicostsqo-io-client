@@ -21,11 +21,12 @@ import AllRPsVisualization from "@/components/fields/AllRPsVisualization";
 import VirtualExtended3DRPsVisualization from "@/components/fields/VirtualExtended3DRPsVisualization";
 import PolyhedronVisualization from "@/components/fields/PolyhedronVisualization";
 import RPDistributionCurves from "@/components/fields/RPDistributionCurves";
-import DFNVisualization from "@/components/fields/DFNVisualization";
 import VirtualExtended1DRPsVisualization from "@/components/fields/VirtualExtended1DRPsVisualization";
 import { FIELDS } from "@/constants/fields";
 import RPDataEditable from "@/components/fields/RPDataEditable";
 import { hasFeatureTag } from "@/utils";
+import ShowDFN from "@/components/fields/ShowDFN";
+import ReCalculateDFN from "@/components/fields/ReCalculateDFN";
 
 const NotYetImplemented = () => {
   return (
@@ -54,9 +55,10 @@ const FIELD_COMPONENTS = {
     VirtualExtended3DRPsVisualization,
   [FIELDS.POLYHEDRON_VISUALIZATION]: PolyhedronVisualization,
   [FIELDS.RP_DISTRIBUTION_CURVES]: RPDistributionCurves,
-  [FIELDS.DFN_VISUALIZATION]: DFNVisualization,
   [FIELDS.VIRTUAL_EXTENDED_1D_RPS_VISUALIZATION]:
     VirtualExtended1DRPsVisualization,
+  [FIELDS.DFN_SHOW]: ShowDFN,
+  [FIELDS.DFN_RECALCULATE]: ReCalculateDFN,
   [FIELDS.NOT_YET_IMPLEMENTED]: NotYetImplemented,
 };
 
@@ -109,7 +111,8 @@ const FIELDS_MAP: FieldsMap = {
     FIELD_COMPONENTS[FIELDS.VIRTUAL_EXTENDED_1D_RPS_VISUALIZATION],
   "3D Extended (Virtual Representative Prisms)-0":
     FIELD_COMPONENTS[FIELDS.VIRTUAL_EXTENDED_3D_RPS_VISUALIZATION],
-  "DFN-0": FIELD_COMPONENTS[FIELDS.DFN_VISUALIZATION],
+  "Show DFN-0": FIELD_COMPONENTS[FIELDS.DFN_SHOW],
+  "ReCalculate DFN-0": FIELD_COMPONENTS[FIELDS.DFN_RECALCULATE],
 };
 
 const Field = () => {
@@ -195,7 +198,7 @@ const Field = () => {
         {point === "Extended (3D)" && page === 0 && (
           <VirtualExtended3DRPsVisualization />
         )}
-        {point === "DFN" && page === 0 && <DFNVisualization />}
+        {point === "DFN" && page === 0 && <ReCalculateDFN />}
 
         {point === "Discontinuities (GPR)" && page === 0 && (
           <DiscontinuitiesGPRVisualization />
