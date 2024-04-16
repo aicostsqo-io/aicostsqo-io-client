@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import React, { useState } from "react";
 import { assets } from "../../assets/imgs";
-import { IoLogOut } from "react-icons/io5";
+import { FiLogOut } from "react-icons/fi";
 
 const Header = () => {
   const { logged, currentUser, logout } = useUserContext();
@@ -92,8 +92,8 @@ const Header = () => {
       </div>
 
       {logged ? (
-        <div className="nav-item" onClick={handleLogout}>
-          <IoLogOut className="text-4xl" />
+        <div className="nav-item px-5" onClick={handleLogout}>
+          <FiLogOut className="text-3xl" />
         </div>
       ) : null}
     </div>
