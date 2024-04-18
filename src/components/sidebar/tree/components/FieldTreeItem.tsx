@@ -40,13 +40,14 @@ const FieldTreeItem = ({ field, router, setPoint, index, onRefresh }: any) => {
         label={"Site Boundaries (3D Model Virtualization)"}
         onClick={() => setPoint("Site Boundaries")}
       />
-      {hasFeatureTag(router.query, "useNewTree") ? (
+      {!hasFeatureTag(router.query, "useOldTree") ? (
         <SurveyTree
           setPoint={setPoint}
           site={field?.site}
           onRefresh={onRefresh}
         />
       ) : (
+        // TODO: remove this when new tree is fully implemented
         <>
           <TreeItem
             nodeId={"GPRs"}

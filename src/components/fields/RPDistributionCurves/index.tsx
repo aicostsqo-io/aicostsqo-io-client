@@ -30,23 +30,23 @@ const distributionsListInitialState = {
 const volumeTypesListInitialState = {
   volumeTheoric: {
     key: "volumeTheoric",
-    label: "Volume Theoric",
+    label: "Total Polihedral Volume",
     analysisKey: "volumeTheoricExpected",
-    analysisLabel: "Volume Theoric Expected",
-    value: false,
-  },
-  volumeQuarry: {
-    key: "volumeQuarry",
-    label: "Volume Quarry",
-    analysisKey: "volumeQuarryExpected",
-    analysisLabel: "Volume Quarry Expected",
+    analysisLabel: "Total Polihedral Volume Expected",
     value: false,
   },
   totalVolumeOfMaxQs: {
     key: "totalVolumeOfMaxQs",
-    label: "Total Volume Of MaxQs",
+    label: "Total Volume Of MaxQ(s)",
     analysisKey: "totalVolumeOfMaxQsExpected",
     analysisLabel: "Total Volume Of MaxQs Expected",
+    value: false,
+  },
+  volumeQuarry: {
+    key: "volumeQuarry",
+    label: "Real Quarry Quboits",
+    analysisKey: "volumeQuarryExpected",
+    analysisLabel: "Real Quarry Quboits Expected",
     value: false,
   },
 };

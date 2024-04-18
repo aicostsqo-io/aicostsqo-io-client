@@ -48,7 +48,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
         onClick={() => handleClickRpTreeItem(rp)}
         onContextMenu={handleContextMenu}
       >
-        {hasFeatureTag(router.query, "useNewTree") ? (
+        {!hasFeatureTag(router.query, "useOldTree") ? (
           <>
             <TreeItem
               nodeId={rp?._id + 1}
@@ -333,6 +333,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
             </TreeItem>
           </>
         ) : (
+          // TODO: remove this when new tree is fully implemented
           <>
             <TreeItem
               nodeId={rp?._id + 1}

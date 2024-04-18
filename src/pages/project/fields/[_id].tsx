@@ -128,10 +128,105 @@ const Field = () => {
     mutate: siteDataMutate,
   } = useFetch(_id ? `/fields/${_id}` : null);
 
+  // TODO: remove this if statement when new fields is fully implemented
+  if (hasFeatureTag(router.query, "useOldFields")) {
+    return (
+      <MainLayout>
+        <ProjectLayout>
+          <TopBar page={page} setPage={setPage} />
+
+          {/* dont delete */}
+          {point === "Site Main" && (
+            <div className="h-full flex justify-center items-center text-5xl font-bold">
+              {siteData?.site?.name} Mining Field
+            </div>
+          )}
+
+          {/* dont delete */}
+          {point === "RPItem" && (page === 0 || page === 1 || page === 3) && (
+            <div className="h-full flex justify-center items-center text-5xl font-bold">
+              {selectedRP?.name}
+            </div>
+          )}
+
+          {/* dont delete */}
+          {point === "Field Survey" && <h1>In Progress!</h1>}
+
+          {point === "Site Topological Map" && page === 0 && <Topological />}
+          {point === "Site Boundaries" && page === 0 && <Boundaries />}
+          {point === "Representing Prisms" && page === 0 && (
+            <AllRPsVisualization />
+          )}
+          {point === "Representing Prisms" && page === 1 && <RPDataEditable />}
+
+          {point === "RP" && page === 0 && <RPVisualization />}
+          {point === "RP" && page === 1 && <RPData />}
+
+          {point === "Discontinuities (scanline measure)" && page === 0 && (
+            <DiscontinuitiesVisualization />
+          )}
+          {point === "Discontinuities (scanline measure)" && page === 1 && (
+            <DiscontinuitiesData />
+          )}
+
+          {point === "Polyhedron" && page === 0 && <PolyhedronVisualization />}
+
+          {point === "Extended (1D)" && page === 0 && (
+            <VirtualExtended1DRPsVisualization />
+          )}
+          {point === "Extended (3D)" && page === 0 && (
+            <VirtualExtended3DRPsVisualization />
+          )}
+          {point === "DFN" && page === 0 && <ReCalculateDFN />}
+
+          {point === "Discontinuities (GPR)" && page === 0 && (
+            <DiscontinuitiesGPRVisualization />
+          )}
+          {point === "Discontinuities (GPR)" && page === 1 && (
+            <DiscontinuitiesGPRData />
+          )}
+
+          {point === "Discontinuities (Magnetometric)" &&
+            page === 0 &&
+            "Not yet implemented magnetometric visualization"}
+
+          {point === "Discontinuities (Magnetometric)" && page === 1 && (
+            <DiscontinuitiesMagnetometricData />
+          )}
+
+          {point === "Discontinuities (Resistivity)" &&
+            page === 0 &&
+            "Not yet implemented resistivity visualization"}
+
+          {point === "Discontinuities (Resistivity)" && page === 1 && (
+            <DiscontinuitiesResistivityData />
+          )}
+
+          {point === "Discontinuities (Seismic)" &&
+            page === 0 &&
+            "Not yet implemented seismic visualization"}
+          {point === "Discontinuities (Seismic)" && page === 1 && (
+            <DiscontinuitiesSeismicData />
+          )}
+
+          {point === "Discontinuities (Televiewer)" &&
+            page === 0 &&
+            "Not yet implemented televiewer visualization"}
+          {point === "Discontinuities (Televiewer)" && page === 1 && (
+            <DiscontinuitiesTeleviewerData />
+          )}
+
+          {/* Block Size Distribution Curves */}
+          {point === "RPItem" && page === 2 && <RPDistributionCurves />}
+        </ProjectLayout>
+      </MainLayout>
+    );
+  }
+
   const key = `${point}-${page}`;
   const Component = FIELDS_MAP[key];
 
-  if (Component && hasFeatureTag(router.query, "useNewFields")) {
+  if (Component) {
     return (
       <MainLayout>
         <ProjectLayout>
@@ -140,105 +235,12 @@ const Field = () => {
         </ProjectLayout>
       </MainLayout>
     );
-  } else if (hasFeatureTag(router.query, "useNewFields")) {
-    return (
-      <MainLayout>
-        <ProjectLayout>
-          <TopBar page={page} setPage={setPage} />
-          <NotYetImplemented />
-        </ProjectLayout>
-      </MainLayout>
-    );
   }
-
   return (
     <MainLayout>
       <ProjectLayout>
         <TopBar page={page} setPage={setPage} />
-
-        {/* dont delete */}
-        {point === "Site Main" && (
-          <div className="h-full flex justify-center items-center text-5xl font-bold">
-            {siteData?.site?.name} Mining Field
-          </div>
-        )}
-
-        {/* dont delete */}
-        {point === "RPItem" && (page === 0 || page === 1 || page === 3) && (
-          <div className="h-full flex justify-center items-center text-5xl font-bold">
-            {selectedRP?.name}
-          </div>
-        )}
-
-        {/* dont delete */}
-        {point === "Field Survey" && <h1>In Progress!</h1>}
-
-        {point === "Site Topological Map" && page === 0 && <Topological />}
-        {point === "Site Boundaries" && page === 0 && <Boundaries />}
-        {point === "Representing Prisms" && page === 0 && (
-          <AllRPsVisualization />
-        )}
-        {point === "Representing Prisms" && page === 1 && <RPDataEditable />}
-
-        {point === "RP" && page === 0 && <RPVisualization />}
-        {point === "RP" && page === 1 && <RPData />}
-
-        {point === "Discontinuities (scanline measure)" && page === 0 && (
-          <DiscontinuitiesVisualization />
-        )}
-        {point === "Discontinuities (scanline measure)" && page === 1 && (
-          <DiscontinuitiesData />
-        )}
-
-        {point === "Polyhedron" && page === 0 && <PolyhedronVisualization />}
-
-        {point === "Extended (1D)" && page === 0 && (
-          <VirtualExtended1DRPsVisualization />
-        )}
-        {point === "Extended (3D)" && page === 0 && (
-          <VirtualExtended3DRPsVisualization />
-        )}
-        {point === "DFN" && page === 0 && <ReCalculateDFN />}
-
-        {point === "Discontinuities (GPR)" && page === 0 && (
-          <DiscontinuitiesGPRVisualization />
-        )}
-        {point === "Discontinuities (GPR)" && page === 1 && (
-          <DiscontinuitiesGPRData />
-        )}
-
-        {point === "Discontinuities (Magnetometric)" &&
-          page === 0 &&
-          "Not yet implemented magnetometric visualization"}
-
-        {point === "Discontinuities (Magnetometric)" && page === 1 && (
-          <DiscontinuitiesMagnetometricData />
-        )}
-
-        {point === "Discontinuities (Resistivity)" &&
-          page === 0 &&
-          "Not yet implemented resistivity visualization"}
-
-        {point === "Discontinuities (Resistivity)" && page === 1 && (
-          <DiscontinuitiesResistivityData />
-        )}
-
-        {point === "Discontinuities (Seismic)" &&
-          page === 0 &&
-          "Not yet implemented seismic visualization"}
-        {point === "Discontinuities (Seismic)" && page === 1 && (
-          <DiscontinuitiesSeismicData />
-        )}
-
-        {point === "Discontinuities (Televiewer)" &&
-          page === 0 &&
-          "Not yet implemented televiewer visualization"}
-        {point === "Discontinuities (Televiewer)" && page === 1 && (
-          <DiscontinuitiesTeleviewerData />
-        )}
-
-        {/* Block Size Distribution Curves */}
-        {point === "RPItem" && page === 2 && <RPDistributionCurves />}
+        <NotYetImplemented />
       </ProjectLayout>
     </MainLayout>
   );
