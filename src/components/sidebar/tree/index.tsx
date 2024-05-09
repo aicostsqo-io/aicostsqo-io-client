@@ -61,7 +61,7 @@ export default function Tree() {
             label="Use Wizard"
             onClick={() => router.push("/project/add-field-wizard")}
           />
-          {hasFeatureTag(router.query, "useNewTree") ? (
+          {!hasFeatureTag(router.query, "useOldTree") ? (
             <ManuallyTree setPoint={setPoint} />
           ) : (
             <TreeItem
