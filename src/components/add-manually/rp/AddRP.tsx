@@ -59,17 +59,15 @@ const AddRP = ({ method }: any) => {
       </div>
 
       {method === "manual" ? (
-        <RPForm rp={rp} setRp={setRp} handleAddRp={handleAddRp} />
+        <RPForm
+          rp={rp}
+          setRp={setRp}
+          handleAddRp={handleAddRp}
+          handleAddRps={handleAddRps}
+        />
       ) : (
         <RPExcel />
       )}
-
-      <div
-        className="mt-2 w-full bg-black text-white text-center cursor-pointer py-2 px-5 text-lg"
-        onClick={handleAddRps}
-      >
-        Add RPs to Site
-      </div>
     </div>
   );
 };

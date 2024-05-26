@@ -9,20 +9,15 @@ import { useTreeContext } from "@/contexts/Tree";
 import { MANUALLY_ADD_FIELDS } from "@/constants/fields";
 import AddGPR from "@/components/add-manually/other/add-gpr-manually";
 import MethodTopBar from "./MethodTopBar";
-
-const NotYetImplemented = () => {
-  return (
-    <div className="h-full flex justify-center items-center text-5xl font-bold">
-      Not yet implemented
-    </div>
-  );
-};
+import AddScanline from "@/components/add-manually/field-survey/scanline/AddScanline";
+import NotYetImplemented from "@/components/common/NotYetImplemented";
 
 const MANUALLY_ADD_FIELDS_COMPONENTS = {
   [MANUALLY_ADD_FIELDS.IMPORT_SITE]: AddSite,
   [MANUALLY_ADD_FIELDS.IMPORT_RP]: AddRP,
   [MANUALLY_ADD_FIELDS.IMPORT_DISCONTINUITIES]: AddDisc,
   [MANUALLY_ADD_FIELDS.IMPORT_GPR]: AddGPR,
+  [MANUALLY_ADD_FIELDS.IMPORT_SCANLINE]: AddScanline,
   [MANUALLY_ADD_FIELDS.NOT_YET_IMPLEMENTED]: NotYetImplemented,
 };
 
@@ -36,7 +31,7 @@ const MANUALLY_ADD_FIELDS_COMPONENTS_MAP: ManuallyAddFieldsMap = {
   "Import Field Survey Data":
     MANUALLY_ADD_FIELDS_COMPONENTS[MANUALLY_ADD_FIELDS.NOT_YET_IMPLEMENTED],
   "Import Scanline":
-    MANUALLY_ADD_FIELDS_COMPONENTS[MANUALLY_ADD_FIELDS.NOT_YET_IMPLEMENTED],
+    MANUALLY_ADD_FIELDS_COMPONENTS[MANUALLY_ADD_FIELDS.IMPORT_SCANLINE],
   "Import Joint Sets":
     MANUALLY_ADD_FIELDS_COMPONENTS[MANUALLY_ADD_FIELDS.NOT_YET_IMPLEMENTED],
   "Import Drilling":
