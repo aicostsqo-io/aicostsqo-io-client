@@ -76,14 +76,14 @@ const ManuallyTree = ({ setPoint }: any) => {
             setPoint("Import Resistivity");
           }}
         />
+        <TreeItem
+          nodeId={"Import Seismic"}
+          label={"Import Seismic"}
+          onClick={() => {
+            setPoint("Import Seismic");
+          }}
+        />
       </TreeItem>
-      <TreeItem
-        nodeId={"Import Seismic"}
-        label={"Import Seismic"}
-        onClick={() => {
-          setPoint("Import Seismic");
-        }}
-      />
       <TreeItem
         nodeId={"Import RP (Representing Prisms)"}
         label={"Import RP (Representing Prisms)"}
