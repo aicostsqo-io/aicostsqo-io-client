@@ -3,7 +3,7 @@ import { instance as axios } from "./axiosInstance";
 
 export const getSiteBounds = () => axios.get(`/siteBounds`);
 
-export const getSites = () => axios.get(`/sites`);
+export const getSites = () => axios.get(`/fields`);
 
 export const createSiteByManual = (data: any) =>
   axios.post(`/fields/manual`, data);
