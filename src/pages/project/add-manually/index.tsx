@@ -57,11 +57,10 @@ const MANUALLY_ADD_FIELDS_COMPONENTS_MAP: ManuallyAddFieldsMap = {
 };
 
 const AddManually = () => {
-  const [page, setPage] = useState(0);
+  // const [page, setPage] = useState(0);
   const [method, setMethod] = useState("manual");
 
   const { point } = useTreeContext();
-  console.log("point", point);
 
   const AddManuallyComponent =
     MANUALLY_ADD_FIELDS_COMPONENTS_MAP[point] || NotYetImplemented;

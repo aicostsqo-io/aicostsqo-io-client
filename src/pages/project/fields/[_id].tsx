@@ -232,7 +232,6 @@ const Field = () => {
   }
 
   const key = `${point}-${page}`;
-  console.log("key", key);
   const Component = FIELDS_MAP[key];
 
   if (Component) {

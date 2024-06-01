@@ -1,6 +1,7 @@
 import { getExcel } from "@/api/excel";
 import { getExcelTemplate, importFromExcel, uploadFile } from "@/api/upload";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const useUploadExcel = () => {
   const [file, setFile] = useState<any | null>(null);
@@ -22,8 +23,6 @@ const useUploadExcel = () => {
   };
 
   const upload = async (file: any, path: string) => {
-    console.log("file", file);
-    console.log("path", path);
     //     setLoading(true);
     //   setError(null);
 
@@ -31,19 +30,23 @@ const useUploadExcel = () => {
       const formData = new FormData();
       formData.append("file", file);
       const response = await uploadFile(formData);
-      console.log("response", response);
       const { filePath } = response.data;
       const importResponse = await importFromExcel(
         { fileName: filePath },
         path
       );
       console.log("importResponse", importResponse);
+      const { success, message } = importResponse.data;
+      if (success) {
+        toast.success(message);
+      }
+      setFile(null);
     } catch (error: any) {
-      console.log("error", error);
-      setError(error.message);
+      toast.error("Something went wrong");
+      // setError(error.message);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   };
 
   return { file, setFile, loading, error, upload, excelTemplate };
