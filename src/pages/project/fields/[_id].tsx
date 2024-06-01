@@ -1,5 +1,5 @@
 import Boundaries from "@/components/fields/Boundaries";
-import DiscontinuitiesVisualization from "@/components/fields/DiscontinuitiesVisualization";
+import RPDiscontinuitiesVisualization from "@/components/fields/DiscontinuitiesVisualization";
 import RPVisualization from "@/components/fields/RPVisualization";
 import TopBar from "@/components/fields/TopBar";
 import Topological from "@/components/fields/Topological";
@@ -9,7 +9,7 @@ import MainLayout from "@/layouts/main/MainLayout";
 import ProjectLayout from "@/layouts/project/ProjectLayout";
 import { useRouter } from "next/router";
 import RPData from "@/components/fields/RPData";
-import DiscontinuitiesData from "@/components/fields/DiscontinuitiesData";
+import RPDiscontinuitiesData from "@/components/fields/DiscontinuitiesData";
 import { useSiteContext } from "@/contexts/Site";
 import DiscontinuitiesGPRVisualization from "@/components/fields/GPR";
 import DiscontinuitiesGPRData from "@/components/fields/GPR/DiscontinuitiesGPRData";
@@ -27,6 +27,7 @@ import RPDataEditable from "@/components/fields/RPDataEditable";
 import { hasFeatureTag } from "@/utils";
 import ShowDFN from "@/components/fields/ShowDFN";
 import ReCalculateDFN from "@/components/fields/ReCalculateDFN";
+import SiteDiscontinuitiesData from "@/components/fields/FieldSurvey/Scanline";
 
 const NotYetImplemented = () => {
   return (
@@ -39,8 +40,10 @@ const NotYetImplemented = () => {
 const FIELD_COMPONENTS = {
   [FIELDS.TOPOLOGICAL]: Topological,
   [FIELDS.BOUNDARIES]: Boundaries,
-  [FIELDS.DISCONTINUITIES_VISUALIZATION]: DiscontinuitiesVisualization,
-  [FIELDS.DISCONTINUITIES_DATA]: DiscontinuitiesData,
+  [FIELDS.SITE_DISCONTINUITIES_DATA]: SiteDiscontinuitiesData,
+  [FIELDS.SITE_DISCONTINUITIES_VISUALIZATION]: NotYetImplemented,
+  [FIELDS.RP_DISCONTINUITIES_VISUALIZATION]: RPDiscontinuitiesVisualization,
+  [FIELDS.RP_DISCONTINUITIES_DATA]: RPDiscontinuitiesData,
   [FIELDS.RP_VISUALIZATION]: RPVisualization,
   [FIELDS.RP_DATA]: RPData,
   [FIELDS.RP_DATA_EDITABLE]: RPDataEditable,
@@ -70,20 +73,11 @@ interface FieldsMap {
 const FIELDS_MAP: FieldsMap = {
   "Site Topological Map-0": FIELD_COMPONENTS[FIELDS.TOPOLOGICAL],
   "Site Boundaries-0": FIELD_COMPONENTS[FIELDS.BOUNDARIES],
-  //   ---------- Representing Prisms ----------
-  "Representing Prisms-0": FIELD_COMPONENTS[FIELDS.ALL_RPS_VISUALIZATION],
-  "Representing Prisms-1": FIELD_COMPONENTS[FIELDS.RP_DATA_EDITABLE],
-  //   ---------- RPItem ----------
-  "RPItem-0": FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
-  "RPItem-1": FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
-  "RPItem-2": FIELD_COMPONENTS[FIELDS.RP_DISTRIBUTION_CURVES],
-  "RPItem-3": FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
-  //   ---------- RP ----------
-  "RP-0": FIELD_COMPONENTS[FIELDS.RP_VISUALIZATION],
-  "RP-1": FIELD_COMPONENTS[FIELDS.RP_DATA],
-  //   ---------- Discontinuities (scanline measure) ----------
-  "Scanline-0": FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_VISUALIZATION],
-  "Scanline-1": FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_DATA],
+  //   ---------- Discountinuities (Scanline) ----------
+  "Field Survey - Scanline-0":
+    FIELD_COMPONENTS[FIELDS.SITE_DISCONTINUITIES_VISUALIZATION],
+  "Field Survey - Scanline-1":
+    FIELD_COMPONENTS[FIELDS.SITE_DISCONTINUITIES_DATA],
   //   ---------- Discontinuities (GPR) ----------
   "Field Survey - Ground Penetrating Radar (GPR)-0":
     FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_GPR_VISUALIZATION],
@@ -113,6 +107,20 @@ const FIELDS_MAP: FieldsMap = {
     FIELD_COMPONENTS[FIELDS.VIRTUAL_EXTENDED_3D_RPS_VISUALIZATION],
   "Show DFN-0": FIELD_COMPONENTS[FIELDS.DFN_SHOW],
   "ReCalculate DFN-0": FIELD_COMPONENTS[FIELDS.DFN_RECALCULATE],
+  //   ---------- Representing Prisms ----------
+  "Representing Prisms-0": FIELD_COMPONENTS[FIELDS.ALL_RPS_VISUALIZATION],
+  "Representing Prisms-1": FIELD_COMPONENTS[FIELDS.RP_DATA_EDITABLE],
+  //   ---------- RPItem ----------
+  "RPItem-0": FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
+  "RPItem-1": FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
+  "RPItem-2": FIELD_COMPONENTS[FIELDS.RP_DISTRIBUTION_CURVES],
+  "RPItem-3": FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
+  //   ---------- RP ----------
+  "RP-0": FIELD_COMPONENTS[FIELDS.RP_VISUALIZATION],
+  "RP-1": FIELD_COMPONENTS[FIELDS.RP_DATA],
+  //   ---------- RP Discontinuities (scanline measure) ----------
+  "Scanline-0": FIELD_COMPONENTS[FIELDS.RP_DISCONTINUITIES_VISUALIZATION],
+  "Scanline-1": FIELD_COMPONENTS[FIELDS.RP_DISCONTINUITIES_DATA],
 };
 
 const Field = () => {
@@ -163,10 +171,10 @@ const Field = () => {
           {point === "RP" && page === 1 && <RPData />}
 
           {point === "Discontinuities (scanline measure)" && page === 0 && (
-            <DiscontinuitiesVisualization />
+            <RPDiscontinuitiesVisualization />
           )}
           {point === "Discontinuities (scanline measure)" && page === 1 && (
-            <DiscontinuitiesData />
+            <RPDiscontinuitiesData />
           )}
 
           {point === "Polyhedron" && page === 0 && <PolyhedronVisualization />}
@@ -224,6 +232,7 @@ const Field = () => {
   }
 
   const key = `${point}-${page}`;
+  console.log("key", key);
   const Component = FIELDS_MAP[key];
 
   if (Component) {
