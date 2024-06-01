@@ -1,7 +1,7 @@
 import useUploadExcel from "@/hooks/useUploadExcel";
 
 const ScanlineExcel = () => {
-  const { file, setFile, upload } = useUploadExcel();
+  const { file, setFile, upload, excelTemplate } = useUploadExcel();
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (files) {
@@ -15,6 +15,10 @@ const ScanlineExcel = () => {
     if (file) {
       upload(file, "/scanlines");
     }
+  };
+
+  const handleGetExcelTemplate = () => {
+    excelTemplate("/scanlines");
   };
 
   return (
@@ -33,7 +37,14 @@ const ScanlineExcel = () => {
           className="ml-2 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           onClick={handleUploadClick}
         >
-          Yükle
+          Upload
+        </button>
+        <button
+          type="button"
+          className="ml-2 inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          onClick={handleGetExcelTemplate}
+        >
+          Sample File
         </button>
       </div>
     </div>
