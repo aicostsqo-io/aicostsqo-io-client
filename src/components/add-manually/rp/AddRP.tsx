@@ -2,7 +2,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 import RPForm from "./RPForm";
 import { createRpsByManual } from "@/api/rp";
-import RPExcel from "./RPExcel";
+import Excel from "./Excel";
 
 const initialState = {
   siteBound: "",
@@ -66,7 +66,7 @@ const AddRP = ({ method }: any) => {
           handleAddRps={handleAddRps}
         />
       ) : (
-        <RPExcel />
+        <Excel />
       )}
     </div>
   );

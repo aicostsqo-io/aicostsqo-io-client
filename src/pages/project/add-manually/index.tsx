@@ -9,7 +9,10 @@ import { useTreeContext } from "@/contexts/Tree";
 import { MANUALLY_ADD_FIELDS } from "@/constants/fields";
 import AddGPR from "@/components/add-manually/other/add-gpr-manually";
 import MethodTopBar from "./MethodTopBar";
-import AddScanline from "@/components/add-manually/field-survey/scanline/AddScanline";
+import AddScanline from "@/components/add-manually/field-survey/scanline/Add";
+import AddJointSet from "@/components/add-manually/field-survey/joint-set/Add";
+import AddLidar from "@/components/add-manually/field-survey/lidar/Add";
+import AddDrilling from "@/components/add-manually/field-survey/drilling/Add";
 import NotYetImplemented from "@/components/common/NotYetImplemented";
 
 const MANUALLY_ADD_FIELDS_COMPONENTS = {
@@ -18,6 +21,9 @@ const MANUALLY_ADD_FIELDS_COMPONENTS = {
   [MANUALLY_ADD_FIELDS.IMPORT_DISCONTINUITIES]: AddDisc,
   [MANUALLY_ADD_FIELDS.IMPORT_GPR]: AddGPR,
   [MANUALLY_ADD_FIELDS.IMPORT_SCANLINE]: AddScanline,
+  [MANUALLY_ADD_FIELDS.IMPORT_JOINT_SETS]: AddJointSet,
+  [MANUALLY_ADD_FIELDS.IMPORT_LIDAR]: AddLidar,
+  [MANUALLY_ADD_FIELDS.IMPORT_DRILLING]: AddDrilling,
   [MANUALLY_ADD_FIELDS.NOT_YET_IMPLEMENTED]: NotYetImplemented,
 };
 
@@ -33,11 +39,11 @@ const MANUALLY_ADD_FIELDS_COMPONENTS_MAP: ManuallyAddFieldsMap = {
   "Import Scanline":
     MANUALLY_ADD_FIELDS_COMPONENTS[MANUALLY_ADD_FIELDS.IMPORT_SCANLINE],
   "Import Joint Sets":
-    MANUALLY_ADD_FIELDS_COMPONENTS[MANUALLY_ADD_FIELDS.NOT_YET_IMPLEMENTED],
+    MANUALLY_ADD_FIELDS_COMPONENTS[MANUALLY_ADD_FIELDS.IMPORT_JOINT_SETS],
   "Import Drilling":
-    MANUALLY_ADD_FIELDS_COMPONENTS[MANUALLY_ADD_FIELDS.NOT_YET_IMPLEMENTED],
+    MANUALLY_ADD_FIELDS_COMPONENTS[MANUALLY_ADD_FIELDS.IMPORT_DRILLING],
   "Import Lidar":
-    MANUALLY_ADD_FIELDS_COMPONENTS[MANUALLY_ADD_FIELDS.NOT_YET_IMPLEMENTED],
+    MANUALLY_ADD_FIELDS_COMPONENTS[MANUALLY_ADD_FIELDS.IMPORT_LIDAR],
   "Import Ground Penetrating Radar (GPR)":
     MANUALLY_ADD_FIELDS_COMPONENTS[MANUALLY_ADD_FIELDS.IMPORT_GPR],
   "Import Magnetometry":

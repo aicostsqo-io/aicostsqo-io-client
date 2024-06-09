@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
-import ScanlineForm from "./ScanlineForm";
+import ScanlineForm from "./Form";
 import { createRpsByManual } from "@/api/rp";
-import ScanlineExcel from "./ScanlineExcel";
+import ScanlineExcel from "./Excel";
 import NotYetImplemented from "@/components/common/NotYetImplemented";
 
 const initialState = {

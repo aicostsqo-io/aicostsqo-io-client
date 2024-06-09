@@ -28,6 +28,7 @@ import { hasFeatureTag } from "@/utils";
 import ShowDFN from "@/components/fields/ShowDFN";
 import ReCalculateDFN from "@/components/fields/ReCalculateDFN";
 import SiteDiscontinuitiesData from "@/components/fields/FieldSurvey/Scanline";
+import JointSetsData from "@/components/fields/FieldSurvey/JointSet";
 
 const NotYetImplemented = () => {
   return (
@@ -42,6 +43,12 @@ const FIELD_COMPONENTS = {
   [FIELDS.BOUNDARIES]: Boundaries,
   [FIELDS.SITE_DISCONTINUITIES_DATA]: SiteDiscontinuitiesData,
   [FIELDS.SITE_DISCONTINUITIES_VISUALIZATION]: NotYetImplemented,
+  [FIELDS.JOINT_SETS_DATA]: JointSetsData,
+  [FIELDS.JOINT_SETS_VISUALIZATION]: NotYetImplemented,
+  [FIELDS.DRILLING_DATA]: NotYetImplemented,
+  [FIELDS.DRILLING_VISUALIZATION]: NotYetImplemented,
+  [FIELDS.LIDAR_DATA]: NotYetImplemented,
+  [FIELDS.LIDAR_VISUALIZATION]: NotYetImplemented,
   [FIELDS.RP_DISCONTINUITIES_VISUALIZATION]: RPDiscontinuitiesVisualization,
   [FIELDS.RP_DISCONTINUITIES_DATA]: RPDiscontinuitiesData,
   [FIELDS.RP_VISUALIZATION]: RPVisualization,
@@ -78,6 +85,16 @@ const FIELDS_MAP: FieldsMap = {
     FIELD_COMPONENTS[FIELDS.SITE_DISCONTINUITIES_VISUALIZATION],
   "Field Survey - Scanline-1":
     FIELD_COMPONENTS[FIELDS.SITE_DISCONTINUITIES_DATA],
+  //  ---------- Joint Sets ----------
+  "Field Survey - Joint Sets-0":
+    FIELD_COMPONENTS[FIELDS.JOINT_SETS_VISUALIZATION],
+  "Field Survey - Joint Sets-1": FIELD_COMPONENTS[FIELDS.JOINT_SETS_DATA],
+  //   ---------- Drilling ----------
+  "Field Survey - Drilling-0": FIELD_COMPONENTS[FIELDS.DRILLING_VISUALIZATION],
+  "Field Survey - Drilling-1": FIELD_COMPONENTS[FIELDS.DRILLING_DATA],
+  //   ---------- Lidar ----------
+  "Field Survey - Lidar-0": FIELD_COMPONENTS[FIELDS.LIDAR_VISUALIZATION],
+  "Field Survey - Lidar-1": FIELD_COMPONENTS[FIELDS.LIDAR_DATA],
   //   ---------- Discontinuities (GPR) ----------
   "Field Survey - Ground Penetrating Radar (GPR)-0":
     FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_GPR_VISUALIZATION],

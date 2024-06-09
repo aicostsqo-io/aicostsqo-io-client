@@ -1,9 +1,9 @@
 import useUploadExcel from "@/hooks/useUploadExcel";
 import { useEffect, useState } from "react";
-import SiteList from "../SiteList";
+import SiteList from "../../SiteList";
 import { getSites } from "@/api/site";
 
-const ScanlineExcel = () => {
+const Excel = () => {
   const { file, setFile, upload, excelTemplate } = useUploadExcel();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sites, setSites] = useState<any>([]);
@@ -26,19 +26,18 @@ const ScanlineExcel = () => {
     const files = e.target.files;
     if (files) {
       const file = files[0];
-      console.log(file);
       setFile(file);
     }
   };
 
   const handleUploadClick = () => {
     if (file) {
-      upload(file, "/scanlines");
+      upload(file, "/joint-sets");
     }
   };
 
   const handleGetExcelTemplate = () => {
-    excelTemplate("/scanlines");
+    excelTemplate("/joint-sets");
   };
 
   const handleShowSiteList = () => {
@@ -87,4 +86,4 @@ const ScanlineExcel = () => {
   );
 };
 
-export default ScanlineExcel;
+export default Excel;

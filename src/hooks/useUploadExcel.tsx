@@ -35,7 +35,6 @@ const useUploadExcel = () => {
         { fileName: filePath },
         path
       );
-      console.log("importResponse", importResponse);
       const { success, message } = importResponse.data;
       if (success) {
         toast.success(message);
