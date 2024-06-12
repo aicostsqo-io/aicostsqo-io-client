@@ -4,10 +4,13 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { assets } from "../../assets/imgs";
 import { FiLogOut } from "react-icons/fi";
+import ProjectSelectModal from "../common/Modals/ProjectSelectModal";
 
 const Header = () => {
   const { logged, currentUser, logout } = useUserContext();
   const [visible, setVisible] = useState(false);
+  const [projectSelectModalVisible, setProjectSelectModalVisible] =
+    useState(false);
 
   const handleLogout = () => {
     setVisible(false);
@@ -41,24 +44,26 @@ const Header = () => {
                 } `}
               >
                 <Link
-                  // onClick={() => setVisible(!visible)}
-                  href="#"
+                  onClick={() => setVisible(!visible)}
+                  href="/new-project"
                   className={
-                    "text-base inline-flex py-2 px-2 items-center rounded border-b-2 cursor-default text-slate-400"
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-green-500 hover:text-white border-b-2"
                   }
                 >
                   New Project
                 </Link>
-                <Link
-                  onClick={() => setVisible(!visible)}
-                  href="/project"
+                <button
+                  onClick={() => {
+                    setVisible(!visible);
+                    setProjectSelectModalVisible(true);
+                  }}
                   className={
                     "text-base inline-flex py-2 px-2 items-center rounded hover:bg-green-500 hover:text-white border-b-2"
                   }
                 >
                   Open Project
-                </Link>
-                <Link
+                </button>
+                {/* <Link
                   // onClick={() => setVisible(!visible)}
                   href="#"
                   className={
@@ -75,7 +80,7 @@ const Header = () => {
                   }
                 >
                   Close Project
-                </Link>
+                </Link> */}
               </div>
             </li>
             <li className="nav-item text-slate-300 hover:text-slate-300 hover:bg-gray-100 cursor-default">
@@ -95,6 +100,12 @@ const Header = () => {
         <div className="nav-item px-5" onClick={handleLogout}>
           <FiLogOut className="text-3xl" />
         </div>
+      ) : null}
+
+      {projectSelectModalVisible ? (
+        <ProjectSelectModal
+          onClose={() => setProjectSelectModalVisible(false)}
+        />
       ) : null}
     </div>
   );

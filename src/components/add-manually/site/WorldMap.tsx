@@ -16,11 +16,13 @@ import {
 import { EditControl } from "react-leaflet-draw";
 import { toast } from "react-toastify";
 import SiteExcel from "./SiteExcel";
+import { useSiteContext } from "@/contexts/Site";
 
 const WorldMap = ({ method }: any) => {
   const [siteBounds, setSiteBounds] = useState<SiteBound[] | null>(null);
   const [polygon, setPolygon] = useState<number[][] | null>(null);
   const { currentUser } = useUserContext();
+  const { currentProject } = useSiteContext();
   const [siteName, setSiteName] = useState<string>("");
 
   const position: LatLngExpression = [52.515, -0.09];
@@ -93,6 +95,7 @@ const WorldMap = ({ method }: any) => {
         site: {
           customerId: currentUser?._id,
           name: siteName,
+          project: currentProject?._id || null,
         },
         siteBound: {
           mapReferenceSystem: siteBound.mapReferenceSystem,
