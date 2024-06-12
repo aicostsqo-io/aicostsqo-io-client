@@ -41,10 +41,10 @@ const Header = () => {
                 } `}
               >
                 <Link
-                  // onClick={() => setVisible(!visible)}
-                  href="#"
+                  onClick={() => setVisible(!visible)}
+                  href="/new-project"
                   className={
-                    "text-base inline-flex py-2 px-2 items-center rounded border-b-2 cursor-default text-slate-400"
+                    "text-base inline-flex py-2 px-2 items-center rounded hover:bg-green-500 hover:text-white border-b-2"
                   }
                 >
                   New Project
@@ -58,7 +58,7 @@ const Header = () => {
                 >
                   Open Project
                 </Link>
-                <Link
+                {/* <Link
                   // onClick={() => setVisible(!visible)}
                   href="#"
                   className={
@@ -75,7 +75,7 @@ const Header = () => {
                   }
                 >
                   Close Project
-                </Link>
+                </Link> */}
               </div>
             </li>
             <li className="nav-item text-slate-300 hover:text-slate-300 hover:bg-gray-100 cursor-default">
