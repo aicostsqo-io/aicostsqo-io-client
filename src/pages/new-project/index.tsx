@@ -1,4 +1,6 @@
 import { createProject } from "@/api/project";
+import { useSiteContext } from "@/contexts/Site";
+import { useUserContext } from "@/contexts/User";
 import MainLayout from "@/layouts/main/MainLayout";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
@@ -8,18 +10,21 @@ import { toast } from "react-toastify";
 const NewProject = () => {
   const [name, setName] = useState("");
   const router = useRouter();
+  const { currentUser } = useUserContext();
+  const { setProject } = useSiteContext();
 
   const handleCreate = async () => {
     try {
-      const res = await createProject({ name });
+      const res = await createProject({ name, user: currentUser._id });
       if (res.status !== 200) {
         return;
       }
       toast.success("Project created successfully");
       const {
-        data: { _id },
+        data: { project },
       } = res;
-      router.push(`/project/${_id}`);
+      setProject(project);
+      router.push(`/project/${project?._id}`);
     } catch (err) {
       toast.error("Failed to create project");
     }

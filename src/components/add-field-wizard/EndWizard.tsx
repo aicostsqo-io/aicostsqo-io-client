@@ -5,7 +5,6 @@ import {
 
 const EndWizard = ({ end, save, info, setInfo }: any) => {
   const { site } = info;
-  console.log("info", info);
   return (
     <div className="flex flex-col gap-10 p-10  text-xl items-center">
       <div className="flex flex-col gap-5">

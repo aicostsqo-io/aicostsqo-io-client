@@ -11,10 +11,13 @@ import { toast } from "react-toastify";
 import FieldTreeItem from "./components/FieldTreeItem";
 import ManuallyTree from "./components/ManuallyTree";
 import { hasFeatureTag, hincalRouter } from "@/utils";
+import { useSiteContext } from "@/contexts/Site";
 
 export default function Tree() {
   const { expanded, setExpanded, setPoint } = useTreeContext();
   const [selected, setSelected] = React.useState<string[]>([]);
+  const router = useRouter();
+  const { currentProject } = useSiteContext();
 
   const handleToggle = (event: React.SyntheticEvent, nodeIds: string[]) => {
     setExpanded(nodeIds);
@@ -28,14 +31,22 @@ export default function Tree() {
     // console.log("sidebar rendered"); // TODO: why are you rendering all the time bitch?
   }, []);
 
-  const router = useRouter();
+  /*  const {
+    data: fieldData,
+    isLoading: fieldDataLoading,
+    isError: fieldDataError,
+    mutate: fieldDataMutate,
+  } = useFetch("/fields"); */
 
+  //get fields by project id (from url param)
   const {
     data: fieldData,
     isLoading: fieldDataLoading,
     isError: fieldDataError,
     mutate: fieldDataMutate,
-  } = useFetch("/fields");
+  } = useFetch(
+    currentProject?._id ? `/fields/project/${currentProject?._id}` : null
+  );
 
   return (
     <Box
