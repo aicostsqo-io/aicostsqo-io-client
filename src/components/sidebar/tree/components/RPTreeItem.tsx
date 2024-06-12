@@ -165,14 +165,14 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
                 }}
                 onContextMenu={(e) => e.stopPropagation()}
               />
-              <TreeItem
+              {/* <TreeItem
                 nodeId={rp?._id + 15}
                 label={"3D Extended (Virtual Representative Prisms)"}
                 onClick={() => {
                   setPoint("3D Extended (Virtual Representative Prisms)");
                 }}
                 onContextMenu={(e) => e.stopPropagation()}
-              />
+              /> */}
               <TreeItem
                 nodeId={rp?._id + 16}
                 label={"DFN"}

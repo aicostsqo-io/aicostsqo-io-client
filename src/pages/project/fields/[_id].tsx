@@ -117,7 +117,8 @@ const FIELDS_MAP: FieldsMap = {
   "Field Survey - Televiewer-1":
     FIELD_COMPONENTS[FIELDS.DISCONTINUITIES_TELEVIEWER_DATA],
   //   ---------- Virtual Extended ----------
-  "Polyhedrons-0": FIELD_COMPONENTS[FIELDS.POLYHEDRON_VISUALIZATION],
+  "Show polyhedrons-0": FIELD_COMPONENTS[FIELDS.POLYHEDRON_VISUALIZATION],
+  "ReCalculate polyhedrons-0": FIELD_COMPONENTS[FIELDS.NOT_YET_IMPLEMENTED],
   "1D Extended (Virtual Representative Prisms)-0":
     FIELD_COMPONENTS[FIELDS.VIRTUAL_EXTENDED_1D_RPS_VISUALIZATION],
   "3D Extended (Virtual Representative Prisms)-0":
