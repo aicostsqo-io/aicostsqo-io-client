@@ -13,6 +13,7 @@ export type Urls = {
 export type SceneProps = {
   urls: Urls;
   ambientLight?: boolean;
+  cameraPosition?: [number, number, number];
 };
 
 function Scene({ urls }: SceneProps) {
@@ -34,14 +35,18 @@ function Scene({ urls }: SceneProps) {
   return <primitive object={obj} />;
 }
 
-const ObjectVisualizer = ({ urls, ambientLight = true }: SceneProps) => {
+const ObjectVisualizer = ({
+  urls,
+  cameraPosition = [100, 160, 200],
+  ambientLight = true,
+}: SceneProps) => {
   const camera = new PerspectiveCamera(
     45,
     window.innerWidth / window.innerHeight,
     0.1,
     1000
   );
-  camera.position.set(100, 160, 200);
+  camera.position.set(cameraPosition[0], cameraPosition[1], cameraPosition[2]);
 
   return (
     urls && (

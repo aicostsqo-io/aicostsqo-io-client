@@ -12,14 +12,20 @@ const AllRPsVisualization = () => {
   useEffect(() => {
     const fetchObj = async () => {
       setLoading(true);
+      const modifiedRPs = selectedRPs.filter((rp: any) => rp.name !== "RP 0");
+      const min = {
+        x: modifiedRPs[0].positionX,
+        y: modifiedRPs[0].positionY,
+        z: modifiedRPs[0].positionZ,
+      };
       const res = await axios.post(
         `${process.env.NEXT_PUBLIC_MARBLE_API_ENDPOINT}/site`,
         {
           filename: selectedSite.site._id,
-          data: selectedRPs.map((rp: any) => ({
-            positionX: rp.positionX,
-            positionY: rp.positionY,
-            positionZ: rp.positionZ,
+          data: modifiedRPs.map((rp: any) => ({
+            positionX: rp.positionX - min.x,
+            positionY: rp.positionY - min.y,
+            positionZ: rp.positionZ - min.z,
             sizeX: rp.sizeX,
             sizeY: rp.sizeY,
             sizeZ: rp.sizeZ,
