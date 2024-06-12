@@ -2,15 +2,17 @@ import useUploadExcel from "@/hooks/useUploadExcel";
 import { useEffect, useState } from "react";
 import SiteList from "../../SiteList";
 import { getSites } from "@/api/site";
+import { useSiteContext } from "@/contexts/Site";
 
 const Excel = () => {
   const { file, setFile, upload, excelTemplate } = useUploadExcel();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [sites, setSites] = useState<any>([]);
+  const { currentProject } = useSiteContext();
 
   const fetchSites = async () => {
     try {
-      const response = await getSites();
+      const response = await getSites(currentProject?._id);
       const sites = response?.data?.map((siteData: any) => siteData.site);
       setSites(sites);
     } catch (err) {

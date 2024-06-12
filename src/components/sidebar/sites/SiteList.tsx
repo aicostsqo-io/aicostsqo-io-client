@@ -1,11 +1,13 @@
 import { getSites } from "@/api/site";
+import { useSiteContext } from "@/contexts/Site";
 import React, { useEffect, useState } from "react";
 
 const SiteList = () => {
   const [sites, setSites] = useState<any>([]);
+  const { currentProject } = useSiteContext();
 
   useEffect(() => {
-    getSites()
+    getSites(currentProject?._id)
       .then((res) => {
         setSites(res?.data?.siteData);
       })
