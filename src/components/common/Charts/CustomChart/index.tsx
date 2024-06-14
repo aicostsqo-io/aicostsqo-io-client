@@ -39,6 +39,18 @@ function getColor(key: string) {
       return {
         borderColor: "rgba(75, 192, 192, 0.5)",
       };
+    case "volumeTheoricUngenerated":
+      return {
+        borderColor: "#FFA500",
+      };
+    case "volumeQuarryUngenerated":
+      return {
+        borderColor: "#FFA500",
+      };
+    case "totalVolumeOfMaxQsUngenerated":
+      return {
+        borderColor: "#FFA500",
+      };
     default:
       return {
         borderColor: "rgb(255, 99, 132)",
@@ -79,6 +91,19 @@ const CustomChart = ({
           marker: { color: getColor(key)?.borderColor },
           name: object.label,
         });
+
+        // TODO: review this shit
+        if (text === "PDF") {
+          datasetsArray.push({
+            x: data[object.rawKey]?.map((item: any) => item.x),
+            y: data[object.rawKey]?.map((item: any) => item.y),
+            type: type,
+            mode: "lines+markers",
+            marker: { color: getColor(object.rawKey)?.borderColor },
+            name: object.rawLabel,
+            visible:"legendonly"
+          });
+        }
 
         if (text === "PDF" && showAnalysis) {
           datasetsArray.push({

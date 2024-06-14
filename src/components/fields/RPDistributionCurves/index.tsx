@@ -33,6 +33,8 @@ const volumeTypesListInitialState = {
     label: "Total Polihedral Volume",
     analysisKey: "volumeTheoricExpected",
     analysisLabel: "Total Polihedral Volume Expected",
+    rawKey: "volumeTheoricUngenerated",
+    rawLabel: "Total Polihedral Volume Ungenerated",
     value: false,
   },
   totalVolumeOfMaxQs: {
@@ -40,6 +42,8 @@ const volumeTypesListInitialState = {
     label: "Total Volume Of MaxQ(s)",
     analysisKey: "totalVolumeOfMaxQsExpected",
     analysisLabel: "Total Volume Of MaxQs Expected",
+    rawKey: "totalVolumeOfMaxQsUngenerated",
+    rawLabel: "Total Volume Of MaxQs Ungenerated",
     value: false,
   },
   volumeQuarry: {
@@ -47,6 +51,8 @@ const volumeTypesListInitialState = {
     label: "Real Quarry Quboits",
     analysisKey: "volumeQuarryExpected",
     analysisLabel: "Real Quarry Quboits Expected",
+    rawKey: "volumeQuarryUngenerated",
+    rawLabel: "Real Quarry Quboits Ungenerated",
     value: false,
   },
 };
@@ -94,10 +100,14 @@ function RPDistributionCurves() {
         chartData = {
           totalVolumeOfMaxQs: data?.totalVolumeOfMaxQs?.pdf?.observed,
           totalVolumeOfMaxQsExpected: data?.totalVolumeOfMaxQs?.pdf?.expected,
+          totalVolumeOfMaxQsUngenerated:
+            data?.totalVolumeOfMaxQs?.pdf?.ungenerated,
           volumeQuarry: data?.volumeQuarry?.pdf?.observed,
           volumeQuarryExpected: data?.volumeQuarry?.pdf?.expected,
+          volumeQuarryUngenerated: data?.volumeQuarry?.pdf?.ungenerated,
           volumeTheoric: data?.volumeTheoric?.pdf?.observed,
           volumeTheoricExpected: data?.volumeTheoric?.pdf?.expected,
+          volumeTheoricUngenerated: data?.volumeTheoric?.pdf?.ungenerated,
         };
         break;
       case "histogram":
