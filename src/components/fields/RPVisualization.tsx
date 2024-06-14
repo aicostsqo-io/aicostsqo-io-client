@@ -16,7 +16,7 @@ const RPVisualization = () => {
         `${process.env.NEXT_PUBLIC_MARBLE_API_ENDPOINT}/rp`,
         {
           filename: selectedRP._id,
-          positionX: 0, // TODO: kamerayı objeye taşıyamadık objeyi kameraya taşıdık
+          positionX: 0,
           positionY: 0,
           positionZ: 0,
           sizeX: selectedRP.sizeX,
