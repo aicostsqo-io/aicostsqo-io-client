@@ -29,6 +29,7 @@ import ShowDFN from "@/components/fields/ShowDFN";
 import ReCalculateDFN from "@/components/fields/ReCalculateDFN";
 import SiteDiscontinuitiesData from "@/components/fields/FieldSurvey/Scanline";
 import JointSetsData from "@/components/fields/FieldSurvey/JointSet";
+import CustomObjectVirtualizationContainer from "@/components/fields/CustomObjectVirtualizationContainer";
 
 const NotYetImplemented = () => {
   return (
@@ -69,6 +70,7 @@ const FIELD_COMPONENTS = {
     VirtualExtended1DRPsVisualization,
   [FIELDS.DFN_SHOW]: ShowDFN,
   [FIELDS.DFN_RECALCULATE]: ReCalculateDFN,
+  [FIELDS.CUSTOM_OBJECT_CONTAINER]: CustomObjectVirtualizationContainer,
   [FIELDS.NOT_YET_IMPLEMENTED]: NotYetImplemented,
 };
 
@@ -139,13 +141,25 @@ const FIELDS_MAP: FieldsMap = {
   //   ---------- RP Discontinuities (scanline measure) ----------
   "Scanline-0": FIELD_COMPONENTS[FIELDS.RP_DISCONTINUITIES_VISUALIZATION],
   "Scanline-1": FIELD_COMPONENTS[FIELDS.RP_DISCONTINUITIES_DATA],
+  //  ---------- Custom Object Visualizer  ----------
+  "Custom Object Visualizer-0":
+    FIELD_COMPONENTS[FIELDS.CUSTOM_OBJECT_CONTAINER],
 };
 
 const Field = () => {
   const router = useRouter();
   const { _id } = router.query;
-  const { point } = useTreeContext();
+  const { point, visualizationShowList, setVisualizationShowList } =
+    useTreeContext();
   const { selectedRP, page, setPage } = useSiteContext();
+
+  // TODO: should refactor this in the future
+  if (
+    point !== "Custom Object Visualizer" &&
+    visualizationShowList.length > 0
+  ) {
+    setVisualizationShowList([]);
+  }
 
   const {
     data: siteData,

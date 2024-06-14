@@ -5,6 +5,7 @@ import { hasFeatureTag } from "@/utils";
 import { TreeItem } from "@mui/lab";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import CustomTreeItem from "./CustomTreeItem";
 
 const initialContextMenu = {
   show: false,
@@ -50,8 +51,10 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
       >
         {!hasFeatureTag(router.query, "useOldTree") ? (
           <>
-            <TreeItem
+            <CustomTreeItem
+              className="w-3/4"
               nodeId={rp?._id + 1}
+              rp={rp}
               label={"RP"}
               onClick={() => {
                 setPoint("RP");
@@ -68,8 +71,10 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
               }}
               onContextMenu={(e) => e.stopPropagation()}
             >
-              <TreeItem
+              <CustomTreeItem
+                className="w-3/4"
                 nodeId={rp?._id + 3}
+                rp={rp}
                 label={"Scanline"}
                 onClick={() => {
                   setPoint("Scanline");
