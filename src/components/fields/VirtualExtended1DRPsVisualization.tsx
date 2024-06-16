@@ -17,9 +17,9 @@ const VirtualExtended1DRPsVisualization = () => {
         `${process.env.NEXT_PUBLIC_MARBLE_API_ENDPOINT}/extend1d`,
         {
           filename: selectedRP._id,
-          positionX: selectedRP.positionX,
-          positionY: selectedRP.positionY,
-          positionZ: selectedRP.positionZ,
+          positionX: 0,
+          positionY: 0,
+          positionZ: 0,
           sizeX: selectedRP.sizeX,
           sizeY: selectedRP.sizeY,
           sizeZ: selectedRP.sizeZ,

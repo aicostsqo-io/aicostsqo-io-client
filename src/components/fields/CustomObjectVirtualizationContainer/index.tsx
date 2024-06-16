@@ -9,9 +9,9 @@ const fetchDiscObj = async (rp: any, discs: any) => {
     `${process.env.NEXT_PUBLIC_MARBLE_API_ENDPOINT}/disc`,
     {
       filename: rp._id,
-      positionX: rp.positionX,
-      positionY: rp.positionY,
-      positionZ: rp.positionZ,
+      positionX: 0,
+      positionY: 0,
+      positionZ: 0,
       sizeX: rp.sizeX,
       sizeY: rp.sizeY,
       sizeZ: rp.sizeZ,
