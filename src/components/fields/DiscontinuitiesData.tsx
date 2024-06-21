@@ -9,15 +9,19 @@ import {
   IoSearchOutline as SearchIcon,
   IoTrashOutline as TrashIcon,
 } from "react-icons/io5";
+import { FaRegEdit } from "react-icons/fa";
 import AddDiscontinuity from "../common/Modals/AddDiscontinuity";
+import UpdateDiscontinuity from "../common/Modals/UpdateDiscontinuity";
 
 const DiscontinuitiesData = () => {
   const [data, setData] = useState<any>([]);
   const [selectedRows, setselectedRows] = useState<string[]>([]);
   const { setSelectedDiscs, selectedRP } = useSiteContext();
   const { point } = useTreeContext();
+  const [discontinuityToUpdate, setDiscontinuityToUpdate] = useState<any>(null);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAddDiscModalOpen, setIsAddDiscModalOpen] = useState(false);
+  const [isUpdateDiscModalOpen, setIsUpdateDiscModalOpen] = useState(false);
 
   const fetchDiscData = async () => {
     const res = await getDiscsByRpId(selectedRP?._id);
@@ -62,13 +66,14 @@ const DiscontinuitiesData = () => {
         <table className="min-w-max w-full table-auto">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-              <th className="py-3 px-6 text-left">
+              <th className="pt-2 px-6 text-left">
                 <input type="checkbox" onChange={handleSelectAll} />
               </th>
+              <th>-</th>
               <th className="py-3 px-6 text-left">RP Id</th>
               <th className="py-3 px-6 text-left">Id</th>
-              <th className="py-3 px-6 text-left">Slope</th>
-              <th className="py-3 px-6 text-left">Slope Direction</th>
+              <th className="py-3 px-6 text-left">Dip</th>
+              <th className="py-3 px-6 text-left">Dip Direction</th>
               <th className="py-3 px-6 text-left">pX</th>
               <th className="py-3 px-6 text-left">pY</th>
               <th className="py-3 px-6 text-left">pZ</th>
@@ -81,11 +86,20 @@ const DiscontinuitiesData = () => {
           <tbody className="text-gray-600 text-sm font-light">
             {data?.map((p: any) => (
               <tr key={p._id} className="border-b border-gray-200">
-                <td className="py-3 px-6 text-left">
+                <td className="pt-2 px-6 text-left">
                   <input
                     type="checkbox"
                     checked={selectedRows.includes(p._id)}
                     onChange={(e) => handleSelectRow(e, p._id)}
+                  />
+                </td>
+                <td>
+                  <FaRegEdit
+                    onClick={() => {
+                      setDiscontinuityToUpdate(p);
+                      setIsUpdateDiscModalOpen(true);
+                    }}
+                    className="text-xl cursor-pointer"
                   />
                 </td>
                 <td className="py-3 px-6 text-left">{p.rpId}</td>
@@ -110,7 +124,7 @@ const DiscontinuitiesData = () => {
             className="flex flex-col gap-3 items-center cursor-pointer"
             data-modal-target="authentication-modal"
             data-modal-toggle="authentication-modal"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => setIsAddDiscModalOpen(true)}
           >
             <AddIcon className="text-4xl" />
             <span className="text-lg">Add New Line</span>
@@ -136,9 +150,16 @@ const DiscontinuitiesData = () => {
           </div>
         </div>
       </div>
-      {isModalOpen ? (
+      {isAddDiscModalOpen ? (
         <AddDiscontinuity
-          onClose={() => setIsModalOpen(false)}
+          onClose={() => setIsAddDiscModalOpen(false)}
+          refetch={() => fetchDiscData()}
+        />
+      ) : null}
+      {isUpdateDiscModalOpen ? (
+        <UpdateDiscontinuity
+          discontinuity={discontinuityToUpdate}
+          onClose={() => setIsUpdateDiscModalOpen(false)}
           refetch={() => fetchDiscData()}
         />
       ) : null}
