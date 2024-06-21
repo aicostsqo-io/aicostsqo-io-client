@@ -11,7 +11,9 @@ import {
   IoSearchOutline as SearchIcon,
   IoTrashOutline as TrashIcon,
 } from "react-icons/io5";
+import { FaRegEdit } from "react-icons/fa";
 import AddRP from "../common/Modals/AddRP";
+import UpdateRP from "../common/Modals/UpdateRP";
 
 const RPDataEditable = ({ editable = true }: { editable?: boolean }) => {
   const [data, setData] = useState<Rp[]>([]);
@@ -20,7 +22,9 @@ const RPDataEditable = ({ editable = true }: { editable?: boolean }) => {
   const { point } = useTreeContext();
   // const { setActiveModal } = useUIContext();
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [rpToUpdate, setRpToUpdate] = useState(null);
+  const [isAddRPModalOpen, setIsAddRPModalOpen] = useState(false);
+  const [isUpdateRPModalOpen, setIsUpdateRPModalOpen] = useState(false);
 
   useEffect(() => {
     if (point === "Representing Prisms") {
@@ -59,9 +63,10 @@ const RPDataEditable = ({ editable = true }: { editable?: boolean }) => {
         <table className="min-w-max w-full table-auto">
           <thead>
             <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-              <th className="py-3 px-6 text-left">
+              <th className="pt-2 px-6 text-left">
                 <input type="checkbox" onChange={handleSelectAll} />
               </th>
+              <th>-</th>
               <th className="py-3 px-6 text-left">Id</th>
               <th className="py-3 px-6 text-left">Name</th>
               <th className="py-3 px-6 text-left">Site Bound Id</th>
@@ -82,11 +87,20 @@ const RPDataEditable = ({ editable = true }: { editable?: boolean }) => {
           <tbody className="text-gray-600 text-sm font-light">
             {data?.map((p: any) => (
               <tr key={p._id} className="border-b border-gray-200">
-                <td className="py-3 px-6 text-left">
+                <td className="pt-2 px-6 text-left">
                   <input
                     type="checkbox"
                     checked={selectedRows.includes(p._id)}
                     onChange={(e) => handleSelectRow(e, p._id)}
+                  />
+                </td>
+                <td>
+                  <FaRegEdit
+                    onClick={() => {
+                      setRpToUpdate(p);
+                      setIsUpdateRPModalOpen(true);
+                    }}
+                    className="text-xl cursor-pointer"
                   />
                 </td>
                 <td className="py-3 px-6 text-left">{p._id}</td>
@@ -116,7 +130,7 @@ const RPDataEditable = ({ editable = true }: { editable?: boolean }) => {
               className="flex flex-col gap-3 items-center cursor-pointer"
               data-modal-target="authentication-modal"
               data-modal-toggle="authentication-modal"
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => setIsAddRPModalOpen(true)}
             >
               <AddIcon className="text-3xl" />
               <span className="text-base">Add New Line</span>
@@ -143,7 +157,15 @@ const RPDataEditable = ({ editable = true }: { editable?: boolean }) => {
           </div>
         </div>
       ) : null}
-      {isModalOpen ? <AddRP onClose={() => setIsModalOpen(false)} /> : null}
+      {isAddRPModalOpen ? (
+        <AddRP onClose={() => setIsAddRPModalOpen(false)} />
+      ) : null}
+      {isUpdateRPModalOpen ? (
+        <UpdateRP
+          rp={rpToUpdate}
+          onClose={() => setIsUpdateRPModalOpen(false)}
+        />
+      ) : null}
     </div>
   );
 };
