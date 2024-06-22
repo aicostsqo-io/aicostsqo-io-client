@@ -38,6 +38,14 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
     const newExpanded = expanded.filter(
       (item: any) => !item.startsWith("RPNode")
     );
+
+    if (expanded.includes("RPNode" + rp?._id)) {
+      const newExpanded2 = expanded.filter(
+        (item: any) => item !== "RPNode" + rp?._id
+      );
+      setExpanded(newExpanded2);
+      return;
+    }
     newExpanded.push("RPNode" + rp?._id);
     setExpanded(newExpanded);
   };
