@@ -29,6 +29,9 @@ const AllRPsVisualization = () => {
             sizeX: rp.sizeX,
             sizeY: rp.sizeY,
             sizeZ: rp.sizeZ,
+            rotationX: rp.rotationX,
+            rotationY: rp.rotationY,
+            rotationZ: rp.rotationZ,
           })),
         }
       );
