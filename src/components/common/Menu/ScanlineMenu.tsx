@@ -36,7 +36,7 @@ export default function ScanlineMenu({
       if (success) {
         getExcel(result);
       }
-      toast.success("Seismics exported successfully");
+      toast.success("Scanlines exported successfully");
     } catch (err) {
       toast.error("Failed to export Seismic");
     }
@@ -60,7 +60,7 @@ export default function ScanlineMenu({
             <ListItemIcon>
               <AddIcon fontSize="small" />
             </ListItemIcon>
-            <ListItemText>Export Seismics</ListItemText>
+            <ListItemText>Export Scanlines</ListItemText>
           </MenuItem>
         </MenuList>
       </Paper>
