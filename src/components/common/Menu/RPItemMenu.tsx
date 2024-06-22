@@ -35,12 +35,6 @@ export default function RPItemMenu({
     onClose();
   });
 
-  const handleAddNewRP = () => {
-    console.log("id", rpId);
-    console.log("Add New RP");
-    onClose();
-  };
-
   const handleDeleteRP = async () => {
     try {
       await bulkDeleteRps([rpId]);
@@ -65,12 +59,6 @@ export default function RPItemMenu({
         }}
       >
         <MenuList>
-          <MenuItem onClick={handleAddNewRP}>
-            <ListItemIcon>
-              <AddIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText>Add New</ListItemText>
-          </MenuItem>
           <MenuItem onClick={onClose}>
             <ListItemIcon>
               <ContentCopy fontSize="small" />

@@ -7,12 +7,14 @@ import ListItemText from "@mui/material/ListItemText";
 import ListItemIcon from "@mui/material/ListItemIcon";
 // import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 // import Cloud from "@mui/icons-material/Cloud";
 import { useClickAway } from "@uidotdev/usehooks";
 import { toast } from "react-toastify";
 import { getExportedRps } from "@/api/rp";
 import axios from "axios";
 import { getExcel } from "@/api/excel";
+import { useRouter } from "next/router";
 
 interface RepresentingPrismsMenuProps {
   x: number;
@@ -26,9 +28,16 @@ export default function RepresentingPrismsMenu({
   onClose,
   siteBoundId,
 }: RepresentingPrismsMenuProps) {
+  const router = useRouter();
   const contextMenuRef = useClickAway<HTMLDivElement>(() => {
     onClose();
   });
+
+  const handleAddNewRP = () => {
+    console.log("Add New RP");
+    router.push(`/project/add-manually?addRP=1`);
+    onClose();
+  };
 
   const handleExportRPs = async () => {
     try {
@@ -57,9 +66,15 @@ export default function RepresentingPrismsMenu({
         }}
       >
         <MenuList>
-          <MenuItem onClick={handleExportRPs}>
+          <MenuItem onClick={handleAddNewRP}>
             <ListItemIcon>
               <AddIcon fontSize="small" />
+            </ListItemIcon>
+            <ListItemText>Add New</ListItemText>
+          </MenuItem>
+          <MenuItem onClick={handleExportRPs}>
+            <ListItemIcon>
+              <FileUploadIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Export RP(s)</ListItemText>
           </MenuItem>

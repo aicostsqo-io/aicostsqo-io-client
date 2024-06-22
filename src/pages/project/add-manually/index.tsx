@@ -2,7 +2,7 @@ import AddRP from "@/components/add-manually/rp/AddRP";
 import MainLayout from "@/layouts/main/MainLayout";
 import ProjectLayout from "@/layouts/project/ProjectLayout";
 import { AddSharp } from "@mui/icons-material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AddSite from "@/components/add-manually/site";
 import AddDisc from "@/components/add-manually/discontinuities/AddDisc";
 import { useTreeContext } from "@/contexts/Tree";
@@ -14,6 +14,8 @@ import AddJointSet from "@/components/add-manually/field-survey/joint-set/Add";
 import AddLidar from "@/components/add-manually/field-survey/lidar/Add";
 import AddDrilling from "@/components/add-manually/field-survey/drilling/Add";
 import NotYetImplemented from "@/components/common/NotYetImplemented";
+import { useRouter } from "next/router";
+import { hasFeatureTag } from "@/utils";
 
 const MANUALLY_ADD_FIELDS_COMPONENTS = {
   [MANUALLY_ADD_FIELDS.IMPORT_SITE]: AddSite,
@@ -65,8 +67,15 @@ const MANUALLY_ADD_FIELDS_COMPONENTS_MAP: ManuallyAddFieldsMap = {
 const AddManually = () => {
   // const [page, setPage] = useState(0);
   const [method, setMethod] = useState("manual");
+  const router = useRouter();
 
-  const { point } = useTreeContext();
+  const { point, setPoint } = useTreeContext();
+
+  useEffect(() => {
+    if (hasFeatureTag(router.query, "addRP")) {
+      setPoint("Import RP (Representing Prisms)");
+    }
+  }, [router.query, setPoint]);
 
   const AddManuallyComponent =
     MANUALLY_ADD_FIELDS_COMPONENTS_MAP[point] || NotYetImplemented;
