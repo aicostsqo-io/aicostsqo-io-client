@@ -99,7 +99,7 @@ const DiscontinuitiesData = () => {
                       setDiscontinuityToUpdate(p);
                       setIsUpdateDiscModalOpen(true);
                     }}
-                    className="text-xl cursor-pointer"
+                    className="text-xl cursor-pointer text-blue-700 font-bold"
                   />
                 </td>
                 <td className="py-3 px-6 text-left">{p.rpId}</td>
