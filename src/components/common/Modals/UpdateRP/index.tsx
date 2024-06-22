@@ -16,7 +16,7 @@ const labelClasses = "w-1/2 text-left";
 
 const UpdateRP = ({ rp, onClose }: Props) => {
   const [rpToUpdate, setRpToUpdate] = useState<any>(null);
-  const { selectedSite, setSelectedRPs } = useSiteContext();
+  const { selectedSite, setSelectedRPs, mutate } = useSiteContext();
   useEffect(() => {
     setRpToUpdate(rp);
   }, [rp]);
@@ -29,7 +29,7 @@ const UpdateRP = ({ rp, onClose }: Props) => {
         selectedSite?.siteBound?._id
       );
       setSelectedRPs(rpsGetResponse?.data?.rps);
-
+      mutate();
       toast.success("RP updated successfully");
       onClose();
     } catch (err) {

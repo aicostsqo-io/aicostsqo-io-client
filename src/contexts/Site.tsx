@@ -1,3 +1,4 @@
+import useFetch from "@/hooks/useFetch";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 export const SiteContext = createContext<any>(null);
@@ -15,6 +16,10 @@ export const SiteProvider: React.FC<props> = ({ children }) => {
   const [selectedDiscs, setSelectedDiscs] = useState<any>();
   const [page, setPage] = useState<number>(0);
   const [currentProject, setCurrentProject] = useState<any>();
+
+  const { data, isLoading, isError, mutate } = useFetch(
+    currentProject?._id ? `/fields/project/${currentProject?._id}` : null
+  );
 
   useEffect(() => {
     const currentProject = localStorage.getItem("currentProject");
@@ -47,6 +52,8 @@ export const SiteProvider: React.FC<props> = ({ children }) => {
     page,
     currentProject,
     setProject,
+    data,
+    mutate,
   };
 
   return <SiteContext.Provider value={values}>{children}</SiteContext.Provider>;

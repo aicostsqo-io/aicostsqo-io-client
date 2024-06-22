@@ -17,7 +17,7 @@ export default function Tree() {
   const { expanded, setExpanded, setPoint } = useTreeContext();
   const [selected, setSelected] = React.useState<string[]>([]);
   const router = useRouter();
-  const { currentProject } = useSiteContext();
+  const { data: fieldData, mutate: fieldDataMutate } = useSiteContext();
 
   const handleToggle = (event: React.SyntheticEvent, nodeIds: string[]) => {
     setExpanded(nodeIds);
@@ -39,14 +39,14 @@ export default function Tree() {
   } = useFetch("/fields"); */
 
   //get fields by project id (from url param)
-  const {
+  /* const {
     data: fieldData,
     isLoading: fieldDataLoading,
     isError: fieldDataError,
     mutate: fieldDataMutate,
   } = useFetch(
     currentProject?._id ? `/fields/project/${currentProject?._id}` : null
-  );
+  ); */
 
   return (
     <Box
