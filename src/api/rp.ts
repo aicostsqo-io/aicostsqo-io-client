@@ -5,6 +5,9 @@ export const bulkDeleteRps = (data: string[]) =>
 
 export const getRps = () => axios.get("/rps");
 
+export const copyPasteRp = (siteBoundId: string, data: any) =>
+  axios.post(`/rps/copy-paste/${siteBoundId}`, data);
+
 export const createRp = (data: any) => axios.post("/rps", data);
 
 export const updateRp = (id: string, data: any) =>

@@ -16,11 +16,13 @@ import AddIcon from "@mui/icons-material/Add";
 import { useClickAway } from "@uidotdev/usehooks";
 import { bulkDeleteRps } from "@/api/rp";
 import { toast } from "react-toastify";
+import { useTreeContext } from "@/contexts/Tree";
 
 interface RPItemMenuProps {
   x: number;
   y: number;
   onClose: () => void;
+  rpName: string;
   rpId: string;
   onRefresh?: () => void;
 }
@@ -28,9 +30,11 @@ export default function RPItemMenu({
   x,
   y,
   onClose,
+  rpName,
   rpId,
   onRefresh,
 }: RPItemMenuProps) {
+  const { expanded, setExpanded, setPoint } = useTreeContext();
   const contextMenuRef = useClickAway<HTMLDivElement>(() => {
     onClose();
   });
@@ -43,6 +47,23 @@ export default function RPItemMenu({
     } catch (err) {
       toast.error("Failed to delete RP");
     }
+    onClose();
+  };
+
+  const handleExpand = () => {
+    // setExpanded([...expanded, rpId]);
+    // console.log("expanded", expanded);
+    onClose();
+  };
+
+  const handleCollapse = () => {
+    // setExpanded(expanded.filter((id) => id !== rpId));
+    onClose();
+  };
+
+  const handleCopyRP = () => {
+    navigator.clipboard.writeText(rpId);
+    toast.success("RP copied to clipboard");
     onClose();
   };
 
@@ -59,25 +80,29 @@ export default function RPItemMenu({
         }}
       >
         <MenuList>
-          <MenuItem onClick={onClose}>
-            <ListItemIcon>
-              <ContentCopy fontSize="small" />
-            </ListItemIcon>
-            <ListItemText>Copy</ListItemText>
-          </MenuItem>
-          <MenuItem onClick={handleDeleteRP}>
-            <ListItemIcon>
-              <RemoveIcon fontSize="small" />
-            </ListItemIcon>
-            <ListItemText>Delete</ListItemText>
-          </MenuItem>
-          <MenuItem onClick={onClose}>
+          {!rpName.startsWith("RP 0") ? (
+            <>
+              <MenuItem onClick={handleCopyRP}>
+                <ListItemIcon>
+                  <ContentCopy fontSize="small" />
+                </ListItemIcon>
+                <ListItemText>Copy</ListItemText>
+              </MenuItem>
+              <MenuItem onClick={handleDeleteRP}>
+                <ListItemIcon>
+                  <RemoveIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText>Delete</ListItemText>
+              </MenuItem>
+            </>
+          ) : null}
+          <MenuItem onClick={handleExpand}>
             <ListItemIcon>
               <UnfoldMoreIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Expand</ListItemText>
           </MenuItem>
-          <MenuItem onClick={onClose}>
+          <MenuItem onClick={handleCollapse}>
             <ListItemIcon>
               <UnfoldLessIcon fontSize="small" />
             </ListItemIcon>

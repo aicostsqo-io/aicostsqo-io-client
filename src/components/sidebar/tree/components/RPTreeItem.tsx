@@ -409,6 +409,7 @@ const RPTreeItem = ({ rp, site, setPoint, onRefresh }: any) => {
           x={contextMenu.x}
           y={contextMenu.y}
           onClose={closeContextMenu}
+          rpName={rp?.name}
           rpId={rp?._id}
           onRefresh={onRefresh}
         />
