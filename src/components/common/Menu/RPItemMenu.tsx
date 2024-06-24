@@ -96,7 +96,7 @@ export default function RPItemMenu({
               </MenuItem>
             </>
           ) : null}
-          <MenuItem onClick={handleExpand}>
+          {/* <MenuItem onClick={handleExpand}>
             <ListItemIcon>
               <UnfoldMoreIcon fontSize="small" />
             </ListItemIcon>
@@ -107,7 +107,7 @@ export default function RPItemMenu({
               <UnfoldLessIcon fontSize="small" />
             </ListItemIcon>
             <ListItemText>Collapse</ListItemText>
-          </MenuItem>
+          </MenuItem> */}
           <MenuItem onClick={onClose}>
             <ListItemIcon>
               <DoDisturbAltIcon fontSize="small" />
