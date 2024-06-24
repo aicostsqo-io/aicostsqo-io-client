@@ -1,8 +1,8 @@
 /* eslint-disable */
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense } from "react";
 import { OrbitControls } from "@react-three/drei";
 import { Canvas, useLoader } from "@react-three/fiber";
-import { PerspectiveCamera, DoubleSide } from "three";
+import { PerspectiveCamera, DoubleSide, Material } from "three";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 import { MTLLoader } from "three/examples/jsm/loaders/MTLLoader";
 
@@ -39,6 +39,14 @@ function Scene({ urls }: SceneProps) {
           }
         )
       : null;
+
+  if (mtlRP) {
+    Object.values(mtlRP.materials).forEach((material: Material) => {
+      material.opacity = 0.5;
+      material.transparent = true;
+    });
+  }
+
   const mtlDisc = urls?.disc?.mtl
     ? useLoader(
         MTLLoader,
